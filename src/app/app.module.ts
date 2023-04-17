@@ -13,6 +13,10 @@ import { FooterComponent } from './viewer/passenger/footer/footer.component';
 import { MainComponent } from './viewer/passenger/main/main.component';
 import { ResultTicketsComponent } from './viewer/passenger/sidebar/result-tickets/result-tickets.component';
 import { AboutUsComponent } from './viewer/passenger/sidebar/about-us/about-us.component';
+import { HttpClientModule} from '@angular/common/http';
+import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieukien/dieukien.component';
+import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
+import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +31,16 @@ import { AboutUsComponent } from './viewer/passenger/sidebar/about-us/about-us.c
     MainComponent,
     ResultTicketsComponent,
     AboutUsComponent,
+    DieukienComponent,
+    ChinhsachbaomatComponent,
+    DieukhoansudungComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

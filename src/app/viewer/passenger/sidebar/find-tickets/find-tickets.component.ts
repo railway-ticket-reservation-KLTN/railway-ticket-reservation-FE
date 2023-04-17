@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MachineService } from 'src/app/service/machine-service.service';
 
 @Component({
   selector: 'app-find-tickets',
@@ -6,12 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./find-tickets.component.css']
 })
 export class FindTicketsComponent {
-  departureDate?: Date;
-  returnDate?: Date;
+  ngayDi: Date;
+  ngayDen: Date;
   isCheck=true;
   minDate: string;
+  gaDi: string;
+  gaDen:string;
+  loaiChuyenDi:string;
+
   
-  constructor(){
+  constructor(
+    private machineService:MachineService
+  ){
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
@@ -22,13 +29,22 @@ export class FindTicketsComponent {
    enableRadio(){
     
     this.isCheck=true;
-    this.returnDate = this.departureDate;
+    this.ngayDen = this.ngayDi;
    }
    enableRadioTwo(){
     this.isCheck=false;
-   
    }
 
-  
+  onSearch(){
+    alert("Tìm kiếm thành công")
+    console.log(this.gaDi);
+    console.log(this.gaDen);
+    console.log(this.ngayDi);
+    console.log(this.ngayDen);
+    
+   
+    
+    
+  }
   
 }

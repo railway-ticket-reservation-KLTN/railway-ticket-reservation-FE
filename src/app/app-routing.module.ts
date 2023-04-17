@@ -8,6 +8,9 @@ import { ResultTicketsComponent } from './viewer/passenger/sidebar/result-ticket
 import { CheckTicketsComponent } from './viewer/passenger/sidebar/check-tickets/check-tickets.component';
 import { PayTicketsComponent } from './viewer/passenger/sidebar/pay-tickets/pay-tickets.component';
 import { AboutUsComponent } from './viewer/passenger/sidebar/about-us/about-us.component';
+import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieukien/dieukien.component';
+import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
+import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -18,6 +21,9 @@ const routes: Routes = [
   { path: 'kiem-tra-ve', component:CheckTicketsComponent  },
   { path: 'tra-ve', component:PayTicketsComponent },
   { path: 'lien-he', component:AboutUsComponent  },
+  { path: 'dieukien', component:DieukienComponent  },
+  { path: 'chinhsachbaomat', component:ChinhsachbaomatComponent},
+  {path:'dieukhoansudung', component:DieukhoansudungComponent}
 ];
 
 @NgModule({
