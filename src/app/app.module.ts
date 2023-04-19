@@ -34,6 +34,7 @@ import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations
     DieukienComponent,
     ChinhsachbaomatComponent,
     DieukhoansudungComponent,
+    
   ],
   imports: [
     BrowserModule,
