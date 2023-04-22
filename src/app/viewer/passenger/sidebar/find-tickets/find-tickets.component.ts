@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { TimChuyenTauRequest } from 'src/app/domain/TimChuyenTauRequest';
 import { MachineService } from 'src/app/service/machine-service.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from 'src/app/service/error-service.service';
+import { VeTauInfo } from 'src/app/domain/VeTauInfo';
 
 @Component({
   selector: 'app-find-tickets',
@@ -9,14 +12,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./find-tickets.component.css']
 })
 export class FindTicketsComponent {
-  dataSearch:[];
+  dataSearch = new VeTauInfo();
   isCheck=true;
   minDate: string;
-  machineSearch=new TimChuyenTauRequest();
+  machineSearch = new TimChuyenTauRequest();
   
   constructor(
     private machineService:MachineService,
-    private router:Router
+    private router:Router,
+    private errorService: ErrorService
 
   ){
     const today = new Date();
@@ -39,13 +43,14 @@ export class FindTicketsComponent {
 
   onSearch(){
     
-  //  let machineInfo=this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
-    // const machine = data;
-    // this.dataSearch=machine;
-    // console.log(this.dataSearch);
-        this.router.navigate(['/ket-qua'], { queryParams: { q: this.machineSearch } });
-
-  // });
+  this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
+      this.dataSearch = data;
+      this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearch) } });
+  },
+  (error) => {
+      alert('Không tìm thấy')
+  }
+  );
   }
   formatNgayVe(date: string): string {
     let formattedDate = '';

@@ -17,6 +17,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieukien/dieukien.component';
 import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
+import { CheckTicketsComponent } from './viewer/passenger/sidebar/check-tickets/check-tickets.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations
     DieukienComponent,
     ChinhsachbaomatComponent,
     DieukhoansudungComponent,
+    CheckTicketsComponent
     
   ],
   imports: [

@@ -6922,7 +6922,7 @@ body,html {
 }
 
 .et-main-label {
-    background: url(/images/label_bg.png) right bottom no-repeat #0082c4;
+    /* background: url(/images/label_bg.png) right bottom no-repeat #0082c4; */
     padding: 5px 40px 5px 10px;
     margin-left: 5px;
     color: #fff;

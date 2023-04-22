@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HanhTrinh } from 'src/app/domain/HanhTrinh';
+import { KiemTraVeInfo } from 'src/app/domain/KiemTraVeInfo';
+import { KiemTraVeRequest } from 'src/app/domain/KiemTraVeRequest';
+import { MachineService } from 'src/app/service/machine-service.service';
 
 @Component({
   selector: 'app-check-tickets',
@@ -6,10 +10,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./check-tickets.component.css']
 })
 export class CheckTicketsComponent implements OnInit {
-
-  constructor() { }
+  kiemTraVeInfo=new KiemTraVeInfo();
+  hanhTrinhInfo= new HanhTrinh();
+  kiemTraVeRequest = new KiemTraVeRequest();
+  hidenSuccess=true;
+  hidenError=true;
+  constructor(
+    private machineService: MachineService
+  ) { }
 
   ngOnInit(): void {
   }
  
+  onSearch(){
+   this.machineService.getKiemTraVe(this.kiemTraVeRequest).subscribe(data =>{
+        this.kiemTraVeInfo=data;
+        this.hidenSuccess=false;
+        this.hanhTrinhInfo=data.hanhTrinh;
+        console.log(this.hanhTrinhInfo);    
+   },
+   (error) => {
+       this.hidenError=false;
+   })
+    
+  }
 }

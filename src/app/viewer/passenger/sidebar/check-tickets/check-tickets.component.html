@@ -3,30 +3,13 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="ng-binding" style="text-align: center;">Kiểm tra vé<!--Kiểm tra vé--></h3>
-            <!-- <div class="alert alert-info">
-                <div ng-bind-html="'PKTraVe_MoTa'|translate" class="ng-binding">Theo quy định của Tổng công ty Đường sắt
-                    Việt Nam, hành khách có thông tin giấy tờ tùy thân trùng với thông tin trên vé điện tử mới đủ điều
-                    kiện vào ga lên tàu.<br>Để đảm bảo quyền lợi cho hành khách, tránh mua phải vé giả, hoặc vé không
-                    đúng với quy định, quý khách có thể kiểm tra lại vé điện tử của mình bằng cách điền đầy đủ các thông
-                    tin dưới đây.</div>
-            </div> -->
-            <!-- <div class="alert alert-danger ng-hide" ng-show="isError">
-                <div ng-bind-html="'PKTraVe_InputError'|translate" class="ng-binding">Thông tin quý khách nhập chưa
-                    chính xác, vui lòng kiểm tra các mục lỗi màu đỏ bên dưới.</div>
-            </div> -->
-            <div class="alert alert-success ng-hide" ng-show="isValidTicket">
+            <div [hidden]="hidenSuccess" class="alert alert-success ng-hide" ng-show="isValidTicket">
                 <div ng-bind-html="'PKTraVe_ResultValid'|translate" class="ng-binding"><strong>Vé điện tử của bạn hoàn
                         toàn hợp lệ.</strong></div>
             </div>
-            <!-- <div class="alert alert-danger ng-hide" ng-show="isInvalidTicket">
-                <div ng-bind-html="'PKTraVe_ResultInValid'|translate" class="ng-binding">
-                    <p><strong>Không tìm thấy vé điện tử phù hợp.</strong></p>
-                    <p>- Quý khách vui lòng kiểm tra và nhập chính xác các thông tin tìm vé.</p>
-                    <p>- Nếu vẫn không tìm thấy Vé xin vui lòng ra ga để kiểm tra hoặc liên hệ đầu số
-                        <strong>19006469</strong> để được trợ
-                        giúp.</p>
-                </div>
-            </div> -->
+            <div [hidden]="hidenError" class="alert alert-danger ng-hide" ng-show="isInvalidTicket">
+                <div ng-bind-html="'PKTraVe_ResultInValid'|translate" class="ng-binding"><p><strong>Không tìm thấy vé điện tử phù hợp.</strong></p><p>- Quý khách vui lòng kiểm tra và nhập chính xác các thông tin tìm vé.</p><p>- Nếu vẫn không tìm thấy Vé xin vui lòng ra ga để kiểm tra hoặc liên hệ đầu số <strong>19006469</strong> để được trợ giúp.</p></div>
+            </div>
         </div>
     </div>
     <div class="col-md-12">
@@ -38,21 +21,30 @@
                 <div class="form-group" ng-class="{'has-error': maVeError}">
                     <span class="control-label ng-binding ng-hide" ng-show="maVeError">Vui lòng nhập mã vé chính xác 8
                         hoặc 9 ký tự số<!--Vui lòng nhập mã vé chính xác 8 hoặc 9 ký tự số--></span>
-                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.maVe"
-                        ng-disabled="isRequesting" ng-change="maVeError = false"
-                        placeholder="Nhập mã vé gồm 8 hoặc 9 ký tự số" id="maVe">
+                    <input type="text" 
+                        class="form-control ng-pristine ng-valid" 
+                        [(ngModel)]="kiemTraVeRequest.maVe"
+                        ng-disabled="isRequesting" 
+                        ng-change="maVeError = false"
+                        placeholder="Nhập mã vé gồm 8 hoặc 9 ký tự số" id="maVe" required>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-2 col-md-2">
-                <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">Mác
+                <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">Tên
                     tàu<!--Mác tàu--></label>
             </div>
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group" ng-class="{'has-error': macTauError}">
                     <span class="control-label ng-binding ng-hide" ng-show="macTauError">Vui lòng nhập mác tàu chính
                         xác<!--Vui lòng nhập mác tàu chính xác--></span>
-                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.macTau"
-                        ng-change="macTauError = false" placeholder="Ví dụ SE1, TN1, SE2, SE6 ..." id="gaDen">
+                    <input 
+                        type="text" 
+                        class="form-control ng-pristine ng-valid" 
+                        [(ngModel)]="kiemTraVeRequest.tenTau"
+                        ng-change="macTauError = false" 
+                        placeholder="Ví dụ SE1, TN1, SE2, SE6 ..." 
+                        id="gaDen">
+
                 </div>
             </div>
         </div>
@@ -64,11 +56,66 @@
                 <div class="form-group" ng-class="{'has-error': gaDiError}">
                     <span class="control-label ng-binding ng-hide" ng-show="gaDiError">Vui lòng nhập ga đi ghi trên
                         vé<!--Vui lòng nhập ga đi ghi trên vé--></span>
-                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDi"
-                        ng-change="verifyGa(searchData.tenGaDi, true)" typeahead-on-select="setMaGaDi($item)"
-                        typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10"
-                        placeholder="Nhập mã ga đi tại đây" id="gaDi" aria-autocomplete="list" aria-expanded="false"
-                        aria-owns="typeahead-04M-6001">
+                    <input 
+                        type="text" class="form-control ng-pristine ng-valid" 
+                        [(ngModel)]="kiemTraVeRequest.gaDi"
+                        placeholder="Nhập mã ga đi tại đây" 
+                        id="gaDi" 
+                        list="stations">
+                        <datalist id="stations">
+                            <option value="Lào Cai"></option>
+                              <option value="Phố Lú"></option>
+                              <option value="Bảo Hà"></option>
+                              <option value="Yên Bái"></option>
+                              <option value="Phú Thọ"></option>
+                              <option value="Việt Trì"></option>
+                              <option value="Đông Anh"></option>
+                              <option value="Hà Nội"></option>
+                              <option value="Phủ Lý"></option>
+                              <option value="Nam Định"></option>
+                              <option value="Ninh Bình"></option>
+                              <option value="Bỉm Sơn"></option>
+                              <option value="Đồng Đăng"></option>
+                              <option value="Uông Bí"></option>
+                              <option value="Hạ Long"></option>
+                              <option value="Hải Dương"></option>
+                              <option value="Hải Phòng"></option>
+                              <option value="Thanh Hóa"></option>
+                              <option value="Minh Khôi"></option>
+                              <option value="Chợ Sy"></option>
+                              <option value="Vinh"></option>
+                              <option value="Yên Trung"></option>
+                              <option value="Hương Phố"></option>
+                              <option value="Đồng Lê"></option>
+                              <option value="Đồng Hới"></option>
+                              <option value="Đông Hà"></option>
+                              <option value="Huế"></option>
+                              <option value="Lăng Cô"></option>
+                              <option value="Đà Nẵng"></option>
+                              <option value="Trà Kiệu"></option>
+                              <option value="Phú Cang"></option>
+                              <option value="Tam Kỳ"></option>
+                              <option value="Núi Thành"></option>
+                              <option value="Quảng Ngãi"></option>
+                              <option value="Đức Phổ"></option>
+                              <option value="Bồng Sơn"></option>
+                              <option value="Diêu Trì"></option>
+                              <option value="Quy Nhơn"></option>
+                              <option value="Tuy Hòa"></option>
+                              <option value="Giã"></option>
+                              <option value="Ninh Hòa"></option>
+                              <option value="Nha Trang"></option>
+                              <option value="Ngã Ba"></option>
+                              <option value="Tháp Chàm"></option>
+                              <option value="Sông Mao"></option>
+                              <option value="Ma Lâm"></option>
+                              <option value="Phan Thiết"></option>
+                              <option value="Long Khánh"></option>
+                              <option value="Biên Hòa"></option>
+                              <option value="Bình Thuận"></option>
+                              <option value="Sài Gòn"></option>
+        
+                          </datalist>
 
                 </div>
             </div>
@@ -79,11 +126,68 @@
                 <div class="form-group" ng-class="{'has-error': gaDenError}">
                     <span class="control-label ng-binding ng-hide" ng-show="gaDenError">Vui lòng nhập ga đến ghi trên
                         vé<!--Vui lòng nhập ga đến ghi trên vé--></span>
-                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.tenGaDen"
-                        ng-change="verifyGa(searchData.tenGaDen, false)" typeahead-on-select="setMaGaDen($item)"
-                        typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10"
-                        placeholder="Nhập mã ga đến tại đây" id="gaDen" aria-autocomplete="list" aria-expanded="false"
-                        aria-owns="typeahead-04N-5231">
+                    <input 
+                        type="text" 
+                        class="form-control ng-pristine ng-valid" 
+                        [(ngModel)]="kiemTraVeRequest.gaDen"
+                        placeholder="Nhập mã ga đến tại đây" 
+                        id="gaDen" 
+                        list="stations"
+                        >
+                        <datalist id="stations">
+                            <option value="Lào Cai"></option>
+                              <option value="Phố Lú"></option>
+                              <option value="Bảo Hà"></option>
+                              <option value="Yên Bái"></option>
+                              <option value="Phú Thọ"></option>
+                              <option value="Việt Trì"></option>
+                              <option value="Đông Anh"></option>
+                              <option value="Hà Nội"></option>
+                              <option value="Phủ Lý"></option>
+                              <option value="Nam Định"></option>
+                              <option value="Ninh Bình"></option>
+                              <option value="Bỉm Sơn"></option>
+                              <option value="Đồng Đăng"></option>
+                              <option value="Uông Bí"></option>
+                              <option value="Hạ Long"></option>
+                              <option value="Hải Dương"></option>
+                              <option value="Hải Phòng"></option>
+                              <option value="Thanh Hóa"></option>
+                              <option value="Minh Khôi"></option>
+                              <option value="Chợ Sy"></option>
+                              <option value="Vinh"></option>
+                              <option value="Yên Trung"></option>
+                              <option value="Hương Phố"></option>
+                              <option value="Đồng Lê"></option>
+                              <option value="Đồng Hới"></option>
+                              <option value="Đông Hà"></option>
+                              <option value="Huế"></option>
+                              <option value="Lăng Cô"></option>
+                              <option value="Đà Nẵng"></option>
+                              <option value="Trà Kiệu"></option>
+                              <option value="Phú Cang"></option>
+                              <option value="Tam Kỳ"></option>
+                              <option value="Núi Thành"></option>
+                              <option value="Quảng Ngãi"></option>
+                              <option value="Đức Phổ"></option>
+                              <option value="Bồng Sơn"></option>
+                              <option value="Diêu Trì"></option>
+                              <option value="Quy Nhơn"></option>
+                              <option value="Tuy Hòa"></option>
+                              <option value="Giã"></option>
+                              <option value="Ninh Hòa"></option>
+                              <option value="Nha Trang"></option>
+                              <option value="Ngã Ba"></option>
+                              <option value="Tháp Chàm"></option>
+                              <option value="Sông Mao"></option>
+                              <option value="Ma Lâm"></option>
+                              <option value="Phan Thiết"></option>
+                              <option value="Long Khánh"></option>
+                              <option value="Biên Hòa"></option>
+                              <option value="Bình Thuận"></option>
+                              <option value="Sài Gòn"></option>
+        
+                          </datalist>
 
                 </div>
             </div>
@@ -95,12 +199,20 @@
             </div>
             <div _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
                 <div _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}" class="form-group"><span _ngcontent-ppu-c53=""
-                        ng-show="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span><input
-                        _ngcontent-ppu-c53="" type="date" ng-model="searchData.tenGaDi"
-                        ng-change="verifyGa(searchData.tenGaDi, true)" typeahead-on-select="setMaGaDi($item)"
-                        typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10" placeholder="Nhập mã ga đi tại đây"
-                        id="gaDi" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-04M-6001"
-                        class="form-control ng-pristine ng-valid"></div>
+                        ng-show="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span>
+                        <input
+                            _ngcontent-ppu-c53="" 
+                            type="date" 
+                            [(ngModel)]="kiemTraVeRequest.ngayDi"
+                            ng-change="verifyGa(searchData.tenGaDi, true)" 
+                            typeahead-on-select="setMaGaDi($item)"
+                            typeahead="ga.TenGa for ga in gas | filter:$viewValue | limitTo:10" 
+                            placeholder="Nhập mã ga đi tại đây"
+                            id="gaDi" 
+                            aria-autocomplete="list" 
+                            aria-expanded="false" 
+                            aria-owns="typeahead-04M-6001"
+                            class="form-control ng-pristine ng-valid"></div>
             </div>
 
             <div class="col-xs-4 col-sm-2 col-md-2">
@@ -109,14 +221,19 @@
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group">
                     <!--<span class="control-label" ng-show="cmtError">Vui lòng nhập số giấy tờ cá nhân ghi trên vé</span>-->
-                    <input type="text" class="form-control ng-pristine ng-valid" ng-model="searchData.cmt"
-                        ng-change="cmtError=false" placeholder="Nhập giấy tờ cá nhân ghi trên vé" id="maVe">
+                    <input 
+                        type="text"
+                        class="form-control ng-pristine ng-valid"
+                        [(ngModel)]="kiemTraVeRequest.soGiayTo"
+                        ng-change="cmtError=false" 
+                        placeholder="Nhập giấy tờ cá nhân ghi trên vé"
+                        id="maVe">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <input analytics-on="click" analytics-event="DoCheckTicket" type="button" class="btn btn-primary"
+                <input analytics-on="click" (click)="onSearch()" analytics-event="DoCheckTicket" type="button" class="btn btn-primary"
                     ng-click="submitForm()" value="Kiểm tra vé" style="border-radius: 10px !important; margin-bottom: 20px;   border: 1px solid rgba(0, 0, 0, 0.1); ">
             </div>
         </div>
@@ -136,15 +253,28 @@
                         <th style="width:10%;">Ga đi</th>
                         <th style="width:10%;">Ga đến</th>
                         <th style="width:10%;">Giá vé</th>
-                        <th style="width:10%;">Giảm giá phương thức</th>
-                        <th style="width:10%;">Giảm giá thời gian</th>
-                        <th style="width:10%;">Tiền dịch vụ</th>
-                        <th style="width:10%;">Bảo hiểm</th>
-                        <th style="width:10%;">Tiền thu</th>
+                        <th style="width:10%;">Đối tượng</th>
+                        <th style="width:10%;">Số ghế</th>
+                        <th style="width:10%;">Số toa</th>
+                        <th style="width:10%;">Tình trạng</th>
+                        <th style="width:10%;">Loại vé</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- ngRepeat: item in items -->
+                    <tr>
+                        <td>{{ kiemTraVeInfo.id }}</td>
+                        <td>{{ kiemTraVeInfo.tenTau }}</td>
+                        <td>{{ hanhTrinhInfo.ngayDi }}</td>
+                        <td>{{ hanhTrinhInfo.gaDi }}</td>
+                        <td>{{ hanhTrinhInfo.gaDen }}</td>
+                        <td>{{ hanhTrinhInfo.giaVe }}</td>
+                        <td>{{ kiemTraVeInfo.doiTuong }}</td>
+                        <td>{{ kiemTraVeInfo.soGhe }}</td>
+                        <td>{{ kiemTraVeInfo.soToa }}</td>
+                        <td>{{ kiemTraVeInfo.tinhTrang }}</td>
+                        <td>{{ kiemTraVeInfo.loaiVe }}</td>
+                    </tr>
+                    
                 </tbody>
             </table>
             <!--Giao dien cho mobile-->

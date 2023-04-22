@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Search } from '../domain/SearchInfo.model';
 import { TimChuyenTauRequest } from '../domain/TimChuyenTauRequest';
+import { VeTauInfo } from '../domain/VeTauInfo';
+import { KiemTraVeRequest } from '../domain/KiemTraVeRequest';
+import { KiemTraVeInfo } from '../domain/KiemTraVeInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +20,13 @@ export class MachineService {
   };
   constructor(private http: HttpClient) { }
 
-  public getHanhTrinhTau(timChuyenTauRequest: TimChuyenTauRequest): Observable<any> {
+  public getKiemTraVe(kiemTraVeRequest: KiemTraVeRequest): Observable<KiemTraVeInfo> {
+    const url = `${this.REST_API_SERVER}/kiemtrave`;
+    return this.http.post<KiemTraVeInfo>(url, kiemTraVeRequest, this.httpOptions);
+  }
+  public getHanhTrinhTau(timChuyenTauRequest: TimChuyenTauRequest): Observable<VeTauInfo> {
     const url = `${this.REST_API_SERVER}/hanhtrinhtau`;
-    return this.http.post<any>(url, timChuyenTauRequest, this.httpOptions);
+    return this.http.post<VeTauInfo>(url, timChuyenTauRequest, this.httpOptions);
   }
 
   getChoNgoi():Observable<any[]>{

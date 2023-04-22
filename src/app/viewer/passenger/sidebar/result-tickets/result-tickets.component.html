@@ -1,31 +1,32 @@
-<div class="result" style="height: 600px; margin-bottom: 60px;">
+<div class="result" style="height: 600px; margin-bottom: 60px;" >
     <span class="et-main-label ng-binding">
-        <strong class="ng-binding">Chiều đi:</strong> ngày 13/04/2023 từ Sài Gòn đến Hà Nội
+        <strong class="ng-binding">Chiều đi:</strong> ngày {{ hanhTrinhInfo.ngayDi }} từ {{hanhTrinhInfo.gaDi}} đến {{hanhTrinhInfo.gaDen}}
     </span>
 
-    <div class="row et-train-list" style="margin-top: 20px;">
+    <div class="row et-train-list" style="margin-top: 20px; margin-left: 20px;" >
         <div class="previous-train et-col-md-1 text-center">
             <div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}"
                 ng-click="chuyenTruoc(true)" tooltip="Tàu trước">
                 <div class="et-arrow-left"></div>
             </div>
         </div>
-        <div class="train-group"><!-- ngRepeat: tau in onScreenGoingTrains -->
-            <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" ng-repeat="tau in onScreenGoingTrains"
-                ng-click="doiChuyen(tau, false)" analytics-on="click" analytics-event="SelectTrain">
-                <div class="et-train-head et-train-head-selected"
-                    ng-class="{'et-train-head-selected': tau.MacTau == searchData.tauDi.MacTau}">
+        <div class="train-group" >
+            <!-- *ngFor="let tau of tauList" -->
+            <!-- <div *ngFor="let tau of tauList"> -->
+                <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" ng-repeat="tau in onScreenGoingTrains"
+                ng-click="doiChuyen(tau, false)" analytics-on="click" analytics-event="SelectTrain" *ngFor="let tau of tauList">
+                <div class="et-train-head et-train-head-selected">
                     <div class="row center-block" style="width: 40%; margin-bottom: 3px">
-                        <div class="et-train-lamp text-center ng-binding"
+                        <div class="et-train-lamp text-center ng-binding" 
                             ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85);">
-                            SE8
+                            {{ tau.tenTau }}
                         </div>
                     </div>
                     <div class="et-train-head-info">
                         <div class="row et-no-margin"><span class="pull-left et-bold ng-binding">TG đi</span> <span
-                                class="pull-right ng-binding">18/04 06:45</span></div>
+                                class="pull-right ng-binding"> {{ hanhTrinhInfo.gioDi }}</span></div>
                         <div class="row et-no-margin"><span class="pull-left et-bold ng-binding">TG đến</span> <span
-                                class="pull-right"></span> <span class="pull-right ng-binding">19/04 19:12</span></div>
+                                class="pull-right"></span> <span class="pull-right ng-binding">{{ hanhTrinhInfo.gioDen }}</span></div>
                         <div class="row et-no-margin">
                            
                         </div>
@@ -40,7 +41,9 @@
                 <div class="et-train-base-3"></div>
                 <div class="et-train-base-4"></div>
                 <div class="et-train-base-5"></div>
-            </div><!-- end ngRepeat: tau in onScreenGoingTrains -->
+            </div>
+        <!-- </div> -->
+            <!-- end ngRepeat: tau in onScreenGoingTrains -->
        
          
             <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block et-train-block-none" style="display:none"
@@ -82,80 +85,18 @@
         </div>
     </div>
 
-    <li *ngFor="let tau of tauList">
+    <!-- <li *ngFor="let tau of tauList"> -->
         <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 4 điều hòa (An28LV)">
+            <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeList"
+              >
                 <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                     ng-click="doiToaMoi(toa, false)"
                     ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
                     <img src="https://dsvn.vn/images/trainCar2.png">
                 </div>
-                <div class="text-center text-info et-car-label ng-binding">8</div>
+                <div class="text-center text-info et-car-label ng-binding">{{toaXe.soToa}}</div>
             </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 4 điều hòa (An28LV)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">7</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 4 điều hòa (An28LV)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">6</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 6 điều hòa (Bn42L)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">5</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 6 điều hòa (Bn42L)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">4</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Giường nằm khoang 6 điều hòa (Bn42L)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">3</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Ngồi mềm điều hòa (A64LV)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">2</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
-            <div class="et-car-block ng-scope" ng-repeat="toa in searchData.tauDi.ToaXes"
-                tooltip="Ngồi mềm điều hòa (A64LV)">
-                <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-selected"
-                    ng-click="doiToaMoi(toa, false)"
-                    ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-                    <img src="https://dsvn.vn/images/trainCar2.png">
-                </div>
-                <div class="text-center text-info et-car-label ng-binding">1</div>
-            </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
+         
             <div class="et-car-block">
                 <div class="et-car-icon"><img src="https://dsvn.vn/images/train2.png"></div>
                 <div class="text-center text-info et-car-label ng-binding">SE8</div>
@@ -166,7 +107,7 @@
                 giá rẻ, bấm vào đây để xem chi tiết</div>
     
         </div>
-    </li>
+    <!-- </li> -->
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <h4 class="ng-binding">Toa số 1: Ngồi mềm điều hòa</h4>
     </div>
