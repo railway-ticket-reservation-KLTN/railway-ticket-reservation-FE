@@ -1,9 +1,10 @@
 export class ToaTau{
-    maHanhTrinh: string;
-    tenTau:string;
-    soToa:number;
-    tenToa:string;
+    maToa: string;
     moTaToa:string;
     soLuongGhe:number;
+    soToa:number;
+    tenTau:string;
+    tenToa:string;
+   
     
 }

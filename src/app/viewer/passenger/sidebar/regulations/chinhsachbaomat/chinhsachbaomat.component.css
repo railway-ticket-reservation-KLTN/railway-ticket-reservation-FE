@@ -3,3 +3,39 @@ p{
     font-size: 20px;
     font-weight: 400;
 }
+
+/*  ==============  
+
+<div class="col-xs-12 col-sm-4 et-col-md-3">
+        <div class="sidebar">
+                <ul>
+                  <li><a href="#">Trang chủ</a></li>
+                  <li><a href="#">Giới thiệu</a></li>
+                  <li><a href="#">Sản phẩm</a></li>
+                  <li><a href="#">Liên hệ</a></li>
+                </ul>
+              </div>
+</div>*/
+.sidebar {
+    float: left;
+    width: 200px;
+    background-color: #f1f1f1;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar li a {
+    display: block;
+    color: #000;
+    padding: 12px;
+    text-decoration: none;
+  }
+  
+  .sidebar li a:hover {
+    background-color: #555;
+    color: #fff;
+  }

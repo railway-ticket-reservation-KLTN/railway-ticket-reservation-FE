@@ -6,7 +6,7 @@ export class TimChuyenTauRequest{
     loaiHanhTrinh:string
     constructor(){
         this.gaDi="Sài Gòn";
-        this.gaDen="Biên Hòa";
+        this.gaDen="Nha Trang";
         this.ngayDi="2023-04-01";
         this.ngayVe="2023-04-01";
         this.loaiHanhTrinh="MOT_CHIEU"

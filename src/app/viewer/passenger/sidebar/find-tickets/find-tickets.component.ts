@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/service/error-service.service';
 import { VeTauInfo } from 'src/app/domain/VeTauInfo';
+import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
 
 @Component({
   selector: 'app-find-tickets',
@@ -13,6 +14,7 @@ import { VeTauInfo } from 'src/app/domain/VeTauInfo';
 })
 export class FindTicketsComponent {
   dataSearch = new VeTauInfo();
+  dataSearchKhuHoi= new VeTauInfoKhuHoi();
   isCheck=true;
   minDate: string;
   machineSearch = new TimChuyenTauRequest();
@@ -31,7 +33,6 @@ export class FindTicketsComponent {
 
   }
    enableRadio(){
-    
     this.isCheck=true;
     this.machineSearch.ngayVe = this.machineSearch.ngayDi;
     this.machineSearch.loaiHanhTrinh = 'MOT_CHIEU';
@@ -40,15 +41,34 @@ export class FindTicketsComponent {
     this.isCheck=false;
     this.machineSearch.loaiHanhTrinh = 'KHU_HOI';
    }
-
-  onSearch(){
-    
+  onSearch(){ 
   this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
+    if(Array.isArray(data) && data.length === 0){
+        alert("Không tìm thấy");
+    }
+    else if(Array.isArray(data) == true){
       this.dataSearch = data;
       this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearch) } });
+    }else{
+     
+      this.machineService.getHanhTrinhTauKhuHoi(this.machineSearch).subscribe(data => {
+        this.dataSearchKhuHoi = data;
+        if(Array.isArray( this.dataSearchKhuHoi.hanhTrinhDi) && this.dataSearchKhuHoi.hanhTrinhDi.length === 0){
+          alert("Không tìm thấy");
+      }else{
+        this.dataSearchKhuHoi = data;
+
+        console.log(data);
+        this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearchKhuHoi) } });
+      }
+        
+      })
+        
+    }
+      
   },
   (error) => {
-      alert('Không tìm thấy')
+      alert(error);  
   }
   );
   }

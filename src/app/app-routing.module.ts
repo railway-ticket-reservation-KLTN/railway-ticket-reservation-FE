@@ -11,6 +11,7 @@ import { AboutUsComponent } from './viewer/passenger/sidebar/about-us/about-us.c
 import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieukien/dieukien.component';
 import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
+import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulations/phuongthucthanhtoan/phuongthucthanhtoan.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'lien-he', component:AboutUsComponent  },
   { path: 'dieukien', component:DieukienComponent  },
   { path: 'chinhsachbaomat', component:ChinhsachbaomatComponent},
-  {path:'dieukhoansudung', component:DieukhoansudungComponent}
+  {path:'dieukhoansudung', component:DieukhoansudungComponent},
+  {path:'phuongthucthanhtoan', component:PhuongthucthanhtoanComponent}
 ];
 
 @NgModule({

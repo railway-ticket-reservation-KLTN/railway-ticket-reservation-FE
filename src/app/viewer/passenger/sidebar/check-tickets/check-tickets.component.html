@@ -19,7 +19,7 @@
             </div>
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group" ng-class="{'has-error': maVeError}">
-                    <span class="control-label ng-binding ng-hide" ng-show="maVeError">Vui lòng nhập mã vé chính xác 8
+                    <span class="control-label ng-binding ng-hide" [hidden]="Error">Vui lòng nhập mã vé chính xác 8
                         hoặc 9 ký tự số<!--Vui lòng nhập mã vé chính xác 8 hoặc 9 ký tự số--></span>
                     <input type="text" 
                         class="form-control ng-pristine ng-valid" 
@@ -35,7 +35,7 @@
             </div>
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group" ng-class="{'has-error': macTauError}">
-                    <span class="control-label ng-binding ng-hide" ng-show="macTauError">Vui lòng nhập mác tàu chính
+                    <span class="control-label ng-binding ng-hide" [hidden]="macTauError">Vui lòng nhập mác tàu chính
                         xác<!--Vui lòng nhập mác tàu chính xác--></span>
                     <input 
                         type="text" 
@@ -54,7 +54,7 @@
             </div>
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group" ng-class="{'has-error': gaDiError}">
-                    <span class="control-label ng-binding ng-hide" ng-show="gaDiError">Vui lòng nhập ga đi ghi trên
+                    <span class="control-label ng-binding ng-hide" [hidden]="gaDiError">Vui lòng nhập ga đi ghi trên
                         vé<!--Vui lòng nhập ga đi ghi trên vé--></span>
                     <input 
                         type="text" class="form-control ng-pristine ng-valid" 
@@ -124,7 +124,7 @@
             </div>
             <div class="col-xs-8 col-sm-4 col-md-4">
                 <div class="form-group" ng-class="{'has-error': gaDenError}">
-                    <span class="control-label ng-binding ng-hide" ng-show="gaDenError">Vui lòng nhập ga đến ghi trên
+                    <span class="control-label ng-binding ng-hide" [hidden]="gaDenError">Vui lòng nhập ga đến ghi trên
                         vé<!--Vui lòng nhập ga đến ghi trên vé--></span>
                     <input 
                         type="text" 
@@ -199,7 +199,7 @@
             </div>
             <div _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
                 <div _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}" class="form-group"><span _ngcontent-ppu-c53=""
-                        ng-show="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span>
+                    [hidden]="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span>
                         <input
                             _ngcontent-ppu-c53="" 
                             type="date" 
@@ -232,9 +232,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <input analytics-on="click" (click)="onSearch()" analytics-event="DoCheckTicket" type="button" class="btn btn-primary"
-                    ng-click="submitForm()" value="Kiểm tra vé" style="border-radius: 10px !important; margin-bottom: 20px;   border: 1px solid rgba(0, 0, 0, 0.1); ">
+            <div class="col-md-12" >
+                <input 
+                    analytics-on="click" 
+                    (click)="onSearch()" 
+                    analytics-event="DoCheckTicket" 
+                    type="button" 
+                    class="btn btn-primary"
+                    value="Kiểm tra vé" 
+                    style="
+                        border-radius: 10px !important; 
+                        margin-bottom: 20px; 
+                        outline: none;   
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        font-size: 20px; ">
             </div>
         </div>
     </div>
@@ -244,7 +255,7 @@
         <div ng-show="isValidTicket" class="ng-hide" style="padding-left: 30px; padding-right: 30px;">
             <h3 class="ng-binding">Thông tin vé<!--Thông tin vé--></h3>
             <!--Giao dien cho deskhop-->
-            <table class="table table-bordered list-ticket-deskhop">
+            <table class="table table-bordered list-ticket-deskhop" [hidden]="showResult">
                 <thead class="et-table-header">
                     <tr>
                         <th style="width:2%;">STT</th>

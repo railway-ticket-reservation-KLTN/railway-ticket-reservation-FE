@@ -8082,13 +8082,14 @@ select {
     width: 100%;
     border-radius: 10px;
     background-color: #fff;
-    font-size: 9px;
+    font-size: 11px;
     padding-left: 2px;
     padding-right: 2px;
     padding-top: 5px
 }
 
 .et-train-lamp {
+    line-height: 15px;
     height: 15px;
     border-radius: 10px;
     background-color: #fff;

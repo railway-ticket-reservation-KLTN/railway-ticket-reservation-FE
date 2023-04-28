@@ -18,7 +18,9 @@ import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieuki
 import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
 import { CheckTicketsComponent } from './viewer/passenger/sidebar/check-tickets/check-tickets.component';
-
+import { DialogErrorComponent } from './dialog/dialog-error/dialog-error.component';
+import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulations/phuongthucthanhtoan/phuongthucthanhtoan.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,14 +37,17 @@ import { CheckTicketsComponent } from './viewer/passenger/sidebar/check-tickets/
     DieukienComponent,
     ChinhsachbaomatComponent,
     DieukhoansudungComponent,
-    CheckTicketsComponent
+    CheckTicketsComponent,
+    DialogErrorComponent,
+    PhuongthucthanhtoanComponent
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

@@ -1,181 +1,164 @@
-
 <div class="image-section">
 
-    <div class="panel-search" style="height: 10px;">
+  <div class="panel-search" style="height: 10px;">
 
+  </div>
+  <div class="panel panel-warning"
+    style="margin-bottom: 15px;margin-left:15px; margin-right:15px; border-radius: 15px;">
+    <div class="panel-heading" style="border-top-right-radius:15px; border-top-left-radius: 15px;">
+      <h3 class="panel-title" style="font-size: 25px;">Thông tin hành trình</h3>
     </div>
-    <div class="panel panel-warning" style="margin-bottom: 15px;margin-left:15px; margin-right:15px; border-radius: 15px;">
-        <div class="panel-heading" style="border-top-right-radius:15px; border-top-left-radius: 15px;">
-            <h3 class="panel-title" style="font-size: 25px;">Thông tin hành trình</h3>
-        </div>
-        <div class="panel-body">
-            <form>
-                <div class="form-group">
-                  <label for="departure-station">Ga đi:</label>
-                  <input type="text" id="departure-station" [(ngModel)]="machineSearch.gaDi" name="gaDi" list="stations">
-                  <datalist id="stations">
-                    <option value="Lào Cai"></option>
-                      <option value="Phố Lú"></option>
-                      <option value="Bảo Hà"></option>
-                      <option value="Yên Bái"></option>
-                      <option value="Phú Thọ"></option>
-                      <option value="Việt Trì"></option>
-                      <option value="Đông Anh"></option>
-                      <option value="Hà Nội"></option>
-                      <option value="Phủ Lý"></option>
-                      <option value="Nam Định"></option>
-                      <option value="Ninh Bình"></option>
-                      <option value="Bỉm Sơn"></option>
-                      <option value="Đồng Đăng"></option>
-                      <option value="Uông Bí"></option>
-                      <option value="Hạ Long"></option>
-                      <option value="Hải Dương"></option>
-                      <option value="Hải Phòng"></option>
-                      <option value="Thanh Hóa"></option>
-                      <option value="Minh Khôi"></option>
-                      <option value="Chợ Sy"></option>
-                      <option value="Vinh"></option>
-                      <option value="Yên Trung"></option>
-                      <option value="Hương Phố"></option>
-                      <option value="Đồng Lê"></option>
-                      <option value="Đồng Hới"></option>
-                      <option value="Đông Hà"></option>
-                      <option value="Huế"></option>
-                      <option value="Lăng Cô"></option>
-                      <option value="Đà Nẵng"></option>
-                      <option value="Trà Kiệu"></option>
-                      <option value="Phú Cang"></option>
-                      <option value="Tam Kỳ"></option>
-                      <option value="Núi Thành"></option>
-                      <option value="Quảng Ngãi"></option>
-                      <option value="Đức Phổ"></option>
-                      <option value="Bồng Sơn"></option>
-                      <option value="Diêu Trì"></option>
-                      <option value="Quy Nhơn"></option>
-                      <option value="Tuy Hòa"></option>
-                      <option value="Giã"></option>
-                      <option value="Ninh Hòa"></option>
-                      <option value="Nha Trang"></option>
-                      <option value="Ngã Ba"></option>
-                      <option value="Tháp Chàm"></option>
-                      <option value="Sông Mao"></option>
-                      <option value="Ma Lâm"></option>
-                      <option value="Phan Thiết"></option>
-                      <option value="Long Khánh"></option>
-                      <option value="Biên Hòa"></option>
-                      <option value="Bình Thuận"></option>
-                      <option value="Sài Gòn"></option>
+    <div class="panel-body">
+      <form>
+        <div class="form-group">
 
-                  </datalist>
-                </div>
-                <div class="form-group">
-                  <label for="arrival-station">Ga đến:</label>
-                  <input type="text" id="departure-station-arivel" [(ngModel)]="machineSearch.gaDen" name="gaDen" list="stations-arivel">
-                  <datalist id="stations-arivel">
-                      <option value="Lào Cai"></option>
-                      <option value="Phố Lú"></option>
-                      <option value="Bảo Hà"></option>
-                      <option value="Yên Bái"></option>
-                      <option value="Phú Thọ"></option>
-                      <option value="Việt Trì"></option>
-                      <option value="Đông Anh"></option>
-                      <option value="Hà Nội"></option>
-                      <option value="Phủ Lý"></option>
-                      <option value="Nam Định"></option>
-                      <option value="Ninh Bình"></option>
-                      <option value="Bỉm Sơn"></option>
-                      <option value="Đồng Đăng"></option>
-                      <option value="Uông Bí"></option>
-                      <option value="Hạ Long"></option>
-                      <option value="Hải Dương"></option>
-                      <option value="Hải Phòng"></option>
-                      <option value="Thanh Hóa"></option>
-                      <option value="Minh Khôi"></option>
-                      <option value="Chợ Sy"></option>
-                      <option value="Vinh"></option>
-                      <option value="Yên Trung"></option>
-                      <option value="Hương Phố"></option>
-                      <option value="Đồng Lê"></option>
-                      <option value="Đồng Hới"></option>
-                      <option value="Đông Hà"></option>
-                      <option value="Huế"></option>
-                      <option value="Lăng Cô"></option>
-                      <option value="Đà Nẵng"></option>
-                      <option value="Trà Kiệu"></option>
-                      <option value="Phú Cang"></option>
-                      <option value="Tam Kỳ"></option>
-                      <option value="Núi Thành"></option>
-                      <option value="Quảng Ngãi"></option>
-                      <option value="Đức Phổ"></option>
-                      <option value="Bồng Sơn"></option>
-                      <option value="Diêu Trì"></option>
-                      <option value="Quy Nhơn"></option>
-                      <option value="Tuy Hòa"></option>
-                      <option value="Giã"></option>
-                      <option value="Ninh Hòa"></option>
-                      <option value="Nha Trang"></option>
-                      <option value="Ngã Ba"></option>
-                      <option value="Tháp Chàm"></option>
-                      <option value="Sông Mao"></option>
-                      <option value="Ma Lâm"></option>
-                      <option value="Phan Thiết"></option>
-                      <option value="Long Khánh"></option>
-                      <option value="Biên Hòa"></option>
-                      <option value="Bình Thuận"></option>
-                      <option value="Sài Gòn"></option>
-                  </datalist>
-                </div>
-                <div class="form-group">
-                  <label for="departure-date">Ngày đi:</label>
-                  <input 
-                    type="date" 
-                    [(ngModel)]="machineSearch.ngayDi" 
-                    id="departure-date" 
-                    name="departure-date" 
-                    min="{{ minDate }}"
-                    
+          <label for="departure-station">Ga đi:</label>
+          <input type="text" id="departure-station" [(ngModel)]="machineSearch.gaDi" name="gaDi" list="stations"
+            required #cus_class="ngModel">
+          <datalist id="stations">
+            <option value="Lào Cai"></option>
+            <option value="Phố Lú"></option>
+            <option value="Bảo Hà"></option>
+            <option value="Yên Bái"></option>
+            <option value="Phú Thọ"></option>
+            <option value="Việt Trì"></option>
+            <option value="Đông Anh"></option>
+            <option value="Hà Nội"></option>
+            <option value="Phủ Lý"></option>
+            <option value="Nam Định"></option>
+            <option value="Ninh Bình"></option>
+            <option value="Bỉm Sơn"></option>
+            <option value="Đồng Đăng"></option>
+            <option value="Uông Bí"></option>
+            <option value="Hạ Long"></option>
+            <option value="Hải Dương"></option>
+            <option value="Hải Phòng"></option>
+            <option value="Thanh Hóa"></option>
+            <option value="Minh Khôi"></option>
+            <option value="Chợ Sy"></option>
+            <option value="Vinh"></option>
+            <option value="Yên Trung"></option>
+            <option value="Hương Phố"></option>
+            <option value="Đồng Lê"></option>
+            <option value="Đồng Hới"></option>
+            <option value="Đông Hà"></option>
+            <option value="Huế"></option>
+            <option value="Lăng Cô"></option>
+            <option value="Đà Nẵng"></option>
+            <option value="Trà Kiệu"></option>
+            <option value="Phú Cang"></option>
+            <option value="Tam Kỳ"></option>
+            <option value="Núi Thành"></option>
+            <option value="Quảng Ngãi"></option>
+            <option value="Đức Phổ"></option>
+            <option value="Bồng Sơn"></option>
+            <option value="Diêu Trì"></option>
+            <option value="Quy Nhơn"></option>
+            <option value="Tuy Hòa"></option>
+            <option value="Giã"></option>
+            <option value="Ninh Hòa"></option>
+            <option value="Nha Trang"></option>
+            <option value="Ngã Ba"></option>
+            <option value="Tháp Chàm"></option>
+            <option value="Sông Mao"></option>
+            <option value="Ma Lâm"></option>
+            <option value="Phan Thiết"></option>
+            <option value="Long Khánh"></option>
+            <option value="Biên Hòa"></option>
+            <option value="Bình Thuận"></option>
+            <option value="Sài Gòn"></option>
 
-                    >
-                </div>
-                <div class="form-group">
-                  <label for="return-date" >Ngày về:</label>
-                  <input 
-                    type="date"  
-                    [disabled]="isCheck" 
-                    [(ngModel)]="machineSearch.ngayVe" 
-                    id="return-date" 
-                    name="return-date" 
-                    min="{{ machineSearch.ngayDi }}"
-                    [min]="machineSearch.ngayVe | date:'yyyy-MM-yyyy'"
-                   >
-                </div>
-                <div class="form-check" style="text-align: center;">
-                  <label for="one-way" style="margin-top: 4; margin-right: 5px; font-family: Arial, Helvetica, sans-serif;">Một chiều</label>
-                  <input 
-                    type="radio" 
-                    [(ngModel)]="machineSearch.loaiHanhTrinh"  
-                    (click)="enableRadio()" 
-                    value="MOT_CHIEU" 
-                    id="one-way" 
-                    name="trip-type" 
-                    style="margin-right: 20px;" 
-                    checked>
-                  <label for="round-trip" style="margin-top: 4; margin-right: 5px; font-family: Arial, Helvetica, sans-serif;">Khứ hồi</label>
-                  <input type="radio" 
-                    [(ngModel)]="machineSearch.loaiHanhTrinh"  
-                    (click)="enableRadioTwo()" 
-                    value="KHU_HOI" 
-                    id="round-trip" 
-                    name="trip-type" 
-                    min="1" 
-                    max="10" >
-              </div>
-                <div style="display: flex; justify-content: center;">
-                    <button (click)="onSearch()" type="submit">Tìm kiếm</button>
-                  </div>
-              </form>          
+          </datalist>
+
         </div>
+        <div class="error" style="padding-left: 250px;">
+          <span _ngcontent-ppu-c53="" [hidden]="true" class="control-label ng-binding ng-hide"
+            style="color: red; align-items: center;">Vui lòng nhập ga đi ghi trên vé</span>
+        </div>
+        <div class="form-group">
+          <label for="departure-station">Ga đến:</label>
+          <input type="text" id="departure-station" [(ngModel)]="machineSearch.gaDen" name="gaDen" list="stations"
+            required #depStation="ngModel">
+          <datalist id="stations-arivel">
+            <option value="Lào Cai"></option>
+            <option value="Phố Lú"></option>
+            <option value="Bảo Hà"></option>
+            <option value="Yên Bái"></option>
+            <option value="Phú Thọ"></option>
+            <option value="Việt Trì"></option>
+            <option value="Đông Anh"></option>
+            <option value="Hà Nội"></option>
+            <option value="Phủ Lý"></option>
+            <option value="Nam Định"></option>
+            <option value="Ninh Bình"></option>
+            <option value="Bỉm Sơn"></option>
+            <option value="Đồng Đăng"></option>
+            <option value="Uông Bí"></option>
+            <option value="Hạ Long"></option>
+            <option value="Hải Dương"></option>
+            <option value="Hải Phòng"></option>
+            <option value="Thanh Hóa"></option>
+            <option value="Minh Khôi"></option>
+            <option value="Chợ Sy"></option>
+            <option value="Vinh"></option>
+            <option value="Yên Trung"></option>
+            <option value="Hương Phố"></option>
+            <option value="Đồng Lê"></option>
+            <option value="Đồng Hới"></option>
+            <option value="Đông Hà"></option>
+            <option value="Huế"></option>
+            <option value="Lăng Cô"></option>
+            <option value="Đà Nẵng"></option>
+            <option value="Trà Kiệu"></option>
+            <option value="Phú Cang"></option>
+            <option value="Tam Kỳ"></option>
+            <option value="Núi Thành"></option>
+            <option value="Quảng Ngãi"></option>
+            <option value="Đức Phổ"></option>
+            <option value="Bồng Sơn"></option>
+            <option value="Diêu Trì"></option>
+            <option value="Quy Nhơn"></option>
+            <option value="Tuy Hòa"></option>
+            <option value="Giã"></option>
+            <option value="Ninh Hòa"></option>
+            <option value="Nha Trang"></option>
+            <option value="Ngã Ba"></option>
+            <option value="Tháp Chàm"></option>
+            <option value="Sông Mao"></option>
+            <option value="Ma Lâm"></option>
+            <option value="Phan Thiết"></option>
+            <option value="Long Khánh"></option>
+            <option value="Biên Hòa"></option>
+            <option value="Bình Thuận"></option>
+            <option value="Sài Gòn"></option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="departure-date">Ngày đi:</label>
+          <input type="date" [(ngModel)]="machineSearch.ngayDi" id="departure-date" name="departure-date"
+            min="{{ minDate }}">
+        </div>
+        <div class="form-group">
+          <label for="return-date">Ngày về:</label>
+          <input type="date" [disabled]="isCheck" [(ngModel)]="machineSearch.ngayVe" id="return-date" name="return-date"
+            min="{{ machineSearch.ngayDi }}" [min]="machineSearch.ngayVe | date:'yyyy-MM-yyyy'">
+        </div>
+        <div class="form-check" style="text-align: center;">
+          <label for="one-way" style="margin-top: 4; margin-right: 5px; font-family: Arial, Helvetica, sans-serif;">Một
+            chiều</label>
+          <input type="radio" [(ngModel)]="machineSearch.loaiHanhTrinh" (click)="enableRadio()" value="MOT_CHIEU"
+            id="one-way" name="trip-type" style="margin-right: 20px;" checked>
+          <label for="round-trip"
+            style="margin-top: 4; margin-right: 5px; font-family: Arial, Helvetica, sans-serif;">Khứ hồi</label>
+          <input type="radio" [(ngModel)]="machineSearch.loaiHanhTrinh" (click)="enableRadioTwo()" value="KHU_HOI"
+            id="round-trip" name="trip-type" min="1" max="10">
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <button (click)="onSearch()" type="submit">Tìm kiếm</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 <app-notifications></app-notifications>
 

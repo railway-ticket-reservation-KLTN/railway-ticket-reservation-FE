@@ -11,7 +11,7 @@ export class VeTauInfo{
     gioDen:string;
     trangThai:number;
     giaVe:number;
-    taus:Tau[];
-    toaTaus:ToaTau[];
+    tau: Tau;
+    
 
 }

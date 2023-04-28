@@ -10,28 +10,43 @@ import { MachineService } from 'src/app/service/machine-service.service';
   styleUrls: ['./check-tickets.component.css']
 })
 export class CheckTicketsComponent implements OnInit {
-  kiemTraVeInfo=new KiemTraVeInfo();
-  hanhTrinhInfo= new HanhTrinh();
+  kiemTraVeInfo = new KiemTraVeInfo();
+  hanhTrinhInfo = new HanhTrinh();
   kiemTraVeRequest = new KiemTraVeRequest();
-  hidenSuccess=true;
-  hidenError=true;
+  hidenSuccess = true;
+  hidenError = true;
+  showResult = true;
+  gaDiError=true;
+  gaDenError=true;
+  macTauError=true;
+  Error=true;
   constructor(
     private machineService: MachineService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+  }
+
+
+  async onSearch() {
+
+ 
+    this.hidenError = true;
+    this.hidenSuccess = true;
+    this.showResult=true;
+    this.machineService.getKiemTraVe(this.kiemTraVeRequest).subscribe(data => {
+      this.kiemTraVeInfo = data;
+      this.hidenSuccess = false;
+      this.hanhTrinhInfo = data.hanhTrinh;
+      this.showResult=false;
+      console.log(this.kiemTraVeInfo);
+    },
+      (error) => {
+        this.hidenError = false;
+        this.showResult=true;
+      })
+
   }
  
-  onSearch(){
-   this.machineService.getKiemTraVe(this.kiemTraVeRequest).subscribe(data =>{
-        this.kiemTraVeInfo=data;
-        this.hidenSuccess=false;
-        this.hanhTrinhInfo=data.hanhTrinh;
-        console.log(this.hanhTrinhInfo);    
-   },
-   (error) => {
-       this.hidenError=false;
-   })
-    
-  }
 }
