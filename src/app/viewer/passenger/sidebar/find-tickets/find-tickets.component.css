@@ -9269,6 +9269,11 @@ table th {
   font-size: 28px;
   font-weight: bold;
 }
+.snack-bar-large {
+  min-width: 400px;
+  min-height: 400px;
+  font-size: 18px;
+}
 
 .close:hover,
 .close:focus {

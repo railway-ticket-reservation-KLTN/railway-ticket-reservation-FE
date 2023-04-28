@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorService } from 'src/app/service/error-service.service';
 import { VeTauInfo } from 'src/app/domain/VeTauInfo';
 import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-find-tickets',
@@ -22,7 +23,8 @@ export class FindTicketsComponent {
   constructor(
     private machineService:MachineService,
     private router:Router,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private snackBar: MatSnackBar
 
   ){
     const today = new Date();
@@ -44,7 +46,12 @@ export class FindTicketsComponent {
   onSearch(){ 
   this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
     if(Array.isArray(data) && data.length === 0){
-        alert("Không tìm thấy");
+        // alert("Không tìm thấy");
+        this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
+          duration: 2000, // Thời gian hiển thị (ms)
+          verticalPosition: 'top', // Vị trí hiển thị
+          panelClass: ['snack-bar-large'] 
+        });
     }
     else if(Array.isArray(data) == true){
       this.dataSearch = data;
@@ -54,7 +61,11 @@ export class FindTicketsComponent {
       this.machineService.getHanhTrinhTauKhuHoi(this.machineSearch).subscribe(data => {
         this.dataSearchKhuHoi = data;
         if(Array.isArray( this.dataSearchKhuHoi.hanhTrinhDi) && this.dataSearchKhuHoi.hanhTrinhDi.length === 0){
-          alert("Không tìm thấy");
+          this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
+            duration: 2000, // Thời gian hiển thị (ms)
+            verticalPosition: 'top', // Vị trí hiển thị
+            panelClass: ['snack-bar-large'] 
+          });
       }else{
         this.dataSearchKhuHoi = data;
 
@@ -68,7 +79,11 @@ export class FindTicketsComponent {
       
   },
   (error) => {
-      alert(error);  
+    this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
+      duration: 2000, // Thời gian hiển thị (ms)
+      verticalPosition: 'top', // Vị trí hiển thị
+      panelClass: ['snack-bar-large'] 
+    });
   }
   );
   }
