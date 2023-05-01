@@ -1,3 +1,4 @@
+
 <div class="result" style="height: 600px; margin-bottom: 60px;">
     <span class="et-main-label ng-binding">
         <strong class="ng-binding">Chiều đi:</strong> ngày {{ hanhTrinhInfo.ngayDi }} từ {{hanhTrinhInfo.gaDi}} đến
@@ -11,13 +12,13 @@
                 <div class="et-arrow-left"></div>
             </div>
         </div>
-        <div class="train-group">
+        <div class="train-group" style="max-width: 100%; overflow: auto;">
             <!-- *ngFor="let tau of tauList" -->
             <!-- <div *ngFor="let tau of tauList"> -->
             <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" analytics-on="click"
                 analytics-event="SelectTrain" *ngFor="let search of dataSearch"
-                (click)="loadToaTau($event, search.id, search.soToa)">
-                <div class="et-train-head et-train-head-selected">
+                (click)="loadToaTau($event, search.id, search.soToa)" >
+                <div class="et-train-head et-train-head-selected" >
                     <div class="row center-block" style="width: 40%; margin-bottom: 3px">
                         <div class="et-train-lamp text-center ng-binding"
                             ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85);">
@@ -90,7 +91,29 @@
                 </div>
             </div>
 
-            
+            <div class="panel panel-warning" style=" margin-bottom: 15px; float: right ;margin-right:15px;border-radius: 15px; width: 30%;">
+                <div class="panel-heading" style="background-color:  rgba(73, 123, 254, 1) !important; border-top-right-radius:15px; border-top-left-radius: 15px;">
+                  <h3 class="panel-title" style="font-size: 25px;">Giỏ Vé</h3>
+                </div>
+                <div class="panel-body" style="max-height: 85px; overflow: auto;">
+                  <form >
+                    <div class="form-group">
+                        <div *ngFor="let loads of gheDaDatList">
+                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}</label><br>
+                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}} {{loads.gioDi}}</label><br>
+                            <span (click)="btnDelete( loads.soGhe)" class="fa fa-trash-o" style="font-weight: 900; float: right; padding-right: 20px;">
+                                <span *ngIf="timeRemaining > 0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{ timeRemaining }}</span>
+                            </span>
+                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
+                            <p>====================================</p>
+                        </div>
+                    </div>
+                  </form>
+                  <div style="display: flex; justify-content: center;">
+                    <button type="submit">Mua vé</button>
+                  </div>
+                </div>
+              </div>
         </div>
         
     </div>
@@ -135,12 +158,11 @@
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-left=""
-                        *ngFor="let ghes of danhSachGheResponse | slice:0:26 ">
+                        *ngFor="let ghes of danhSachGheResponse | slice:0:26 "  (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-bought"
-                                    ng-class="{'et-sit-booked': seat.Status.Status == 2,'et-sit-bought': seat.Status.Status == 1, 'et-sit-longer': seat.Status.Status == 5, 'et-sit-blocked': seat.Status.Status == 4 &amp;&amp; (!seat.Status.LyDo || seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') == -1), 'et-sit-avaiable': seat.Status.Status == 3, 'et-sit-buying': seat.Status.Status == 6, 'et-sit-distancing': seat.Status.Status == 4 &amp;&amp; seat.Status.LyDo &amp;&amp; seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') != -1}">
+                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-bought': ghes.trangThai != '1'}"                                >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -171,7 +193,7 @@
                             ng-click="buyTicket(seat, direct)" ng-show="seat.Status">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-bought"
+                                <div class="et-sit-sur text-center et-sit-booked"
                                     ng-class="{'et-sit-booked': seat.Status.Status == 2,'et-sit-bought': seat.Status.Status == 1, 'et-sit-longer': seat.Status.Status == 5, 'et-sit-blocked': seat.Status.Status == 4 &amp;&amp; (!seat.Status.LyDo || seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') == -1), 'et-sit-avaiable': seat.Status.Status == 3, 'et-sit-buying': seat.Status.Status == 6, 'et-sit-distancing': seat.Status.Status == 4 &amp;&amp; seat.Status.LyDo &amp;&amp; seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') != -1}">
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
@@ -630,15 +652,15 @@
                 <div></div>
                 <div></div>
             </div>
-
+            <!-- bought -->
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-right=""
-                        *ngFor="let ghes of danhSachGheResponse | slice:27:64 ">
+                        *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-bought"
-                                    ng-class="{'et-sit-booked': seat.Status.Status == 2,'et-sit-bought': seat.Status.Status == 1, 'et-sit-longer': seat.Status.Status == 5, 'et-sit-blocked': seat.Status.Status == 4 &amp;&amp; (!seat.Status.LyDo || seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') == -1), 'et-sit-avaiable': seat.Status.Status == 3, 'et-sit-buying': seat.Status.Status == 6, 'et-sit-distancing': seat.Status.Status == 4 &amp;&amp; seat.Status.LyDo &amp;&amp; seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') != -1}">
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-bought': ghes.trangThai != '1'}" 
+                                >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -1276,8 +1298,8 @@
 </div>
 <div class="result" style="height: 600px; margin-bottom: 60px;" [hidden]="showResult">
     <span class="et-main-label ng-binding">
-        <strong class="ng-binding">Chiều về:</strong> ngày {{ hanhTrinhInfo.ngayDi }} từ  {{hanhTrinhInfo.gaDen}} đến
-        {{hanhTrinhInfo.gaDi}}
+        <strong class="ng-binding">Chiều về:</strong> ngày {{ hanhTrinhInfoKhuHoi.ngayDi }} từ  {{hanhTrinhInfoKhuHoi.gaDi}} đến
+        {{hanhTrinhInfoKhuHoi.gaDen}}
     </span>
 
     <div class="row et-train-list" style="margin-top: 20px; margin-left: 20px;">
@@ -1291,8 +1313,8 @@
             <!-- *ngFor="let tau of tauList" -->
             <!-- <div *ngFor="let tau of tauList"> -->
             <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" analytics-on="click"
-                analytics-event="SelectTrain" *ngFor="let search of dataSearch"
-                (click)="loadToaTau($event, search.id, search.soToa)" >
+                analytics-event="SelectTrain" *ngFor="let search of dataSearchVe"
+                (click)="loadToaTauKhuHoi($event, search.id, search.soToa)" >
                 <div class="et-train-head et-train-head-selected">
                     <div class="row center-block" style="width: 40%; margin-bottom: 3px">
                         <div class="et-train-lamp text-center ng-binding"
@@ -1373,8 +1395,8 @@
 
     <!-- <li *ngFor="let tau of tauList"> -->
     <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
-        <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeList"
-            (click)="loadToaGhe($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
+        <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeListKhuHoi"
+            (click)="loadToaGheKhuHoi($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                 ng-click="doiToaMoi(toa, false)"
                 ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
@@ -1385,15 +1407,15 @@
 
         <div class="et-car-block">
             <div class="et-car-icon"><img src="https://dsvn.vn/images/train2.png"></div>
-            <div class="text-center text-info et-car-label ng-binding">{{tauInfo.tenTau}}</div>
+            <div class="text-center text-info et-car-label ng-binding">{{tauInfoKhuHoi.tenTau}}</div>
         </div>
         <div ng-show="searchData.tauDi.HasCheapTicket" class="text-center ng-binding ng-hide"
             style="color:#bf8c01;cursor:pointer" ng-click="openTauGiaRe(searchData.tauDi, 0)"></div>
     </div>
     <!-- </li> -->
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <h4 class="ng-binding" style="font-weight: bold;">Toa số {{danhsachToaResponse.soToa}} :
-            {{danhsachToaResponse.moTaToa}} </h4>
+        <h4 class="ng-binding" style="font-weight: bold;">Toa số {{danhsachToaResponseKhuHoi.soToa}} :
+            {{danhsachToaResponseKhuHoi.moTaToa}} </h4>
     </div>
 
     <div class="et-col-5">
@@ -1411,11 +1433,11 @@
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-left=""
-                        *ngFor="let ghes of danhSachGheResponse | slice:0:26 ">
+                        *ngFor="let ghes of danhSachGheResponseKhuHoi | slice:0:26 ">
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-bought"
+                                <div class="et-sit-sur text-center et-sit-avaiable"
                                     ng-class="{'et-sit-booked': seat.Status.Status == 2,'et-sit-bought': seat.Status.Status == 1, 'et-sit-longer': seat.Status.Status == 5, 'et-sit-blocked': seat.Status.Status == 4 &amp;&amp; (!seat.Status.LyDo || seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') == -1), 'et-sit-avaiable': seat.Status.Status == 3, 'et-sit-buying': seat.Status.Status == 6, 'et-sit-distancing': seat.Status.Status == 4 &amp;&amp; seat.Status.LyDo &amp;&amp; seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') != -1}">
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
@@ -1910,10 +1932,10 @@
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-right=""
-                        *ngFor="let ghes of danhSachGheResponse | slice:27:64 ">
+                        *ngFor="let ghes of danhSachGheResponseKhuHoi | slice:27:64 ">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-bought"
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"
                                     ng-class="{'et-sit-booked': seat.Status.Status == 2,'et-sit-bought': seat.Status.Status == 1, 'et-sit-longer': seat.Status.Status == 5, 'et-sit-blocked': seat.Status.Status == 4 &amp;&amp; (!seat.Status.LyDo || seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') == -1), 'et-sit-avaiable': seat.Status.Status == 3, 'et-sit-buying': seat.Status.Status == 6, 'et-sit-distancing': seat.Status.Status == 4 &amp;&amp; seat.Status.LyDo &amp;&amp; seat.Status.LyDo.toLowerCase().indexOf('chỗ giãn cách') != -1}">
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
@@ -2550,5 +2572,5 @@
     </div>
 
 </div>
-<app-notifications></app-notifications>
+<app-notifications ></app-notifications>
 

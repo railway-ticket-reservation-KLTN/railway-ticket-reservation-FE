@@ -7517,7 +7517,8 @@ select {
 
 .et-sit-bought {
     background-color: #df5327;
-    color: #fff
+    color: #fff;
+    cursor: not-allowed;
 }
 
 .et-sit-bought .popover h3 {
@@ -8080,9 +8081,10 @@ select {
 .et-train-head-info {
     height: 70px;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
     background-color: #fff;
-    font-size: 11px;
+    font-size: 10px;
     padding-left: 2px;
     padding-right: 2px;
     padding-top: 5px
@@ -8586,12 +8588,32 @@ table th {
     background-color: #d9edf7;
     border-color: #bce8f1
 }
+button {
+    margin-top: 10px;
+    overflow: visible;
+    border-radius: 10px;
+    color: #f4fafc;
+    background-color: #0082c0;
+    height: 30px;
+    border: none;
+  }
+  .selected {
+  background-color: red;
+  /* other styles... */
+}
 
+
+  button:hover{
+    background-color: rgb(244, 232, 11);
+    color: #000;
+    
+  }
 .panel-heading {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
-    border-top-right-radius: 3px
+    border-top-right-radius: 3px;
+    background-color:rgba(73, 123, 254, 1) !important;
 }
 
 .navbar-nav>li>a {
