@@ -4,6 +4,7 @@ import { DanhSachGheRequest } from 'src/app/domain/DanhSachGheRequest';
 import { DanhSachGheResponse } from 'src/app/domain/DanhSachGheResponse';
 import { DanhSachToaRequest } from 'src/app/domain/DanhSachToaRequest';
 import { DanhSachToaResponse } from 'src/app/domain/DanhSachToaResponse';
+import { DatCho } from 'src/app/domain/DatCho';
 import { gheDaDat } from 'src/app/domain/GheDaDat';
 import { TimChuyenTauRequest } from 'src/app/domain/TimChuyenTauRequest';
 import { ToaTau } from 'src/app/domain/ToaTau';
@@ -59,6 +60,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   gheDaDatList: gheDaDat[];
   gheDaDat =new gheDaDat();
   gheDaDatLoad:gheDaDat;
+
+  datCho=new DatCho();
   constructor(
     private route: ActivatedRoute,
     private machineService: MachineService) { }
@@ -170,16 +173,23 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     })
   }
   loadThongTinGioVe(event:any, id:string, soGhe:string){
-  console.log(this.danhsachToaResponse); 
-    // this.gheDaDat.tenToa = this.tauInfo.tenTau;
-    // this.gheDaDat.gaDi = this.dataSearch[0].gaDi;
-    // this.gheDaDat.gaDen =this.dataSearch[0].gaDen;
-    // this.gheDaDat.ngayDi = this.dataSearch[0].ngayDi;
-    // this.gheDaDat.gioDi = this.dataSearch[0].gioDi;
-    // this.gheDaDat.soToa = this.tauInfo.soToa;
-    // this.gheDaDat.soGhe = soGhe;
-    // this.selectedSeatId = id;
-  
+    this.datCho.gaDi = this.dataSearch[0].gaDi;
+    this.datCho.gaDen =this.dataSearch[0].gaDen;
+    this.datCho.soToa = this.danhsachToaResponse.soToa;
+    this.datCho.maGhe = soGhe;
+    this.datCho.tenTau = this.tauInfo.tenTau;
+    this.datCho.ngayDi = this.dataSearch[0].ngayDi;
+    this.datCho.gioDi = this.dataSearch[0].gioDi;
+    this.datCho.gioDen = this.dataSearch[0].gioDen;
+    this.datCho.trangThai ="DAT_CHO";
+
+    console.log(this.gheDaDat);
+    
+   
+    this.machineService.getDatCho(this.datCho).subscribe(data =>{
+      console.log(data);
+      
+    })
     const newGheDaDat = {
       tenTau: this.tauInfo.tenTau,
       gaDi: this.dataSearch[0].gaDi,
@@ -187,9 +197,11 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       ngayDi: this.dataSearch[0].ngayDi,
       gioDi: this.dataSearch[0].gioDi,
       soToa: this.danhsachToaResponse.soToa,
-      soGhe: soGhe,
+      maGhe: soGhe,
       selected: true,
       tenToa: this.tauInfo.tenToa,
+      trangThai:'DAT_CHO',
+      gioDen: this.dataSearch[0].gioDen,
     };
     const index = this.selectedSeats.indexOf(id);
     if (index !== -1) {
@@ -207,6 +219,20 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
 
   btnDelete(soGhe:string){
+
+    this.datCho.gaDi = this.dataSearch[0].gaDi;
+    this.datCho.gaDen =this.dataSearch[0].gaDen;
+    this.datCho.soToa = this.danhsachToaResponse.soToa;
+    this.datCho.maGhe = soGhe;
+    this.datCho.tenTau = this.tauInfo.tenTau;
+    this.datCho.ngayDi = this.dataSearch[0].ngayDi;
+    this.datCho.gioDi = this.dataSearch[0].gioDi;
+    this.datCho.gioDen = this.dataSearch[0].gioDen;
+    this.datCho.trangThai ="DAT_CHO";
+    this.machineService.getTraCho(this.datCho).subscribe(data =>{
+      console.log(data);
+      
+    })
     const index = this.selectedSeats.indexOf(soGhe);
     // console.log(index);
     
@@ -217,7 +243,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.selectedSeats.splice(index, 1);
   
     // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
-    const gheDaDat = this.gheDaDatList.find(ghe => ghe.soGhe === soGhe);
+    const gheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === soGhe);
   
     if (gheDaDat) {
       gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false

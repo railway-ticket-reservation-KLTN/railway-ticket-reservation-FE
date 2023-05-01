@@ -5,17 +5,23 @@ export class gheDaDat{
     gaDen :string;
     ngayDi :string;
     gioDi :string;
+    gioDen :string;
     soToa :string;
-    soGhe:string;
+    maGhe:string;
     selected:boolean;
+    trangThai:string;
 
     constructor(){
+        this.tenTau = "";
+        this.tenToa = "";
         this.gaDen = "";
         this.gaDi = "";
         this.ngayDi = "";
         this.gioDi ="";
+        this.gioDen = "";
         this.soToa;
-        this.soGhe;
+        this.maGhe;
         this.selected;
+        this.trangThai ="DAT_CHO";
     }
 }

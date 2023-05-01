@@ -12,6 +12,9 @@ import { DanhSachGheRequest } from '../domain/DanhSachGheRequest';
 import { DanhSachGheResponse } from '../domain/DanhSachGheResponse';
 import { map } from 'rxjs/operators';
 import { VeTauInfoKhuHoi } from '../domain/VeTauInfoKhuHoi';
+import { DatCho } from '../domain/DatCho';
+import { gheDaDat } from '../domain/GheDaDat';
+import { DatChoInfo } from '../domain/DatChoInfo';
 
 
 @Injectable({
@@ -23,8 +26,12 @@ export class MachineService {
   private REST_API_SERVER='http://localhost:8080/v1';
   private httpOptions ={
     headers: new HttpHeaders({
+      
       'Content-Type':'application/json',
+      // 'Origin': 'http://localhost:4200' // Thay localhost:4200 bằng domain của ứng dụng Angular của bạn
+
     }),
+    
   };
   constructor(private http: HttpClient) { }
 
@@ -55,6 +62,15 @@ export class MachineService {
   public getDanhSachGhe(danhSachGheRequest: DanhSachGheRequest): Observable<DanhSachGheResponse[]> {
     const url = `${this.REST_API_SERVER}/ghes`;
     return this.http.post<DanhSachGheResponse[]>(url, danhSachGheRequest, this.httpOptions);
+  }
+  public getDatCho(datCho: DatCho): Observable<DatChoInfo> {
+    const url = `${this.REST_API_SERVER}/datcho`;
+    return this.http.post<DatChoInfo>(url, datCho, this.httpOptions);
+  }
+
+  public getTraCho(datCho: DatCho): Observable<any> {
+    const url = `${this.REST_API_SERVER}/tracho`;
+    return this.http.post<any>(url, datCho, this.httpOptions);
   }
 
   getChoNgoi():Observable<any[]>{
