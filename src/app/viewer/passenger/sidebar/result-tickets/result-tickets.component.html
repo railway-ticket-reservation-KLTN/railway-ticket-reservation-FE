@@ -101,16 +101,16 @@
                         <div *ngFor="let loads of gheDaDatList">
                             <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}</label><br>
                             <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}} {{loads.gioDi}}</label><br>
-                            <span (click)="btnDelete( loads.maGhe)" class="fa fa-trash-o" style="font-weight: 900; float: right; padding-right: 20px;">
+                            <span (click)="btnDelete( loads.maGhe, loads.soGhe)" class="fa fa-trash-o" style="font-weight: 900; float: right; padding-right: 20px;">
                                 <span *ngIf="timeRemaining > 0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{ timeRemaining }}</span>
                             </span>
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}} Số ghế: {{loads.maGhe}}</label>
+                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
                             <p>====================================</p>
                         </div>
                     </div>
                   </form>
                   <div style="display: flex; justify-content: center;">
-                    <button type="submit">Mua vé</button>
+                    <button type="submit" (click)="onSubmit()">Mua vé</button>
                   </div>
                 </div>
               </div>
@@ -157,12 +157,12 @@
             <div class="et-car-door"></div>
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
-                    <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-left=""
+                    <div class="et-car-nm-64-sit ng-isolate-scope"
                         *ngFor="let ghes of danhSachGheResponse | slice:0:26 "  (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-bought': ghes.trangThai != '1'}"                                >
+                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 && selectedSeats.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked1': ghes.trangThai != '1'}"                                >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -659,7 +659,7 @@
                         *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-bought': ghes.trangThai != '1'}" 
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-blocked': ghes.trangThai != '1'}" 
                                 >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"

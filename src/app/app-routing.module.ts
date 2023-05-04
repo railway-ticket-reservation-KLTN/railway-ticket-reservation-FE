@@ -12,6 +12,7 @@ import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieuki
 import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
 import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulations/phuongthucthanhtoan/phuongthucthanhtoan.component';
+import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -20,12 +21,14 @@ const routes: Routes = [
   { path: 'regulations', component: RegulationsComponent },
   { path: 'ket-qua', component:ResultTicketsComponent  },
   { path: 'kiem-tra-ve', component:CheckTicketsComponent  },
-  { path: 'tra-ve', component:PayTicketsComponent },
+  // { path: 'tra-ve', component:PayTicketsComponent },
   { path: 'lien-he', component:AboutUsComponent  },
   { path: 'dieukien', component:DieukienComponent  },
   { path: 'chinhsachbaomat', component:ChinhsachbaomatComponent},
   {path:'dieukhoansudung', component:DieukhoansudungComponent},
-  {path:'phuongthucthanhtoan', component:PhuongthucthanhtoanComponent}
+  {path:'phuongthucthanhtoan', component:PhuongthucthanhtoanComponent},
+  {path:'thanhtoan', component:PayTicketsComponent},
+  {path:'xac-nhan-thong-tin-ve', component:ConfirmTicketsComponent}
 ];
 
 @NgModule({

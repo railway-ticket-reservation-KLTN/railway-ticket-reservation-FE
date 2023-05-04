@@ -1,10 +1,8 @@
-export class DatCho{
-    tenToa:string;
+export class TraCho{
     gaDi:string;
     gaDen:string;
     soToa:number;
     maGhe:string;
-    soGhe:string;
     tenTau:string;
     ngayDi:string;
     gioDi:string;
@@ -12,7 +10,6 @@ export class DatCho{
     trangThai:string;    
     constructor(){
         this.tenTau = "";
-        this.tenToa = "";
         this.gaDen = "";
         this.gaDi = "";
         this.ngayDi = "";
@@ -20,6 +17,6 @@ export class DatCho{
         this.gioDen = "";
         this.soToa;
         this.maGhe;
-        this.trangThai ="";
+        this.trangThai ="DAT_CHO";
     }
 }

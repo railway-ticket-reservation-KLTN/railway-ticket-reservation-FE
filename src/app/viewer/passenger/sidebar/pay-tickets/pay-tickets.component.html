@@ -1,0 +1,453 @@
+<div class="vcvc" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
+
+    <div class="col-md-12" ng-show="!isViewConfirm &amp;&amp; !isFormDichVu">
+        <div class="et-page-header"><span class="et-main-label ng-binding" style="float:left">THÔNG TIN GIỎ
+                VÉ</span>&nbsp;&nbsp; <a class="list-ticket-mobile" ng-click="thongBaoHetThoiGianGiuCho()"
+                style="float:left"><img style="margin-bottom:3PX" height="32"></a>
+        </div>
+        <div class="row list-ticket-deskhop">
+            <div class="alert alert-info">
+                <p ng-bind-html="'PBuyTicket_dienGiaiGioVe'|translate" class="ng-binding">Các vé có biểu tượng là các vé
+                    bị hết thời gian tạm giữ. Xin vui lòng loại bỏ các vé này
+                    khỏi danh sách vé đặt mua trước khi thực hiện giao dịch thanh toán tiền.</p>
+                <p ng-bind-html="'PBuyTicket_dienGiaiNhapTT'|translate" class="ng-binding">Quý khách vui lòng điền đầy
+                    đủ, chính xác tất cả các thông tin về hành khách đi tàu bao gồm: Họ tên đầy đủ, số giấy tờ tùy thân
+                    (Số chứng minh nhân dân hoặc số hộ chiếu hoặc số giấy phép lái xe đường bộ được pháp luật Việt Nam
+                    công nhận hoặc ngày tháng năm sinh nếu là trẻ em hoặc thẻ sinh viên nếu là sinh viên). Để đảm bảo an
+                    toàn, minh bạch trong quá trình bán vé các thông tin này sẽ được nhân viên soát vé kiểm tra trước
+                    khi lên tàu theo đúng các quy định của Tổng công ty Đường sắt Việt Nam.</p>
+            </div>
+        </div><!-- ngInclude: 'app/payment/ticketCart.form.desktop.html' -->
+        <div ng-include="'app/payment/ticketCart.form.desktop.html'" class="ng-scope">
+            <div class="row form-group table-responsive list-ticket-deskhop ng-scope"
+                ng-class="{'et-error-block': maxPassengerError || shortyNameError}">
+                <table class="table table-bordered">
+                    <thead class="et-table-header">
+                        <tr>
+                            <th style="background-color: lavender;width: 25%;" class="ng-binding">Họ tên<!--Họ tên-->
+                            </th>
+                            <th style="width: 120px;background-color: lavender;" class="ng-binding">Thông tin
+                                chỗ<!--Thông tin chỗ--></th>
+                            <th style="background-color: lavender;" class="ng-binding">Giá vé<!--Giá vé--></th>
+                            <th style="background-color: lavender;" class="ng-binding">Giảm đối
+                                tượng<!--Giảm đối tượng--></th>
+                            <th style="background-color: lavender;" class="ng-binding">Thành tiền (VNĐ)<!--Khuyến mại-->
+                            </th>
+                            <th style="background-color: lavender;" class="ng-binding">Bảo hiểm<!--Bảo hiểm--></th>
+                            <th style="background-color: lavender;width: 120px;" class="ng-binding">Hủy
+                                bỏ<!--Thành tiền (VNĐ)--></th>
+                            <th style="background-color: lavender;width: 25px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-show="ves.khuHoi.length > 0" class="ng-hide">
+                        <tr class="et-table-group-header" ng-show="ves.chieuDi.length > 0 || ves.chieuVe.length > 0">
+                            <td colspan="8" style="text-align:center;vertical-align:middle;">
+                                <label class="ng-binding">Khứ hồi<!--Khứ hồi--></label>
+                                <!--<div>Vui lòng nhập địa chỉ cư trú, lưu trú cho các vé chiều đi vào phần địa chỉ lưu trú kế bên</div>-->
+                            </td>
+                            <!--<td colspan="7" style="text-align:left;vertical-align:middle;">
+                        <div class="input-group input-group-sm" style="margin-bottom:2px;">
+                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiDiDiaChiDi" id="luuTruKhuHoiDiDiaChiDi"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.khuHoiDiDiaChiDiRequired}"
+                                   ng-change="changeLuuTruKhuHoiDiDiaChiDi()"
+                                   class="form-control input-sm" />
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiDiDiaChiDen" id="luuTruKhuHoiDiDiaChiDen"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.khuHoiDiDiaChiDenRequired}"
+                                   ng-change="changeLuuTruKhuHoiDiDiaChiDen()"
+                                   class="form-control input-sm" />
+                        </div>
+                    </td>-->
+                        </tr>
+                        <!-- ngRepeat: ve in ves.khuHoi -->
+                        <!--<tr>
+                    <td colspan="1" style="text-align:center;vertical-align:middle;">
+                        Vui lòng nhập địa chỉ cưu trú, lưu trú cho các vé chiều về vào phần địa chỉ lưu trú kế bên
+                    </td>
+                    <td colspan="7" style="text-align:left;vertical-align:middle;">
+                        <div class="input-group input-group-sm" style="margin-bottom:2px;">
+                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiVeDiaChiDi" id="luuTruKhuHoiVeDiaChiDi"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.khuHoiVeDiaChiDiRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiVeDiaChiDen" id="luuTruKhuHoiVeDiaChiDen"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.khuHoiVeDiaChiDenRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                    </td>
+                </tr>-->
+                    </tbody>
+                    <tbody ng-show="ves.chieuDi.length > 0" class="">
+                        <tr class="et-table-group-header ng-hide"
+                            ng-show="ves.khuHoi.length > 0 || ves.chieuVe.length > 0">
+                            <td colspan="8" style="text-align:center;vertical-align:middle;">
+                                <label class="ng-binding">Chiều đi<!--Chiều đi--></label>
+                                <!--<div>Vui lòng nhập địa chỉ cưu trú, lưu trú vào phần địa chỉ lưu trú kế bên</div>-->
+                            </td>
+                            <!--<td colspan="7" style="text-align:left;vertical-align:middle;">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.chieuDiDiaChiDi" id="luuTruChieuDiDiaChiDi"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.chieuDiDiaChiDiRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.chieuDiDiaChiDen" id="luuTruChieuDiDiaChiDen"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.chieuDiDiaChiDenRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                    </td>-->
+                        </tr>
+                        <!-- ngRepeat: ve in ves.chieuDi -->
+                        <tr *ngFor="let loads of gheDaDatList;  let i = index"
+                            ng-class="{'et-error-tr': ve.buyingRuleError || ve.sameNameError}" class="ng-scope">
+                            <td class="et-table-cell" style="padding: 0px;border-bottom: solid 2px #ccc;">
+                                <div class="input-group input-group-sm" style="margin-bottom: 6px;width: 100%;">
+                                    <span class="input-group-addon text-left ng-binding" style="width: 84px;">Họ
+                                        tên</span>
+                                    <input type="text" placeholder="Thông tin hành khách" [(ngModel)]="gheDaDatList[i].tenKhach"
+                                    name="tenHanhKhach{{i}}"
+                                        class="form-control input-sm ng-pristine ng-invalid ng-invalid-required"
+                                        ng-class="{'et-error-block': ve.nameMissing}"
+                                        ng-change="syncRegister($index, false)" ng-disabled="ve.IsVeThang"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                        required="">
+                                </div>
+                                <div class="input-group input-group-sm" style="margin-bottom: 6px;width: 100%;">
+                                    <span class="input-group-addon text-left ng-binding" style="width: 84px;">Đối
+                                        tượng</span>
+                                    <select class="form-control input-sm ng-pristine ng-valid ng-valid-required" 
+                                    [(ngModel)]="gheDaDatList[i].doiTuong"
+                                        ng-class="{'et-error-block': ve.typeMissing}"
+                                        ng-options="passengerType.TenPTOnline|translate group by passengerType.Nhom|translate for passengerType in passengerTypes"
+                                        id="pt121593754"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important; width: 192px;"
+                                        required="">
+                                        <optgroup label="Người Việt Nam">
+                                            <option value="Người lớn" selected="selected" label="Người lớn">Người lớn</option>
+                                            <option value="Trẻ em" label="Trẻ em">Trẻ em</option>
+                                            <option value="Sinh viên" label="Sinh viên">Sinh viên</option>
+                                            <option value="Người cao tuổi" label="Người cao tuổi">Người cao tuổi</option>
+                                            <option value="Đoàn viên Công Đoàn" label="Đoàn viên Công Đoàn">Đoàn viên Công Đoàn</option>
+                                        </optgroup>
+                                        <optgroup label="Người nước ngoài">
+                                            <option value="5" label="Người lớn">Người lớn</option>
+                                            <option value="6" label="Trẻ em">Trẻ em</option>
+                                        </optgroup>
+                                    </select>
+                                    <!-- <select class="form-control input-sm ng-hide" ng-show="ve.IsVeThang"
+                                        ng-disabled="ve.IsVeThang">
+                                        <option value="27" class="ng-binding">Vé tháng</option>
+                                    </select> -->
+                                </div>
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <span class="input-group-addon text-left ng-scope ng-binding" style="width: 84px;"
+                                        popover="<div>- Số CMND</div><div>- Hộ chiếu</div><div>- Ngày tháng năm sinh trẻ em</div>"
+                                        popover-title="Số giấy tờ áp dụng" popover-trigger="mouseenter"
+                                        popover-placement="top">Số giấy tờ</span>
+                                    <input type="text" placeholder="Số CMND/ Hộ chiếu/ Ngày tháng năm sinh trẻ em"
+                                        [(ngModel)]="gheDaDatList[i].giayTo"
+                                         maxlength="19"
+                                        class="form-control input-sm ng-scope ng-pristine ng-valid"
+                                        ng-class="{'et-error-block': ve.identityMissing}"
+                                        ng-disabled="ve.IsVeThang || (ve.hanhKhach.loaiKhach &amp;&amp; (ve.hanhKhach.loaiKhach.MaPT == 2 || ve.hanhKhach.loaiKhach.MaPT == 7))"
+                                        ng-change="syncRegister($index, true)"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                        popover="<div>- Số CMND</div><div>- Hộ chiếu</div><div>- Ngày tháng năm sinh trẻ em</div>"
+                                        popover-title="Số giấy tờ áp dụng" popover-trigger="mouseenter"
+                                        popover-placement="top">
+                                </div>
+                            </td>
+                            <td style="font-size: 10px;border-bottom: solid 2px #ccc;">
+                                <div class="text-center ng-hide" ng-show="ve.seat.Status.Status != 6">
+
+                                </div>
+                                <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
+                                    <span ng-bind-html="'PBuyTicket_thoiGianTamGiu'|translate:ve.seat.Status.Duration"
+                                        class="ng-binding">Giữ trong <span class="text-danger">572</span> giây</span>
+                                </div>
+                                <div>
+                                    <div class="ng-binding">
+                                        {{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}
+                                    </div>
+                                    <div class="ng-binding">
+                                       {{loads.ngayDi}} {{loads.gioDi}}
+                                    </div>
+                                    <div class="ng-binding">
+                                        <!--{{'Toa ' + ve.carNo + ' chỗ ' + ve.seat.ChoSo}}-->
+                                         Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}}
+                                    </div>
+                                    <div class="ng-binding">
+                                        Số ghế: {{loads.soGhe}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                {{loads.giaVe}}
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                0
+                            </td>
+                            <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
+                                <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
+                                    {{(loads.giaVe -1000)}}
+                                </div>
+
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                1,000
+                            </td>
+                           
+                            <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
+                                <a analytics-on="click" analytics-event="removeTicket" href="" class="fa fa-trash-o"
+                                    ng-click="removeTicket(ve)" ng-show="!ve.seat.waiting"></a>
+                            </td>
+                        </tr><!-- end ngRepeat: ve in ves.chieuDi -->
+                    </tbody>
+                    <tbody ng-show="ves.chieuVe.length > 0" class="ng-hide">
+                        <tr class="et-table-group-header" ng-show="ves.khuHoi.length > 0 || ves.chieuDi.length > 0">
+                            <td colspan="8" style="text-align:center;vertical-align:middle;">
+                                <label class="ng-binding">Chiều về<!--Chiều về--></label>&nbsp;
+                                <div ng-show="ves.khuHoi.length > 0 || ves.chieuDi.length > 0" class=""><a
+                                        class="et-btn ng-binding" id="btnCloneBookingInfo"
+                                        ng-show="ves.chieuDi.length > 0" ng-click="setBackInfo()">Lấy thông tin từ chiều
+                                        đi<!--Lấy thông tin từ chiều đi--></a></div>
+                                <!--<div>Vui lòng nhập địa chỉ cưu trú, lưu trú vào phần địa chỉ lưu trú kế bên</div>-->
+                            </td>
+                            <!--<td colspan="7" style="text-align:left;vertical-align:middle;">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.chieuVeDiaChiDi" id="luuTruChieuVeDiaChiDi"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.chieuVeDiaChiDiRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
+                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.chieuVeDiaChiDen" id="luuTruChieuVeDiaChiDen"
+                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
+                                   ng-class="{'et-error-block': luuTru.chieuVeDiaChiDenRequired}"
+                                   class="form-control input-sm" />
+                        </div>
+                    </td>-->
+                        </tr>
+                        <!-- ngRepeat: ve in ves.chieuVe -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="info">
+                            <td colspan="6">
+                                <div style="float: left;">
+
+                                </div>
+                                <div style="float: right;">
+                                    <span class="pull-right"><strong class="ng-binding">Tổng
+                                            tiền<!--Tổng tiền--></strong></span>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <strong class="ng-binding"> {{ getTotalPrice() }}</strong>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="et-register-block">
+            <h5 class="ng-binding">Thông tin người đặt vé</h5>
+            <div class="row text-info ng-binding" ng-bind-html="'PBuyTicket_dienGiaiNguoiDat'|translate">Quý khách vui
+                lòng điền đẩy đủ và chính xác các thông tin về người mua vé dưới đây. Các thông tin này sẽ được sử dụng
+                để xác minh người mua vé và lấy vé tại ga trước khi lên tàu theo đúng các quy định của Tổng công ty
+                Đường sắt Việt Nam.</div>
+            <div _ngcontent-ybq-c94="" class="col-md-12">
+                <div _ngcontent-ybq-c94="" class="row">
+                    <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2">
+                        <label 
+                            _ngcontent-ybq-c94=""
+                            class="kt-form-label ng-binding">Họ và tên<span
+                            style="color: red">*</span></label></div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                        <div _ngcontent-ybq-c94="" class="form-group"><span
+                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
+                                mã vé chính
+                                xác 8 hoặc 9 ký tự số</span>
+                                <input _ngcontent-ybq-c94="" type="text"
+                                placeholder="Họ và tên" [(ngModel)]="nguoiDatVe.tenHanhKhach"
+                                id="tenHanhKhach" required="" class="form-control ng-pristine ng-valid ng-untouched"
+                                ng-reflect-required=""></div>
+                    </div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                            ng-class="{'has-error': macTauError}" class="kt-form-label ng-binding">Số CMND/Hộ chiếu
+                            <span style="color: red">*</span></label></div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': macTauError}" class="form-group"><span
+                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
+                                mác tàu chính
+                                xác</span><input _ngcontent-ybq-c94=""  [(ngModel)]="nguoiDatVe.soGiayTo" type="text" ng-change="macTauError = false"
+                                placeholder="Số CMND/Hộ chiếu" id="soGiayTo"
+                                class="form-control ng-pristine ng-valid ng-untouched" ng-reflect-model="SE8"></div>
+                    </div>
+                </div>
+                <div _ngcontent-ybq-c94="" class="row">
+                    <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                            ng-class="{'has-error': gaDiError}" class="kt-form-label ng-binding">Email <span style="color: red">*</span></label></div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': gaDiError}" class="form-group"><span
+                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
+                                ga đi ghi
+                                trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.email" type="email" placeholder="Email"
+                                class="form-control ng-pristine ng-valid ng-untouched"></div>
+                    </div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                            ng-class="{'has-error': gaDenError}"  class="kt-form-label ng-binding">Xác nhận email</label>
+                    </div>
+                    <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': gaDenError}" class="form-group"><span
+                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
+                                ga đến ghi
+                                trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.email" type="email" placeholder="Xác nhận email"
+                                class="form-control ng-pristine ng-valid ng-untouched"></div>
+                    </div>
+                </div>
+                <div _ngcontent-ybq-c94="" class="row">
+                    <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                            ng-class="{'has-error': ngayDiError}" class="kt-form-label ng-binding">Số điện thoại <span
+                                style="color: red">*</span></label></div>
+                    <div _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
+                        <div _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}"
+                            class="form-group">
+                            <span _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" class="control-label ng-binding ng-hide"
+                                hidden="">Vui
+                                lòng nhập ga đi ghi trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.sdt" _ngcontent-ppu-c53=""
+                                type="text" placeholder="Nhập số điện thoại  tại đây" aria-autocomplete="list"
+                                aria-expanded="false" aria-owns="typeahead-04M-6001"
+                                class="form-control ng-pristine ng-valid ng-untouched">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="ng-binding">Phương thức thanh toán</h5>
+            <div class="list-group"><!-- ngRepeat: item in listCongTT -->
+
+                <div class="list-group-item ng-scope" ng-repeat="item in listCongTT"
+                    ng-style="{'border-color': congThanhToanError?'red':'#dddddd'}"
+                    ng-show="item.MaCongTT=='PayLater'||!register.IsVeThang" style="border-color: rgb(221, 221, 221);">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="cursor:pointer;width: 3%" ng-click="setCongTT(item.MaCongTT)"><input
+                                        type="radio" name="phuongThucThanhToan"
+                                        ng-checked="isCheckedCongTT(item.MaCongTT)"
+                                        ng-disabled="register.IsVeThang || (item.MaCongTT=='PayLater' &amp;&amp; !canPayLatter)"
+                                        style="cursor:pointer;height: 1.2em;width: 100%"></td>
+                                <td style="cursor:pointer;width: 12%" ng-click="setCongTT(item.MaCongTT)"><img
+                                        ng-show="!register.IsVeThang" ng-src="/images/logo-dvtt-MOM.png"
+                                        style="width: 100px" src="assets/images/logo-dvtt-MOM.png" class=""> <img
+                                        ng-show="register.IsVeThang" style="width: 100px"
+                                        ng-disabled="register.IsVeThang" class="ng-hide"></td>
+                                <td ng-show="register.IsVeThang" class="ng-hide">
+                                    <div class="text-info" style="font-size: 12px"><strong class="ng-binding">Thanh toán
+                                            trực tuyến qua ví điện tử MoMo</strong></div>
+
+                                </td>
+                                <td ng-show="!register.IsVeThang" class="">
+                                    <div class="text-info" style="font-size: 12px"><strong class="ng-binding"> Thanh
+                                            toán bằng hình thức Quét Mã QR sử dụng ví điện tử MoMo</strong></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end ngRepeat: item in listCongTT -->
+                <div class="list-group-item ng-scope" ng-repeat="item in listCongTT"
+                    ng-style="{'border-color': congThanhToanError?'red':'#dddddd'}"
+                    ng-show="item.MaCongTT=='PayLater'||!register.IsVeThang" style="border-color: rgb(221, 221, 221);">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+                        <tbody>
+                            <tr>
+                                <td style="cursor:pointer;width: 3%"><input
+                                        type="radio" name="phuongThucThanhToan"
+                                        style="cursor:pointer;height: 1.2em;width: 100%"></td>
+                                <td style="cursor:pointer;width: 12%"><img
+                                     
+                                        style="width: 100px" src="assets/images/logo-dvtt-PayLater.png" class=""> <img
+                                        ng-show="register.IsVeThang"></td>
+                                <td ng-show="register.IsVeThang" class="ng-hide" style="width: 403px;">
+                                    <div class="text-info" style="font-size: 12px"><strong class="ng-binding">Thanh toán
+                                            trả sau bằng tiền mặt tại các điểm giao dịch:</strong></div>
+
+                                </td>
+                                <td ng-show="!register.IsVeThang" class="">
+                                    <div class="text-info" style="font-size: 12px"><strong class="ng-binding">Tại các
+                                            nhà ga, các điểm bưu cục VNPost, ngân hàng VIB, Payoo, Internet
+                                            Banking</strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end ngRepeat: item in listCongTT -->
+            </div>
+            <div class="row ng-hide"
+                ng-show="passengerInputError || maxPassengerError || maxTicketError || maxTicketPerTrainError || passengerInfoError || shortyNameError || invoiceError || mstError || congThanhToanError">
+                <div class="col-md-12 alert alert-warning" [hidden]="true">
+                    <div class="et-error-label"><span class="glyphicon glyphicon-warning-sign"></span> <b
+                            class="ng-binding">Thông tin nhập vào chưa chính xác</b></div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="passengerInputError">* Hãy điền đầy đủ thông
+                        tin hành khách</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="maxPassengerError">* Mỗi giao dịch chỉ cho
+                        tối đa 5 hành khách</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="maxTicketError">* Mỗi hành khách chỉ được sở
+                        hữu tối đa 2 vé mỗi giao dịch</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="maxTicketPerTrainError">* Mỗi hành khách chỉ
+                        được sở hữu 1 vé trên 1 chuyến tàu</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="passengerInfoError">* Có hành khách khác tên
+                        nhưng trùng số CMTND/ Hộ chiếu?</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="shortyNameError">* Bạn cần điền đầy đủ họ và
+                        tên giống với CMTND</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="invoiceError">* Thông tin xuất hóa đơn phải
+                        bao gồm cả Tên công ty (hoặc đơn vị) và địa chỉ</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="mstError">* Mã số thuế để xuất hóa đơn không
+                        đúng định dạng (chỉ bao gồm 10 hoặc 13 ký tự số và dấu [-])</div>
+                    <div class="et-error-label ng-binding ng-hide" ng-show="congThanhToanError">* Vui lòng chọn phương
+                        thức thanh toán</div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'et-error-block': notAgreementError}">
+                <div ng-show="notAgreementError" [hidden]="true"><span class="et-error-label ng-binding">Bạn chưa đồng ý
+                        với những quy định mua vé trực tuyến.</span></div>
+                <div><input type="checkbox" ng-model="agreement" class="ng-pristine ng-valid"> <span
+                        ng-bind-html="'PBuyTicket_xacNhanDongYMuaVeOnline'|translate" class="ng-binding">Tôi đã đọc kỹ
+                        và đồng ý tuân thủ tất cả các <a href="/#/quydinhmuave" target="_blank">quy định mua vé trực
+                            tuyến</a>, <a href="/#/khuyenmai" target="_blank">các chương trình khuyến mại</a> của Tổng
+                        công ty đường sắt Việt Nam và chịu trách nhiệm về tính xác thực của các thông tin trên.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12"><a analytics-on="click" analytics-event="SaveBooking-Step1" id="btnSaveBookInfo"
+               class="pull-right et-btn-rec ng-binding" ng-disabled="requesting" (click)="btnNext()">Tiếp
+                theo&gt;&gt;</a> <a routerLink="/tim-ve" class="pull-left et-btn-rec ng-binding"
+                ng-disabled="requesting">&lt;&lt; Quay lại</a></div>
+    </div>
+
+</div>

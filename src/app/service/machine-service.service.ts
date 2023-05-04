@@ -15,6 +15,7 @@ import { VeTauInfoKhuHoi } from '../domain/VeTauInfoKhuHoi';
 import { DatCho } from '../domain/DatCho';
 import { gheDaDat } from '../domain/GheDaDat';
 import { DatChoInfo } from '../domain/DatChoInfo';
+import { TraCho } from '../domain/TraCho';
 
 
 @Injectable({
@@ -63,15 +64,20 @@ export class MachineService {
     const url = `${this.REST_API_SERVER}/ghes`;
     return this.http.post<DanhSachGheResponse[]>(url, danhSachGheRequest, this.httpOptions);
   }
-  public getDatCho(datCho: DatCho): Observable<DatChoInfo> {
+  public getDatCho(datCho: DatCho): Observable<any> {
     const url = `${this.REST_API_SERVER}/datcho`;
-    return this.http.post<DatChoInfo>(url, datCho, this.httpOptions);
-  }
-
-  public getTraCho(datCho: DatCho): Observable<any> {
-    const url = `${this.REST_API_SERVER}/tracho`;
     return this.http.post<any>(url, datCho, this.httpOptions);
   }
+
+  // public getTraCho(traCho: TraCho): Observable<boolean> {
+  //   const url = `${this.REST_API_SERVER}/tracho`;
+  //   return this.http.post<any>(url, traCho, this.httpOptions);
+  // }
+  public traCho(traCho: TraCho): Observable<boolean> {
+    const url = `${this.REST_API_SERVER}/tracho`;
+    return this.http.delete<boolean>(url, { body: traCho, headers: this.httpOptions.headers });
+  }
+  
 
   getChoNgoi():Observable<any[]>{
     return this.http.get<any>(this.REST_API_SERVER+'/hanhtrinhtau');

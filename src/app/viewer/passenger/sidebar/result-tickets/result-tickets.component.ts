@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DanhSachGheRequest } from 'src/app/domain/DanhSachGheRequest';
 import { DanhSachGheResponse } from 'src/app/domain/DanhSachGheResponse';
 import { DanhSachToaRequest } from 'src/app/domain/DanhSachToaRequest';
@@ -8,6 +8,7 @@ import { DatCho } from 'src/app/domain/DatCho';
 import { gheDaDat } from 'src/app/domain/GheDaDat';
 import { TimChuyenTauRequest } from 'src/app/domain/TimChuyenTauRequest';
 import { ToaTau } from 'src/app/domain/ToaTau';
+import { TraCho } from 'src/app/domain/TraCho';
 import { VeTauInfo } from 'src/app/domain/VeTauInfo';
 import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
 import { MachineService } from 'src/app/service/machine-service.service';
@@ -58,15 +59,19 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   danhsachToaResponse = new DanhSachToaResponse();
   danhsachToaResponseKhuHoi = new DanhSachToaResponse();
   gheDaDatList: gheDaDat[];
+  gheDaDatList1: gheDaDat[];
   gheDaDat =new gheDaDat();
   gheDaDatLoad:gheDaDat;
 
   datCho=new DatCho();
+  traCho=new TraCho();
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private machineService: MachineService) { }
   ngOnChanges() {
-    this.gheDaDatList=this.gheDaDatList;
+    this.gheDaDatList=this.gheDaDatList1;
+
   }
   ngOnInit() {
 
@@ -173,17 +178,17 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     })
   }
   loadThongTinGioVe(event:any, id:string, soGhe:string){
+    console.log(this.danhSachGheResponse);
+    
     this.datCho.gaDi = this.dataSearch[0].gaDi;
     this.datCho.gaDen =this.dataSearch[0].gaDen;
     this.datCho.soToa = this.danhsachToaResponse.soToa;
-    this.datCho.maGhe = soGhe;
+    this.datCho.maGhe = id;
     this.datCho.tenTau = this.tauInfo.tenTau;
     this.datCho.ngayDi = this.dataSearch[0].ngayDi;
     this.datCho.gioDi = this.dataSearch[0].gioDi;
     this.datCho.gioDen = this.dataSearch[0].gioDen;
     this.datCho.trangThai ="DAT_CHO";
-
-    console.log(this.gheDaDat);
     
    
     this.machineService.getDatCho(this.datCho).subscribe(data =>{
@@ -197,42 +202,61 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       ngayDi: this.dataSearch[0].ngayDi,
       gioDi: this.dataSearch[0].gioDi,
       soToa: this.danhsachToaResponse.soToa,
-      maGhe: soGhe,
+      soGhe: soGhe,
+      giaVe:this.dataSearch[0].giaVe,
       selected: true,
       tenToa: this.tauInfo.tenToa,
       trangThai:'DAT_CHO',
       gioDen: this.dataSearch[0].gioDen,
+      maGhe:id,
+      tenKhach:'',
+      doiTuong:'',
+      giayTo:'',
     };
     const index = this.selectedSeats.indexOf(id);
-    if (index !== -1) {
+    const index1 = this.selectedSeats.indexOf(soGhe);
+
+    if (index !== -1 && index1 !==-1) {
       this.selectedSeats.splice(index, 1);
     } else {
       this.selectedSeats.push(id);
     }
     if(Array.isArray(this.gheDaDatList) && this.gheDaDatList){
       this.gheDaDatList = [...this.gheDaDatList, newGheDaDat]; // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-      console.log(this.gheDaDatList);
+      this.gheDaDatList1=this.gheDaDatList;
     } else { 
       this.gheDaDatList = [newGheDaDat];
       console.log(this.gheDaDatList);
+      this.gheDaDatList1=this.gheDaDatList;
+
     }
+    console.log(this.gheDaDatList);
+
+    console.log(this.gheDaDatList1);
+    
   }
 
-  btnDelete(soGhe:string){
+  btnDelete(maGhe:string, soGhe:string, ){
+    this.traCho.gaDi = this.dataSearch[0].gaDi;
+    this.traCho.gaDen =this.dataSearch[0].gaDen;
+    this.traCho.soToa = this.danhsachToaResponse.soToa;
+    this.traCho.maGhe = maGhe;
+    this.traCho.tenTau = this.tauInfo.tenTau;
+    this.traCho.ngayDi = this.dataSearch[0].ngayDi;
+    this.traCho.gioDi = this.dataSearch[0].gioDi;
+    this.traCho.gioDen = this.dataSearch[0].gioDen;
+    this.traCho.trangThai ="DAT_CHO";
 
-    this.datCho.gaDi = this.dataSearch[0].gaDi;
-    this.datCho.gaDen =this.dataSearch[0].gaDen;
-    this.datCho.soToa = this.danhsachToaResponse.soToa;
-    this.datCho.maGhe = soGhe;
-    this.datCho.tenTau = this.tauInfo.tenTau;
-    this.datCho.ngayDi = this.dataSearch[0].ngayDi;
-    this.datCho.gioDi = this.dataSearch[0].gioDi;
-    this.datCho.gioDen = this.dataSearch[0].gioDen;
-    this.datCho.trangThai ="DAT_CHO";
-    this.machineService.getTraCho(this.datCho).subscribe(data =>{
+    console.log(this.traCho);
+    
+    // this.machineService.getTraCho(this.traCho).subscribe(data =>{
+    //   console.log(data);
+      
+    // })
+    this.machineService.traCho(this.traCho).subscribe(data =>{
       console.log(data);
       
-    })
+    });
     const index = this.selectedSeats.indexOf(soGhe);
     // console.log(index);
     
@@ -263,6 +287,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     }, 1000);
   }
 
+  onSubmit(){
+    this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList) } });
+  }
   
 }
 

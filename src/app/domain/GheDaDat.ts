@@ -6,10 +6,15 @@ export class gheDaDat{
     ngayDi :string;
     gioDi :string;
     gioDen :string;
-    soToa :string;
+    soToa :number;
     maGhe:string;
+    soGhe:string;
     selected:boolean;
     trangThai:string;
+    giaVe:number;
+    tenKhach:string;
+    doiTuong:string;
+    giayTo:string;
 
     constructor(){
         this.tenTau = "";
@@ -22,6 +27,7 @@ export class gheDaDat{
         this.soToa;
         this.maGhe;
         this.selected;
-        this.trangThai ="DAT_CHO";
+        this.trangThai ="";
+        this.giaVe;
     }
 }

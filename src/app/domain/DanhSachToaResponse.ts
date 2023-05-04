@@ -1,6 +1,6 @@
 export class DanhSachToaResponse{
     id:string;
-    soToa:string;
+    soToa:number;
     moTaToa:string;
     soLuongGhe:string;
     ten_toa:string;

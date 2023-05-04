@@ -13,7 +13,7 @@ import { FooterComponent } from './viewer/passenger/footer/footer.component';
 import { MainComponent } from './viewer/passenger/main/main.component';
 import { ResultTicketsComponent } from './viewer/passenger/sidebar/result-tickets/result-tickets.component';
 import { AboutUsComponent } from './viewer/passenger/sidebar/about-us/about-us.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { DieukienComponent } from './viewer/passenger/sidebar/regulations/dieukien/dieukien.component';
 import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations/chinhsachbaomat/chinhsachbaomat.component';
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     DieukhoansudungComponent,
     CheckTicketsComponent,
     DialogErrorComponent,
-    PhuongthucthanhtoanComponent
+    PhuongthucthanhtoanComponent,
+    ConfirmTicketsComponent
     
   ],
   imports: [
@@ -54,7 +56,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    NgScrollbarModule 
+    NgScrollbarModule,
+    HttpClientXsrfModule
 
   ],
   providers: [],

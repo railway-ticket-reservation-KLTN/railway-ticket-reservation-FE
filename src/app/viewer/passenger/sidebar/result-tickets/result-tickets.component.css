@@ -7514,7 +7514,6 @@ select {
 .et-sit-booked .popover div {
     color: #555
 }
-
 .et-sit-bought {
     background-color: #df5327;
     color: #fff;
@@ -7558,7 +7557,8 @@ select {
 
 .et-sit-blocked {
     background-color: #df5327;
-    color: #fff
+    color: #fff;
+    cursor: not-allowed;
 }
 
 .et-sit-blocked .popover h3 {
@@ -7566,6 +7566,19 @@ select {
 }
 
 .et-sit-blocked .popover div {
+    color: #555
+}
+.et-sit-blocked1 {
+    background-color: #a6b727;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.et-sit-blocked1 .popover h3 {
+    color: #df5327
+}
+
+.et-sit-blocked1 .popover div {
     color: #555
 }
 
