@@ -71,7 +71,8 @@ xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
     console.log(this.xacnhanthongtinve);
     if(this.xacnhanthongtin.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO"){
       this.machineService.thanhToanMomo(this.xacnhanthongtinve).subscribe(data =>{
-        console.log(data);
+        window.open(data.payUrl, '_blank');
+
       })
     }
     else{
