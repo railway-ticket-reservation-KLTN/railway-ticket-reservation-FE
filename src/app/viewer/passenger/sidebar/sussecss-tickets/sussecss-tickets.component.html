@@ -1,0 +1,159 @@
+<div class="row" ng-show="!notFound" style="padding: 10px;">
+    <div class="col-md-12 hidden-print">
+        <div class="et-col-md-12 et-widget alert alert-info" style="color:#0091d4">
+            <p>Để kiểm soát và ngăn ngừa dịch bệnh Covid-19, Ngành Đường sắt kính đề nghị Quý khách hàng khi đến ga mua
+                vé hoặc đi tàu thực hiện các biện pháp phòng chống dịch bệnh theo THÔNG ĐIỆP 5K của Bộ Y tế
+                [<strong>Khẩu trang – Khử khuẩn – Khoảng cách – Không tập trung – Khai báo y tế</strong>]. Riêng việc
+                khai báo y tế, hành khách vui lòng truy cập vào địa chỉ: <a href="https://tokhaiyte.vn"
+                    target="_blank">https://tokhaiyte.vn</a> hoặc app [Vietnam Health Declaration]. Trân trọng cảm ơn!
+            </p>
+        </div>
+        <div class="row et-page-header">
+            <!-- <span class="et-main-label ng-binding ng-hide" ng-show="msgShowed == -1">GIAO
+                DỊCH KHÔNG THÀNH CÔNG</span>  -->
+            <span class="et-main-label ng-binding ng-hide" ng-show="msgShowed == 1">GIAO DỊCH
+                THÀNH CÔNG</span> 
+            <!-- <span class="et-main-label ng-binding" ng-show="msgShowed == 2">ĐẶT MUA VÉ THÀNH CÔNG</span>
+            <span class="et-main-label ng-binding ng-hide" ng-show="msgShowed == 3">XẾP HÀNG MUA VÉ THÀNH CÔNG</span> -->
+        </div>
+        <div class="text-info">
+            <div ng-show="msgShowed == 1" class="ng-binding ng-hide">Cám ơn quý khách đã sử dụng dịch vụ vận chuyển hành
+                khách của Tổng công ty Đường sắt Việt Nam. Quý khách đã thực hiện mua vé thành công với thông tin chi
+                tiết như dưới đây:</div>
+    </div>
+    <div class="col-xs-11 et-col-md-3 text-info bg-danger" style="padding: 10px 15px; margin: 10px 0px 10px 30px"><label
+            class="ng-binding">Mã đặt chỗ:&nbsp;{{xacnhanthongtinveInfo.maDatCho}}</label><br></div>
+    <div class="col-md-12 text-info" ng-show="!successTrans &amp;&amp;  paymentId &amp;&amp; !hasVeThang()">
+        <p ng-bind-html="'PBookingInfo_moTaThanhToan'|translate:paymentId" class="ng-binding">Quý khách vui lòng sử dụng
+            mã thanh toán &nbsp;<label class="text-info">30549381</label>&nbsp; để thực hiện giao dịch thanh toán qua
+            InternetBanking hoặc các đại lý thu tiền ủy quyền của Tổng công ty đường sắt Việt Nam bao gồm:</p><label
+            style="margin: 0" class="ng-binding">Thanh toán tại các nhà ga bán vé của Đường sắt Việt
+            Nam</label><br><label style="margin: 0" class="ng-binding">Thanh toán tại các đại lý vé tàu hỏa chính thức
+            của Đường sắt Việt Nam</label><br><a
+            href="http://www.saigonrailway.com.vn/category-13-22-29-Cac_diem_giao_dich_Ngan_hang_Quoc_te_(VIB).html"
+            target="_blank"><strong class="ng-binding">Các địa chỉ thanh toán tại ngân hàng VIB</strong></a><br><a
+            href="http://vr.com.vn/cac-quy-dinh/dia-chi-thanh-toan-tai-buu-dien.html" target="_blank"><strong
+                class="ng-binding">Các địa chỉ thanh toán tại bưu điện</strong></a><br><a
+            href="https://www.payoo.vn/tin-tuc/payoo/thanh-toan-ve-tau-chua-bao-gio-don-gian-va-tien-loi-den-the%2521-7536"
+            target="_blank"><strong class="ng-binding">Điểm thanh toán gần nhà qua Payoo</strong></a><br><a
+            href="http://vr.com.vn/cac-quy-dinh/danh-sach-ngan-hang-chap-nhan-thanh-toan-qua-cong-thanh-toan-banknetvn.html"
+            target="_blank"><strong class="ng-binding">Điểm thanh toán qua Internet Banking/Mobile
+                banking/ATM</strong></a>
+    </div>
+    <div class="col-md-12 table-responsive list-ticket-deskhop">
+        <h5 class="et-register-block ng-binding" style="margin-left:0px">Thông tin vé</h5>
+        <table class="table table-bordered">
+            <thead class="et-table-header">
+                <tr>
+                    <th class="ng-binding">Họ tên</th>
+                    <th style="width:150px" class="ng-binding">Số CMND/ Hộ chiếu</th>
+                    <th style="width:85px" class="ng-binding">Đối tượng</th>
+                    <th style="width:120px" class="ng-binding">Loại chỗ</th>
+                    <th style="width:150px" class="ng-binding">Thông tin vé</th>
+                    <th style="width:100px" class="ng-binding">Trạng thái</th>
+                    <th style="width:100px" class="ng-binding">Thành tiền (VNĐ)</th>
+                </tr>
+            </thead><!-- ngRepeat: group in bookingGroup -->
+            <tbody *ngFor="let ves of xacnhanthongtinveInfo.veTaus;" class="ng-scope">
+                <tr class="et-table-group-header">
+                    <td colspan="7" class="ng-binding">{{ves.hanhTrinh.gaDi}} - {{ves.hanhTrinh.gaDen}} {{ves.hanhTrinh.ngayDi}}</td>
+                </tr><!-- ngRepeat: book in group -->
+                <tr ng-repeat="book in group" class="ng-scope">
+                    <td class="et-table-cell ng-binding">{{ves.tenHanhKhach}}</td>
+                    <td class="et-table-cell ng-binding">{{ves.soGiayTo}}</td>
+                    <td class="et-table-cell">
+                        <div ng-show="book.MaPT!=27" class="ng-binding">{{ves.doiTuong}}</div>
+                    </td>
+                    <td class="et-table-cell et-text-md ng-binding">{{ves.loaiVe}}</td>
+                    <td class="et-table-cell et-text-md">
+                        <div class="ng-binding">{{ves.tenTau}}</div>
+                        <div class="ng-binding">{{ves.hanhTrinh.ngayDi}} {{ves.hanhTrinh.gioDi}}</div>
+                        <div class="ng-binding">Toa: {{ves.soToa}} chỗ số: {{ves.soGhe}}</div>
+                    </td>
+                    <td class="et-table-cell et-text-md ng-binding">{{ves.tinhTrang}}.</td>
+                    <td class="et-table-cell text-right ng-binding">{{ves.donGia}}</td>
+                </tr><!-- end ngRepeat: book in group -->
+            </tbody><!-- end ngRepeat: group in bookingGroup -->
+            <tfoot>
+                <tr class="info">
+                    <td colspan="6"><span class="pull-right"><strong class="ng-binding">Tổng tiền</strong></span></td>
+                    <td class="text-right"><strong class="ng-binding">{{getTotalPrice()}}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div _ngcontent-ybq-c94="" class="col-md-12">
+        <div _ngcontent-ybq-c94="" class="row">
+            <h5 class="et-register-block ng-binding" style="margin-left:0px; padding: 10px;">Thông tin người đặt vé</h5>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2">
+                <label 
+                    class="kt-form-label ng-binding">Họ và tên</label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                        <input _ngcontent-ybq-c94="" type="text"
+                        placeholder="Họ và tên" [(ngModel)]="khachDatVe.hoTen" disabled
+                        id="tenHanhKhach" required="" class="form-control ng-pristine ng-valid ng-untouched"
+                       ></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label
+                   class="kt-form-label ng-binding">Số CMND/Hộ chiếu
+                  </label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div _ngcontent-ybq-c94="" class="form-group"><input [(ngModel)]="khachDatVe.soGiayTo" type="text" 
+                        placeholder="Số CMND/Hộ chiếu" id="soGiayTo" disabled
+                        class="form-control ng-pristine ng-valid ng-untouched" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2"><label
+                    class="kt-form-label ng-binding">Email </label></div>
+            <div  class="col-xs-8 col-sm-4 col-md-4">
+                <div ng-class="{'has-error': gaDiError}" class="form-group">
+                    <input _ngcontent-ybq-c94="" [(ngModel)]="khachDatVe.email" disabled type="email" placeholder="Email"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                    ng-class="{'has-error': gaDenError}"  class="kt-form-label ng-binding">Số điện thoại</label>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group"><input _ngcontent-ybq-c94="" disabled [(ngModel)]="khachDatVe.sdt" type="text" placeholder="Số điện thoại"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="col-md-12 text-info">
+        <p class=""><span  class="ng-binding">Vé của quý khách đã được tạm khóa. Quý khách vui lòng thanh toán trước thời hạn
+                <strong>06/05/2023 02:07</strong></span> <span ng-show="hasVeThang()"
+                class="ng-binding ng-hide">Vé của quý khách đã được tạm khóa. Quý khách vui lòng ra ga xuất vé trước
+                thời hạn <strong>06/05/2023 02:07</strong></span></p>
+        <p 
+            class="ng-binding ng-hide">Để in vé điện tử, vui lòng <a
+                href="/#/thongtingiaodich?bookingCode=K13X6G&amp;email=&amp;mobile=0374079637">bấm vào đây.</a></p>
+        <p ng-show="msgShowed==1" ng-bind-html="'PBookingInfo_huongDanInVe'|translate" class="ng-binding ng-hide">Ngoài
+            ra, quý khách cũng có thể in thẻ lên tàu tại các cửa vé hoặc tại các kiosk in vé tự động được đặt ở các ga
+            của Tổng công ty Đường sắt Việt Nam.<br><br>Trong trường hợp không in được thẻ lên tàu, quý khách có thể lưu
+            bản mềm trên các thiết bị di động cá nhân như smart phone, máy tính bảng,... khi lên tàu và xuất trình (kèm
+            giấy tờ tùy thân) cho nhân viên đường sắt khi có yêu cầu.</p>
+        <p  class="ng-binding">Để nhận được các
+            thông tin hướng dẫn qua tin nhắn SMS, xin vui lòng gửi tin nhắn từ số điện thoại đăng ký mua vé đến đầu số
+            8200 với cú pháp: <strong>VT K13X6G</strong>. Trong đó VT là mã kích hoạt dịch vụ, K13X6G là mã đặt chỗ của
+            quý khách.<br>Phí gửi tin nhắn để kích hoạt dịch vụ là 2.000 VNĐ (Hai nghìn đồng)</p>
+        <p  class="ng-binding">Quý khách có thể liên hệ với trung
+            tâm hỗ trợ khách hàng 19006469 để được trợ giúp.<br>Chúng tôi phục vụ quý khách 24 giờ trong ngày và 7 ngày
+            trong tuần.</p>
+    </div>
+    <div class="col-md-12 text-info ng-hide" ng-show="msgShowed == 3">
+        <p ng-bind-html="'PBookingInfo_guiThongBaoQuaEmail'|translate:bookingCode" class="ng-binding">Chúng tôi sẽ gửi
+            thông báo cho quý khách qua email ngay khi tìm được chỗ phù hợp. Quý khách vui lòng kiểm tra email thường
+            xuyên để xác nhận mua vé nếu như có thông báo tìm được vé phù hợp.<br>Để nhận được các thông báo qua tin
+            nhắn SMS, quý khách vui lòng gửi tin nhắn từ số điện thoại đăng ký xếp hàng mua vé đến đầu số 8200 với cú
+            pháp: VT K13X6G. Trong đó VT là mã kích hoạt dịch vụ, K13X6G là mã đặt chỗ của quý khách trong email
+            này.<br>Phí gửi tin nhắn để kích hoạt dịch vụ là 2.000 VNĐ (Hai nghìn đồng)</p>
+        <p ng-bind-html="'PBookingInfo_lienHeTrungTam'|translate" class="ng-binding">Quý khách có thể liên hệ với trung
+            tâm hỗ trợ khách hàng 19006469 để được trợ giúp.<br>Chúng tôi phục vụ quý khách 24 giờ trong ngày và 7 ngày
+            trong tuần.</p>
+    </div>
+    <div class="et-col-md-12 text-center hidden-print"><a href="" onclick="print()" class="et-btn ng-binding">In</a> <a
+            href="/#" class="et-btn ng-binding">Trang chủ</a></div>
+</div>

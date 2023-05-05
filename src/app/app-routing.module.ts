@@ -13,6 +13,7 @@ import { ChinhsachbaomatComponent } from './viewer/passenger/sidebar/regulations
 import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations/dieukhoansudung/dieukhoansudung.component';
 import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulations/phuongthucthanhtoan/phuongthucthanhtoan.component';
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
+import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path:'dieukhoansudung', component:DieukhoansudungComponent},
   {path:'phuongthucthanhtoan', component:PhuongthucthanhtoanComponent},
   {path:'thanhtoan', component:PayTicketsComponent},
-  {path:'xac-nhan-thong-tin-ve', component:ConfirmTicketsComponent}
+  {path:'xac-nhan-thong-tin-ve', component:ConfirmTicketsComponent},
+  {path:'thong-tin-giao-dich', component:SussecssTicketsComponent}
 ];
 
 @NgModule({

@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
+import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tick
     CheckTicketsComponent,
     DialogErrorComponent,
     PhuongthucthanhtoanComponent,
-    ConfirmTicketsComponent
+    ConfirmTicketsComponent,
+    SussecssTicketsComponent,
+    
     
   ],
   imports: [

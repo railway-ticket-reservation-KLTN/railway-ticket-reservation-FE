@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
 import { XacNhanThongTin } from 'src/app/domain/XacNhanThongTin';
 import { XacNhanThongTinVe } from 'src/app/domain/XacNhanThongTinVe';
+import { XacNhanThongTinVeInfo } from 'src/app/domain/XacNhanThongTinVeInfo';
+import { XacNhanThongTinVeInfoMoMo } from 'src/app/domain/XacNhanThongTinVeInfoMoMo';
 import { MachineService } from 'src/app/service/machine-service.service';
 
 @Component({
@@ -13,6 +15,8 @@ import { MachineService } from 'src/app/service/machine-service.service';
 export class ConfirmTicketsComponent {
 xacnhanthongtin=new XacNhanThongTin();
 xacnhanthongtinve =new XacNhanThongTinVe;
+xacnhanthongtinveInfo = new XacNhanThongTinVeInfo;
+xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
   constructor(
     private router:Router,
     private route: ActivatedRoute,
@@ -65,16 +69,16 @@ xacnhanthongtinve =new XacNhanThongTinVe;
     this.xacnhanthongtinve.hinhThucThanhToan =  this.xacnhanthongtin.nguoiDatVe.hinhthucthanhtoan;
     this.xacnhanthongtinve.ngayLap = "2023-4-16"
     console.log(this.xacnhanthongtinve);
-
     if(this.xacnhanthongtin.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO"){
       this.machineService.thanhToanMomo(this.xacnhanthongtinve).subscribe(data =>{
         console.log(data);
-        
       })
     }
     else{
       this.machineService.thanhToanTraSau(this.xacnhanthongtinve).subscribe(data =>{
-        console.log(data);
+       
+        this.xacnhanthongtinveInfo=data;
+        this.router.navigate(['/thong-tin-giao-dich'],  { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
         
       })
     }

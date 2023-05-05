@@ -1,3 +1,4 @@
+import { HanhTrinh } from "./HanhTrinh";
 import { KhachDatVe } from "./KhachDatVe";
 
 export class VeTausThanhToans{
@@ -17,4 +18,6 @@ export class VeTausThanhToans{
     trangThai:string;
     thoiGianGiuVe:string;
     khachDatVe:KhachDatVe;
+    hanhTrinh:HanhTrinh;
+    
 }
