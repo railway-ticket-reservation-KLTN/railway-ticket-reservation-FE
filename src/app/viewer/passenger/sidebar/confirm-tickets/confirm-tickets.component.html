@@ -29,14 +29,12 @@
                         class="text-info-ticket ng-binding"></span></div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="ng-binding">&nbsp;&nbsp;- Phương thức thanh
-                    toán:</span> <span ng-show="!register.IsVeThang" class=""><!-- ngRepeat: item in listCongTT --><span
-                        class="text-info-ticket ng-binding ng-scope" ng-show="congThanhToan==item.MaCongTT"
-                        ng-repeat="item in listCongTT">Thanh toán qua ví
+                    toán:</span> <span class=""><!-- ngRepeat: item in listCongTT --><span
+                        class="text-info-ticket ng-binding ng-scope" >Thanh toán qua ví
                         MoMo</span><!-- end ngRepeat: item in listCongTT --><span
                         class="text-info-ticket ng-binding ng-scope ng-hide" ng-show="congThanhToan==item.MaCongTT"
                         ng-repeat="item in listCongTT">Trả sau</span><!-- end ngRepeat: item in listCongTT --></span> <span
-                    ng-show="register.IsVeThang" class="ng-hide"><span class="text-info-ticket ng-binding">Ra ga xuất
-                        vé</span></span></div>
+                    ng-show="register.IsVeThang" class="ng-hide"></span></div>
         </div>
         <h4 style="color: #dd5600;margin-top: 20px;font-weight: 600" class="ng-binding">Thông tin vé mua</h4>
         <!-- ngInclude: 'app/payment/ticketCart.confirm.desktop.html' -->
@@ -280,7 +278,7 @@
             thực hiện giao dịch thanh toán ở trang tiếp theo quý khách sẽ không thể thay đổi được thông tin mua vé trên.
         >
         <div class="col-md-12"><a analytics-on="click" analytics-event="SaveBooking" href="javascript:;"
-                id="btnSaveBookInfo" ng-click="validateDataViewConfirm()" class="pull-right et-btn-rec ng-binding"
+                id="btnSaveBookInfo"(click)="onNextButtonClick()" class="pull-right et-btn-rec ng-binding"
                 ng-disabled="requesting">Đồng ý xác nhận&gt;&gt;</a> <a href="javascript:;" analytics-on="click"
                 analytics-event="BackToAddInfo" ng-click="nhapLaiThongTin()" class="pull-left et-btn-rec ng-binding"
                 ng-disabled="requesting">&lt;&lt; Nhập lại</a></div>

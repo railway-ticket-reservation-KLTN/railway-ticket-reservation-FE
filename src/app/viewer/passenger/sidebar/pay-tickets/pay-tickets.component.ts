@@ -59,5 +59,11 @@ btnNext(){
   console.log(this.xacnhanthongtin);
   
 }
-
+btnMomo(){
+  this.nguoiDatVe.hinhthucthanhtoan = "THANH_TOAN_MOMO"
 }
+btnTraSau(){
+  this.nguoiDatVe.hinhthucthanhtoan = "TRA_SAU"
+}
+}
+

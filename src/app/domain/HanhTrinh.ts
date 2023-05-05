@@ -8,5 +8,5 @@ export class HanhTrinh{
     gioDen:string;
     trangThai:string;
     giaVe:number;
-    hibernateLazyInitializer:[];
+    tau:string;
 }

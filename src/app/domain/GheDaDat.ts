@@ -4,6 +4,7 @@ export class gheDaDat{
     gaDi:string;
     gaDen :string;
     ngayDi :string;
+    ngayDen:string;
     gioDi :string;
     gioDen :string;
     soToa :number;
@@ -15,6 +16,7 @@ export class gheDaDat{
     tenKhach:string;
     doiTuong:string;
     giayTo:string;
+    loaiVe:string;
 
     constructor(){
         this.tenTau = "";
@@ -26,7 +28,7 @@ export class gheDaDat{
         this.gioDen = "";
         this.soToa;
         this.maGhe;
-        this.selected;
+        this.soGhe;
         this.trangThai ="";
         this.giaVe;
     }

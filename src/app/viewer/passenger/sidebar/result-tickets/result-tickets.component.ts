@@ -200,6 +200,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       gaDi: this.dataSearch[0].gaDi,
       gaDen: this.dataSearch[0].gaDen,
       ngayDi: this.dataSearch[0].ngayDi,
+      ngayDen:this.dataSearch[0].ngayDen,
       gioDi: this.dataSearch[0].gioDi,
       soToa: this.danhsachToaResponse.soToa,
       soGhe: soGhe,
@@ -212,6 +213,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       tenKhach:'',
       doiTuong:'',
       giayTo:'',
+      loaiVe:'MOT_CHIEU',
     };
     const index = this.selectedSeats.indexOf(id);
     const index1 = this.selectedSeats.indexOf(soGhe);

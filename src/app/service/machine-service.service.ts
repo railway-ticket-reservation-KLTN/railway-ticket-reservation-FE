@@ -16,6 +16,9 @@ import { DatCho } from '../domain/DatCho';
 import { gheDaDat } from '../domain/GheDaDat';
 import { DatChoInfo } from '../domain/DatChoInfo';
 import { TraCho } from '../domain/TraCho';
+import { XacNhanThongTinVe } from '../domain/XacNhanThongTinVe';
+import { XacNhanThongTinVeInfo } from '../domain/XacNhanThongTinVeInfo';
+import { XacNhanThongTinVeInfoMoMo } from '../domain/XacNhanThongTinVeInfoMoMo';
 
 
 @Injectable({
@@ -82,6 +85,14 @@ export class MachineService {
   getChoNgoi():Observable<any[]>{
     return this.http.get<any>(this.REST_API_SERVER+'/hanhtrinhtau');
 
+  }
+  public thanhToanMomo(xacnhanthongtinve:XacNhanThongTinVe): Observable<XacNhanThongTinVeInfoMoMo>{
+    const url = `${this.REST_API_SERVER}/muave`;
+    return this.http.post<XacNhanThongTinVeInfoMoMo>(url, xacnhanthongtinve, this.httpOptions);
+  }
+  public thanhToanTraSau(xacnhanthongtinve:XacNhanThongTinVe): Observable<XacNhanThongTinVeInfo>{
+    const url = `${this.REST_API_SERVER}/muave`;
+    return this.http.post<XacNhanThongTinVeInfo>(url, xacnhanthongtinve, this.httpOptions);
   }
 
   public getSearch( ):Observable<any>{

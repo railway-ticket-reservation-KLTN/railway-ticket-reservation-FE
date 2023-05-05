@@ -358,8 +358,9 @@
                             <tr>
                                 <td style="cursor:pointer;width: 3%" ng-click="setCongTT(item.MaCongTT)"><input
                                         type="radio" name="phuongThucThanhToan"
-                                        ng-checked="isCheckedCongTT(item.MaCongTT)"
-                                        ng-disabled="register.IsVeThang || (item.MaCongTT=='PayLater' &amp;&amp; !canPayLatter)"
+                                        (click)="btnMomo()"
+                                        [(ngModel)]="nguoiDatVe.hinhthucthanhtoan"
+                                        value="THANH_TOAN_MOMO"
                                         style="cursor:pointer;height: 1.2em;width: 100%"></td>
                                 <td style="cursor:pointer;width: 12%" ng-click="setCongTT(item.MaCongTT)"><img
                                         ng-show="!register.IsVeThang" ng-src="/images/logo-dvtt-MOM.png"
@@ -387,6 +388,9 @@
                             <tr>
                                 <td style="cursor:pointer;width: 3%"><input
                                         type="radio" name="phuongThucThanhToan"
+                                        (click)="btnTraSau()"
+                                        value="TRA_SAU"
+                                        [(ngModel)]="nguoiDatVe.hinhthucthanhtoan"
                                         style="cursor:pointer;height: 1.2em;width: 100%"></td>
                                 <td style="cursor:pointer;width: 12%"><img
                                      
