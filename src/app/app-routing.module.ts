@@ -14,6 +14,7 @@ import { DieukhoansudungComponent } from './viewer/passenger/sidebar/regulations
 import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulations/phuongthucthanhtoan/phuongthucthanhtoan.component';
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
+import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-tickets/return-tickets.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'regulations', component: RegulationsComponent },
   { path: 'ket-qua', component:ResultTicketsComponent  },
   { path: 'kiem-tra-ve', component:CheckTicketsComponent  },
-  // { path: 'tra-ve', component:PayTicketsComponent },
+  { path: 'tra-ve', component:ReturnTicketsComponent },
   { path: 'lien-he', component:AboutUsComponent  },
   { path: 'dieukien', component:DieukienComponent  },
   { path: 'chinhsachbaomat', component:ChinhsachbaomatComponent},

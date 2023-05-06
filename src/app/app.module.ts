@@ -26,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
+import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-tickets/return-tickets.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-ti
     PhuongthucthanhtoanComponent,
     ConfirmTicketsComponent,
     SussecssTicketsComponent,
+    ReturnTicketsComponent,
     
     
   ],

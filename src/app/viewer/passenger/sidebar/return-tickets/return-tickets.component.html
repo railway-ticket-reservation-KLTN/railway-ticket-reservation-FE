@@ -1,0 +1,243 @@
+<div class="vcvc" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
+<div class="col-md-12 hidden-print">
+    <div class="row et-page-header">
+        <span class="et-main-label ng-binding">TRẢ VÉ TRỰC TUYẾN<!--TRẢ VÉ TRỰC TUYẾN--></span>
+    </div>
+</div>
+
+<div ng-show="step == 1" class="">
+    <div class="col-md-12">
+        <div>
+            <p class="alert alert-info">
+                Trả vé trực tuyến chỉ áp dụng với trường hợp khách hàng đã thanh toán trực tuyến (qua cổng thanh toán, ví điện tử, app ngân hàng) và có điền email khi mua vé.
+                <br> 
+                Nếu quý khách thanh toán bằng tiền mặt, trả sau qua ứng dụng ngân hàng và atm, chuyển khoản hoặc trả vé khi có sự cố bãi bỏ tàu vui lòng thực hiện thủ tục tại các nhà ga, đại lý bán vé.
+            </p>
+        </div>
+        <label class="ng-binding">Để hiển thị các vé cần trả, vui lòng điền chính xác 3 thông tin dưới đây :<!--Để hiển thị các vé cần trả, vui lòng điền chính xác 3 thông tin dưới đây.--></label>
+    </div>
+    <div class="col-md-12 hidden-print" [hidden]="true">
+        <div class="et-col-md-12">
+            <span class="et-error-label clearfix ng-binding ng-hide" ng-show="bookingCodeError">Mã đặt chỗ không hợp lệ<!--Mã đặt chỗ không hợp lệ--></span>
+            <span class="et-error-label clearfix ng-binding ng-hide" ng-show="emailError">Email không hợp lệ<!--Email không hợp lệ--></span>
+            <span class="et-error-label clearfix ng-binding ng-hide" ng-show="mobileError">Điện thoại không hợp lệ<!--Số điện thoại không hợp lệ--></span>
+        </div>
+    </div>
+    <div ng-controller="KiemTraVeController" class="kt-form ng-scope">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div [hidden]="hidenSuccess" class="alert alert-success ng-hide" ng-show="isValidTicket">
+                    <div ng-bind-html="'PKTraVe_ResultValid'|translate" class="ng-binding"><strong>Vé điện tử của bạn hoàn
+                            toàn hợp lệ.</strong></div>
+                </div>
+                <div [hidden]="hidenError" class="alert alert-danger ng-hide" ng-show="isInvalidTicket">
+                    <div ng-bind-html="'PKTraVe_ResultInValid'|translate" class="ng-binding"><p><strong>Không tìm thấy vé điện tử phù hợp.</strong></p><p>- Quý khách vui lòng kiểm tra và nhập chính xác các thông tin tìm vé.</p><p>- Nếu vẫn không tìm thấy Vé xin vui lòng ra ga để kiểm tra hoặc liên hệ đầu số <strong>19006469</strong> để được trợ giúp.</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-4 col-sm-2 col-md-2">
+                    <label class="kt-form-label ng-binding" ng-class="{'has-error': maVeError}">Mã đặt vé<!--Mã vé--></label>
+                </div>
+                <div class="col-xs-8 col-sm-4 col-md-4">
+                    <div class="form-group" ng-class="{'has-error': maVeError}">
+                        <span class="control-label ng-binding ng-hide" [hidden]="Error">Vui lòng nhập mã vé chính xác 8
+                            hoặc 9 ký tự số<!--Vui lòng nhập mã vé chính xác 8 hoặc 9 ký tự số--></span>
+                        <input type="text" 
+                            class="form-control ng-pristine ng-valid" 
+                            ng-disabled="isRequesting" 
+                            [(ngModel)]="traVe.maDatVe"
+                            ng-change="maVeError = false"
+                            placeholder="Nhập mã đặt vé" id="maVe" required>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-2 col-md-2">
+                    <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">Tên khách đặt
+                        <!--Mác tàu--></label>
+                </div>
+                <div class="col-xs-8 col-sm-4 col-md-4">
+                    <div class="form-group" ng-class="{'has-error': macTauError}">
+                        <span class="control-label ng-binding ng-hide" [hidden]="macTauError">Vui lòng nhập mác tàu chính
+                            xác<!--Vui lòng nhập mác tàu chính xác--></span>
+                        <input 
+                            type="text" 
+                            class="form-control ng-pristine ng-valid" 
+                            [(ngModel)]="traVe.tenKhachDat"
+                            ng-change="macTauError = false" 
+                            placeholder="Tên khách đặt" 
+                            id="gaDen">
+    
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-2 col-md-2">
+                    <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDiError}">Email<!--Ga đi--></label>
+                </div>
+                <div class="col-xs-8 col-sm-4 col-md-4">
+                    <div class="form-group" ng-class="{'has-error': gaDiError}">
+                        <span class="control-label ng-binding ng-hide" [hidden]="gaDiError">Vui lòng nhập ga đi ghi trên
+                            vé<!--Vui lòng nhập ga đi ghi trên vé--></span>
+                        <input 
+                            type="text" class="form-control ng-pristine ng-valid" 
+                            placeholder="email" 
+                            [(ngModel)]="traVe.email"
+                            id="gaDi" 
+                           >
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-2 col-md-2">
+                    <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDenError}">Số CMND/CCCD<!--Ga đến--></label>
+                </div>
+                <div class="col-xs-8 col-sm-4 col-md-4">
+                    <div class="form-group" ng-class="{'has-error': gaDenError}">
+                        <span class="control-label ng-binding ng-hide" [hidden]="gaDenError">Vui lòng nhập ga đến ghi trên
+                            vé<!--Vui lòng nhập ga đến ghi trên vé--></span>
+                        <input 
+                            type="text" 
+                            class="form-control ng-pristine ng-valid" 
+                            placeholder="Số giấy Tờ" 
+                            [(ngModel)]="traVe.soGiayTo"
+                            id="gaDen" 
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-2 col-md-2">
+                    <label class="kt-form-label ng-binding" ng-class="{'has-error': ngayDiError}">Số điện thoại<!--Ngày đi--></label>
+                </div>
+                <div _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
+                    <div _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}" class="form-group"><span _ngcontent-ppu-c53=""
+                        [hidden]="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span>
+                            <input
+                                _ngcontent-ppu-c53="" 
+                                type="text" 
+                                placeholder="Số điện thoại"
+                                [(ngModel)]="traVe.sdt"
+                                id="gaDi" 
+                                aria-autocomplete="list" 
+                                aria-expanded="false" 
+                                aria-owns="typeahead-04M-6001"
+                                class="form-control ng-pristine ng-valid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row text-center ng-hide" ng-show="notFound" [hidden]="true">
+        <h4 class="ng-binding"><!--Không tìm thấy dữ liệu nào-->Không tìm thấy dữ liệu nào</h4>
+    </div>
+
+
+    <div class="col-md-12 text-center alert alert-info"  [hidden]="true" ng-show="bookingInfo.VeTraOnline.Messsage.length > 0 ">       
+        <div class="ng-binding">Thông tin vé cần trả không đúng, vui lòng kiểm tra lại</div>
+
+    </div>
+
+    <!--Giao dien cho moblie-->
+    <div class="list-ticket-mobile" style="display: none;">
+        <div ng-show="successGroup.length > 0" class="ng-hide">
+            <h5 class="et-register-block ng-binding" style="color: #e55a05; font-weight: 700;"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <!-- ngRepeat: group in successGroup -->
+        </div>
+    </div>
+
+    <!--Giao dien cho desktop-->
+    <div class="col-md-12 table-responsive list-ticket-desktop">
+        <div ng-show="successGroup.length > 0" class="ng-hide">
+            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <table class="table table-bordered">
+                <thead class="et-table-header">
+                <tr>
+                    <th style="width: 2%;">#</th>
+                    <th style="width: 19%;" class="ng-binding">Họ tên<!--Họ tên--></th>
+                    <th style="width: 19%;" class="ng-binding">Thông tin vé<!--Thông tin vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
+                    <th style="width: 15%;" class="ng-binding">Loại trả vé<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Lệ phí trả vé<!--Lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Tiền trả lại<!--Tiền trả lại--></th>
+                    <th style="width: 14%;" class="ng-binding">Thông tin vé trả<!--Nội dung trả vé--></th>
+                    <th style="width: 6%;" class="ng-binding">Chọn vé trả<!--Chọn vé trả--></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>  <input type="checkbox">
+                        </td>
+                    </tr>
+                    
+                </tbody>
+                <!-- ngRepeat: group in successGroup -->
+            </table>
+        </div>
+    </div>
+    <!-- <div class="col-md-12 text-info" ng-show="successGroup.length > 0 || pendingGroup.length > 0">
+        <div ng-bind-html="'PReturnTicket_huongDanHoTro'|translate:bookingCode">
+        </div>
+    </div> -->
+
+    <div _ngcontent-ybq-c94="" class="col-md-12">
+        <div _ngcontent-ybq-c94="" class="row">
+            <h5 class="et-register-block ng-binding" style="margin-left:0px; padding: 10px;">Thông tin người đặt vé</h5>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2">
+                <label 
+                    class="kt-form-label ng-binding">Họ và tên</label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                        <input _ngcontent-ybq-c94="" type="text"
+                        placeholder="Họ và tên" disabled
+                        [(ngModel)]="khachDatVe.hoTen"
+                        id="tenHanhKhach" required="" class="form-control ng-pristine ng-valid ng-untouched"
+                       ></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label
+                   class="kt-form-label ng-binding">Số CMND/Hộ chiếu
+                  </label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div _ngcontent-ybq-c94="" class="form-group"><input  type="text" 
+                        placeholder="Số CMND/Hộ chiếu" id="soGiayTo" disabled
+                        [(ngModel)]="khachDatVe.soGiayTo"
+                        class="form-control ng-pristine ng-valid ng-untouched" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2"><label
+                    class="kt-form-label ng-binding">Email </label></div>
+            <div  class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                    <input _ngcontent-ybq-c94="" disabled type="email"
+                    [(ngModel)]="khachDatVe.email" placeholder="Email"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                     class="kt-form-label ng-binding">Số điện thoại</label>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group"><input _ngcontent-ybq-c94="" disabled 
+                    [(ngModel)]="khachDatVe.sdt" type="text" placeholder="Số điện thoại"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+        </div>
+        <div class="col-md-12 text-right">
+            <p><button class="btn btn-primary ng-binding" >Tiếp tục</button>
+            </p>
+            <hr>
+        </div>
+    </div>
+</div>
+</div>
+
+<!---->
