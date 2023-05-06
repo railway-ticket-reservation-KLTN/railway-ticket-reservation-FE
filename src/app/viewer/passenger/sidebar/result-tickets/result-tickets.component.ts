@@ -122,7 +122,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachToaRequest.tauID = this.dataSearchLoadToa.tau.id;
     this.machineService.getDanhSachToa(this.danhSachToaRequest).subscribe(data => {
       this.toaXeList = data;
-      const tauInfo = this.toaXeList.find(item => item.soToa == soToa);
+      const tauInfo = this.toaXeList.find(item => item.soToa == id);
       this.tauInfo = tauInfo;
     });
 
