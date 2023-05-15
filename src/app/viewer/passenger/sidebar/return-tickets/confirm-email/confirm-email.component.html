@@ -1,0 +1,123 @@
+<app-header></app-header>
+<div class="vcvc" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
+    <div class="col-md-12 hidden-print">
+        <div class="row et-page-header">
+            <span class="et-main-label ng-binding">TRẢ VÉ TRỰC TUYẾN<!--TRẢ VÉ TRỰC TUYẾN--></span>
+        </div>
+    </div>
+    <div ng-show="step == 1" class="">
+        <div class="col-md-12">
+            <div>
+                <p class="alert alert-info">
+                    Trả vé trực tuyến chỉ áp dụng với trường hợp khách hàng đã thanh toán trực tuyến (qua cổng thanh
+                    toán, ví điện tử, app ngân hàng) và có điền email khi mua vé.
+                    <br>
+                    Nếu quý khách thanh toán bằng tiền mặt, trả sau qua ứng dụng ngân hàng và atm, chuyển khoản hoặc trả
+                    vé khi có sự cố bãi bỏ tàu vui lòng thực hiện thủ tục tại các nhà ga, đại lý bán vé.
+                </p>
+            </div>
+            <label class="ng-binding">Danh sách vé đã chọn
+                :<!--Để hiển thị các vé cần trả, vui lòng điền chính xác 3 thông tin dưới đây.--></label>
+        </div>
+
+        <div ng-include="'app/payment/ticketCart.confirm.desktop.html'" class="ng-scope">
+            <div class="table table-responsive list-ticket-deskhop ng-scope">
+                <table class="table table-bordered tbl-border-black ng-hide" ng-show="isHasDichVu">
+                    <tbody>
+                        <tr>
+                            <th class="ng-binding">STT<!--STT--></th>
+                            <th class="ng-binding">Thông tin vé mua<!--Thông tin vé mua--></th>
+                            <th class="ng-binding">Ngày mua<!--TG giữ vé--></th>
+                            <th class="ng-binding">Giá (VNĐ)<!--Giá (VNĐ)--></th>
+                            <th class="ng-binding">Phí trả vé<!--Giá dịch vụ--></th>
+                            <th class="ng-binding">Giảm giá dịch vụ<!--Giảm giá dịch vụ--></th>
+                            <th class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
+                        </tr>
+                    </tbody>
+                    <tbody ng-show="ves.chieuDi.length > 0" class="">
+                        <!-- ngRepeat: ve in ves.chieuDi -->
+                        <tr *ngFor="let loads of dataConfirmTraVe; let i = index">
+                            <td rowspan="" class="et-table-cell text-center" style="vertical-align: middle;">
+                                <div class="ng-binding">{{i+1}}</div>
+                            </td>
+                            <td rowspan="" class="et-table-cell">
+                                <div class="row">
+                                    <div class="col-md-4 ng-binding" style="width: 40%;padding-right: 0;"><span
+                                            class="ng-binding">Họ tên<!--Họ tên-->:</span> {{loads.khachDatVe.hoTen}}</div>
+                                    <div class="col-md-4" style="width: 28%;padding-right: 0;">
+                                        <span class="ng-binding">Đối tượng<!--Đối tượng-->:</span>
+                                        <span ng-show="!ve.IsVeThang" class="ng-binding">{{loads.doiTuong}}</span>
+                                    </div>
+                                    <div class="col-md-4" style="width: 32%;padding-right: 0;">
+                                        <div ng-hide="ve.hanhKhach.loaiKhach &amp;&amp; (ve.hanhKhach.loaiKhach.MaPT == 2 || ve.hanhKhach.loaiKhach.MaPT == 7)"
+                                            class="ng-binding">
+                                            <span class="ng-binding">Giấy tờ:<!--Số giấy tờ:--></span>{{loads.khachDatVe.soGiayTo}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ng-binding">
+                                    <span class="ng-binding">Hành trình:<!--Hành trình:--></span>
+                                    {{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}} - {{loads.ngayDi}} - {{loads.gioDi}}
+                                    <!--Toa {{ve.carNo}} chỗ {{ve.seat.ChoSo}} {{ve.seat.detail.name}}-->
+                                    Toa {{loads.soToa}} chỗ {{loads.soGhe}}
+                                </div>
+                            </td>
+                            <td rowspan="" class="et-table-cell">
+                                <div class="text-center ng-binding ng-hide" ng-show="ve.seat.Status.Status != 6">
+                                                                   </div>
+                                <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
+                                    <!--Còn <span class="text-danger">{{ve.seat.Status.Duration}}</span> giây-->
+                                    <span ng-bind-html="'PBuyTicket_thoiGianGiuConLai'|translate:ve.seat.Status.Duration"
+                                        class="ng-binding">{{loads.ngayMua}}</span>
+                                </div>
+                            </td>
+                            <td rowspan="" class="et-table-cell text-right ng-binding">
+                               {{loads.donGia}}
+                            </td>
+                            <td class="et-table-cell text-right" style="border-bottom: solid 2px #ccc;">
+                                <!-- ngIf: listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID -->
+                                20000
+                            </td>
+                            <td class="et-table-cell text-right" style="border-bottom: solid 2px #ccc;">
+                                <!-- ngIf: listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID -->
+                            </td>
+                            <!--<td class="et-table-cell text-center" style="border-bottom: solid 2px #ccc;">
+                        <button disabled="disabled" ng-show="!ve.selectedDichVus[listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID]" type="button" class="btn btn-default" aria-label="Không dùng dịch vụ">
+                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span>
+                        </button>
+                        <button disabled="disabled" ng-show="ve.selectedDichVus[listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID]" type="button" class="btn btn-default" aria-label="Sử dụng dịch vụ">
+                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                        </button>
+                    </td>-->
+                            <td rowspan="" class="et-table-cell text-right ng-binding">
+                                {{loads.donGia - 20000}}
+                            </td>
+                        </tr>
+                        <!-- ngRepeat: dichVu in listDichVuByTicket[ve.seat.Status.TicketId] --><!-- end ngRepeat: ve in ves.chieuDi -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <span class="pull-right"><strong class="ng-binding">Tổng
+                                        tiền<!--Tổng tiền--></strong></span>
+                            </td>
+                            <td colspan="5" class="text-right">
+                                <strong class="ng-binding">{{getTotalPrice()}} VNĐ</strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <h5 class="et-register-block ng-binding" style="margin-left:0px; padding: 10px;">Phương thức nhận mã xác nhận</h5>
+    <strong class="ng-binding" style="padding: 10px;">{{dataConfirmTraVe[0].khachDatVe.email}}</strong>
+    <div class="col-md-12"><a
+        id="btnSaveBookInfo"(click)="onNextButtonClick()" class="pull-right et-btn-rec ng-binding"
+        ng-disabled="requesting">Đồng ý xác nhận&gt;&gt;</a></div>
+
+        <input style="border-radius: 5px; outline: none; border: 1px solid #ccc;" [(ngModel)]="traVeRequest.maXacThuc" type="text" placeholder="Mã xác nhận">
+        <input type="button" (click)="btnEmail()"  value="Gửi" style="border-radius: 5px; outline: none; border: 1px solid #ccc;" >
+    </div>
+
+    <app-footer></app-footer>

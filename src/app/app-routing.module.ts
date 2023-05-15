@@ -15,6 +15,7 @@ import { PhuongthucthanhtoanComponent } from './viewer/passenger/sidebar/regulat
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
 import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-tickets/return-tickets.component';
+import { ConfirmEmailComponent } from './viewer/passenger/sidebar/return-tickets/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path:'thanhtoan', component:PayTicketsComponent},
   {path:'xac-nhan-thong-tin-ve', component:ConfirmTicketsComponent},
   {path:'thong-tin-giao-dich', component:SussecssTicketsComponent},
+  {path:'xac-nhan-email', component:ConfirmEmailComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

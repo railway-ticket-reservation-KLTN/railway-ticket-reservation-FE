@@ -180,7 +180,9 @@
                         <td>Trả vé</td>
                         <td>20000</td>
                         <td>{{loads.donGia - 20000 }}</td>
-                        <td>  <input type="checkbox">
+                        <td>   
+                            <input type="checkbox" (change)="selectLoad($event, loads)">
+
                         </td>
                     </tr>
                     
@@ -237,7 +239,7 @@
             </div>
         </div>
         <div class="col-md-12 text-right">
-            <p><button class="btn btn-primary ng-binding" >Tiếp tục</button>
+            <p><button class="btn btn-primary ng-binding" (click)="btnNext()" >Tiếp tục</button>
             </p>
             <hr>
         </div>

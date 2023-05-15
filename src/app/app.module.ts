@@ -29,6 +29,7 @@ import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-ti
 import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-tickets/return-tickets.component';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
+import { ConfirmEmailComponent } from './viewer/passenger/sidebar/return-tickets/confirm-email/confirm-email.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { RouterModule } from '@angular/router';
     ConfirmTicketsComponent,
     SussecssTicketsComponent,
     ReturnTicketsComponent,
+    ConfirmEmailComponent,
   
     
   ],

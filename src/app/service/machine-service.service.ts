@@ -21,6 +21,8 @@ import { XacNhanThongTinVeInfo } from '../domain/XacNhanThongTinVeInfo';
 import { XacNhanThongTinVeInfoMoMo } from '../domain/XacNhanThongTinVeInfoMoMo';
 import { TraVe } from '../domain/TraVe';
 import { TraVeInFo } from '../domain/TraVeInFo';
+import { KhachDatVe } from '../domain/KhachDatVe';
+import { TraVeRequest } from '../domain/TraVeRequest';
 
 
 @Injectable({
@@ -28,7 +30,6 @@ import { TraVeInFo } from '../domain/TraVeInFo';
 })
 export class MachineService {
   private confirmationCode: string;
-
   private REST_API_SERVER='http://localhost:8080/v1/khachhang';
   private httpOptions ={
     headers: new HttpHeaders({
@@ -66,6 +67,15 @@ export class MachineService {
     const url = `${this.REST_API_SERVER}/hanhtrinhtau`;
     return this.http.post<VeTauInfoKhuHoi>(url, timChuyenTauRequest, this.httpOptions);
   }
+  public getCodeEmail(khachDatVe: KhachDatVe): Observable<any> {
+    const url = `${this.REST_API_SERVER}/guima`;
+    return this.http.post<KhachDatVe>(url, khachDatVe, this.httpOptions);
+  }
+  public traVeDaDat(traVeRequest: TraVeRequest): Observable<any> {
+    const url = `${this.REST_API_SERVER}/xacthuctrave`;
+    return this.http.post<KhachDatVe>(url, traVeRequest, this.httpOptions);
+  }
+
 
   public getDanhSachToa(danhSachToaRequest: DanhSachToaRequest): Observable<DanhSachToaResponse[]> {
     const url = `${this.REST_API_SERVER}/toas`;
