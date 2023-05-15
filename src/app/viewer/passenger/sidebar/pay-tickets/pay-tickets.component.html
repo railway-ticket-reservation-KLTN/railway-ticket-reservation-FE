@@ -1,3 +1,4 @@
+
 <div class="vcvc" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
 
     <div class="col-md-12" ng-show="!isViewConfirm &amp;&amp; !isFormDichVu">
@@ -39,7 +40,7 @@
                             <th style="background-color: lavender;width: 25px;"></th>
                         </tr>
                     </thead>
-                    <tbody ng-show="ves.khuHoi.length > 0" class="ng-hide">
+                    <tbody ng-show="ves.khuHoi.length > 0" [hidden]="true">
                         <tr class="et-table-group-header" ng-show="ves.chieuDi.length > 0 || ves.chieuVe.length > 0">
                             <td colspan="8" style="text-align:center;vertical-align:middle;">
                                 <label class="ng-binding">Khứ hồi<!--Khứ hồi--></label>
@@ -209,7 +210,7 @@
                             </td>
                             <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
                                 <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
-                                    {{(loads.giaVe -1000)}}
+                                    {{(loads.giaVe +1000)}}
                                 </div>
 
                             </td>
@@ -218,8 +219,8 @@
                             </td>
                            
                             <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
-                                <a analytics-on="click" analytics-event="removeTicket" href="" class="fa fa-trash-o"
-                                    ng-click="removeTicket(ve)" ng-show="!ve.seat.waiting"></a>
+                                <a class="fa fa-trash-o"
+                                    (click)="removeTicket(loads.maGhe)"></a>
                             </td>
                         </tr><!-- end ngRepeat: ve in ves.chieuDi -->
                     </tbody>
@@ -252,6 +253,110 @@
                         </div>
                     </td>-->
                         </tr>
+                        <tr *ngFor="let loads1 of gheDaDatListKhuHoi;  let i = index"
+                            ng-class="{'et-error-tr': ve.buyingRuleError || ve.sameNameError}" class="ng-scope">
+                            <td class="et-table-cell" style="padding: 0px;border-bottom: solid 2px #ccc;">
+                                <div class="input-group input-group-sm" style="margin-bottom: 6px;width: 100%;">
+                                    <span class="input-group-addon text-left ng-binding" style="width: 84px;">Họ
+                                        tên</span>
+                                    <input type="text" placeholder="Thông tin hành khách" [(ngModel)]="gheDaDatListKhuHoi[i].tenKhach"
+                                    name="tenHanhKhach{{i}}"
+                                        class="form-control input-sm ng-pristine ng-invalid ng-invalid-required"
+                                        ng-class="{'et-error-block': ve.nameMissing}"
+                                        ng-change="syncRegister($index, false)" ng-disabled="ve.IsVeThang"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                        required="">
+                                </div>
+                                <div class="input-group input-group-sm" style="margin-bottom: 6px;width: 100%;">
+                                    <span class="input-group-addon text-left ng-binding" style="width: 84px;">Đối
+                                        tượng</span>
+                                    <select class="form-control input-sm ng-pristine ng-valid ng-valid-required" 
+                                    [(ngModel)]="gheDaDatListKhuHoi[i].doiTuong"
+                                        ng-class="{'et-error-block': ve.typeMissing}"
+                                        ng-options="passengerType.TenPTOnline|translate group by passengerType.Nhom|translate for passengerType in passengerTypes"
+                                        id="pt121593754"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important; width: 192px;"
+                                        required="">
+                                        <optgroup label="Người Việt Nam">
+                                            <option value="Người lớn" selected="selected" label="Người lớn">Người lớn</option>
+                                            <option value="Trẻ em" label="Trẻ em">Trẻ em</option>
+                                            <option value="Sinh viên" label="Sinh viên">Sinh viên</option>
+                                            <option value="Người cao tuổi" label="Người cao tuổi">Người cao tuổi</option>
+                                            <option value="Đoàn viên Công Đoàn" label="Đoàn viên Công Đoàn">Đoàn viên Công Đoàn</option>
+                                        </optgroup>
+                                        <optgroup label="Người nước ngoài">
+                                            <option value="5" label="Người lớn">Người lớn</option>
+                                            <option value="6" label="Trẻ em">Trẻ em</option>
+                                        </optgroup>
+                                    </select>
+                                    <!-- <select class="form-control input-sm ng-hide" ng-show="ve.IsVeThang"
+                                        ng-disabled="ve.IsVeThang">
+                                        <option value="27" class="ng-binding">Vé tháng</option>
+                                    </select> -->
+                                </div>
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <span class="input-group-addon text-left ng-scope ng-binding" style="width: 84px;"
+                                        popover="<div>- Số CMND</div><div>- Hộ chiếu</div><div>- Ngày tháng năm sinh trẻ em</div>"
+                                        popover-title="Số giấy tờ áp dụng" popover-trigger="mouseenter"
+                                        popover-placement="top">Số giấy tờ</span>
+                                    <input type="text" placeholder="Số CMND/ Hộ chiếu/ Ngày tháng năm sinh trẻ em"
+                                        [(ngModel)]="gheDaDatListKhuHoi[i].giayTo"
+                                         maxlength="19"
+                                        class="form-control input-sm ng-scope ng-pristine ng-valid"
+                                        ng-class="{'et-error-block': ve.identityMissing}"
+                                        ng-disabled="ve.IsVeThang || (ve.hanhKhach.loaiKhach &amp;&amp; (ve.hanhKhach.loaiKhach.MaPT == 2 || ve.hanhKhach.loaiKhach.MaPT == 7))"
+                                        ng-change="syncRegister($index, true)"
+                                        style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
+                                        popover="<div>- Số CMND</div><div>- Hộ chiếu</div><div>- Ngày tháng năm sinh trẻ em</div>"
+                                        popover-title="Số giấy tờ áp dụng" popover-trigger="mouseenter"
+                                        popover-placement="top">
+                                </div>
+                            </td>
+                            <td style="font-size: 10px;border-bottom: solid 2px #ccc;">
+                                <div class="text-center ng-hide" ng-show="ve.seat.Status.Status != 6">
+
+                                </div>
+                                <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
+                                    <span ng-bind-html="'PBuyTicket_thoiGianTamGiu'|translate:ve.seat.Status.Duration"
+                                        class="ng-binding">Giữ trong <span class="text-danger">572</span> giây</span>
+                                </div>
+                                <div>
+                                    <div class="ng-binding">
+                                        {{loads1.tenTau}} {{loads1.gaDi}} - {{loads1.gaDen}}
+                                    </div>
+                                    <div class="ng-binding">
+                                       {{loads1.ngayDi}} {{loads1.gioDi}}
+                                    </div>
+                                    <div class="ng-binding">
+                                        <!--{{'Toa ' + ve.carNo + ' chỗ ' + ve.seat.ChoSo}}-->
+                                         Tên toa: {{loads1.tenToa}} Số Toa: {{loads1.soToa}}
+                                    </div>
+                                    <div class="ng-binding">
+                                        Số ghế: {{loads1.soGhe}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                {{loads1.giaVe}}
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                0
+                            </td>
+                            <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
+                                <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
+                                    {{(loads1.giaVe + 1000)}}
+                                </div>
+
+                            </td>
+                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                                1,000
+                            </td>
+                           
+                            <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
+                                <a  class="fa fa-trash-o" (click)="removeTicketKhuHoi(loads1.maGhe)"
+                                   ></a>
+                            </td>
+                        </tr><!-- end ngRepe
                         <!-- ngRepeat: ve in ves.chieuVe -->
                     </tbody>
                     <tfoot>

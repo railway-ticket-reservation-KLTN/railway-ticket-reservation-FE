@@ -10,12 +10,6 @@ import { MachineService } from 'src/app/service/machine-service.service';
   styleUrls: ['./sussecss-tickets.component.css']
 })
 export class SussecssTicketsComponent implements OnInit {
-   
-
-  // tenHanhKhach:string;
-  // soGiayTo:string;
-  // email:string;
-  // sdt:string;
   khachDatVe=new KhachDatVe;
   xacnhanthongtinveInfo: any;
   constructor(
@@ -23,9 +17,7 @@ export class SussecssTicketsComponent implements OnInit {
     private route: ActivatedRoute,
     private machineService: MachineService
 
-  ){
-
-  }
+  ){}
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
       this.xacnhanthongtinveInfo = JSON.parse(params['data']);})
@@ -36,14 +28,13 @@ export class SussecssTicketsComponent implements OnInit {
         hoTen:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.hoTen,
         soGiayTo:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.soGiayTo,
         email:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.email,
-        sdt:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.sdt
+        sdt:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.sdt,
      }
-      
   }
   getTotalPrice() {
     let total = 0;
     for (let i = 0; i < this.xacnhanthongtinveInfo.veTaus.length; i++) {
-      total += this.xacnhanthongtinveInfo.veTaus[i].donGia - 1000;
+      total += this.xacnhanthongtinveInfo.veTaus[i].donGia + 1000;
     }
     return total;
   }

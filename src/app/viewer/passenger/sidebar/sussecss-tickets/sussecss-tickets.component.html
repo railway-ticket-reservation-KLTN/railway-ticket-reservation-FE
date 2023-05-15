@@ -62,7 +62,7 @@
                     <td class="et-table-cell ng-binding">{{ves.tenHanhKhach}}</td>
                     <td class="et-table-cell ng-binding">{{ves.soGiayTo}}</td>
                     <td class="et-table-cell">
-                        <div ng-show="book.MaPT!=27" class="ng-binding">{{ves.doiTuong}}</div>
+                        <div ng-show="book.MaPT!=27" class="ng-binding">{{ves.doiTuong}} <br>Mã vé: {{ves.maVe}}</div>
                     </td>
                     <td class="et-table-cell et-text-md ng-binding">{{ves.loaiVe}}</td>
                     <td class="et-table-cell et-text-md">
@@ -124,9 +124,9 @@
     </div>
     <div class="col-md-12 text-info">
         <p class=""><span  class="ng-binding">Vé của quý khách đã được tạm khóa. Quý khách vui lòng thanh toán trước thời hạn
-                <strong>06/05/2023 02:07</strong></span> <span ng-show="hasVeThang()"
+               <strong> 02:07</strong></span> <span 
                 class="ng-binding ng-hide">Vé của quý khách đã được tạm khóa. Quý khách vui lòng ra ga xuất vé trước
-                thời hạn <strong>06/05/2023 02:07</strong></span></p>
+                thời hạn <strong>02:07</strong></span></p>
         <p 
             class="ng-binding ng-hide">Để in vé điện tử, vui lòng <a
                 href="/#/thongtingiaodich?bookingCode=K13X6G&amp;email=&amp;mobile=0374079637">bấm vào đây.</a></p>

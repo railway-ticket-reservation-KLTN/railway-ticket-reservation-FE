@@ -27,7 +27,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ConfirmTicketsComponent } from './viewer/passenger/sidebar/confirm-tickets/confirm-tickets.component';
 import { SussecssTicketsComponent } from './viewer/passenger/sidebar/sussecss-tickets/sussecss-tickets.component';
 import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-tickets/return-tickets.component';
-
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,19 +51,23 @@ import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-ticket
     ConfirmTicketsComponent,
     SussecssTicketsComponent,
     ReturnTicketsComponent,
-    
+  
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
     NgScrollbarModule,
-    HttpClientXsrfModule
+    HttpClientXsrfModule,
+
+
+    
 
   ],
   providers: [],

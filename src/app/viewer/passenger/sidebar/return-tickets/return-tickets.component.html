@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="vcvc" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
 <div class="col-md-12 hidden-print">
     <div class="row et-page-header">
@@ -118,11 +119,15 @@
                                 placeholder="Số điện thoại"
                                 [(ngModel)]="traVe.sdt"
                                 id="gaDi" 
-                                aria-autocomplete="list" 
                                 aria-expanded="false" 
                                 aria-owns="typeahead-04M-6001"
                                 class="form-control ng-pristine ng-valid"></div>
                 </div>
+            </div>
+            <div class="col-md-12 text-right">
+                <p>
+                    <button (click)="btnSearch()" class="btn btn-primary ng-binding">Tìm kiếm</button></p>
+                <hr >
             </div>
         </div>
     </div>
@@ -148,7 +153,7 @@
     </div>
 
     <!--Giao dien cho desktop-->
-    <div class="col-md-12 table-responsive list-ticket-desktop">
+    <div class="col-md-12 table-responsive list-ticket-desktop" [hidden]="Susscess">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
             <table class="table table-bordered">
@@ -161,20 +166,20 @@
                     <th style="width: 15%;" class="ng-binding">Loại trả vé<!--Loại lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Lệ phí trả vé<!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Tiền trả lại<!--Tiền trả lại--></th>
-                    <th style="width: 14%;" class="ng-binding">Thông tin vé trả<!--Nội dung trả vé--></th>
                     <th style="width: 6%;" class="ng-binding">Chọn vé trả<!--Chọn vé trả--></th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
+                    <tr *ngFor="let loads of traVeInfo; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{loads.tenHanhKhach}}</td>
+                        <td>{{loads.tenTau}} {{loads.hanhTrinh.ngayDi}}
+                             {{loads.soGhe}} {{loads.soToa}}
+                            {{loads.donGia}} {{loads.maVe}}</td>
+                        <td>{{loads.donGia}}</td>
+                        <td>Trả vé</td>
+                        <td>20000</td>
+                        <td>{{loads.donGia - 20000 }}</td>
                         <td>  <input type="checkbox">
                         </td>
                     </tr>
@@ -189,7 +194,7 @@
         </div>
     </div> -->
 
-    <div _ngcontent-ybq-c94="" class="col-md-12">
+    <div _ngcontent-ybq-c94="" class="col-md-12" [hidden]="Susscess">
         <div _ngcontent-ybq-c94="" class="row">
             <h5 class="et-register-block ng-binding" style="margin-left:0px; padding: 10px;">Thông tin người đặt vé</h5>
             <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2">
@@ -239,5 +244,5 @@
     </div>
 </div>
 </div>
-
+<app-footer></app-footer>
 <!---->

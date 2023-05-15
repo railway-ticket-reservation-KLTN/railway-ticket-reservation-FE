@@ -6550,11 +6550,12 @@ button.close {
 .btn-primary {
   background-image: -webkit-linear-gradient(#54b4eb,#2fa4e7 60%,#1d9ce5);
   background-image: -o-linear-gradient(#54b4eb,#2fa4e7 60%,#1d9ce5);
-  background-image: linear-gradient(#54b4eb,#2fa4e7 60%,#1d9ce5);
+  /* background-image: linear-gradient(#54b4eb,#2fa4e7 60%,#1d9ce5); */
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff54b4eb', endColorstr='#ff1d9ce5', GradientType=0);
   filter: none;
-  border-bottom: 1px solid #178acc
+  border-bottom: 1px solid #178acc;
+  outline: none;
 }
 
 .btn-success {
@@ -9290,7 +9291,12 @@ label{
 .ng-valid:required, .ng-valid.required {
   border-left: 5px solid #42A948;
 }
-
+.btn.btn-primary:hover{
+  background-color: yellow !important;
+  color: black;
+  outline: none !important;
+  border: 1px solid #fff;
+}
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }

@@ -31,9 +31,8 @@ const routes: Routes = [
   {path:'phuongthucthanhtoan', component:PhuongthucthanhtoanComponent},
   {path:'thanhtoan', component:PayTicketsComponent},
   {path:'xac-nhan-thong-tin-ve', component:ConfirmTicketsComponent},
-  {path:'thong-tin-giao-dich', component:SussecssTicketsComponent}
+  {path:'thong-tin-giao-dich', component:SussecssTicketsComponent},
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

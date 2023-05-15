@@ -20,9 +20,10 @@ import { MachineService } from 'src/app/service/machine-service.service';
 })
 export class ResultTicketsComponent implements OnInit, OnChanges {
   public timeRemaining = 600; // in seconds
-  public selectedSeatId: string;
+  public selectedSeatId: string[] = [];
   public selectedSeats: string[] = [];
-
+  show=true;
+  showKhuHoi=true;
   // ticket = {
   //   tenToa : '',
   //   gaDi : '',
@@ -59,6 +60,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   danhsachToaResponse = new DanhSachToaResponse();
   danhsachToaResponseKhuHoi = new DanhSachToaResponse();
   gheDaDatList: gheDaDat[];
+  gheDaDatListKhuHoi: gheDaDat[];
   gheDaDatList1: gheDaDat[];
   gheDaDat =new gheDaDat();
   gheDaDatLoad:gheDaDat;
@@ -169,6 +171,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
   loadThongTinGioVe(event:any, id:string, soGhe:string){
      //Một chiều
+     this.show=false;
     this.datCho.gaDi = this.dataSearch[0].gaDi;
     this.datCho.gaDen =this.dataSearch[0].gaDen;
     this.datCho.soToa = this.danhsachToaResponse.soToa;
@@ -222,6 +225,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
   loadThongTinGioVeKhuHoi(event:any, id:string, soGhe:string){
     //Một chiều
+    this.showKhuHoi=false
    this.datCho.gaDi = this.dataSearchVe[0].gaDi;
    this.datCho.gaDen =this.dataSearchVe[0].gaDen;
    this.datCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
@@ -234,7 +238,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
    this.machineService.getDatCho(this.datCho).subscribe(data =>{
      
    })
-   const newGheDaDat = {
+   const newGheDaDatKhuHoi = {
      tenTau: this.tauInfoKhuHoi.tenTau,
      gaDi: this.dataSearchVe[0].gaDi,
      gaDen: this.dataSearchVe[0].gaDen,
@@ -254,19 +258,20 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
      giayTo:'',
      loaiVe:'Khứ hồi',
    };
-   const index = this.selectedSeats.indexOf(id);
-   const index1 = this.selectedSeats.indexOf(soGhe);
+   const index = this.selectedSeatId.indexOf(id);
+   const index1 = this.selectedSeatId.indexOf(soGhe);
    if (index !== -1 && index1 !==-1 ) {
-     this.selectedSeats.splice(index, 1);
+     this.selectedSeatId.splice(index, 1);
    } else {
-     this.selectedSeats.push(id);
+     this.selectedSeatId.push(id);
    }
-   if(Array.isArray(this.gheDaDatList) && this.gheDaDatList){
-     this.gheDaDatList = [...this.gheDaDatList, newGheDaDat]; // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-     this.gheDaDatList1=this.gheDaDatList;
+   if(Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi){
+     this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi]; 
+     console.log(this.gheDaDatListKhuHoi);
+     // sử dụng spread operator để sao chép mảng và thêm phần tử mới
    } else { 
-     this.gheDaDatList = [newGheDaDat];
-     this.gheDaDatList1=this.gheDaDatList;
+     this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
+     console.log(this.gheDaDatListKhuHoi);
 
    }
  }
@@ -297,6 +302,33 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
     }
   }
+  btnDeleteKhuHoi(maGhe:string, soGhe:string, ){
+    this.traCho.gaDi = this.dataSearchVe[0].gaDi;
+    this.traCho.gaDen =this.dataSearchVe[0].gaDen;
+    this.traCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
+    this.traCho.maGhe = maGhe;
+    this.traCho.tenTau = this.tauInfoKhuHoi.tenTau;
+    this.traCho.ngayDi = this.dataSearchVe[0].ngayDi;
+    this.traCho.gioDi = this.dataSearchVe[0].gioDi;
+    this.traCho.gioDen = this.dataSearchVe[0].gioDen;
+    this.traCho.trangThai ="DAT_CHO";
+    this.machineService.traCho(this.traCho).subscribe(data =>{
+      console.log(data);
+      
+    });
+    const index = this.selectedSeatId.indexOf(soGhe);
+    
+    this.gheDaDatListKhuHoi.splice(index, 1);
+    console.log(index);
+    this.selectedSeatId.splice(index, 1);
+  
+    // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
+    const gheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === maGhe);
+  
+    if (gheDaDat) {
+      gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
+    }
+  }
   
   setTimeoutLoad(){
     const countdown = setInterval(() => {
@@ -309,7 +341,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
 
   onSubmit(){
-    this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList) } });
+    this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList),
+      gheDaDatListKhuHoi: JSON.stringify(this.gheDaDatListKhuHoi)
+    } });
   }
   
 }

@@ -19,6 +19,8 @@ import { TraCho } from '../domain/TraCho';
 import { XacNhanThongTinVe } from '../domain/XacNhanThongTinVe';
 import { XacNhanThongTinVeInfo } from '../domain/XacNhanThongTinVeInfo';
 import { XacNhanThongTinVeInfoMoMo } from '../domain/XacNhanThongTinVeInfoMoMo';
+import { TraVe } from '../domain/TraVe';
+import { TraVeInFo } from '../domain/TraVeInFo';
 
 
 @Injectable({
@@ -27,12 +29,12 @@ import { XacNhanThongTinVeInfoMoMo } from '../domain/XacNhanThongTinVeInfoMoMo';
 export class MachineService {
   private confirmationCode: string;
 
-  private REST_API_SERVER='http://localhost:8080/v1';
+  private REST_API_SERVER='http://localhost:8080/v1/khachhang';
   private httpOptions ={
     headers: new HttpHeaders({
       
       'Content-Type':'application/json',
-      // 'Origin': 'http://localhost:4200' // Thay localhost:4200 bằng domain của ứng dụng Angular của bạn
+      // 'Origin': 'http://localhost:4200' //  Thay localhost:4200 bằng domain của ứng dụng Angular của bạn
 
     }),
     
@@ -44,7 +46,13 @@ export class MachineService {
     return this.http.post<KiemTraVeInfo>(url, kiemTraVeRequest, this.httpOptions).pipe(
       map((response: KiemTraVeInfo) => {
         // Thay đổi giá trị thuộc tính DA_THANH_TOAN trên đối tượng kết quả trả về
-        response.tinhTrang = 'Đã thanh toán';
+        if( response.tinhTrang == 'CHUA_THANH_TOAN'){
+          response.tinhTrang = 'Chưa thanh toán';
+        }
+        else{
+          response.tinhTrang = 'Đã mua';
+        }
+       
         return response;
       })
     );
@@ -70,6 +78,11 @@ export class MachineService {
   public getDatCho(datCho: DatCho): Observable<any> {
     const url = `${this.REST_API_SERVER}/datcho`;
     return this.http.post<any>(url, datCho, this.httpOptions);
+  }
+
+  public traVe(traVe: TraVe): Observable<TraVeInFo[]> {
+    const url = `${this.REST_API_SERVER}/ves`;
+    return this.http.post<TraVeInFo[]>(url, traVe, this.httpOptions);
   }
 
   // public getTraCho(traCho: TraCho): Observable<boolean> {
