@@ -4,6 +4,47 @@
       <div class="page__content-data position-absolute text-center">
         Tàu Content Goes Here
       </div>
+
+      <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
+        <div ng-show="successGroup.length > 0" class="ng-hide">
+            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <table class="table table-bordered">
+                <thead class="et-table-header">
+                <tr>
+                    <th style="width: 2%;">#</th>
+                    <th style="width: 19%;" class="ng-binding">Tên tàu<!--Họ tên--></th>
+                    <th style="width: 19%;" class="ng-binding">Số lượng toa<!--Thông tin vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Ga đi<!--Thành tiền (VNĐ)--></th>
+                    <th style="width: 15%;" class="ng-binding">Ga đến<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 15%;" class="ng-binding">Ngày đi<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Ngày đến<!--Lệ phí trả vé--></th>
+                    <th style="width: 15%;" class="ng-binding">Giờ đi<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Giờ đến<!--Lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Giá vé<!--Lệ phí trả vé--></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let loads of HanhTrinh; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{loads.tau.tenTau}}</td>
+                        <td>{{loads.tau.soLuongToa}}</td>
+                        <td>{{loads.gaDi}}</td>
+                        <td>{{loads.gaDi}}</td>
+                        <td>{{loads.ngayDi}}</td>
+                        <td>{{loads.ngayDen}}</td>
+                        <td>{{loads.gioDi}}</td>
+                        <td>{{loads.gioDen}}</td>
+                        <td>{{loads.giaVe}}</td>
+                        <td>   
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    
+                </tbody>
+                <!-- ngRepeat: group in successGroup -->
+            </table>
+        </div>
     </div>
   </div>
   
