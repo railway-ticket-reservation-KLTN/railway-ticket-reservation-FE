@@ -86,7 +86,7 @@ export class ConfirmTicketsComponent implements OnInit {
         sdt: this.xacnhanthongtin.nguoiDatVe.sdt,
       }
       this.xacnhanthongtinve.hinhThucThanhToan = this.xacnhanthongtin.nguoiDatVe.hinhthucthanhtoan;
-      this.xacnhanthongtinve.ngayLap = "2023-4-16"
+      this.xacnhanthongtinve.ngayLap = this.getFormattedDate();
       console.log(this.xacnhanthongtinve);
       if (this.xacnhanthongtin.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO") {
         this.machineService.thanhToanMomo(this.xacnhanthongtinve).subscribe(data => {
@@ -135,7 +135,7 @@ export class ConfirmTicketsComponent implements OnInit {
         sdt: this.xacnhanthongtinKhuHoi.nguoiDatVe.sdt,
       }
       this.xacnhanthongtinveKhuHoi.hinhThucThanhToan = this.xacnhanthongtinKhuHoi.nguoiDatVe.hinhthucthanhtoan;
-      this.xacnhanthongtinveKhuHoi.ngayLap = "2023-4-16",
+      this.xacnhanthongtinveKhuHoi.ngayLap = this.getFormattedDate();
         console.log(this.xacnhanthongtinveKhuHoi);
       if (this.xacnhanthongtinKhuHoi.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO") {
         this.machineService.thanhToanMomo(this.xacnhanthongtinveKhuHoi).subscribe(data => {
@@ -177,7 +177,7 @@ export class ConfirmTicketsComponent implements OnInit {
         sdt: this.xacNhanThongTinKH.sdt,
       }
       this.xacnhanthongtinveKhuHoiLS.hinhThucThanhToan = this.xacNhanThongTinKH.hinhthucthanhtoan;
-      this.xacnhanthongtinveKhuHoiLS.ngayLap = "2023-4-16",
+      this.xacnhanthongtinveKhuHoiLS.ngayLap = this.getFormattedDate();
         console.log(this.xacnhanthongtinveKhuHoiLS);
       if (this.xacNhanThongTinKH.hinhthucthanhtoan == "THANH_TOAN_MOMO") {
         this.machineService.thanhToanMomo(this.xacnhanthongtinveKhuHoiLS).subscribe(data => {
@@ -192,5 +192,14 @@ export class ConfirmTicketsComponent implements OnInit {
       }
     }
 
+  }
+
+  getFormattedDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

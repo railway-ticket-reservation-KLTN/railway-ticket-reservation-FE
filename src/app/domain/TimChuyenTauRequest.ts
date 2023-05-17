@@ -5,10 +5,10 @@ export class TimChuyenTauRequest{
     ngayVe:string;
     loaiHanhTrinh:string
     constructor(){
-        this.gaDi="Sài Gòn";
-        this.gaDen="Nha Trang";
-        this.ngayDi="2023-04-01";
-        this.ngayVe="2023-04-01";
+        this.gaDi="";
+        this.gaDen="";
+        this.ngayDi="";
+        this.ngayVe="";
         this.loaiHanhTrinh="MOT_CHIEU"
     }
 }
