@@ -7,7 +7,6 @@ import { HomeComponent } from './viewer/passenger/home/home.component';
 import { FindTicketsComponent } from './viewer/passenger/sidebar/find-tickets/find-tickets.component';
 import { PayTicketsComponent } from './viewer/passenger/sidebar/pay-tickets/pay-tickets.component';
 import { RegulationsComponent } from './viewer/passenger/sidebar/regulations/regulations.component';
-import { HeaderComponent } from './viewer/passenger/header/header.component';
 import { NotificationsComponent } from './viewer/passenger/notifications/notifications.component';
 import { FooterComponent } from './viewer/passenger/footer/footer.component';
 import { MainComponent } from './viewer/passenger/main/main.component';
@@ -30,6 +29,32 @@ import { ReturnTicketsComponent } from './viewer/passenger/sidebar/return-ticket
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { ConfirmEmailComponent } from './viewer/passenger/sidebar/return-tickets/confirm-email/confirm-email.component';
+import { DashboardComponent } from './viewer/admin/dashboard/dashboard.component';
+import { SidenavComponent } from './viewer/admin/sidenav/sidenav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { HeaderComponent } from './viewer/passenger/header/header.component';
+import { HeaderComponentAdmin } from './viewer/admin/header/header.component';
+import { NhanvienComponent } from './viewer/admin/nhanvien/nhanvien.component';
+import { VeComponent } from './viewer/admin/ve/ve.component';
+import { TauComponent } from './viewer/admin/tau/tau.component';
+import { LoginComponent } from './viewer/admin/login/login.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { EmpAddEditComponent } from './viewer/admin/emp-add-edit/emp-add-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,8 +78,17 @@ import { ConfirmEmailComponent } from './viewer/passenger/sidebar/return-tickets
     SussecssTicketsComponent,
     ReturnTicketsComponent,
     ConfirmEmailComponent,
-  
-    
+    DashboardComponent,
+    SidenavComponent,
+    HeaderComponent,
+    HeaderComponentAdmin,
+    DashboardComponent,
+    SidenavComponent,
+    NhanvienComponent,
+    VeComponent,
+    TauComponent,
+    LoginComponent,
+    EmpAddEditComponent
   ],
   imports: [
     BrowserModule,
@@ -67,10 +101,30 @@ import { ConfirmEmailComponent } from './viewer/passenger/sidebar/return-tickets
     MatSnackBarModule,
     NgScrollbarModule,
     HttpClientXsrfModule,
-
-
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    MatListModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
     
-
   ],
   providers: [],
   bootstrap: [AppComponent]

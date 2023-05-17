@@ -85,7 +85,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
         const tauInfo = this.dataSearch.find(item => item.id == 1);
         this.tauInfo = tauInfo;
         this.loadToaTau(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
-        this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
+        // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
+        this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, 
+          this.hanhTrinhInfo.tau.toas[0].tenTau, this.hanhTrinhInfo.gaDi, this.hanhTrinhInfo.gaDen, this.hanhTrinhInfo.gioDi, this.hanhTrinhInfo.ngayDi);
         this.hanhTrinhInfoKhuHoi =[];
       }
       else {
@@ -97,9 +99,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
           const tauInfo = this.dataSearch.find(item => item.id == 1);
           this.tauInfo = tauInfo;
           this.loadToaTau(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
-          this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
+          // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
           // this.loadToaTauKhuHoi(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
-
+          this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau, 
+            this.hanhTrinhInfo.gaDi, this.hanhTrinhInfo.gaDen, this.hanhTrinhInfo.gioDi, this.hanhTrinhInfo.ngayDi);
            // Khu hoi
           this.dataSearchVe = this.dataSearchKhuHoi.hanhTrinhVe;
           console.log(this.dataSearchVe);
@@ -145,11 +148,16 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     });
   }
 
-  loadToaGhe(event: any, id: string, soToa: string, tenTau: string) {
+  loadToaGhe(event: any, id: string, soToa: string, tenTau: string, gaDi:string, gaDen:string, gioDi:string, ngayDi:string) {
     this.danhSachGheRequest.maToa = id;
     this.danhSachGheRequest.ngayDi = this.dataSearchLoadToa.ngayDi;
     this.danhSachGheRequest.soToa = soToa;
     this.danhSachGheRequest.tenTau = tenTau;
+    this.danhSachGheRequest.gaDi = gaDi
+    this.danhSachGheRequest.gaDen = gaDen;
+    this.danhSachGheRequest.gioDi = gioDi;
+    this.danhSachGheRequest.ngayDi = ngayDi;
+    console.log(this.danhSachGheRequest);
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponse = data;
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);

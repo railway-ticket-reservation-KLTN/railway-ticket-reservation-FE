@@ -1,0 +1,49 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Nhân viên</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="page__content-data position-absolute text-center">
+        <mat-toolbar color="primary">
+          <span class="example-spacer"></span>
+          <button mat-raised-button (click)="openAddEditEmpForm()">
+            ADD EMPLOYEE
+          </button>
+        </mat-toolbar>
+      </div>
+      <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
+        <div ng-show="successGroup.length > 0" class="ng-hide">
+            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <table class="table table-bordered">
+                <thead class="et-table-header">
+                <tr>
+                    <th style="width: 2%;">#</th>
+                    <th style="width: 19%;" class="ng-binding">Tên tài Khoản<!--Họ tên--></th>
+                    <th style="width: 19%;" class="ng-binding">Loại TK<!--Thông tin vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Tên nhân viên<!--Thành tiền (VNĐ)--></th>
+                    <th style="width: 15%;" class="ng-binding">Số điện thoại<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 15%;" class="ng-binding">Địa chỉ<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 8%;" class="ng-binding">Vị trí<!--Lệ phí trả vé--></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let loads of nhanVien; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{loads.tenTaiKhoan}}</td>
+                        <td>{{loads.loaiTK}}</td>
+                        <td>{{loads.nhanVien.tenNhanVien}}</td>
+                        <td>{{loads.nhanVien.sdt}}</td>
+                        <td>{{loads.nhanVien.diaChi}}</td>
+                        <td>{{loads.nhanVien.viTri}}</td>
+                        <td>   
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    
+                </tbody>
+                <!-- ngRepeat: group in successGroup -->
+            </table>
+        </div>
+    </div>
+    </div>
+  </div>
+  

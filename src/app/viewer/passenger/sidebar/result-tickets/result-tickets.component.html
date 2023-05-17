@@ -132,7 +132,7 @@
     <!-- <li *ngFor="let tau of tauList"> -->
     <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
         <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeList"
-            (click)="loadToaGhe($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
+            (click)="loadToaGhe($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau, toaXe.gaDi, toaXe.gaDen, toaXe.gioDi, toaXe.ngayDi)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                 ng-click="doiToaMoi(toa, false)"
                 ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">

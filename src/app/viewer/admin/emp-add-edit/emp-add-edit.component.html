@@ -1,0 +1,94 @@
+<div mat-dialog-title>
+    <h1>Thêm Nhân Viên</h1>
+</div>
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Tên tài khoản</mat-label>
+                <input matInput type="tenTaiKhoan" placeholder="Tên tài khoản" formControlName="tenTaiKhoan">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Mật khẩu</mat-label>
+                <input matInput type="password" placeholder="Mật khẩu" formControlName="matKhau">
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Ex. test@gmail.com" formControlName="email">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Date of birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div> -->
+
+        <!-- <div class="row">
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+                <mat-label><b>Gender</b></mat-label>
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="female">Female</mat-radio-button>
+                <mat-radio-button value="others">Others</mat-radio-button>
+            </mat-radio-group>
+        </div> -->
+
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Vị trí</mat-label>
+                <mat-select formControlName="education">
+                    <mat-option> NHAN_VIEN
+                    </mat-option>
+                    <mat-option> QUAN_LY
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>Company</mat-label>
+                <input matInput placeholder="Ex. Google" formControlName="company">
+            </mat-form-field> -->
+        </div>
+        <!-- <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Experience</mat-label>
+                <input matInput placeholder="Ex. 4" type="number" formControlName="experience">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Package</mat-label>
+                <input matInput placeholder="Ex. 12" type="number" formControlName="package">
+                <mat-hint>In rupees</mat-hint>
+            </mat-form-field>
+        </div> -->
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Tên nhân viên</mat-label>
+                <input matInput type="tenNhanVien" placeholder="Tên nhân viên" formControlName="tenNhanVien">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Địa chỉ</mat-label>
+                <input matInput type="text" placeholder="Địa chỉ" formControlName="diaChi">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Số điện thoại</mat-label>
+                <input matInput type="text" placeholder="Số điện thoại" formControlName="sdt">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Vị trí</mat-label>
+                <input matInput type="text" placeholder="Vị Trí" formControlName="viTri">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Trạng thái</mat-label>
+                <input matInput type="number" placeholder="Trạng thái" formControlName="trangThai">
+            </mat-form-field>
+            
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+</form>

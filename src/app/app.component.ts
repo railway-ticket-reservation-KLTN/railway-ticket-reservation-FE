@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sell_Train_Tickets';
+  sideBarOpen = false;
+
+  sideBarToggler() {
+    this.sideBarOpen = !this.sideBarOpen;
+    
+  }
+  
 }
