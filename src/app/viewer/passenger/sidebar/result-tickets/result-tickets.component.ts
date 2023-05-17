@@ -161,10 +161,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.ngayDi = this.dataSearchLoadToa.ngayDi;
     this.danhSachGheRequest.soToa = soToa;
     this.danhSachGheRequest.tenTau = tenTau;
-    this.danhSachGheRequest.gaDi = gaDi
-    this.danhSachGheRequest.gaDen = gaDen;
-    this.danhSachGheRequest.gioDi = gioDi;
-    this.danhSachGheRequest.ngayDi = ngayDi;
+    this.danhSachGheRequest.gaDi = this.dataSearchLoadToa.gaDi
+    this.danhSachGheRequest.gaDen = this.dataSearchLoadToa.gaDen;
+    this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
     console.log(this.danhSachGheRequest);
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponse = data;

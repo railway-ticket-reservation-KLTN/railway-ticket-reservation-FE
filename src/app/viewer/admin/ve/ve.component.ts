@@ -9,6 +9,7 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
 })
 export class VeComponent implements OnInit {
 Ve:any[];
+selectedLoads:any[]=[];
   constructor(
     private service:OtherAdminService,
     private _dialog: MatDialog,
@@ -21,5 +22,25 @@ Ve:any[];
     this.Ve=data;
     
    })
+  }
+  selectLoad(event: any, load: any) {
+    load.isSelected = event.target.checked;
+    
+    if (load.isSelected) {
+      this.selectedLoads.push(load);   
+    } else {
+      const index = this.selectedLoads.indexOf(load);
+      if (index > -1) {
+        this.selectedLoads.splice(index, 1);
+      }
+    }
+    console.log(this.selectedLoads);
+  }
+
+  btnDatVe(){
+    alert("Đặt vé")
+  }
+  btnTraVe(){
+    alert("Trả vé")
   }
 }
