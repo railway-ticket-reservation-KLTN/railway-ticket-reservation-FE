@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
 import { XacNhanThongTin } from 'src/app/domain/XacNhanThongTin';
@@ -12,25 +12,35 @@ import { MachineService } from 'src/app/service/machine-service.service';
   templateUrl: './confirm-tickets.component.html',
   styleUrls: ['./confirm-tickets.component.css']
 })
-export class ConfirmTicketsComponent {
-xacnhanthongtin=new XacNhanThongTin();
-xacnhanthongtinKhuHoi=new XacNhanThongTin();
-xacnhanthongtinve =new XacNhanThongTinVe;
-xacnhanthongtinveKhuHoi =new XacNhanThongTinVe;
-xacnhanthongtinveInfo = new XacNhanThongTinVeInfo;
-xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
+export class ConfirmTicketsComponent implements OnInit {
+  xacnhanthongtin = new XacNhanThongTin();
+  xacnhanthongtinKhuHoi = new XacNhanThongTin();
+  xacnhanthongtinve = new XacNhanThongTinVe;
+  xacnhanthongtinveKhuHoi = new XacNhanThongTinVe;
+  xacnhanthongtinveInfo = new XacNhanThongTinVeInfo;
+  xacNhanThongTinVeInfoMoMo = new XacNhanThongTinVeInfoMoMo;
+  xacNhanThongTinLS: any[];
+  xacnhanthongtinveKhuHoiLS = new XacNhanThongTinVe;
+  xacNhanThongTinKH: any;
   constructor(
-    private router:Router,
+    private router: Router,
     private route: ActivatedRoute,
     private machineService: MachineService
 
-  ){
+  ) {
     this.route.queryParams.subscribe(params => {
       this.xacnhanthongtin = JSON.parse(params['data']);
       this.xacnhanthongtinKhuHoi = JSON.parse(params['xacnhanthongtinKhuHoi']);
     });
 
 
+  }
+  ngOnInit() {
+    this.xacNhanThongTinLS = [...this.xacnhanthongtinKhuHoi.gheDaDat, ...this.xacnhanthongtin.gheDaDat];
+    console.log(this.xacNhanThongTinLS);
+    this.xacNhanThongTinKH = this.xacnhanthongtinKhuHoi.nguoiDatVe
+    console.log(this.xacNhanThongTinKH);
+    console.log(this.xacnhanthongtinve);
   }
 
   getTotalPrice() {
@@ -43,11 +53,12 @@ xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
       totalKhuHoi += this.xacnhanthongtinKhuHoi.gheDaDat[i].giaVe + 1000;
     }
 
-    return total+totalKhuHoi;
+    return total + totalKhuHoi;
+
   }
 
   onNextButtonClick() {
-    if (this.xacnhanthongtin.gheDaDat.length > 0) {
+    if (this.xacnhanthongtin.gheDaDat.length > 0 && this.xacnhanthongtinKhuHoi.gheDaDat.length <= 0  ) {
       for (let i = 0; i < this.xacnhanthongtin.gheDaDat.length; i++) {
         this.xacnhanthongtinve.veTaus[i] = {
           trangThai: '0',
@@ -81,7 +92,7 @@ xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
         this.machineService.thanhToanMomo(this.xacnhanthongtinve).subscribe(data => {
           // window.open(data.payUrl, '_blank');
           window.location.href = data.payUrl;
-          
+
 
         })
       }
@@ -94,9 +105,9 @@ xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
         })
       }
       console.log(this.xacnhanthongtinveInfo);
-      
+
     }
-    if (this.xacnhanthongtinKhuHoi.gheDaDat.length > 0) {
+    else if (this.xacnhanthongtinKhuHoi.gheDaDat.length > 0 && this.xacnhanthongtin.gheDaDat.length <= 0) {
       for (let i = 0; i < this.xacnhanthongtinKhuHoi.gheDaDat.length; i++) {
         this.xacnhanthongtinveKhuHoi.veTaus[i] = {
           trangThai: '0',
@@ -125,18 +136,61 @@ xacNhanThongTinVeInfoMoMo =new XacNhanThongTinVeInfoMoMo;
       }
       this.xacnhanthongtinveKhuHoi.hinhThucThanhToan = this.xacnhanthongtinKhuHoi.nguoiDatVe.hinhthucthanhtoan;
       this.xacnhanthongtinveKhuHoi.ngayLap = "2023-4-16",
-      console.log(this.xacnhanthongtinveKhuHoi);
-      if (this.xacnhanthongtinKhuHoi.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO"){
+        console.log(this.xacnhanthongtinveKhuHoi);
+      if (this.xacnhanthongtinKhuHoi.nguoiDatVe.hinhthucthanhtoan == "THANH_TOAN_MOMO") {
         this.machineService.thanhToanMomo(this.xacnhanthongtinveKhuHoi).subscribe(data => {
           window.location.href = data.payUrl;
         })
       }
       else {
         this.machineService.thanhToanTraSau(this.xacnhanthongtinveKhuHoi).subscribe(data => {
-        this.xacnhanthongtinveInfo = data;
-        this.router.navigate(['/thong-tin-giao-dich'], { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
+          this.xacnhanthongtinveInfo = data;
+          this.router.navigate(['/thong-tin-giao-dich'], { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
         })
       }
     }
+    else {
+      for (let i = 0; i < this.xacNhanThongTinLS.length; i++) {
+        this.xacnhanthongtinveKhuHoiLS.veTaus[i] = {
+          trangThai: '0',
+          tenHanhKhach: this.xacNhanThongTinLS[i].tenKhach,
+          soGiayTo: this.xacNhanThongTinLS[i].giayTo,
+          donGia: this.xacNhanThongTinLS[i].giaVe,
+          loaiVe: this.xacNhanThongTinLS[i].loaiVe,
+          doiTuong: this.xacNhanThongTinLS[i].doiTuong,
+          tenTau: this.xacNhanThongTinLS[i].tenTau,
+          maGhe: this.xacNhanThongTinLS[i].maGhe,
+          soGhe: this.xacNhanThongTinLS[i].soGhe,
+          soToa: this.xacNhanThongTinLS[i].soToa,
+          gaDi: this.xacNhanThongTinLS[i].gaDi,
+          gaDen: this.xacNhanThongTinLS[i].gaDen,
+          ngayDi: this.xacNhanThongTinLS[i].ngayDi,
+          ngayDen: this.xacNhanThongTinLS[i].ngayDen,
+          gioDi: this.xacNhanThongTinLS[i].gioDi,
+          gioDen: this.xacNhanThongTinLS[i].gioDen,
+        };
+      }
+      this.xacnhanthongtinveKhuHoiLS.khachDatVe = {
+        hoTen: this.xacNhanThongTinKH.tenHanhKhach,
+        soGiayTo: this.xacNhanThongTinKH.soGiayTo,
+        email: this.xacNhanThongTinKH.email,
+        sdt: this.xacNhanThongTinKH.sdt,
+      }
+      this.xacnhanthongtinveKhuHoiLS.hinhThucThanhToan = this.xacNhanThongTinKH.hinhthucthanhtoan;
+      this.xacnhanthongtinveKhuHoiLS.ngayLap = "2023-4-16",
+        console.log(this.xacnhanthongtinveKhuHoiLS);
+      if (this.xacNhanThongTinKH.hinhthucthanhtoan == "THANH_TOAN_MOMO") {
+        this.machineService.thanhToanMomo(this.xacnhanthongtinveKhuHoiLS).subscribe(data => {
+          window.location.href = data.payUrl;
+        })
+      }
+      else {
+        this.machineService.thanhToanTraSau(this.xacnhanthongtinveKhuHoiLS).subscribe(data => {
+          this.xacnhanthongtinveInfo = data;
+          this.router.navigate(['/thong-tin-giao-dich'], { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
+        })
+      }
+    }
+
   }
 }

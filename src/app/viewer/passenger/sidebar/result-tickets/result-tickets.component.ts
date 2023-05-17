@@ -287,11 +287,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
      // sử dụng spread operator để sao chép mảng và thêm phần tử mới
    } else { 
      this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
-     console.log(this.gheDaDatListKhuHoi);
-
    }
  }
   btnDelete(maGhe:string, soGhe:string, ){
+   
     this.traCho.gaDi = this.dataSearch[0].gaDi;
     this.traCho.gaDen =this.dataSearch[0].gaDen;
     this.traCho.soToa = this.danhsachToaResponse.soToa;
@@ -357,6 +356,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
 
   onSubmit(){
+
+    // const arrayC = [...this.gheDaDatList, ...this.gheDaDatListKhuHoi]
+    // console.log(arrayC);
+    
     this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList),
       gheDaDatListKhuHoi: JSON.stringify(this.gheDaDatListKhuHoi)
     } });
