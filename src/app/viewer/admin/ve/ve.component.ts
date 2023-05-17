@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { OtherAdminService } from 'src/app/service/other-admin-service';
 
 @Component({
@@ -7,15 +8,17 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
   styleUrls: ['./ve.component.css']
 })
 export class VeComponent implements OnInit {
-
+Ve:any[];
   constructor(
-    private service:OtherAdminService
+    private service:OtherAdminService,
+    private _dialog: MatDialog,
   ){
 
   }
   ngOnInit() {
    this.service.getDanhSachVe().subscribe(data =>{
     console.log(data);
+    this.Ve=data;
     
    })
   }

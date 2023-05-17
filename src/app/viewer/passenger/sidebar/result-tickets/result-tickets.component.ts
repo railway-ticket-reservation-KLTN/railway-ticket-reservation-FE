@@ -81,9 +81,13 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.dataSearch = JSON.parse(params['data']);
       if (Array.isArray(this.dataSearch) == true && this.dataSearch.length > 0) {
         this.hanhTrinhInfo = this.dataSearch[0];
+       
         this.showResult = true;
         const tauInfo = this.dataSearch.find(item => item.id == 1);
         this.tauInfo = tauInfo;
+        console.log(this.tauInfo);
+        
+        
         this.loadToaTau(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
         // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
         this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, 
@@ -127,9 +131,13 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachToaRequest.tauID = this.dataSearchLoadToa.tau.id;
     this.machineService.getDanhSachToa(this.danhSachToaRequest).subscribe(data => {
       this.toaXeList = data;
-      const tauInfo = this.toaXeList.find(item => item.soToa == id);
+      const tauInfo = this.toaXeList.find(item => item.soToa <= id);
       this.tauInfo = tauInfo;
     });
+    console.log(this.toaXeList);
+    console.log(id);
+    
+    
 
     // this.loadToaGhe(event, )
   }

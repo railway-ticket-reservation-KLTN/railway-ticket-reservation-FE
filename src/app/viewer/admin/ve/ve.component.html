@@ -7,45 +7,72 @@
 
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
-            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách vé</h5>
             <table class="table table-bordered">
                 <thead class="et-table-header">
                 <tr>
                     <th style="width: 2%;">#</th>
-                    <th style="width: 19%;" class="ng-binding">Hành trình<!--Họ tên--></th>
-                    <th style="width: 19%;" class="ng-binding">Khách đặt vé<!--Thông tin vé--></th>
+                    <th style="width: 25%;" class="ng-binding">Hành trình<!--Họ tên--></th>
+                    <th style="width: 12%;" class="ng-binding">Khách đặt vé<!--Thông tin vé--></th>
                     <th style="width: 8%;" class="ng-binding">Tàu<!--Thành tiền (VNĐ)--></th>
-                    <th style="width: 15%;" class="ng-binding">Mã vé<!--Loại lệ phí trả vé--></th>
-                    <th style="width: 15%;" class="ng-binding">Mã đặt chỗ<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 12%;" class="ng-binding">Mã vé<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 12%;" class="ng-binding">Mã đặt chỗ<!--Loại lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Ngày mua<!--Lệ phí trả vé--></th>
                     <th style="width: 15%;" class="ng-binding">khách hàng<!--Loại lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Đơn giá <!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Loại vé<!--Lệ phí trả vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Số ghế<!--Lệ phí trả vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Số toa<!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Tình trạng<!--Lệ phí trả vé--></th>
 
 
                 </tr>
                 </thead>
-                <!-- <tbody>
-                    <tr *ngFor="let loads of HanhTrinh; let i = index">
+                <tbody>
+                    <tr *ngFor="let loads of Ve; let i = index">
                         <td>{{i+1}}</td>
-                        <td>{{loads.tau.tenTau}}</td>
-                        <td>{{loads.tau.soLuongToa}}</td>
-                        <td>{{loads.gaDi}}</td>
-                        <td>{{loads.gaDi}}</td>
-                        <td>{{loads.ngayDi}}</td>
-                        <td>{{loads.ngayDen}}</td>
-                        <td>{{loads.gioDi}}</td>
-                        <td>{{loads.gioDen}}</td>
-                        <td>{{loads.giaVe}}</td>
+                        <td>{{loads.hanhTrinh.gaDi}}-{{loads.hanhTrinh.gaDen}}<br>
+                          Ngày đi:{{loads.hanhTrinh.ngayDi}} Ngày đến:{{loads.hanhTrinh.ngayDen}}<br>Giờ đi:{{loads.hanhTrinh.gioDi}}<br>Giờ đến{{loads.hanhTrinh.gioDen}}<br>Giá vé:{{loads.hanhTrinh.giaVe}}
+                        </td>
+                        <td>
+                          Họ tên:{{loads.khachDatVe.hoTen}}<br>
+                          Giấy tờ:{{loads.khachDatVe.soGiayTo}}<br>
+                          Email:{{loads.khachDatVe.email}}<br>
+                          Số điện thoại:{{loads.khachDatVe.sdt}}<br>
+                        </td>
+                        <td>
+                          Tên tàu:{{loads.hanhTrinh.tau.tenTau}}<br>
+                          Số lượng toa:{{loads.hanhTrinh.tau.soLuongToa}}
+                        </td>
+                        <td>
+                          {{loads.maVe}}
+                        </td>
+                        <td>
+                          {{loads.maDatCho}}
+                        </td>
+                        <td>
+                          {{loads.ngayMua}}
+                        </td>
+                        <td>
+                          Tên:{{loads.tenHanhKhach}}<br>
+                          Giấy tờ:{{loads.soGiayTo}}
+                        </td>
+                        <td>
+                          {{loads.donGia}}
+                        </td>
+                        <td>
+                          {{loads.loaiVe}}<br>
+                          Đối tượng:{{loads.doiTuong}}<br>
+                          Số ghế:{{loads.soGhe}}<br>
+                          Số toa:{{loads.soToa}}
+                        </td>
+                        <td>
+                          {{loads.tinhTrang}}
+                        </td>
                         <td>   
                             <input type="checkbox">
                         </td>
                     </tr>
                     
-                </tbody> -->
+                </tbody>
                 <!-- ngRepeat: group in successGroup -->
             </table>
         </div>
