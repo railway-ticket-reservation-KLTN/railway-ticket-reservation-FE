@@ -10,6 +10,7 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
 })
 export class NhanvienComponent implements OnInit {
 nhanVien:any[];
+isShow=true;
   constructor(
     private _dialog: MatDialog,
     private service:OtherAdminService,
@@ -19,7 +20,11 @@ nhanVien:any[];
       console.log(data);
       this.nhanVien=data;
       
-    })
+    },(error) => {
+      this.isShow = false;
+      alert("Không có quyền truy cập")
+      
+  });
   }
 
   openAddEditEmpForm() {

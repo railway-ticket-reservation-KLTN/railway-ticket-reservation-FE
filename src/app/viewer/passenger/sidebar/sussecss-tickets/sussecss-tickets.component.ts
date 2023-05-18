@@ -12,6 +12,7 @@ import { MachineService } from 'src/app/service/machine-service.service';
 export class SussecssTicketsComponent implements OnInit {
   khachDatVe=new KhachDatVe;
   xacnhanthongtinveInfo: any;
+  htmlMaContent = '';
   constructor(
     private router:Router,
     private route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class SussecssTicketsComponent implements OnInit {
         email:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.email,
         sdt:this.xacnhanthongtinveInfo.veTaus[0].khachDatVe.sdt,
      }
+     this.ganMaTuDong(this.xacnhanthongtinveInfo);
   }
   getTotalPrice() {
     let total = 0;
@@ -37,5 +39,14 @@ export class SussecssTicketsComponent implements OnInit {
       total += this.xacnhanthongtinveInfo.veTaus[i].donGia + 1000;
     }
     return total;
+  }
+  ganMaTuDong(xacnhanthongtinveInfo:XacNhanThongTinVeInfo) {
+    console.log(xacnhanthongtinveInfo);
+    if(this.xacnhanthongtinveInfo.maDatCho != null) {
+      this.htmlMaContent = `Mã đặt chỗ:&nbsp;${xacnhanthongtinveInfo.maDatCho}</label><br>`;
+    } else if(this.xacnhanthongtinveInfo.maDatVe != null) {
+      this.htmlMaContent = `Mã đặt vé:&nbsp;${xacnhanthongtinveInfo.maDatVe}</label><br>`
+    }
+
   }
 }

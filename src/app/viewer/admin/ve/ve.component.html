@@ -1,12 +1,17 @@
-<div class="container-fluid page">
+<div class="container-fluid page" *ngIf="isShow">
     <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data position-absolute text-center">
+      <div class="page__content-data position-absolute text-center" style="font-family: Arial, Helvetica, sans-serif;font-size: 25px; font-weight: 700; color: #317eac;">
         Quản lý vé
       </div>
 
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách vé</h5>
+            
+              <input type="button" (click)="btnDatVe()" value="Đặt vé" style="float: right; background-color: #48D724; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+              <input type="button" (click)="btnTraVe()" value="Trả vé" style="float: right; background-color: #F33A00; outline: none; border: 1px solid #ccc;padding: 5px; margin-right: 10px; border-radius: 5px;">
+              <input type="text" name="maDatCho" [(ngModel)]="maDatCho" id="searchInput" placeholder="Tìm kiếm mã đặt chỗ..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+              <input type="button" (click)="btnSearch()" value="Tìm" style="background-color: #0096FF; color: #fff; outline: none; border: 1px solid #ccc;padding: 5px; margin-left: 5px; border-radius: 5px;">
             <table class="table table-bordered">
                 <thead class="et-table-header">
                 <tr>
@@ -24,8 +29,6 @@
                     <th style="width: 8%;" class="ng-binding">Đơn giá <!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Loại vé<!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Tình trạng<!--Lệ phí trả vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Chức năng<!--Lệ phí trả vé--></th>
-
                 </tr>
                 </thead>
                 <tbody>
@@ -76,17 +79,12 @@
                         </td>
                         <td>
                           {{loads.tinhTrang}}
-                        </td>
-                        <td>
-                          <input type="button" (click)="btnDatVe()" value="Đặt vé" style="float: left; background-color: blue; outline: none;border: 1px solid #ccc; padding-bottom: 5px;">
-                          <input type="button" (click)="btnTraVe()" value="Trả vé" style="float: left; background-color: red; outline: none; border: 1px solid #ccc;">
-                        </td>
-                       
+                        </td>                   
                     </tr>
                     
                 </tbody>
                 <!-- ngRepeat: group in successGroup -->
-            </table>
+            </table>        
         </div>
     </div>
     </div>

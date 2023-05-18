@@ -21,7 +21,7 @@
                 khách của Tổng công ty Đường sắt Việt Nam. Quý khách đã thực hiện mua vé thành công với thông tin chi
                 tiết như dưới đây:</div>
     </div>
-    <div class="col-xs-11 et-col-md-3 text-info bg-danger" style="padding: 10px 15px; margin: 10px 0px 10px 30px"><label
+    <div class="col-xs-11 et-col-md-3 text-info bg-danger" style="padding: 10px 15px; margin: 10px 0px 10px 30px; font-weight:bolder" [innerHTML]="htmlMaContent"><label
             class="ng-binding">Mã đặt chỗ:&nbsp;{{xacnhanthongtinveInfo.maDatCho}}</label><br></div>
     <div class="col-md-12 text-info" ng-show="!successTrans &amp;&amp;  paymentId &amp;&amp; !hasVeThang()">
         <p ng-bind-html="'PBookingInfo_moTaThanhToan'|translate:paymentId" class="ng-binding">Quý khách vui lòng sử dụng

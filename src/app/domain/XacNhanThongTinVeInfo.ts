@@ -7,6 +7,7 @@ export class XacNhanThongTinVeInfo{
     hinhThucThanhToan:string;
     ngayMuaVe:string;
     maDatCho:number;
+    maDatVe:number;
 
    
 }

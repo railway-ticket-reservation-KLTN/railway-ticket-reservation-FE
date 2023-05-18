@@ -55,6 +55,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EmpAddEditComponent } from './viewer/admin/emp-add-edit/emp-add-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +91,8 @@ import { EmpAddEditComponent } from './viewer/admin/emp-add-edit/emp-add-edit.co
     VeComponent,
     TauComponent,
     LoginComponent,
-    EmpAddEditComponent
+    EmpAddEditComponent,
+    MomoComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +128,8 @@ import { EmpAddEditComponent } from './viewer/admin/emp-add-edit/emp-add-edit.co
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-    
+    NgxPaginationModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

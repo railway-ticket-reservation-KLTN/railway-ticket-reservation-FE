@@ -47,4 +47,48 @@ import { Observable, of  } from "rxjs";
         // Xử lý logic khi không có token
         return of(null); 
       }
+      public xacNhanDatVe(data: any[]): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/nhanvien/datvetrasau', data, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
+      public xacNhanTraVe(data: any[]): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/nhanvien/trave', data, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
+
+      public getDSMaDatCho(maDatCho:string): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/nhanvien/vestheomadatcho?maDatCho=' + maDatCho, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
+      
   }

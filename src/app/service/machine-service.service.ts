@@ -23,6 +23,7 @@ import { TraVe } from '../domain/TraVe';
 import { TraVeInFo } from '../domain/TraVeInFo';
 import { KhachDatVe } from '../domain/KhachDatVe';
 import { TraVeRequest } from '../domain/TraVeRequest';
+import { HoanTatThanhToanRequest } from '../domain/HoanTatThanhToanRequest';
 
 
 @Injectable({
@@ -116,6 +117,10 @@ export class MachineService {
   public thanhToanTraSau(xacnhanthongtinve:XacNhanThongTinVe): Observable<XacNhanThongTinVeInfo>{
     const url = `${this.REST_API_SERVER}/muave`;
     return this.http.post<XacNhanThongTinVeInfo>(url, xacnhanthongtinve, this.httpOptions);
+  }
+  public hoanTatThanhToan(hoanTatThanhToanRequest:HoanTatThanhToanRequest): Observable<XacNhanThongTinVeInfo>{
+    const url = `${this.REST_API_SERVER}/thanhtoan/trangthai`;
+    return this.http.post<XacNhanThongTinVeInfo>(url, hoanTatThanhToanRequest, this.httpOptions);
   }
 
   public getSearch( ):Observable<any>{

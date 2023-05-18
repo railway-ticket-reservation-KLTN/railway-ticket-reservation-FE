@@ -1,13 +1,77 @@
-<div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Tàu</div>
+<div class="container-fluid page" *ngIf="isShow">
     <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data position-absolute text-center">
-        Tàu Content Goes Here
-      </div>
+        <div class="page__content-data position-absolute text-center" style="font-family: Arial, Helvetica, sans-serif;font-size: 25px; font-weight: 700; color: #317eac;">
+            Quản lý hành trình
+          </div>
+    
 
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
-            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
+            <input type="button" (click)="btnAdd()" value="Thêm" style="float: right; background-color: #48D724; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+            <input type="button" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none; border: 1px solid #ccc;padding: 5px; margin-right: 10px; border-radius: 5px;">
+            <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
+
+<!-- Modal Popup -->
+<div class="modal" [(ngModel)]="modalOpen" (ngModelChange)="closeModal()" [class.show]="modalOpen">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm hành trình</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your desired content here -->
+        <h3>Thông tin hành trình</h3>
+        <div class="form-group">
+            <label for="gaDi">Ga đi:</label>
+            <input type="text" id="gaDi" [(ngModel)]="hanhTrinhRequest.gaDi" class="form-control">
+          </div>
+          
+          <div class="form-group">
+            <label for="gaDen">Ga đến:</label>
+            <input type="text" id="gaDen" [(ngModel)]="hanhTrinhRequest.gaDen" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="gioDi">Giờ đi:</label>
+            <input type="text" id="gioDi" [(ngModel)]="hanhTrinhRequest.gioDi" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="gioDen">Giờ đến:</label>
+            <input type="text" id="gioDen" [(ngModel)]="hanhTrinhRequest.gioDen" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="ngayDi">Ngày đi:</label>
+            <input type="date" id="ngayDi" [(ngModel)]="hanhTrinhRequest.ngayDi" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="ngayDen">Ngày đến:</label>
+            <input type="date" id="ngayDen" [(ngModel)]="hanhTrinhRequest.ngayDen" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="tinhTrang">Trạng thái:</label>
+            <input type="number" id="trangThai" [(ngModel)]="hanhTrinhRequest.trangThai" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="giaVe">Giá vé</label>
+            <input type="number" id="giaVe" [(ngModel)]="hanhTrinhRequest.giaVe" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="tenTau">Tàu</label>
+            <select id="tenTau"  class="form-control">
+              <option value="SE8">SE8</option>
+              <option value="SE12">SE12</option>
+              <option value="SE22">SE22</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
             <table class="table table-bordered">
                 <thead class="et-table-header">
                 <tr>
@@ -38,6 +102,10 @@
                         <td>{{loads.giaVe}}</td>
                         <td>   
                             <input type="checkbox">
+                        </td>
+                        <td>
+                            <input type="button" (click)="btnEdit()" value="Sửa" style="float: right; background-color: #2466d7; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+
                         </td>
                     </tr>
                     
