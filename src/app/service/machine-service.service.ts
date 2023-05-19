@@ -126,6 +126,9 @@ export class MachineService {
   public getSearch( ):Observable<any>{
     return this.http.get(this.REST_API_SERVER+'/hanhtrinhtau')
   }
+  public getToaTau():Observable<any>{
+    return this.http.get(this.REST_API_SERVER+'/getalltau')
+  }
 
   sendConfirmationEmail(email: string): void {
     const emailBody = `Your confirmation code is: ${this.confirmationCode}`;

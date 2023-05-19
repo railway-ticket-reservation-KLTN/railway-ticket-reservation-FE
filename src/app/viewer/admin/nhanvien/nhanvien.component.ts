@@ -11,6 +11,8 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
 export class NhanvienComponent implements OnInit {
 nhanVien:any[];
 isShow=true;
+modalOpen = false;
+
   constructor(
     private _dialog: MatDialog,
     private service:OtherAdminService,
@@ -36,6 +38,13 @@ isShow=true;
         }
       },
     });
+  }
+  openModal() {
+    this.modalOpen = true;
+  }
+
+  closeModal() {
+    this.modalOpen = false;
   }
 
 }

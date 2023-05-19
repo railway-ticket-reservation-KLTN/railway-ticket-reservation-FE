@@ -11,4 +11,16 @@ export class ThemHanhTrinhRequest{
     trangThai:number;
     giaVe:number;
     tau:Tau;
+
+    constructor(){
+        this.gaDi="";
+        this.gaDen = "";
+        this.ngayDi = "";
+        this.ngayDen = "";
+        this.gioDi = "";
+        this.gioDen = "";
+        this.trangThai = 1;
+        this.giaVe;
+        this.tau ;
+    }
 }

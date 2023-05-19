@@ -1,17 +1,77 @@
 <div class="container-fluid page" *ngIf="isShow">
-    <div class="d-flex page__box p-3 mt-2">Nhân viên</div>
     <div class="page__content shadow p-3 position-relative">
-      <div class="page__content-data position-absolute text-center">
-        <mat-toolbar color="primary">
-          <span class="example-spacer"></span>
-          <button mat-raised-button (click)="openAddEditEmpForm()">
-            ADD EMPLOYEE
-          </button>
-        </mat-toolbar>
+      
+      <div class="page__content-data position-absolute text-center" style="font-family: Arial, Helvetica, sans-serif;font-size: 25px; font-weight: 700; color: #317eac;">
+        Quản lý tài khoản
       </div>
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
+            <input type="button" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+            <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
+            <div class="modal" [(ngModel)]="modalOpen" (ngModelChange)="closeModal()" [class.show]="modalOpen">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Thêm tài khoản</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Add your desired content here -->
+                    <h3>Thông tin tài khoản</h3>
+                    <div class="form-group">
+                      <label for="tenTaiKhoan">Tên tài khoản:</label>
+                      <input  type="text" id="tenTaiKhoan"  class="form-control" placeholder="Tên tài khoản">
+                    </div>
+                    <div class="form-group">
+                      <label for="matKhau">Mật khẩu:</label>
+                      <input type="password" id="matKhau"  class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="form-group">
+                      <label for="trangThai">Trạng thái:</label>
+                      <input  type="number" id="trangThai"  class="form-control" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                      <label for="tenTau">Loại tài khoản</label>
+                      <select id="tenTau"  class="form-control">
+                        <option value="NHAN_VIEN">Nhân viên</option>
+                        <option value="QUAN_LY">Quản lý</option>
+                        <!-- Add more options as needed -->
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="tenNhanVien">Tên nhân viên:</label>
+                      <input  type="text" id="tenNhanVien"  class="form-control" placeholder="Tên nhân viên">
+                    </div>
+                    <div class="form-group">
+                      <label for="diaChi">Địa chỉ:</label>
+                      <input  type="text" id="diaChi"  class="form-control" placeholder="Địa chỉ">
+                    </div>
+                    <div class="form-group">
+                      <label for="sdt">Số điện thoại:</label>
+                      <input  type="text" id="sdt"  class="form-control" placeholder="Số điện thoại">
+                    </div>
+                    <div class="form-group">
+                      <label for="trangThai">Trạng thái:</label>
+                      <input  type="number" id="trangThai"  class="form-control" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                      <label for="viTri">Vị trí</label>
+                      <select id="viTri"  class="form-control">
+                        <option value="Nhân viên">Nhân viên</option>
+                        <option value="Quản lý">Quản lý</option>
+                        <!-- Add more options as needed -->
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary">Thêm</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <table class="table table-bordered">
                 <thead class="et-table-header">
                 <tr>
@@ -37,6 +97,10 @@
                         <td>   
                             <input type="checkbox">
                         </td>
+                        <td>
+                          <input type="button" value="Sửa" style="float: right; background-color: #2466d7; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+
+                      </td>
                     </tr>
                     
                 </tbody>

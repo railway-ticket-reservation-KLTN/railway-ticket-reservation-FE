@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AdminService } from "./admin-service.service";
 import { Observable, of  } from "rxjs";
+import { ThemHanhTrinhRequest } from "../domain/admin/ThemHanhTrinhRequest";
 
 @Injectable({
     providedIn: 'root'
@@ -90,5 +91,18 @@ import { Observable, of  } from "rxjs";
         // Xử lý logic khi không có token
         return of(null);
       }
+      public themHanhTrinh(hanhTrinhRequest:ThemHanhTrinhRequest): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
       
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/admin/themhanhtrinh', hanhTrinhRequest, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
   }

@@ -1,4 +1,4 @@
 export class Tau{
-    id:string;
+    id:number;
     tenTau:string;
 }

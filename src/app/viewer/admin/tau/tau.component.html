@@ -8,8 +8,7 @@
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
-            <input type="button" (click)="btnAdd()" value="Thêm" style="float: right; background-color: #48D724; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
-            <input type="button" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none; border: 1px solid #ccc;padding: 5px; margin-right: 10px; border-radius: 5px;">
+            <input type="button" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
             <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
 
 <!-- Modal Popup -->
@@ -27,28 +26,137 @@
         <h3>Thông tin hành trình</h3>
         <div class="form-group">
             <label for="gaDi">Ga đi:</label>
-            <input type="text" id="gaDi" [(ngModel)]="hanhTrinhRequest.gaDi" class="form-control">
+            <input placeholder="Ga đi" list="stations"
+            required #cus_class="ngModel" type="text" id="gaDi" [(ngModel)]="hanhTrinhRequest.gaDi" class="form-control">
+            <datalist id="stations">
+              <option value="Lào Cai"></option>
+              <option value="Phố Lú"></option>
+              <option value="Bảo Hà"></option>
+              <option value="Yên Bái"></option>
+              <option value="Phú Thọ"></option>
+              <option value="Việt Trì"></option>
+              <option value="Đông Anh"></option>
+              <option value="Hà Nội"></option>
+              <option value="Phủ Lý"></option>
+              <option value="Nam Định"></option>
+              <option value="Ninh Bình"></option>
+              <option value="Bỉm Sơn"></option>
+              <option value="Đồng Đăng"></option>
+              <option value="Uông Bí"></option>
+              <option value="Hạ Long"></option>
+              <option value="Hải Dương"></option>
+              <option value="Hải Phòng"></option>
+              <option value="Thanh Hóa"></option>
+              <option value="Minh Khôi"></option>
+              <option value="Chợ Sy"></option>
+              <option value="Vinh"></option>
+              <option value="Yên Trung"></option>
+              <option value="Hương Phố"></option>
+              <option value="Đồng Lê"></option>
+              <option value="Đồng Hới"></option>
+              <option value="Đông Hà"></option>
+              <option value="Huế"></option>
+              <option value="Lăng Cô"></option>
+              <option value="Đà Nẵng"></option>
+              <option value="Trà Kiệu"></option>
+              <option value="Phú Cang"></option>
+              <option value="Tam Kỳ"></option>
+              <option value="Núi Thành"></option>
+              <option value="Quảng Ngãi"></option>
+              <option value="Đức Phổ"></option>
+              <option value="Bồng Sơn"></option>
+              <option value="Diêu Trì"></option>
+              <option value="Quy Nhơn"></option>
+              <option value="Tuy Hòa"></option>
+              <option value="Giã"></option>
+              <option value="Ninh Hòa"></option>
+              <option value="Nha Trang"></option>
+              <option value="Ngã Ba"></option>
+              <option value="Tháp Chàm"></option>
+              <option value="Sông Mao"></option>
+              <option value="Ma Lâm"></option>
+              <option value="Phan Thiết"></option>
+              <option value="Long Khánh"></option>
+              <option value="Biên Hòa"></option>
+              <option value="Bình Thuận"></option>
+              <option value="Sài Gòn"></option>
+  
+            </datalist>
           </div>
           
           <div class="form-group">
             <label for="gaDen">Ga đến:</label>
-            <input type="text" id="gaDen" [(ngModel)]="hanhTrinhRequest.gaDen" class="form-control">
+            <input placeholder="Ga đến" list="stations-arivel"
+            required #depStation="ngModel" type="text" id="gaDen" [(ngModel)]="hanhTrinhRequest.gaDen" class="form-control">
+            <datalist id="stations-arivel">
+              <option value="Lào Cai"></option>
+              <option value="Phố Lú"></option>
+              <option value="Bảo Hà"></option>
+              <option value="Yên Bái"></option>
+              <option value="Phú Thọ"></option>
+              <option value="Việt Trì"></option>
+              <option value="Đông Anh"></option>
+              <option value="Hà Nội"></option>
+              <option value="Phủ Lý"></option>
+              <option value="Nam Định"></option>
+              <option value="Ninh Bình"></option>
+              <option value="Bỉm Sơn"></option>
+              <option value="Đồng Đăng"></option>
+              <option value="Uông Bí"></option>
+              <option value="Hạ Long"></option>
+              <option value="Hải Dương"></option>
+              <option value="Hải Phòng"></option>
+              <option value="Thanh Hóa"></option>
+              <option value="Minh Khôi"></option>
+              <option value="Chợ Sy"></option>
+              <option value="Vinh"></option>
+              <option value="Yên Trung"></option>
+              <option value="Hương Phố"></option>
+              <option value="Đồng Lê"></option>
+              <option value="Đồng Hới"></option>
+              <option value="Đông Hà"></option>
+              <option value="Huế"></option>
+              <option value="Lăng Cô"></option>
+              <option value="Đà Nẵng"></option>
+              <option value="Trà Kiệu"></option>
+              <option value="Phú Cang"></option>
+              <option value="Tam Kỳ"></option>
+              <option value="Núi Thành"></option>
+              <option value="Quảng Ngãi"></option>
+              <option value="Đức Phổ"></option>
+              <option value="Bồng Sơn"></option>
+              <option value="Diêu Trì"></option>
+              <option value="Quy Nhơn"></option>
+              <option value="Tuy Hòa"></option>
+              <option value="Giã"></option>
+              <option value="Ninh Hòa"></option>
+              <option value="Nha Trang"></option>
+              <option value="Ngã Ba"></option>
+              <option value="Tháp Chàm"></option>
+              <option value="Sông Mao"></option>
+              <option value="Ma Lâm"></option>
+              <option value="Phan Thiết"></option>
+              <option value="Long Khánh"></option>
+              <option value="Biên Hòa"></option>
+              <option value="Bình Thuận"></option>
+              <option value="Sài Gòn"></option>
+            </datalist>
           </div>
           <div class="form-group">
             <label for="gioDi">Giờ đi:</label>
-            <input type="text" id="gioDi" [(ngModel)]="hanhTrinhRequest.gioDi" class="form-control">
+            <input placeholder="00:00:00" type="text" id="gioDi" [(ngModel)]="hanhTrinhRequest.gioDi" class="form-control">
           </div>
           <div class="form-group">
             <label for="gioDen">Giờ đến:</label>
-            <input type="text" id="gioDen" [(ngModel)]="hanhTrinhRequest.gioDen" class="form-control">
+            <input placeholder="00:00:00" type="text" id="gioDen" [(ngModel)]="hanhTrinhRequest.gioDen" class="form-control">
           </div>
           <div class="form-group">
             <label for="ngayDi">Ngày đi:</label>
-            <input type="date" id="ngayDi" [(ngModel)]="hanhTrinhRequest.ngayDi" class="form-control">
+            <input  type="date" id="ngayDi" [(ngModel)]="hanhTrinhRequest.ngayDi" class="form-control" min="{{ minDate }}">
           </div>
           <div class="form-group">
             <label for="ngayDen">Ngày đến:</label>
-            <input type="date" id="ngayDen" [(ngModel)]="hanhTrinhRequest.ngayDen" class="form-control">
+            <input type="date" id="ngayDen" [(ngModel)]="hanhTrinhRequest.ngayDen" class="form-control" min="{{ hanhTrinhRequest.ngayDi }}" [min]="hanhTrinhRequest.ngayDen | date:'yyyy-MM-yyyy'">
           </div>
           <div class="form-group">
             <label for="tinhTrang">Trạng thái:</label>
@@ -56,16 +164,18 @@
           </div>
           <div class="form-group">
             <label for="giaVe">Giá vé</label>
-            <input type="number" id="giaVe" [(ngModel)]="hanhTrinhRequest.giaVe" class="form-control">
+            <input placeholder="Giá vé" type="number" id="giaVe" [(ngModel)]="hanhTrinhRequest.giaVe" class="form-control">
           </div>
           <div class="form-group">
             <label for="tenTau">Tàu</label>
-            <select id="tenTau"  class="form-control">
-              <option value="SE8">SE8</option>
-              <option value="SE12">SE12</option>
-              <option value="SE22">SE22</option>
+            <select id="tenTau"  class="form-control" [(ngModel)]="hanhTrinhRequest.tau">
+              <option *ngFor="let tau of Tau" [ngValue]="tau">{{ tau.tenTau }}</option>
+
               <!-- Add more options as needed -->
             </select>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" (click)="onThemClick()">Thêm</button>
           </div>
       </div>
     </div>
