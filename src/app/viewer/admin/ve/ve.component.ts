@@ -106,7 +106,10 @@ export class VeComponent implements OnInit {
     });
     this.ngZone.run(() => {
       // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
-      this.loadData();
+      this.service.getDSMaDatCho(this.maDatCho).subscribe(data =>{
+        this.Ve = data;
+        
+      });
     });
   }
 

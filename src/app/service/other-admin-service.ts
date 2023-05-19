@@ -84,7 +84,7 @@ import { Observable, of  } from "rxjs";
           });
       
           // Sử dụng mảng data trong yêu cầu HTTP
-          return this.http.post<any>('http://localhost:8080/v1/nhanvien/vestheomadatcho?maDatCho=' + maDatCho, { headers });
+          return this.http.get<any>('http://localhost:8080/v1/nhanvien/vestheomadatcho?maDatCho=' + maDatCho, { headers });
         }
       
         // Xử lý logic khi không có token
