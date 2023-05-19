@@ -32,12 +32,14 @@ export class ReturnTicketsComponent implements OnInit {
 }
 
 ngOnInit() {
+  
+}
+btnSearch(){
+
   this.service.traVe(this.traVe).subscribe(data =>{
     this.traVeInfo=data;
     console.log(this.traVeInfo); 
 })
-}
-btnSearch(){
   if(this.traVeInfo.length > 0){
     this.Susscess = false;
     this.khachDatVe ={
@@ -53,7 +55,6 @@ btnSearch(){
     alert("Không tìm thấy vé")
 
   }
-  console.log(this.traVeInfo);
   
 }
 
@@ -71,10 +72,8 @@ selectLoad(event: any, load: any) {
   console.log(this.selectedLoads);
 }
 btnNext(){
-  console.log(this.selectedLoads);
   if(this.selectedLoads.length > 0){
     this.router.navigate(['/xac-nhan-email'], { queryParams: { data: JSON.stringify(this.selectedLoads) } });  
-
   }
   else{
     alert("Bạn chưa chọn vé cần trả")

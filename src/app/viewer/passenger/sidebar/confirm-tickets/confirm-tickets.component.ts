@@ -42,9 +42,8 @@ export class ConfirmTicketsComponent implements OnInit {
     this.xacNhanThongTinKH = this.xacnhanthongtinKhuHoi.nguoiDatVe
     console.log(this.xacNhanThongTinKH);
     console.log(this.xacnhanthongtinve);
-    this.setPhuongThucThanhToan(this.xacNhanThongTinKH);
+    this.setPhuongThucThanhToan(this.xacNhanThongTinKH)
   }
-
   getTotalPrice() {
     let total = 0;
     let totalKhuHoi = 0;
@@ -195,7 +194,7 @@ export class ConfirmTicketsComponent implements OnInit {
     }
 
   }
-  setPhuongThucThanhToan(xacNhanThongTinKH:any) {
+setPhuongThucThanhToan(xacNhanThongTinKH:any) {
     if(this.xacNhanThongTinKH.hinhthucthanhtoan === 'THANH_TOAN_MOMO') {
       this.htmlPhuongThucThanhToan = `<span class="text-info-ticket ng-binding ng-scope" >Ví MoMo</span>`;
     } else if(this.xacNhanThongTinKH.hinhthucthanhtoan === 'TRA_SAU') {

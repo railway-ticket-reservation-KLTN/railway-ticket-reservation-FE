@@ -40,6 +40,11 @@ export class ConfirmEmailComponent implements OnInit {
   }
 
   onNextButtonClick() {
+
+    if(this.traVeRequest.maXacThuc == null || this.traVeRequest.maXacThuc == ""){
+      alert("Phải nhập mã xác nhận")
+    }
+   else{
     this.traVeRequest.khachDatVe = {
       hoTen: this.dataConfirmTraVe[0].khachDatVe.hoTen,
       email: this.dataConfirmTraVe[0].khachDatVe.email,
@@ -75,6 +80,7 @@ export class ConfirmEmailComponent implements OnInit {
       console.log(data);
       alert("Trả vé thành công")
     })
+   }
   }
 
   btnEmail() {
