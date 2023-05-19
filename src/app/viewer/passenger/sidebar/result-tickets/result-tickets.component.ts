@@ -177,6 +177,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.ngayDi = this.dataSearchLoadToaKhuHoi.ngayDi;
     this.danhSachGheRequest.soToa = soToa;
     this.danhSachGheRequest.tenTau = tenTau;
+    this.danhSachGheRequest.gaDi = this.dataSearchLoadToaKhuHoi.gaDi
+    this.danhSachGheRequest.gaDen = this.dataSearchLoadToaKhuHoi.gaDen;
+    this.danhSachGheRequest.gioDi = this.dataSearchLoadToaKhuHoi.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponseKhuHoi = data;
       const gheInFo = this.toaXeListKhuHoi.find(item => item.soToa == soToa);

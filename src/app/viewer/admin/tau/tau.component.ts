@@ -18,7 +18,7 @@ export class TauComponent implements OnInit {
   name:string;
   selectedValue: string;
   email:string;
-  hanhTrinhRequest = new ThemHanhTrinhRequest;
+  hanhTrinhRequest =new  ThemHanhTrinhRequest;
   minDate: string;
   constructor(
     private _dialog: MatDialog,
