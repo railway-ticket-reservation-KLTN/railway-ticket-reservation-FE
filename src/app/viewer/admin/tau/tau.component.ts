@@ -18,6 +18,7 @@ export class TauComponent implements OnInit {
   name:string;
   selectedValue: string;
   email:string;
+  selectedLoads: any[] = [];
   hanhTrinhRequest =new  ThemHanhTrinhRequest;
   minDate: string;
   constructor(
@@ -52,6 +53,22 @@ export class TauComponent implements OnInit {
 
   btnDelete(){
 
+    console.log(this.selectedLoads);
+
+    if(this.selectedLoads.length > 0){
+        this.service.xoaHanhTrinh(this.selectedLoads).subscribe(data =>{
+          console.log(data); 
+          this.selectedLoads =[];
+          this.ngZone.run(() => {
+            // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
+            this.loadData();
+            
+          });       
+        })
+    }else{
+      alert("Bạn cần chọn hành trình")
+    }
+    
   }
   btnAdd(){
 
@@ -70,6 +87,19 @@ export class TauComponent implements OnInit {
     this.service.getDanhSachHanhTrinh().subscribe(data =>{
       this.HanhTrinh=data;
     });
+  }
+  selectLoad(event: any, load: any) {
+    load.isSelected = event.target.checked;
+
+    if (load.isSelected) {
+      this.selectedLoads.push(load);
+    } else {
+      const index = this.selectedLoads.indexOf(load);
+      if (index > -1) {
+        this.selectedLoads.splice(index, 1);
+      }
+    }
+    console.log(this.selectedLoads);
   }
 
   onThemClick(){

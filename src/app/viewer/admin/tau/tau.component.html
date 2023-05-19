@@ -204,14 +204,14 @@
                         <td>{{loads.tau.tenTau}}</td>
                         <td>{{loads.tau.soLuongToa}}</td>
                         <td>{{loads.gaDi}}</td>
-                        <td>{{loads.gaDi}}</td>
+                        <td>{{loads.gaDen}}</td>
                         <td>{{loads.ngayDi}}</td>
                         <td>{{loads.ngayDen}}</td>
                         <td>{{loads.gioDi}}</td>
                         <td>{{loads.gioDen}}</td>
                         <td>{{loads.giaVe}}</td>
                         <td>   
-                            <input type="checkbox">
+                            <input type="checkbox" (change)="selectLoad($event, loads)">
                         </td>
                         <td>
                             <input type="button" (click)="btnEdit()" value="Sửa" style="float: right; background-color: #2466d7; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">

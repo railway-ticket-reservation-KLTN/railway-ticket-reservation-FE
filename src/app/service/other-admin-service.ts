@@ -105,4 +105,19 @@ import { ThemHanhTrinhRequest } from "../domain/admin/ThemHanhTrinhRequest";
         // Xử lý logic khi không có token
         return of(null);
       }
+
+      public xoaHanhTrinh(data: any[]): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/admin/xoahanhtrinh', data, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
   }
