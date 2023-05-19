@@ -22,6 +22,7 @@ import { VeComponent } from './viewer/admin/ve/ve.component';
 import { TauComponent } from './viewer/admin/tau/tau.component';
 import { LoginComponent } from './viewer/admin/login/login.component';
 import { AdminService } from './service/admin-service.service';
+import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path:'ves', component:VeComponent},
   {path:'taus', component:TauComponent},
   {path:'login', component:LoginComponent},
+  {path:'momopayment', component:MomoComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -12,6 +12,7 @@ import { MachineService } from 'src/app/service/machine-service.service';
 export class CheckTicketsComponent implements OnInit {
   kiemTraVeInfo = new KiemTraVeInfo();
   hanhTrinhInfo = new HanhTrinh();
+  htmlHienThiLabel = "";
   kiemTraVeRequest = new KiemTraVeRequest();
   hidenSuccess = true;
   hidenError = true;
@@ -41,6 +42,9 @@ export class CheckTicketsComponent implements OnInit {
       this.hanhTrinhInfo = data.hanhTrinh;
       this.showResult=false;
       console.log(this.kiemTraVeInfo);
+      if(data != null) {
+        this.htmlHienThiLabel = `Thông tin vé`;
+      }
     },
       (error) => {
         this.hidenError = false;

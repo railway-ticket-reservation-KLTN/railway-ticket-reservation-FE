@@ -7,7 +7,7 @@
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Các giao dịch thành công</h5>
-            <input type="button" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+            <input type="button" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
             <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
             <div class="modal" [(ngModel)]="modalOpen" (ngModelChange)="closeModal()" [class.show]="modalOpen">
               <div class="modal-dialog">
@@ -23,19 +23,19 @@
                     <h3>Thông tin tài khoản</h3>
                     <div class="form-group">
                       <label for="tenTaiKhoan">Tên tài khoản:</label>
-                      <input  type="text" id="tenTaiKhoan"  class="form-control" placeholder="Tên tài khoản">
+                      <input  type="text" id="tenTaiKhoan" [(ngModel)]="themNhanVien.tenTaiKhoan"  class="form-control" placeholder="Tên tài khoản">
                     </div>
                     <div class="form-group">
                       <label for="matKhau">Mật khẩu:</label>
-                      <input type="password" id="matKhau"  class="form-control" placeholder="Mật khẩu">
+                      <input type="password" id="matKhau" [(ngModel)]="themNhanVien.matKhau"  class="form-control" placeholder="Mật khẩu">
                     </div>
                     <div class="form-group">
                       <label for="trangThai">Trạng thái:</label>
-                      <input  type="number" id="trangThai"  class="form-control" placeholder="1">
+                      <input  type="number" id="trangThai" [(ngModel)]="themNhanVien.trangThai"  class="form-control" placeholder="1">
                     </div>
                     <div class="form-group">
                       <label for="tenTau">Loại tài khoản</label>
-                      <select id="tenTau"  class="form-control">
+                      <select id="tenTau"  class="form-control" [(ngModel)]="themNhanVien.loaiTK">
                         <option value="NHAN_VIEN">Nhân viên</option>
                         <option value="QUAN_LY">Quản lý</option>
                         <!-- Add more options as needed -->
@@ -43,30 +43,30 @@
                     </div>
                     <div class="form-group">
                       <label for="tenNhanVien">Tên nhân viên:</label>
-                      <input  type="text" id="tenNhanVien"  class="form-control" placeholder="Tên nhân viên">
+                      <input  type="text" id="tenNhanVien" [(ngModel)]="tenNhanVien" class="form-control" placeholder="Tên nhân viên">
                     </div>
                     <div class="form-group">
                       <label for="diaChi">Địa chỉ:</label>
-                      <input  type="text" id="diaChi"  class="form-control" placeholder="Địa chỉ">
+                      <input  type="text" id="diaChi" [(ngModel)]="diaChi"  class="form-control" placeholder="Địa chỉ">
                     </div>
                     <div class="form-group">
                       <label for="sdt">Số điện thoại:</label>
-                      <input  type="text" id="sdt"  class="form-control" placeholder="Số điện thoại">
+                      <input  type="text" id="sdt" [(ngModel)]="sdt"  class="form-control" placeholder="Số điện thoại">
                     </div>
                     <div class="form-group">
                       <label for="trangThai">Trạng thái:</label>
-                      <input  type="number" id="trangThai"  class="form-control" placeholder="1">
+                      <input  type="number" [(ngModel)]="trangThai" id="trangThai"  class="form-control" placeholder="1">
                     </div>
                     <div class="form-group">
                       <label for="viTri">Vị trí</label>
-                      <select id="viTri"  class="form-control">
+                      <select id="viTri"  class="form-control" [(ngModel)]="viTri">
                         <option value="Nhân viên">Nhân viên</option>
                         <option value="Quản lý">Quản lý</option>
                         <!-- Add more options as needed -->
                       </select>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-primary">Thêm</button>
+                      <button (click)="btnThem()" class="btn btn-primary">Thêm</button>
                     </div>
                   </div>
                 </div>
@@ -95,7 +95,7 @@
                         <td>{{loads.nhanVien.diaChi}}</td>
                         <td>{{loads.nhanVien.viTri}}</td>
                         <td>   
-                            <input type="checkbox">
+                            <input type="checkbox" (change)="selectLoad($event, loads)">
                         </td>
                         <td>
                           <input type="button" value="Sửa" style="float: right; background-color: #2466d7; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">

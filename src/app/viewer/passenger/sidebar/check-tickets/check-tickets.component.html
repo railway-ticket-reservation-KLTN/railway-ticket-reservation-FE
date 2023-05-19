@@ -254,27 +254,29 @@
 
     <div class="row">
         <div ng-show="isValidTicket" class="ng-hide" style="padding-left: 30px; padding-right: 30px;">
-            <h3 class="ng-binding">Thông tin vé<!--Thông tin vé--></h3>
+            <h3 class="ng-binding" [innerHTML] = "htmlHienThiLabel">Thông tin vé<!--Thông tin vé--></h3>
             <!--Giao dien cho deskhop-->
             <table class="table table-bordered list-ticket-deskhop" [hidden]="showResult">
                 <thead class="et-table-header">
                     <tr>
                         <th style="width:2%;">STT</th>
+                        <th style="width:10%;">Mã vé</th>
                         <th style="width:10%;">Mác tàu</th>
                         <th style="width:10%;">Ngày đi</th>
                         <th style="width:10%;">Ga đi</th>
                         <th style="width:10%;">Ga đến</th>
                         <th style="width:10%;">Giá vé</th>
                         <th style="width:10%;">Đối tượng</th>
-                        <th style="width:10%;">Số ghế</th>
-                        <th style="width:10%;">Số toa</th>
-                        <th style="width:10%;">Tình trạng</th>
-                        <th style="width:10%;">Loại vé</th>
+                        <th style="width:7%;">Số ghế</th>
+                        <th style="width:7%;">Số toa</th>
+                        <th style="width:7%;">Tình trạng</th>
+                        <th style="width:7%;">Loại vé</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="text-align: center">
                     <tr>
                         <td>{{ kiemTraVeInfo.id }}</td>
+                        <td>{{ kiemTraVeInfo.maVe }}</td>
                         <td>{{ kiemTraVeInfo.tenTau }}</td>
                         <td>{{ hanhTrinhInfo.ngayDi }}</td>
                         <td>{{ hanhTrinhInfo.gaDi }}</td>

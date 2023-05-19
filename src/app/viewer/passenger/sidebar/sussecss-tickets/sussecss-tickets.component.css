@@ -1227,7 +1227,7 @@ hr {
 }
 
 .h5,h5 {
-  font-size: 14px
+  font-size: 17px
 }
 
 .h6,h6 {
@@ -6691,7 +6691,7 @@ body,html {
   font-weight: 700;
   color: #000;
   background-color: #eee;
-  font-size: 12px
+  font-size: 15px
 }
 
 .et-table-group-header {
@@ -7914,11 +7914,11 @@ select {
 }
 
 .et-text-md-sm {
-  font-size: 10px
+  font-size: 15px
 }
 
 .et-text-md {
-  font-size: 12px
+  font-size: 15px
 }
 
 .et-text-large {
@@ -9277,7 +9277,7 @@ table th {
   font-size: 18px;
 }
 label{
-    font-size: 12px;
+    font-size: 15px;
 }
 .close:hover,
 .close:focus {

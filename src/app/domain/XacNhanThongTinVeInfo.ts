@@ -3,7 +3,7 @@ import { VeTaus } from "./VeTaus";
 import { VeTausThanhToans } from "./VeTausThanhToan";
 
 export class XacNhanThongTinVeInfo{
-    veTaus:VeTausThanhToans;
+    veTaus:VeTausThanhToans[];
     hinhThucThanhToan:string;
     ngayMuaVe:string;
     maDatCho:number;

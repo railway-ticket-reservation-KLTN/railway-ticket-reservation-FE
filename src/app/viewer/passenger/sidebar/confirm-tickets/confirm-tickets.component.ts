@@ -22,6 +22,7 @@ export class ConfirmTicketsComponent implements OnInit {
   xacNhanThongTinLS: any[];
   xacnhanthongtinveKhuHoiLS = new XacNhanThongTinVe;
   xacNhanThongTinKH: any;
+  htmlPhuongThucThanhToan = '';
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class ConfirmTicketsComponent implements OnInit {
     this.xacNhanThongTinKH = this.xacnhanthongtinKhuHoi.nguoiDatVe
     console.log(this.xacNhanThongTinKH);
     console.log(this.xacnhanthongtinve);
+    this.setPhuongThucThanhToan(this.xacNhanThongTinKH);
   }
 
   getTotalPrice() {
@@ -193,7 +195,13 @@ export class ConfirmTicketsComponent implements OnInit {
     }
 
   }
-
+  setPhuongThucThanhToan(xacNhanThongTinKH:any) {
+    if(this.xacNhanThongTinKH.hinhthucthanhtoan === 'THANH_TOAN_MOMO') {
+      this.htmlPhuongThucThanhToan = `<span class="text-info-ticket ng-binding ng-scope" >Ví MoMo</span>`;
+    } else if(this.xacNhanThongTinKH.hinhthucthanhtoan === 'TRA_SAU') {
+      this.htmlPhuongThucThanhToan = ` <span class="text-info-ticket ng-binding ng-scope ng-hide" ng-show="congThanhToan==item.MaCongTT" ng-repeat="item in listCongTT">Trả sau</span>`
+    }
+  }
   getFormattedDate(): string {
     const today = new Date();
     const year = today.getFullYear();

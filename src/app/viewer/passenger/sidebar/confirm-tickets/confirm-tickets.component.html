@@ -7,35 +7,29 @@
         <h4 style="color:#dd5600;margin-top: 20px;font-weight:600" class="ng-binding">Thông tin người mua vé</h4>
         <div class="row" style="border-bottom: 1px solid #ccc; padding-bottom: 15px">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <div><span class="ng-binding">&nbsp;&nbsp;- Họ và tên:</span> <span class="text-info-ticket ng-binding">
+                <div><span class="ng-binding">&nbsp;&nbsp;- Họ và tên: </span> <span class="text-info-ticket ng-binding">
                     {{xacnhanthongtin.nguoiDatVe.tenHanhKhach}}</span></div>
-                <div><span class="ng-binding">&nbsp;&nbsp;- Số CMND/Hộ chiếu:</span><span
+                <div><span class="ng-binding">&nbsp;&nbsp;- Số CMND/Hộ chiếu: </span><span
                         class="text-info-ticket ng-binding">{{xacnhanthongtin.nguoiDatVe.soGiayTo}}</span></div>
-                <div><span class="ng-binding">&nbsp;&nbsp;- Số di động:</span> <span
+                <div><span class="ng-binding">&nbsp;&nbsp;- Số di động: </span> <span
                         class="text-info-ticket ng-binding">{{xacnhanthongtin.nguoiDatVe.sdt}}</span></div>
-                <div><span class="ng-binding">&nbsp;&nbsp;- Email:</span> <span
+                <div><span class="ng-binding">&nbsp;&nbsp;- Email: </span> <span
                         class="text-info-ticket ng-binding">{{xacnhanthongtin.nguoiDatVe.email}}</span></div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                <div style="display:none"><span class="ng-binding">&nbsp;&nbsp;- Mã hội viên:</span> <span
+                <div style="display:none"><span class="ng-binding">&nbsp;&nbsp;- Mã hội viên: </span> <span
                         class="text-info-ticket ng-binding"></span></div>
                 <div ng-show="!register.IsVeThang" class=""><span class="ng-binding">&nbsp;&nbsp;- Người mua
-                        hàng:</span><span class="text-info-ticket ng-binding">{{xacnhanthongtin.nguoiDatVe.tenHanhKhach}}</span></div>
-                <div ng-show="!register.IsVeThang" class=""><span class="ng-binding">&nbsp;&nbsp;- Tên Công ty/Đơn
-                        vị:</span><span class="text-info-ticket ng-binding"></span></div>
-                <div ng-show="!register.IsVeThang" class=""><span class="ng-binding">&nbsp;&nbsp;- Mã số thuế:</span> <span
-                        class="text-info-ticket ng-binding"></span></div>
-                <div ng-show="!register.IsVeThang" class=""><span class="ng-binding">&nbsp;&nbsp;- Địa chỉ:</span><span
-                        class="text-info-ticket ng-binding"></span></div>
+                        hàng: </span><span class="text-info-ticket ng-binding">{{xacnhanthongtin.nguoiDatVe.tenHanhKhach}}</span></div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="ng-binding">&nbsp;&nbsp;- Phương thức thanh
-                    toán:</span> <span class=""><!-- ngRepeat: item in listCongTT --><span
-                        class="text-info-ticket ng-binding ng-scope" >Thanh toán qua ví
-                        MoMo</span><!-- end ngRepeat: item in listCongTT --><span
-                        class="text-info-ticket ng-binding ng-scope ng-hide" ng-show="congThanhToan==item.MaCongTT"
-                        ng-repeat="item in listCongTT">Trả sau</span><!-- end ngRepeat: item in listCongTT --></span> <span
-                    ng-show="register.IsVeThang" class="ng-hide"></span></div>
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="ng-binding">&nbsp;&nbsp;- Phương thức thanh toán: </span> 
+                <strong class="" [innerHTML] = "htmlPhuongThucThanhToan">
+
+                </strong> 
+                <span ng-show="register.IsVeThang" class="ng-hide">
+
+                </span>
+            </div>
         <h4 style="color: #dd5600;margin-top: 20px;font-weight: 600" class="ng-binding">Thông tin vé mua</h4>
         <!-- ngInclude: 'app/payment/ticketCart.confirm.desktop.html' -->
         <div ng-include="'app/payment/ticketCart.confirm.desktop.html'" class="ng-scope">
@@ -53,12 +47,6 @@
                             <th class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
                         </tr>
                     </tbody>
-                    <tbody ng-show="ves.khuHoi.length > 0" class="ng-hide">
-                        <tr class="" ng-show="ves.chieuDi.length > 0 || ves.chieuVe.length > 0">
-                            <td colspan="8"><label class="ng-binding">Khứ hồi<!--Khứ hồi--></label></td>
-                        </tr>
-                        <!-- ngRepeat: ve in ves.khuHoi -->
-                    </tbody>
                     <tbody ng-show="ves.chieuDi.length > 0" class="">
                         <tr class="ng-hide" ng-show="ves.khuHoi.length > 0 || ves.chieuVe.length > 0">
                             <td colspan="8"><label class="ng-binding">Chiều đi<!--Chiều đi--></label></td>
@@ -71,9 +59,9 @@
                             <td rowspan="" class="et-table-cell">
                                 <div class="row">
                                     <div class="col-md-4 ng-binding" style="width: 30%;padding-right: 0;"><span
-                                            class="ng-binding">Họ tên<!--Họ tên-->:</span> {{loads.tenKhach}}</div>
+                                            class="ng-binding">Họ tên<!--Họ tên-->: </span> {{loads.tenKhach}}</div>
                                     <div class="col-md-4" style="width: 28%;padding-right: 0;">
-                                        <span class="ng-binding">Đối tượng<!--Đối tượng-->:</span>
+                                        <span class="ng-binding">Đối tượng<!--Đối tượng-->: </span>
                                         <span ng-show="!ve.IsVeThang" class="ng-binding">{{loads.doiTuong}}</span>
                                     </div>
                                     <div class="col-md-4" style="width: 32%;padding-right: 0;">
