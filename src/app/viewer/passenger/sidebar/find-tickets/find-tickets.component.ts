@@ -44,48 +44,54 @@ export class FindTicketsComponent {
     this.machineSearch.loaiHanhTrinh = 'KHU_HOI';
    }
   onSearch(){ 
-  this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
-    if(Array.isArray(data) && data.length === 0){
-        // alert("Không tìm thấy");
+
+    if(this.checkDuplicatePassengers4()){
+      this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {
+        if(Array.isArray(data) && data.length === 0){
+            // alert("Không tìm thấy");
+            this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
+              duration: 2000, // Thời gian hiển thị (ms)
+              verticalPosition: 'top', // Vị trí hiển thị
+              panelClass: ['snack-bar-large'] 
+            });
+        }
+        else if(Array.isArray(data) == true){
+          this.dataSearch = data;
+          this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearch) } });
+        }else{
+         
+          this.machineService.getHanhTrinhTauKhuHoi(this.machineSearch).subscribe(data => {
+            this.dataSearchKhuHoi = data;
+            if(Array.isArray( this.dataSearchKhuHoi.hanhTrinhDi) && this.dataSearchKhuHoi.hanhTrinhDi.length === 0){
+              this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
+                duration: 2000, // Thời gian hiển thị (ms)
+                verticalPosition: 'top', // Vị trí hiển thị
+                panelClass: ['snack-bar-large'] 
+              });
+          }else{
+            this.dataSearchKhuHoi = data;
+    
+            console.log(data);
+            this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearchKhuHoi) } });
+          }
+            
+          })
+            
+        }
+          
+      },
+      (error) => {
         this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
           duration: 2000, // Thời gian hiển thị (ms)
           verticalPosition: 'top', // Vị trí hiển thị
           panelClass: ['snack-bar-large'] 
         });
-    }
-    else if(Array.isArray(data) == true){
-      this.dataSearch = data;
-      this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearch) } });
-    }else{
-     
-      this.machineService.getHanhTrinhTauKhuHoi(this.machineSearch).subscribe(data => {
-        this.dataSearchKhuHoi = data;
-        if(Array.isArray( this.dataSearchKhuHoi.hanhTrinhDi) && this.dataSearchKhuHoi.hanhTrinhDi.length === 0){
-          this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
-            duration: 2000, // Thời gian hiển thị (ms)
-            verticalPosition: 'top', // Vị trí hiển thị
-            panelClass: ['snack-bar-large'] 
-          });
-      }else{
-        this.dataSearchKhuHoi = data;
-
-        console.log(data);
-        this.router.navigate(['/ket-qua'], { queryParams: { data: JSON.stringify(this.dataSearchKhuHoi) } });
       }
-        
-      })
-        
+      );
+    }else{
+      alert("Thông tin tìm kiếm không được bỏ trống")
     }
-      
-  },
-  (error) => {
-    this.snackBar.open('Không tìm thấy kết quả', 'Đóng', {
-      duration: 2000, // Thời gian hiển thị (ms)
-      verticalPosition: 'top', // Vị trí hiển thị
-      panelClass: ['snack-bar-large'] 
-    });
-  }
-  );
+
   }
   formatNgayVe(date: string): string {
     let formattedDate = '';
@@ -98,4 +104,15 @@ export class FindTicketsComponent {
     }
     return formattedDate;
 }
+
+checkDuplicatePassengers4() {
+  if (!this.machineSearch.gaDen || !this.machineSearch.gaDi || !this.machineSearch.ngayDi || !this.machineSearch.ngayVe) {
+    // Tên hành khách, số giấy tờ và email không được bỏ trống
+    console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
+    return false;
+  }
+  
+  return true; // Không có lỗi
+}
+
 }

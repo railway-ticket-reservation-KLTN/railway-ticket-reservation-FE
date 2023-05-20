@@ -225,6 +225,18 @@ checkDuplicatePassengers() {
       }
     }
   }
+  for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatListKhuHoi.length; j++) {
+      if (
+        this.gheDaDatListKhuHoi[i].tenKhach === this.gheDaDatListKhuHoi[j].tenKhach &&
+        this.gheDaDatListKhuHoi[i].giayTo === this.gheDaDatListKhuHoi[j].giayTo
+      ) {
+        // Tên và số giấy tờ trùng nhau
+        console.log('Lỗi: Tên và số giấy tờ trùng nhau');
+        return false;
+      }
+    }
+  }
   return true; // Không có lỗi
 }
 
@@ -234,6 +246,18 @@ checkDuplicatePassengers1() {
       if (
         this.gheDaDatList[i].giayTo === this.gheDaDatList[j].giayTo &&
         this.gheDaDatList[i].tenKhach !== this.gheDaDatList[j].tenKhach
+      ) {
+        // Số giấy tờ trùng nhau, nhưng tên khác nhau
+        console.log('Lỗi: Số giấy tờ trùng nhau nhưng tên khác nhau');
+        return false;
+      }
+    }
+  }
+  for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatListKhuHoi.length; j++) {
+      if (
+        this.gheDaDatListKhuHoi[i].giayTo === this.gheDaDatListKhuHoi[j].giayTo &&
+        this.gheDaDatListKhuHoi[i].tenKhach !== this.gheDaDatListKhuHoi[j].tenKhach
       ) {
         // Số giấy tờ trùng nhau, nhưng tên khác nhau
         console.log('Lỗi: Số giấy tờ trùng nhau nhưng tên khác nhau');
@@ -254,7 +278,17 @@ checkDuplicatePassengers3() {
       return false;
     }
   }
+  for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
+    const passenger = this.gheDaDatListKhuHoi[i];
+    
+    if (!passenger.tenKhach[i] || !passenger.giayTo) {
+      // Tên hoặc số giấy tờ không được nhập
+      console.log('Lỗi: Tên hoặc số giấy tờ không được để trống');
+      return false;
+    }
+  }
   return true; // Không có lỗi
+  
 }
 checkDuplicatePassengers4() {
   if (!this.nguoiDatVe.tenHanhKhach || !this.nguoiDatVe.soGiayTo || !this.nguoiDatVe.email || !this.nguoiDatVe.sdt) {

@@ -397,13 +397,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
 
   onSubmit(){
 
-    if(this.gheDaDatList.length <=0){
-      alert("Không có vé để mua")
-    }
-    else if(this.gheDaDatListKhuHoi.length < 0){
-      alert("Không có vé để mua")
-    }
-    else if(this.gheDaDatListKhuHoi.length < 0 && this.gheDaDatList.length <=0){
+    if(this.gheDaDatList.length <=0 && this.gheDaDatListKhuHoi.length <=0 ){
       alert("Không có vé để mua")
     }
     // const arrayC = [...this.gheDaDatList, ...this.gheDaDatListKhuHoi]
