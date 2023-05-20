@@ -43,7 +43,7 @@
                             <td rowspan="" class="et-table-cell">
                                 <div class="row">
                                     <div class="col-md-4 ng-binding" style="width: 40%;padding-right: 0;"><span
-                                            class="ng-binding">Họ tên<!--Họ tên-->:</span> {{loads.khachDatVe.hoTen}}</div>
+                                            class="ng-binding">Họ tên<!--Họ tên-->:</span> {{loads.tenHanhKhach}}</div>
                                     <div class="col-md-4" style="width: 28%;padding-right: 0;">
                                         <span class="ng-binding">Đối tượng<!--Đối tượng-->:</span>
                                         <span ng-show="!ve.IsVeThang" class="ng-binding">{{loads.doiTuong}}</span>
@@ -51,7 +51,7 @@
                                     <div class="col-md-4" style="width: 32%;padding-right: 0;">
                                         <div ng-hide="ve.hanhKhach.loaiKhach &amp;&amp; (ve.hanhKhach.loaiKhach.MaPT == 2 || ve.hanhKhach.loaiKhach.MaPT == 7)"
                                             class="ng-binding">
-                                            <span class="ng-binding">Giấy tờ:<!--Số giấy tờ:--></span>{{loads.khachDatVe.soGiayTo}}
+                                            <span class="ng-binding">Giấy tờ:<!--Số giấy tờ:--></span>{{loads.soGiayTo}}
                                         </div>
                                     </div>
                                 </div>
@@ -116,8 +116,8 @@
         id="btnSaveBookInfo"(click)="onNextButtonClick()" class="pull-right et-btn-rec ng-binding"
         ng-disabled="requesting">Đồng ý xác nhận&gt;&gt;</a></div>
 
-        <input style="border-radius: 5px; outline: none; border: 1px solid #ccc;" [(ngModel)]="traVeRequest.maXacThuc" type="text" placeholder="Mã xác nhận">
-        <input type="button" (click)="btnEmail()"  value="Gửi" style="border-radius: 5px; outline: none; border: 1px solid #ccc;" >
+        <input style="border-radius: 5px; outline: none; border: 1px solid #ccc; height: 35px;" [(ngModel)]="traVeRequest.maXacThuc" type="text" placeholder="Mã xác nhận">
+        <input type="button" (click)="btnEmail()"  value="Nhận mã" style="border-radius: 5px; outline: none; border: 1px solid #ccc;margin-left: 2%; font-weight: bold; padding: 7px;" >
     </div>
 
     <app-footer></app-footer>

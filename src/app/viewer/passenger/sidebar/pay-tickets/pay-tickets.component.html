@@ -461,12 +461,14 @@
                     <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
                         <tbody>
                             <tr>
-                                <td style="cursor:pointer;width: 3%" ng-click="setCongTT(item.MaCongTT)"><input
+                                <td style="cursor:pointer;width: 3%"><input
                                         type="radio" name="phuongThucThanhToan"
                                         (click)="btnMomo()"
                                         [(ngModel)]="nguoiDatVe.hinhthucthanhtoan"
                                         value="THANH_TOAN_MOMO"
-                                        style="cursor:pointer;height: 1.2em;width: 100%"></td>
+                                        style="cursor:pointer;height: 1.2em;width: 100% ;" 
+                                        checked
+                                        ></td>
                                 <td style="cursor:pointer;width: 12%" ng-click="setCongTT(item.MaCongTT)"><img
                                         ng-show="!register.IsVeThang" ng-src="/images/logo-dvtt-MOM.png"
                                         style="width: 100px" src="assets/images/logo-dvtt-MOM.png" class=""> <img
@@ -496,7 +498,8 @@
                                         (click)="btnTraSau()"
                                         value="TRA_SAU"
                                         [(ngModel)]="nguoiDatVe.hinhthucthanhtoan"
-                                        style="cursor:pointer;height: 1.2em;width: 100%"></td>
+                                        style="cursor:pointer;height: 1.2em;width: 100%"
+                                        [checked]="true"></td>
                                 <td style="cursor:pointer;width: 12%"><img
                                      
                                         style="width: 100px" src="assets/images/logo-dvtt-PayLater.png" class=""> <img
@@ -518,34 +521,29 @@
                 </div><!-- end ngRepeat: item in listCongTT -->
             </div>
             <div class="row ng-hide"
-                ng-show="passengerInputError || maxPassengerError || maxTicketError || maxTicketPerTrainError || passengerInfoError || shortyNameError || invoiceError || mstError || congThanhToanError">
-                <div class="col-md-12 alert alert-warning" [hidden]="true">
+                >
+                <div class="col-md-12 alert alert-warning">
                     <div class="et-error-label"><span class="glyphicon glyphicon-warning-sign"></span> <b
                             class="ng-binding">Thông tin nhập vào chưa chính xác</b></div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="passengerInputError">* Hãy điền đầy đủ thông
-                        tin hành khách</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="maxPassengerError">* Mỗi giao dịch chỉ cho
+                    <div class="et-error-label ng-binding ng-hide" *ngIf="passengerInputError">* Hãy điền đầy đủ thông
+                        tin khách đặt</div>
+                    <!-- <div class="et-error-label ng-binding ng-hide" ng-show="maxPassengerError">* Mỗi giao dịch chỉ cho
                         tối đa 5 hành khách</div>
                     <div class="et-error-label ng-binding ng-hide" ng-show="maxTicketError">* Mỗi hành khách chỉ được sở
-                        hữu tối đa 2 vé mỗi giao dịch</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="maxTicketPerTrainError">* Mỗi hành khách chỉ
+                        hữu tối đa 2 vé mỗi giao dịch</div> -->
+                    <div class="et-error-label ng-binding ng-hide" *ngIf="maxTicketPerTrainError">* Mỗi hành khách chỉ
                         được sở hữu 1 vé trên 1 chuyến tàu</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="passengerInfoError">* Có hành khách khác tên
+                    <div class="et-error-label ng-binding ng-hide" *ngIf="passengerInfoError">* Có hành khách khác tên
                         nhưng trùng số CMTND/ Hộ chiếu?</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="shortyNameError">* Bạn cần điền đầy đủ họ và
+                    <div class="et-error-label ng-binding ng-hide" *ngIf="shortyNameError">* Bạn cần điền đầy đủ họ và
                         tên giống với CMTND</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="invoiceError">* Thông tin xuất hóa đơn phải
-                        bao gồm cả Tên công ty (hoặc đơn vị) và địa chỉ</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="mstError">* Mã số thuế để xuất hóa đơn không
-                        đúng định dạng (chỉ bao gồm 10 hoặc 13 ký tự số và dấu [-])</div>
-                    <div class="et-error-label ng-binding ng-hide" ng-show="congThanhToanError">* Vui lòng chọn phương
-                        thức thanh toán</div>
+                    <div class="et-error-label ng-binding ng-hide" *ngIf="congThanhToanError">* Vui lòng chọn xác nhận chấp nhận chính sách</div>
                 </div>
             </div>
             <div class="form-group" ng-class="{'et-error-block': notAgreementError}">
                 <div ng-show="notAgreementError" [hidden]="true"><span class="et-error-label ng-binding">Bạn chưa đồng ý
                         với những quy định mua vé trực tuyến.</span></div>
-                <div><input type="checkbox" ng-model="agreement" class="ng-pristine ng-valid"> <span
+                <div><input type="checkbox" [(ngModel)]="agreement" class="ng-pristine ng-valid"> <span
                         ng-bind-html="'PBuyTicket_xacNhanDongYMuaVeOnline'|translate" class="ng-binding">Tôi đã đọc kỹ
                         và đồng ý tuân thủ tất cả các <a href="/#/quydinhmuave" target="_blank">quy định mua vé trực
                             tuyến</a>, <a href="/#/khuyenmai" target="_blank">các chương trình khuyến mại</a> của Tổng

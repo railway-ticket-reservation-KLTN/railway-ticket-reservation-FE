@@ -71,6 +71,7 @@ export class ConfirmEmailComponent implements OnInit {
           ngayDen: this.dataConfirmTraVe[i].hanhTrinh.ngayDen,
           gioDi: this.dataConfirmTraVe[i].hanhTrinh.gioDi,
           gioDen: this.dataConfirmTraVe[i].hanhTrinh.gioDen,
+          tinhTrang: this.dataConfirmTraVe[i].tinhTrang
         }
 
       }

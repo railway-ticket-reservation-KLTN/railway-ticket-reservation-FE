@@ -78,6 +78,7 @@ export class ConfirmTicketsComponent implements OnInit {
           ngayDen: this.xacnhanthongtin.gheDaDat[i].ngayDen,
           gioDi: this.xacnhanthongtin.gheDaDat[i].gioDi,
           gioDen: this.xacnhanthongtin.gheDaDat[i].gioDen,
+          tinhTrang:''
         };
       }
       this.xacnhanthongtinve.khachDatVe = {
@@ -127,6 +128,7 @@ export class ConfirmTicketsComponent implements OnInit {
           ngayDen: this.xacnhanthongtinKhuHoi.gheDaDat[i].ngayDen,
           gioDi: this.xacnhanthongtinKhuHoi.gheDaDat[i].gioDi,
           gioDen: this.xacnhanthongtinKhuHoi.gheDaDat[i].gioDen,
+          tinhTrang:''
         };
       }
       this.xacnhanthongtinveKhuHoi.khachDatVe = {
@@ -169,6 +171,7 @@ export class ConfirmTicketsComponent implements OnInit {
           ngayDen: this.xacNhanThongTinLS[i].ngayDen,
           gioDi: this.xacNhanThongTinLS[i].gioDi,
           gioDen: this.xacNhanThongTinLS[i].gioDen,
+          tinhTrang:''
         };
       }
       this.xacnhanthongtinveKhuHoiLS.khachDatVe = {

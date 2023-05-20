@@ -59,12 +59,11 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   tauInfoKhuHoi = new ToaTau();
   danhsachToaResponse = new DanhSachToaResponse();
   danhsachToaResponseKhuHoi = new DanhSachToaResponse();
-  gheDaDatList: gheDaDat[];
-  gheDaDatListKhuHoi: gheDaDat[];
+  gheDaDatList: gheDaDat[] = [];
+  gheDaDatListKhuHoi: gheDaDat[] = [];
   gheDaDatList1: gheDaDat[];
   gheDaDat =new gheDaDat();
   gheDaDatLoad:gheDaDat;
-
   datCho=new DatCho();
   traCho=new TraCho();
   constructor(
@@ -91,7 +90,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
         this.loadToaTau(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
         // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
         this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, 
-          this.hanhTrinhInfo.tau.toas[0].tenTau, this.hanhTrinhInfo.gaDi, this.hanhTrinhInfo.gaDen, this.hanhTrinhInfo.gioDi, this.hanhTrinhInfo.ngayDi);
+          this.hanhTrinhInfo.tau.toas[0].tenTau);
         this.hanhTrinhInfoKhuHoi =[];
       }
       else {
@@ -106,7 +105,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
           // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
           // this.loadToaTauKhuHoi(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
           this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau, 
-            this.hanhTrinhInfo.gaDi, this.hanhTrinhInfo.gaDen, this.hanhTrinhInfo.gioDi, this.hanhTrinhInfo.ngayDi);
+           );
            // Khu hoi
           this.dataSearchVe = this.dataSearchKhuHoi.hanhTrinhVe;
           console.log(this.dataSearchVe);
@@ -134,11 +133,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       const tauInfo = this.toaXeList.find(item => item.soToa <= id);
       this.tauInfo = tauInfo;
     });
-    console.log(this.toaXeList);
-    console.log(id);
+    console.log(this.dataSearchLoadToa);
     
+    // this.loadToaGhe(event,this.tauInfo.maToa, this.tauInfo.soToa, this.tauInfo.tenTau)
     
-
     // this.loadToaGhe(event, )
   }
   loadToaTauKhuHoi(event: any, id: string, soToa: string) {
@@ -154,9 +152,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       
       
     });
+
   }
 
-  loadToaGhe(event: any, id: string, soToa: string, tenTau: string, gaDi:string, gaDen:string, gioDi:string, ngayDi:string) {
+  loadToaGhe(event: any, id: string, soToa: string, tenTau: string) {
     this.danhSachGheRequest.maToa = id;
     this.danhSachGheRequest.ngayDi = this.dataSearchLoadToa.ngayDi;
     this.danhSachGheRequest.soToa = soToa;
@@ -164,7 +163,6 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gaDi = this.dataSearchLoadToa.gaDi
     this.danhSachGheRequest.gaDen = this.dataSearchLoadToa.gaDen;
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
-    console.log(this.danhSachGheRequest);
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponse = data;
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);
@@ -189,7 +187,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
   loadThongTinGioVe(event:any, id:string, soGhe:string){
      //Một chiều
-     this.show=false;
+    this.show=false;
     this.datCho.gaDi = this.dataSearch[0].gaDi;
     this.datCho.gaDen =this.dataSearch[0].gaDen;
     this.datCho.soToa = this.danhsachToaResponse.soToa;
@@ -199,9 +197,22 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.datCho.gioDi = this.dataSearch[0].gioDi;
     this.datCho.gioDen = this.dataSearch[0].gioDen;
     this.datCho.trangThai ="DAT_CHO";
-    this.machineService.getDatCho(this.datCho).subscribe(data =>{
+    // this.machineService.getDatCho(this.datCho).subscribe(data =>{
       
-    })
+    // })
+    const existingGheDaDat = this.dataSearch.find(ghe => ghe.maGhe === this.datCho.maGhe);
+    if (!existingGheDaDat) {
+      this.machineService.getDatCho(this.datCho).subscribe(data => {
+        // Xử lý dữ liệu trả về từ API (nếu cần)
+        console.log(1);
+        
+      });
+      console.log(this.datCho);
+    } else {
+      // Phần tử đã tồn tại trong mảng
+      // Thực hiện xử lý khi phần tử bị trùng
+      console.log('Phần tử đã tồn tại trong mảng');
+    }    
     const newGheDaDat = {
       tenTau: this.tauInfo.tenTau,
       gaDi: this.dataSearch[0].gaDi,
@@ -296,16 +307,27 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
    const index1 = this.selectedSeatId.indexOf(soGhe);
    if (index !== -1 && index1 !==-1 ) {
      this.selectedSeatId.splice(index, 1);
-   } else {
+   } else if(!this.selectedSeats.includes(id)) {
      this.selectedSeatId.push(id);
    }
-   if(Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi){
-     this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi]; 
-     console.log(this.gheDaDatListKhuHoi);
-     // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-   } else { 
-     this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
-   }
+  //  if(Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi){
+  //    this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi]; 
+  //    console.log(this.gheDaDatListKhuHoi);
+  //    // sử dụng spread operator để sao chép mảng và thêm phần tử mới
+  //  } else { 
+  //    this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
+  //  }
+
+  if (Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi) {
+    const existingGheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === newGheDaDatKhuHoi.maGhe);
+    if (!existingGheDaDat) {
+      this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi];
+      this.gheDaDatList1 = this.gheDaDatListKhuHoi;
+    }
+  } else {
+    this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
+    this.gheDaDatList1 = this.gheDaDatListKhuHoi;
+  }
  }
   btnDelete(maGhe:string, soGhe:string, ){
    
@@ -375,12 +397,23 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
 
   onSubmit(){
 
+    if(this.gheDaDatList.length <=0){
+      alert("Không có vé để mua")
+    }
+    else if(this.gheDaDatListKhuHoi.length < 0){
+      alert("Không có vé để mua")
+    }
+    else if(this.gheDaDatListKhuHoi.length < 0 && this.gheDaDatList.length <=0){
+      alert("Không có vé để mua")
+    }
     // const arrayC = [...this.gheDaDatList, ...this.gheDaDatListKhuHoi]
     // console.log(arrayC);
-    
-    this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList),
-      gheDaDatListKhuHoi: JSON.stringify(this.gheDaDatListKhuHoi)
-    } });
+    else{
+      this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList),
+        gheDaDatListKhuHoi: JSON.stringify(this.gheDaDatListKhuHoi)
+      } });
+    }
+   
   }
   
 }

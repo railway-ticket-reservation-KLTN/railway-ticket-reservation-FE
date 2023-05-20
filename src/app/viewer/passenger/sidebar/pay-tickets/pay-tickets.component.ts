@@ -22,8 +22,14 @@ export class PayTicketsComponent implements OnInit {
   xacnhanthongtin=new XacNhanThongTin();
   xacnhanthongtinKhuHoi=new XacNhanThongTin();
   tenKhach:[];
+  agreement :boolean;
   tenKhachKhuHoi:[];
   traCho=new TraCho;
+  passengerInputError:boolean;
+  maxTicketPerTrainError:boolean;
+  passengerInfoError:boolean;
+  shortyNameError:boolean;
+  congThanhToanError:boolean;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -33,7 +39,12 @@ export class PayTicketsComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.passengerInputError=false;
+    this.maxTicketPerTrainError=false;
+    this.passengerInfoError=false;
+    this.shortyNameError=false;
+    this.congThanhToanError=false;
+    this.nguoiDatVe.hinhthucthanhtoan="THANH_TOAN_MOMO"
     this.route.queryParams.subscribe(params => {
       this.gheDaDatList = JSON.parse(params['data']);
       this.gheDaDatListKhuHoi = JSON.parse(params['gheDaDatListKhuHoi']);
@@ -108,14 +119,43 @@ getTotalPrice() {
   return total+totalKhuHoi;
 }
 btnNext(){
-  
-  this.xacnhanthongtin.gheDaDat=this.gheDaDatList;
-  this.xacnhanthongtin.nguoiDatVe=this.nguoiDatVe;
-  this.xacnhanthongtinKhuHoi.gheDaDat=this.gheDaDatListKhuHoi;
-  this.xacnhanthongtinKhuHoi.nguoiDatVe=this.nguoiDatVe;
-  this.router.navigate(['/xac-nhan-thong-tin-ve'], { queryParams: { data: JSON.stringify(this.xacnhanthongtin),
-    xacnhanthongtinKhuHoi: JSON.stringify(this.xacnhanthongtinKhuHoi) } });
-  console.log(this.xacnhanthongtin);
+  if (this.checkDuplicatePassengers3()) {
+    this.shortyNameError=false;
+    if(this.checkDuplicatePassengers1()){
+      this.passengerInfoError = false;
+     if(this.checkDuplicatePassengers()){
+      this.maxTicketPerTrainError=false;
+      if(this.checkDuplicatePassengers4()){
+        this.passengerInputError=false;
+        if(this.checkDuplicatePassengers5()){
+          this.xacnhanthongtin.gheDaDat=this.gheDaDatList;
+        this.xacnhanthongtin.nguoiDatVe=this.nguoiDatVe;
+        this.xacnhanthongtinKhuHoi.gheDaDat=this.gheDaDatListKhuHoi;
+        this.xacnhanthongtinKhuHoi.nguoiDatVe=this.nguoiDatVe;
+        this.router.navigate(['/xac-nhan-thong-tin-ve'], { queryParams: { data: JSON.stringify(this.xacnhanthongtin),
+          xacnhanthongtinKhuHoi: JSON.stringify(this.xacnhanthongtinKhuHoi) } });
+        console.log(this.xacnhanthongtin);
+        this.congThanhToanError=false;
+        }else{
+            this.congThanhToanError=true;
+        }
+      }else{
+        this.passengerInputError=true;
+      }
+     }else{
+        this.maxTicketPerTrainError=true;
+     }
+    }
+    else{
+      this.passengerInfoError = true;
+    }
+    // Thực hiện hành động tiếp theo khi không có lỗi trùng tên và số giấy tờ
+   
+  } else {
+    // Hiển thị thông báo lỗi cho người dùng
+    this.shortyNameError=true;
+  }
+ 
 }
 btnMomo(){
   this.nguoiDatVe.hinhthucthanhtoan = "THANH_TOAN_MOMO"
@@ -171,5 +211,71 @@ removeTicketKhuHoi(maGhe: string) {
   console.log(this.gheDaDatListKhuHoi);
   
 }
+
+checkDuplicatePassengers() {
+  for (let i = 0; i < this.gheDaDatList.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatList.length; j++) {
+      if (
+        this.gheDaDatList[i].tenKhach === this.gheDaDatList[j].tenKhach &&
+        this.gheDaDatList[i].giayTo === this.gheDaDatList[j].giayTo
+      ) {
+        // Tên và số giấy tờ trùng nhau
+        console.log('Lỗi: Tên và số giấy tờ trùng nhau');
+        return false;
+      }
+    }
+  }
+  return true; // Không có lỗi
+}
+
+checkDuplicatePassengers1() {
+  for (let i = 0; i < this.gheDaDatList.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatList.length; j++) {
+      if (
+        this.gheDaDatList[i].giayTo === this.gheDaDatList[j].giayTo &&
+        this.gheDaDatList[i].tenKhach !== this.gheDaDatList[j].tenKhach
+      ) {
+        // Số giấy tờ trùng nhau, nhưng tên khác nhau
+        console.log('Lỗi: Số giấy tờ trùng nhau nhưng tên khác nhau');
+        return false;
+      }
+    }
+  }
+  return true; // Không có lỗi
+}
+
+checkDuplicatePassengers3() {
+  for (let i = 0; i < this.gheDaDatList.length; i++) {
+    const passenger = this.gheDaDatList[i];
+    
+    if (!passenger.tenKhach[i] || !passenger.giayTo) {
+      // Tên hoặc số giấy tờ không được nhập
+      console.log('Lỗi: Tên hoặc số giấy tờ không được để trống');
+      return false;
+    }
+  }
+  return true; // Không có lỗi
+}
+checkDuplicatePassengers4() {
+  if (!this.nguoiDatVe.tenHanhKhach || !this.nguoiDatVe.soGiayTo || !this.nguoiDatVe.email || !this.nguoiDatVe.sdt) {
+    // Tên hành khách, số giấy tờ và email không được bỏ trống
+    console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
+    return false;
+  }
+  
+  return true; // Không có lỗi
+}
+
+checkDuplicatePassengers5() {
+  if (!this.agreement) {
+    // Checkbox chưa được chọn
+    console.log('Lỗi: Checkbox chưa được chọn');
+    return false;
+  }
+  return true; // Không có lỗi
+}
+
+
+
 }
 

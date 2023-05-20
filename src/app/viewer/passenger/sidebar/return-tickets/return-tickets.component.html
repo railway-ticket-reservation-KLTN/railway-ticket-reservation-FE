@@ -164,6 +164,7 @@
                     <th style="width: 19%;" class="ng-binding">Thông tin vé<!--Thông tin vé--></th>
                     <th style="width: 8%;" class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
                     <th style="width: 15%;" class="ng-binding">Loại trả vé<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 15%;" class="ng-binding">Tình trạng vé<!--Tình trạng vé--></th>
                     <th style="width: 8%;" class="ng-binding">Lệ phí trả vé<!--Lệ phí trả vé--></th>
                     <th style="width: 8%;" class="ng-binding">Tiền trả lại<!--Tiền trả lại--></th>
                     <th style="width: 6%;" class="ng-binding">Chọn vé trả<!--Chọn vé trả--></th>
@@ -178,6 +179,7 @@
                             {{loads.donGia}} {{loads.maVe}}</td>
                         <td>{{loads.donGia}}</td>
                         <td>Trả vé</td>
+                        <td *ngIf="loads.tinhTrang === 'DA_MUA'">Đã thanh toán</td>
                         <td>20000</td>
                         <td>{{loads.donGia - 20000 }}</td>
                         <td>   

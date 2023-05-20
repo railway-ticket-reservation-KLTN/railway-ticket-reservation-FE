@@ -34,28 +34,49 @@ export class ReturnTicketsComponent implements OnInit {
 ngOnInit() {
   
 }
+// btnSearch(){
+
+//   this.service.traVe(this.traVe).subscribe(data =>{
+//     this.traVeInfo=data;
+//     console.log(this.traVeInfo); 
+// })
+//   if(this.traVeInfo.length > 0){
+//     this.Susscess = false;
+//     this.khachDatVe ={
+//       hoTen:this.traVeInfo[0].khachDatVe.hoTen,
+//       email:this.traVeInfo[0].khachDatVe.email,
+//       sdt:this.traVeInfo[0].khachDatVe.sdt,
+//       soGiayTo:this.traVeInfo[0].khachDatVe.soGiayTo,
+      
+      
+//     }
+//   }
+//   else{
+//     alert("Không tìm thấy vé")
+
+//   }
+  
+// }
 btnSearch(){
 
   this.service.traVe(this.traVe).subscribe(data =>{
     this.traVeInfo=data;
-    console.log(this.traVeInfo); 
-})
-  if(this.traVeInfo.length > 0){
+    console.log(this.traVeInfo);
+    if(this.traVeInfo.length > 0){
     this.Susscess = false;
     this.khachDatVe ={
       hoTen:this.traVeInfo[0].khachDatVe.hoTen,
       email:this.traVeInfo[0].khachDatVe.email,
       sdt:this.traVeInfo[0].khachDatVe.sdt,
       soGiayTo:this.traVeInfo[0].khachDatVe.soGiayTo,
-      
-      
     }
   }
   else{
     alert("Không tìm thấy vé")
-
   }
-  
+}, error => {
+  alert(error.error.moTaLoi);
+});
 }
 
 selectLoad(event: any, load: any) {

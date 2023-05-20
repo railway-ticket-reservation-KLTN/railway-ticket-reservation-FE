@@ -17,5 +17,6 @@ export class VeTaus{
       ngayDen: string;
       gioDi: string;
       gioDen: string;
+      tinhTrang:string;
 
 }
