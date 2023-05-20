@@ -227,19 +227,35 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     const index = this.selectedSeats.indexOf(id);
     const index1 = this.selectedSeats.indexOf(soGhe);
 
-    if (index !== -1 && index1 !==-1 ) {
+    // if (index !== -1 && index1 !==-1 ) {
+    //   this.selectedSeats.splice(index, 1);
+    // } else {
+    //   this.selectedSeats.push(id);
+    // }
+    if (index !== -1 && index1 !== -1) {
       this.selectedSeats.splice(index, 1);
-    } else {
+    } else if (!this.selectedSeats.includes(id)) {
       this.selectedSeats.push(id);
     }
-    if(Array.isArray(this.gheDaDatList) && this.gheDaDatList){
-      this.gheDaDatList = [...this.gheDaDatList, newGheDaDat]; // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-      this.gheDaDatList1=this.gheDaDatList;
-    } else { 
-      this.gheDaDatList = [newGheDaDat];
-      this.gheDaDatList1=this.gheDaDatList;
+    // if(Array.isArray(this.gheDaDatList) && this.gheDaDatList){
+    //   this.gheDaDatList = [...this.gheDaDatList, newGheDaDat]; // sử dụng spread operator để sao chép mảng và thêm phần tử mới
+    //   this.gheDaDatList1=this.gheDaDatList;
+    // } else { 
+    //   this.gheDaDatList = [newGheDaDat];
+    //   this.gheDaDatList1=this.gheDaDatList;
 
+    // }
+    if (Array.isArray(this.gheDaDatList) && this.gheDaDatList) {
+      const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === newGheDaDat.maGhe);
+      if (!existingGheDaDat) {
+        this.gheDaDatList = [...this.gheDaDatList, newGheDaDat];
+        this.gheDaDatList1 = this.gheDaDatList;
+      }
+    } else {
+      this.gheDaDatList = [newGheDaDat];
+      this.gheDaDatList1 = this.gheDaDatList;
     }
+    
   }
   loadThongTinGioVeKhuHoi(event:any, id:string, soGhe:string){
     //Một chiều

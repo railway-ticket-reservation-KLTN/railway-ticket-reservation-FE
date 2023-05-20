@@ -8,11 +8,11 @@
       <h3 class="panel-title" style="font-size: 25px;">Thông tin hành trình</h3>
     </div>
     <div class="panel-body">
-      <form>
+      <form #searchForm="ngForm">
         <div class="form-group">
 
           <label for="departure-station">Ga đi:</label>
-          <input type="text" id="departure-station" [(ngModel)]="machineSearch.gaDi" name="gaDi" list="stations"
+          <input type="text" id="departure-station" [(ngModel)]="machineSearch.gaDi" name="gaDi" list="stations" required
             required #cus_class="ngModel">
           <datalist id="stations">
             <option value="Lào Cai"></option>

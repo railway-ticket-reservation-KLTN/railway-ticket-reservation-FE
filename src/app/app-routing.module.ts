@@ -23,6 +23,7 @@ import { TauComponent } from './viewer/admin/tau/tau.component';
 import { LoginComponent } from './viewer/admin/login/login.component';
 import { AdminService } from './service/admin-service.service';
 import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
+import { AuthGuard } from './viewer/admin/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -48,6 +49,11 @@ const routes: Routes = [
   {path:'taus', component:TauComponent},
   {path:'login', component:LoginComponent},
   {path:'momopayment', component:MomoComponent},
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
