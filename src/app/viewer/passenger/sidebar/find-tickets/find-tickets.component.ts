@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TimChuyenTauRequest } from 'src/app/domain/TimChuyenTauRequest';
 import { MachineService } from 'src/app/service/machine-service.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './find-tickets.component.html',
   styleUrls: ['./find-tickets.component.css']
 })
-export class FindTicketsComponent {
+export class FindTicketsComponent implements OnInit {
   dataSearch = new VeTauInfo();
   dataSearchKhuHoi= new VeTauInfoKhuHoi();
   isCheck=true;
@@ -33,6 +33,9 @@ export class FindTicketsComponent {
     const day = today.getDate();
     this.minDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
+  }
+  ngOnInit(){
+    this.machineSearch.loaiHanhTrinh ==="MOT_CHIEU"
   }
    enableRadio(){
     this.isCheck=true;
@@ -106,12 +109,20 @@ export class FindTicketsComponent {
 }
 
 checkDuplicatePassengers4() {
-  if (!this.machineSearch.gaDen || !this.machineSearch.gaDi || !this.machineSearch.ngayDi || !this.machineSearch.ngayVe) {
-    // Tên hành khách, số giấy tờ và email không được bỏ trống
-    console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
-    return false;
+  if(this.machineSearch.loaiHanhTrinh ==="MOT_CHIEU"){
+    if (!this.machineSearch.gaDen || !this.machineSearch.gaDi || !this.machineSearch.ngayDi || !this.machineSearch.ngayDi) {
+      // Tên hành khách, số giấy tờ và email không được bỏ trống
+      console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
+      return false;
+    }
   }
-  
+  else{
+    if (!this.machineSearch.gaDen || !this.machineSearch.gaDi || !this.machineSearch.ngayDi || !this.machineSearch.ngayDi || !this.machineSearch.ngayVe) {
+      // Tên hành khách, số giấy tờ và email không được bỏ trống
+      console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
+      return false;
+    }
+  }
   return true; // Không có lỗi
 }
 
