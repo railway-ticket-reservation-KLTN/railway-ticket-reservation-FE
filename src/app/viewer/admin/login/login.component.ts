@@ -18,7 +18,7 @@ constructor(
 
 }
   btnSubmit(){
-    console.log(this.dangNhap);
+   if(this.checkDuplicatePassengers4()){
     this.service.dangNhap(this.dangNhap).subscribe( data =>{
       this.router.navigate(['/home']);
     // if(data === null || data === ''){
@@ -33,7 +33,22 @@ constructor(
   }
    );
 
+   }
+   else{
+    alert("Nhập đầy đủ thông tin")
+   }
+ 
   
     
+  }
+
+  checkDuplicatePassengers4() {
+    if (!this.dangNhap.userName || !this.dangNhap.userName) {
+      // Tên hành khách, số giấy tờ và email không được bỏ trống
+      console.log('Lỗi: Tên hành khách, số giấy tờ và email không được bỏ trống');
+      return false;
+    }
+    
+    return true; // Không có lỗi
   }
 }

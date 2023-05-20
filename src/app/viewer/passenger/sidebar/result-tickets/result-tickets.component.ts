@@ -270,7 +270,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   }
   loadThongTinGioVeKhuHoi(event:any, id:string, soGhe:string){
     //Một chiều
-    this.showKhuHoi=false
+  this.showKhuHoi=false
    this.datCho.gaDi = this.dataSearchVe[0].gaDi;
    this.datCho.gaDen =this.dataSearchVe[0].gaDen;
    this.datCho.soToa = this.danhsachToaResponseKhuHoi.soToa;

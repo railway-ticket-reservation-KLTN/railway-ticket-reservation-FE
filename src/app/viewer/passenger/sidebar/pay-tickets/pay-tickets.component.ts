@@ -16,8 +16,9 @@ export class PayTicketsComponent implements OnInit {
   public selectedSeatId: string[] = [];
   nguoiDatVe=new NguoiDatVe();
   confirmationForm: FormGroup;
-  gheDaDatList: gheDaDat[];
-  gheDaDatListKhuHoi: gheDaDat[];
+  gheDaDatList: gheDaDat[]=[];
+  gheDaDatListKhuHoi: gheDaDat[]=[];
+  gheDaDatListKhuHoiTH: gheDaDat[]=[];
   private confirmationCode: string;
   xacnhanthongtin=new XacNhanThongTin();
   xacnhanthongtinKhuHoi=new XacNhanThongTin();
@@ -39,6 +40,7 @@ export class PayTicketsComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.passengerInputError=false;
     this.maxTicketPerTrainError=false;
     this.passengerInfoError=false;
@@ -86,6 +88,9 @@ export class PayTicketsComponent implements OnInit {
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\+?\d{10,}$/)]],
       ticketCode: ['', Validators.required]
     });
+
+    this.gheDaDatListKhuHoiTH = [...this.gheDaDatList, ...this.gheDaDatListKhuHoi];
+    console.log(this.gheDaDatListKhuHoiTH);
   }
 
   
@@ -237,6 +242,18 @@ checkDuplicatePassengers() {
       }
     }
   }
+  for (let i = 0; i < this.gheDaDatListKhuHoiTH.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatListKhuHoiTH.length; j++) {
+      if (
+        this.gheDaDatListKhuHoiTH[i].tenKhach === this.gheDaDatListKhuHoiTH[j].tenKhach &&
+        this.gheDaDatListKhuHoiTH[i].giayTo === this.gheDaDatListKhuHoiTH[j].giayTo
+      ) {
+        // Tên và số giấy tờ trùng nhau
+        console.log('Lỗi: Tên và số giấy tờ trùng nhau');
+        return false;
+      }
+    }
+  }
   return true; // Không có lỗi
 }
 
@@ -265,6 +282,18 @@ checkDuplicatePassengers1() {
       }
     }
   }
+  for (let i = 0; i < this.gheDaDatListKhuHoiTH.length; i++) {
+    for (let j = i + 1; j < this.gheDaDatListKhuHoiTH.length; j++) {
+      if (
+        this.gheDaDatListKhuHoiTH[i].giayTo === this.gheDaDatListKhuHoiTH[j].giayTo &&
+        this.gheDaDatListKhuHoiTH[i].tenKhach !== this.gheDaDatListKhuHoiTH[j].tenKhach
+      ) {
+        // Số giấy tờ trùng nhau, nhưng tên khác nhau
+        console.log('Lỗi: Số giấy tờ trùng nhau nhưng tên khác nhau');
+        return false;
+      }
+    }
+  }
   return true; // Không có lỗi
 }
 
@@ -280,6 +309,15 @@ checkDuplicatePassengers3() {
   }
   for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
     const passenger = this.gheDaDatListKhuHoi[i];
+    
+    if (!passenger.tenKhach[i] || !passenger.giayTo) {
+      // Tên hoặc số giấy tờ không được nhập
+      console.log('Lỗi: Tên hoặc số giấy tờ không được để trống');
+      return false;
+    }
+  }
+  for (let i = 0; i < this.gheDaDatListKhuHoiTH.length; i++) {
+    const passenger = this.gheDaDatListKhuHoiTH[i];
     
     if (!passenger.tenKhach[i] || !passenger.giayTo) {
       // Tên hoặc số giấy tờ không được nhập
