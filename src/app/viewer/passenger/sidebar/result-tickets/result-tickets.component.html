@@ -168,7 +168,7 @@
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope"
-                        *ngFor="let ghes of danhSachGheResponse | slice:0:26 "  (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
+                        *ngFor="let ghes of danhSachGheResponse | slice:0:26 "  (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe, ghes.toa.id)">
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
@@ -192,7 +192,7 @@
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope" et-seat-right=""
-                        *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe)">
+                        *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe, ghes.toa.id)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
                                 <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-blocked': ghes.trangThai != '1'}" 

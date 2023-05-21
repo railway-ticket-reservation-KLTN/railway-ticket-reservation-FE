@@ -32,3 +32,91 @@
   :host>>>.d-flex.page__box.p-3.mt-2{
     background-color:rgba(73, 123, 254, 1) !important;
   }
+  .main {
+    background-color: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .card .card-content {
+    margin-right: 10px;
+  }
+
+  .card .number {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .card .card-name {
+    font-size: 14px;
+  }
+
+  .icon-box {
+    width: 40px;
+    height: 40px;
+    color: black;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon-box i {
+    color: #050505;
+    font-size: 20px;
+  }
+
+  .charts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chart {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .chart h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  canvas {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+  .card {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .card:hover {
+    background-color: #317eac;
+    color: white;
+    cursor: pointer;
+  }
+  

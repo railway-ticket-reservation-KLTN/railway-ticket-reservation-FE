@@ -1,0 +1,117 @@
+<app-header></app-header>
+<div class="row" ng-show="!notFound" style="height: 100% !important; width: 100%; overflow:auto; padding: 10px;">
+    <div class="col-md-12 hidden-print">
+        <div class="row et-page-header">
+            <span class="et-main-label ng-binding">TRẢ VÉ TRỰC TUYẾN THÀNH CÔNG<!--TRẢ VÉ TRỰC TUYẾN--></span>
+        </div>
+        <div class="et-col-md-12 et-widget alert alert-info" style="color:#0091d4">
+            <p>Để kiểm soát và ngăn ngừa dịch bệnh Covid-19, Ngành Đường sắt kính đề nghị Quý khách hàng khi đến ga trả
+                vé hoặc đi tàu thực hiện các biện pháp phòng chống dịch bệnh theo THÔNG ĐIỆP 5K của Bộ Y tế
+                [<strong>Khẩu trang – Khử khuẩn – Khoảng cách – Không tập trung – Khai báo y tế</strong>]. Riêng việc
+                khai báo y tế, hành khách vui lòng truy cập vào địa chỉ: <a href="https://tokhaiyte.vn"
+                    target="_blank">https://tokhaiyte.vn</a> hoặc app [Vietnam Health Declaration]. Trân trọng cảm ơn!
+            </p>
+        </div>
+        <!-- <div class="row et-page-header">
+            <span class="et-main-label ng-binding ng-hide" [innerHTML] = "htmlTrangThaiGiaoDich" ng-show="msgShowed == 1"></span>
+        </div> -->
+        <div class="text-info">
+            <div ng-show="msgShowed == 1" class="ng-binding ng-hide">Cám ơn quý khách đã sử dụng dịch vụ vận chuyển hành
+                khách của Tổng công ty Đường sắt Việt Nam. Quý khách đã thực hiện trả vé thành công với thông tin chi
+                tiết như dưới đây:</div>
+    </div>
+   
+    <div class="col-md-12 text-info" ng-show="!successTrans &amp;&amp;  paymentId &amp;&amp; !hasVeThang()">
+        <p ng-bind-html="'PBookingInfo_moTaThanhToan'|translate:paymentId" class="ng-binding">
+        </p>
+    </div>
+    <div class="col-md-12 table-responsive list-ticket-deskhop">
+        <h5 class="et-register-block ng-binding" style="margin-left:0px">Thông tin vé</h5>
+        <table class="table table-bordered">
+            <thead class="et-table-header">
+                <tr>
+                    <th class="ng-binding">Họ tên</th>
+                    <th style="width:160px" class="ng-binding">Số CMND/ Hộ chiếu</th>
+                    <th style="width:85px" class="ng-binding">Đối tượng</th>
+                    <th style="width:120px" class="ng-binding">Loại chỗ</th>
+                    <th style="width:150px" class="ng-binding">Thông tin vé</th>
+                    <th style="width:100px" class="ng-binding">Trạng thái</th>
+                    <th style="width:100px" class="ng-binding">Thành tiền (VNĐ)</th>
+                </tr>
+            </thead><!-- ngRepeat: group in bookingGroup -->
+            <tbody *ngFor="let ves of dataConfirmTraVe;" class="ng-scope">
+                <tr class="et-table-group-header">
+                    <td colspan="7" class="ng-binding">{{ves.hanhTrinh.gaDi}} - {{ves.hanhTrinh.gaDen}} {{ves.hanhTrinh.ngayDi}}</td>
+                </tr><!-- ngRepeat: book in group -->
+                <tr ng-repeat="book in group" class="ng-scope">
+                    <td class="et-table-cell ng-binding">{{ves.tenHanhKhach}}</td>
+                    <td class="et-table-cell ng-binding">{{ves.soGiayTo}}</td>
+                    <td class="et-table-cell">
+                        <div ng-show="book.MaPT!=27" class="ng-binding">{{ves.doiTuong}} <br></div>
+                    </td>
+                    <td class="et-table-cell et-text-md ng-binding">{{ves.loaiVe}}</td>
+                    <td class="et-table-cell et-text-md">
+                        <div class="ng-binding">{{ves.tenTau}}</div>
+                        <div class="ng-binding">{{ves.hanhTrinh.ngayDi}} {{ves.hanhTrinh.gioDi}}</div>
+                        <div class="ng-binding">Toa: {{ves.soToa}} chỗ số: {{ves.soGhe}}</div>
+                    </td>
+                    <td class="et-table-cell et-text-md ng-binding"></td>
+                    <td class="et-table-cell text-right ng-binding">{{ves.donGia}}</td>
+                </tr><!-- end ngRepeat: book in group -->
+            </tbody><!-- end ngRepeat: group in bookingGroup -->
+            <tfoot>
+                <tr class="info">
+                    <td colspan="6"><span class="pull-right"><strong class="ng-binding">Tổng tiền</strong></span></td>
+                    <td class="text-right"><strong class="ng-binding" [innerHTML] = 'htmlTinhTongTien'>{{getTotalPrice()}}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div _ngcontent-ybq-c94="" class="col-md-12">
+        <div _ngcontent-ybq-c94="" class="row">
+            <h5 class="et-register-block ng-binding" style="margin-left:0px; padding: 10px;">Thông tin người đặt vé</h5>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2">
+                <label 
+                    class="kt-form-label ng-binding">Họ và tên</label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group">
+                        <input _ngcontent-ybq-c94="" type="text"
+                        placeholder="Họ và tên" [(ngModel)]="khachDatVe.hoTen" disabled
+                        id="tenHanhKhach" required="" class="form-control ng-pristine ng-valid ng-untouched"
+                       ></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label
+                   class="kt-form-label ng-binding">Số CMND/Hộ chiếu
+                  </label></div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div _ngcontent-ybq-c94="" class="form-group"><input [(ngModel)]="khachDatVe.soGiayTo" type="text" 
+                        placeholder="Số CMND/Hộ chiếu" id="soGiayTo" disabled
+                        class="form-control ng-pristine ng-valid ng-untouched" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-2 col-md-2"><label
+                    class="kt-form-label ng-binding">Email </label></div>
+            <div  class="col-xs-8 col-sm-4 col-md-4">
+                <div ng-class="{'has-error': gaDiError}" class="form-group">
+                    <input _ngcontent-ybq-c94="" [(ngModel)]="khachDatVe.email" disabled type="email" placeholder="Email"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
+                    ng-class="{'has-error': gaDenError}"  class="kt-form-label ng-binding">Số điện thoại</label>
+            </div>
+            <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
+                <div class="form-group"><input _ngcontent-ybq-c94="" disabled [(ngModel)]="khachDatVe.sdt" type="text" placeholder="Số điện thoại"
+                        class="form-control ng-pristine ng-valid ng-untouched"></div>
+            </div>
+        </div>
+       
+    </div>
+        <div class="col-md-12 text-info ng-hide" ng-show="msgShowed == 3">
+        <p ng-bind-html="'PBookingInfo_lienHeTrungTam'|translate" class="ng-binding">Quý khách có thể liên hệ với trung
+            tâm hỗ trợ khách hàng 19006469 để được trợ giúp.<br>Chúng tôi phục vụ quý khách 24 giờ trong ngày và 7 ngày
+            trong tuần.</p>
+    </div>
+    <div class="et-col-md-12 text-center hidden-print"><a
+            href="/#" class="et-btn ng-binding" style="font-size: 18px; padding: 10px; font-family: Arial, Helvetica, sans-serif;">Trang chủ</a></div>
+</div>

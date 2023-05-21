@@ -15,7 +15,7 @@ import { MachineService } from 'src/app/service/machine-service.service';
 
 @Component({
   selector: 'app-result-tickets',
-  templateUrl: './result-tickets.component.html',
+  templateUrl:'./result-tickets.component.html',
   styleUrls: ['./result-tickets.component.css']
 })
 export class ResultTicketsComponent implements OnInit, OnChanges {
@@ -24,6 +24,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   public selectedSeats: string[] = [];
   show=true;
   showKhuHoi=true;
+  selectedCarId: string;
+
   // ticket = {
   //   tenToa : '',
   //   gaDi : '',
@@ -50,7 +52,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   isSelected: boolean;
   danhSachToaRequest = new DanhSachToaRequest();
   danhSachGheRequest = new DanhSachGheRequest;
-  danhSachGheResponse: DanhSachGheResponse[];
+  danhSachGheResponse: DanhSachGheResponse[]=[];
   danhSachGheToaResponse: any[];
   danhSachGheResponseKhuHoi: any[];
   danhSachGheToaResponseKhuHoi: any[];
@@ -132,9 +134,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.toaXeList = data;
       const tauInfo = this.toaXeList.find(item => item.soToa <= id);
       this.tauInfo = tauInfo;
+      console.log(this.toaXeList);
+      
     });
-    console.log(this.dataSearchLoadToa);
-    
+        
     // this.loadToaGhe(event,this.tauInfo.maToa, this.tauInfo.soToa, this.tauInfo.tenTau)
     
     // this.loadToaGhe(event, )
@@ -152,7 +155,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       
       
     });
-
+    
   }
 
   loadToaGhe(event: any, id: string, soToa: string, tenTau: string) {
@@ -165,6 +168,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponse = data;
+      console.log(this.danhSachGheResponse);
+      
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);
       this.danhsachToaResponse = gheInFo;      
     })
@@ -185,17 +190,17 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       console.log(this.danhSachGheResponseKhuHoi); 
     })
   }
-  loadThongTinGioVe(event:any, id:string, soGhe:string){
+  loadThongTinGioVe(event:any, id:string, soGhe:string, maToa:string){
      //Một chiều  
-     this.datCho.maGhe = id;
-
-    console.log(this.danhSachGheResponse);
-    
-    
     // this.machineService.getDatCho(this.datCho).subscribe(data =>{
-      
-    // })
+      console.log(maToa);
+      console.log(this.danhSachGheResponse);           
+    // })   
     const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === id);
+    const existingGheDaDat1 = this.danhSachGheResponse.find(ghe => ghe.trangThai === '0');
+
+    console.log(existingGheDaDat);
+    
     if (!existingGheDaDat) {
     this.show=false;
     this.datCho.gaDi = this.dataSearch[0].gaDi;
@@ -253,14 +258,6 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     } else if (!this.selectedSeats.includes(id)) {
       this.selectedSeats.push(id);
     }
-    // if(Array.isArray(this.gheDaDatList) && this.gheDaDatList){
-    //   this.gheDaDatList = [...this.gheDaDatList, newGheDaDat]; // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-    //   this.gheDaDatList1=this.gheDaDatList;
-    // } else { 
-    //   this.gheDaDatList = [newGheDaDat];
-    //   this.gheDaDatList1=this.gheDaDatList;
-
-    // }
     if (Array.isArray(this.gheDaDatList) && this.gheDaDatList) {
       const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === newGheDaDat.maGhe);
       if (!existingGheDaDat) {
@@ -271,9 +268,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.gheDaDatList = [newGheDaDat];
       this.gheDaDatList1 = this.gheDaDatList;
     }
-    
+    this.selectedCarId = id;
   }
   loadThongTinGioVeKhuHoi(event:any, id:string, soGhe:string){
+    
     //Một chiều
   this.showKhuHoi=false
    this.datCho.gaDi = this.dataSearchVe[0].gaDi;

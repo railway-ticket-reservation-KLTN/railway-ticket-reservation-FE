@@ -58,6 +58,8 @@ import { EmpAddEditComponent } from './viewer/admin/emp-add-edit/emp-add-edit.co
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
+import { SussecssReturnComponent } from './viewer/passenger/sidebar/return-tickets/sussecss-return/sussecss-return.component';
+import { ChartComponent } from './viewer/admin/chart/chart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +94,9 @@ import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
     TauComponent,
     LoginComponent,
     EmpAddEditComponent,
-    MomoComponent
+    MomoComponent,
+    SussecssReturnComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

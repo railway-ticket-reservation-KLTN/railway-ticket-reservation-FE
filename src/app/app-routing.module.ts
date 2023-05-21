@@ -24,6 +24,7 @@ import { LoginComponent } from './viewer/admin/login/login.component';
 import { AdminService } from './service/admin-service.service';
 import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
 import { AuthGuard } from './viewer/admin/auth.guard';
+import { SussecssReturnComponent } from './viewer/passenger/sidebar/return-tickets/sussecss-return/sussecss-return.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path:'taus', component:TauComponent},
   {path:'login', component:LoginComponent},
   {path:'momopayment', component:MomoComponent},
+  {path:'return-susscess', component:SussecssReturnComponent},
   {
     path: 'home',
     component: HomeComponent,

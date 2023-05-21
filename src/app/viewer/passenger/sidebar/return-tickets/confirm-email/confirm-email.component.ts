@@ -14,6 +14,7 @@ export class ConfirmEmailComponent implements OnInit {
   khachDatVe = new KhachDatVe;
   traVeRequest = new TraVeRequest;
   tenHanhKhach: any
+  suscessReturnTickets:any[]=[];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -79,7 +80,10 @@ export class ConfirmEmailComponent implements OnInit {
     console.log(this.traVeRequest);
     this.machineService.traVeDaDat(this.traVeRequest).subscribe(data =>{
       console.log(data);
-      alert("Trả vé thành công")
+      this.suscessReturnTickets= data;
+      this.router.navigate(['/return-susscess'], { queryParams: { data: JSON.stringify(this.suscessReturnTickets) } });  
+    }, error => {
+      alert(error.error.moTaLoi)
     })
    }
   }

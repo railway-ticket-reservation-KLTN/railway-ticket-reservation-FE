@@ -212,4 +212,8 @@ setPhuongThucThanhToan(xacNhanThongTinKH:any) {
 
     return `${year}-${month}-${day}`;
   }
+
+  onReturnButtonClick(){
+    this.router.navigate(['/thong-tin-giao-dich'], { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
+  }
 }
