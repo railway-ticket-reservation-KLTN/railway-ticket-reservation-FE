@@ -12,14 +12,22 @@ import { NgZone } from '@angular/core';
 })
 export class NhanvienComponent implements OnInit {
 nhanVien:any[];
+editedData:any
 isShow=true;
 modalOpen = false;
-themNhanVien=new ThemNhanVien;
+modalOpen1 = false;
+themNhanVien= new ThemNhanVien;
+themNhanVien1=new ThemNhanVien
 tenNhanVien:string;
+tenNhanVien1:string;
 diaChi:string;
 sdt:string;
 viTri:string;
 trangThai = 1;
+diaChi1:string;
+sdt1:string;
+viTri1:string;
+trangThai1 = 1;
 selectedLoads: any[] = [];
   constructor(
     private _dialog: MatDialog,
@@ -30,14 +38,12 @@ selectedLoads: any[] = [];
     this.service.getDanhSachTaiKhoan().subscribe(data =>{
       console.log(data);
       this.nhanVien=data;
-      console.log(this.nhanVien);
-      
-      
     },(error) => {
       this.isShow = false;
       alert("Không có quyền truy cập")
       
   });
+ 
   }
 
   openAddEditEmpForm() {
@@ -53,9 +59,40 @@ selectedLoads: any[] = [];
   openModal() {
     this.modalOpen = true;
   }
+  openModal1(loads:any) {
+    this.modalOpen1 = true;    
+    if (loads) {
+      this.themNhanVien1 = { ...loads };
+    } else {
+      this.themNhanVien1 = {
+        tenTaiKhoan: loads.tenTaiKhoan,
+        matKhau: loads.matKhau,
+        loaiTK:loads.loaiTK,
+        trangThai:loads.trangThai,
+        nhanVien:{
+          tenNhanVien:loads.nhanVien.tenNhanVien,
+          diaChi:loads.nhanVien.diaChi,
+          sdt:loads.nhanVien.sdt,
+          viTri:loads.nhanVien.viTri,
+          trangThai:loads.nhanVien.trangThai
+        }
+        
+        // Other properties
+      };
+    } 
+  this.tenNhanVien1=this.themNhanVien1.nhanVien.tenNhanVien;
+  this.diaChi1=this.themNhanVien1.nhanVien.diaChi;
+  this.sdt1=this.themNhanVien1.nhanVien.sdt;
+  this.viTri1=this.themNhanVien1.nhanVien.viTri;
+  this.trangThai1=this.themNhanVien1.nhanVien.trangThai;
+  }
+  
 
   closeModal() {
     this.modalOpen = false;
+  }
+  closeModal1() {
+    this.modalOpen1 = false;
   }
   btnThem(){
 
@@ -113,5 +150,14 @@ selectedLoads: any[] = [];
     }
     
   }
+  btnUpdate(){
+  this.themNhanVien1.nhanVien.tenNhanVien=this.tenNhanVien1;
+  this.themNhanVien1.nhanVien.diaChi=this.diaChi1;
+  this.themNhanVien1.nhanVien.sdt=this.sdt1;
+  this.themNhanVien1.nhanVien.viTri=this.viTri1;
+  this.themNhanVien1.nhanVien.trangThai=this.trangThai1;
 
+    console.log(this.themNhanVien1);
+    
+  }
 }

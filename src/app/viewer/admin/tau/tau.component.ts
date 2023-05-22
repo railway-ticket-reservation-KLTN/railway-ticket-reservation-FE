@@ -15,11 +15,14 @@ export class TauComponent implements OnInit {
   Tau:any[]=[];
   isShow= true;
   modalOpen = false;
+  modalOpen1 = false;
+themHanhTrinh:any
   name:string;
   selectedValue: string;
   email:string;
   selectedLoads: any[] = [];
   hanhTrinhRequest =new  ThemHanhTrinhRequest;
+  hanhTrinhRequest1 =new  ThemHanhTrinhRequest;
   minDate: string;
   constructor(
     private _dialog: MatDialog,
@@ -82,6 +85,34 @@ export class TauComponent implements OnInit {
 
   closeModal() {
     this.modalOpen = false;
+  }
+
+  openModal1(loads:any) {
+    this.modalOpen1 = true;
+    console.log(loads);
+    if (loads) {
+      this.hanhTrinhRequest1 = { ...loads };
+    } else {
+        this.hanhTrinhRequest1 = {
+          gaDi:loads.gaDi,
+          gaDen:loads.gaDen,
+          ngayDi:loads.ngayDi,
+          ngayDen:loads.ngayDen,
+          gioDi:loads.gioDi,
+          gioDen:loads.gioDen,
+          trangThai:loads.trangThai,
+          giaVe:loads.gaDi,
+          tau : {
+            id:loads.tau.id,
+            tenTau:loads.tau.tenTau,
+          }
+
+        }
+    }
+  }
+
+  closeModal1() {
+    this.modalOpen1 = false;
   }
   loadHanhTrinh(){
     this.service.getDanhSachHanhTrinh().subscribe(data =>{
