@@ -106,11 +106,9 @@ themHanhTrinh:any
             id:loads.tau.id,
             tenTau:loads.tau.tenTau,
           }
-
         }
     }
   }
-
   closeModal1() {
     this.modalOpen1 = false;
   }

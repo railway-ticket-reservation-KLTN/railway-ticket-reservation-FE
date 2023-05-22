@@ -134,13 +134,13 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.toaXeList = data;
       const tauInfo = this.toaXeList.find(item => item.soToa <= id);
       this.tauInfo = tauInfo;
-      console.log(this.toaXeList);
-      
+      this.loadToaGhe(event, this.tauInfo.maToa, this.tauInfo.soToa, this.tauInfo.tenTau);
+
     });
         
     // this.loadToaGhe(event,this.tauInfo.maToa, this.tauInfo.soToa, this.tauInfo.tenTau)
     
-    // this.loadToaGhe(event, )
+    // this.loadToaGhe(event,this.tauInfo.maToa, this.tauInfo.soToa, this.tauInfo.tenTau )
   }
   loadToaTauKhuHoi(event: any, id: string, soToa: string) {
     this.danhSachToaRequest.hanhTrinhID = id;
@@ -152,7 +152,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       const tauInfoKhuHoi = this.toaXeListKhuHoi.find(item => item.soToa <= id);
       this.tauInfoKhuHoi = tauInfoKhuHoi;
       console.log(this.toaXeListKhuHoi);
-      
+      this.loadToaGheKhuHoi(event, this.tauInfoKhuHoi.maToa, this.tauInfoKhuHoi.soToa, this.tauInfoKhuHoi.tenTau);
+
       
     });
     
