@@ -132,9 +132,29 @@ themHanhTrinh:any
   }
 
   onThemClick(){
+    let danhSachTau: any[] = [];
+    
     console.log(this.hanhTrinhRequest);
-    this.service.themHanhTrinh(this.hanhTrinhRequest).subscribe(data =>{
-      console.log(data);
+
+    let tau: any = {
+      "gaDi": this.hanhTrinhRequest.gaDi,
+      "gaDen": this.hanhTrinhRequest.gaDen,
+      "ngayDi": this.hanhTrinhRequest.ngayDi,
+      "ngayDen": this.hanhTrinhRequest.ngayDen,
+      "gioDi": this.hanhTrinhRequest.gioDi,
+      "gioDen": this.hanhTrinhRequest.gioDen,
+      "trangThai": this.hanhTrinhRequest.trangThai,
+      "giaVe": this.hanhTrinhRequest.giaVe,
+      "tau": {
+          "id": this.hanhTrinhRequest.tau.id,
+          "tenTau": this.hanhTrinhRequest.tau.tenTau
+      }
+  };
+    danhSachTau.push(tau);
+    console.log(danhSachTau);
+
+    this.service.themHanhTrinh(danhSachTau).subscribe(data =>{
+      this.modalOpen = false;
       this.ngZone.run(() => {
         // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
         this.loadData();

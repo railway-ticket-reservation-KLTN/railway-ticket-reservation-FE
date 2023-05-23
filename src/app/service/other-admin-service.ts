@@ -92,7 +92,7 @@ import { ThemNhanVien } from "../domain/admin/ThemNhanVien";
         // Xử lý logic khi không có token
         return of(null);
       }
-      public themHanhTrinh(hanhTrinhRequest:ThemHanhTrinhRequest): Observable<any> {
+      public themHanhTrinh(hanhTrinhRequest:ThemHanhTrinhRequest[]): Observable<any> {
         const token = this.adminService.getToken();
         if (token) {
           const headers = new HttpHeaders({
