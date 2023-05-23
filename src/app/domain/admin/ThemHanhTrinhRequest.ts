@@ -2,6 +2,7 @@ import { TauComponent } from "src/app/viewer/admin/tau/tau.component";
 import { Tau } from "./Tau";
 
 export class ThemHanhTrinhRequest{
+    id:string;
     gaDi:string;
     gaDen:string;
     ngayDi:string;

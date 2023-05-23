@@ -151,4 +151,33 @@ import { ThemNhanVien } from "../domain/admin/ThemNhanVien";
         return of(null);
       }
 
+      public capNhatHanhTrinh(data: any): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/admin/capnhathanhtrinh', data, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
+
+      public capNhatTaiKhoan(data: any): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+      
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.post<any>('http://localhost:8080/v1/admin/capnhattk', data, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
   }

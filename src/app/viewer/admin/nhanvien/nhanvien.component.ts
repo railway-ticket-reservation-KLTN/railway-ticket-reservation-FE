@@ -17,7 +17,7 @@ isShow=true;
 modalOpen = false;
 modalOpen1 = false;
 themNhanVien= new ThemNhanVien;
-themNhanVien1=new ThemNhanVien
+themNhanVien1= new ThemNhanVien;;
 tenNhanVien:string;
 tenNhanVien1:string;
 diaChi:string;
@@ -29,6 +29,7 @@ sdt1:string;
 viTri1:string;
 trangThai1 = 1;
 selectedLoads: any[] = [];
+nhanVienDelete:any;
   constructor(
     private _dialog: MatDialog,
     private service:OtherAdminService,
@@ -106,6 +107,7 @@ selectedLoads: any[] = [];
     }
     this.service.themTaiKhoan(this.themNhanVien).subscribe(data =>{
       console.log(data);
+
       this.ngZone.run(() => {
         // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
         this.loadData();
@@ -117,7 +119,7 @@ selectedLoads: any[] = [];
 
   selectLoad(event: any, load: any) {
     load.isSelected = event.target.checked;
-
+   
     if (load.isSelected) {
       this.selectedLoads.push(load);
     } else {
@@ -126,7 +128,6 @@ selectedLoads: any[] = [];
         this.selectedLoads.splice(index, 1);
       }
     }
-    console.log(this.selectedLoads);
   }
 
   loadData(){
@@ -136,6 +137,8 @@ selectedLoads: any[] = [];
     })
   }
   btnDelete(){
+
+    
     if(this.selectedLoads.length > 0){
       this.service.xoaTaiKhoan(this.selectedLoads).subscribe(data =>{
         console.log(data);
@@ -158,6 +161,19 @@ selectedLoads: any[] = [];
   this.themNhanVien1.nhanVien.trangThai=this.trangThai1;
 
     console.log(this.themNhanVien1);
-    
+    this.service.capNhatTaiKhoan(this.themNhanVien1).subscribe(data =>{
+      console.log(data);
+      
+    })
+
+    let nhanvien: any = {
+      "tenTaiKhoan":this.themNhanVien1.tenTaiKhoan,
+      "matKhau":this.themNhanVien1.matKhau,
+      "loaiTK":this.themNhanVien1.loaiTK,
+      "trangThai":this.themNhanVien1.trangThai,
+      "nhanVien":{
+       
+      }
+    }
   }
 }

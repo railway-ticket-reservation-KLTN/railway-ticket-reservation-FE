@@ -90,6 +90,10 @@ export class MachineService {
     const url = `${this.REST_API_SERVER}/datcho`;
     return this.http.post<any>(url, datCho, this.httpOptions);
   }
+  public getPDFInve(data: any[]): Observable<any> {
+    const url = `${this.REST_API_SERVER}/taopdf`;
+    return this.http.post<any>(url, data, this.httpOptions);
+  }
 
   public traVe(traVe: TraVe): Observable<TraVeInFo[]> {
     const url = `${this.REST_API_SERVER}/ves`;

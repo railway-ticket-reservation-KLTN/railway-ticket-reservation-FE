@@ -91,9 +91,10 @@ themHanhTrinh:any
     this.modalOpen1 = true;
     console.log(loads);
     if (loads) {
-      this.hanhTrinhRequest1 = { ...loads };
+      this.hanhTrinhRequest1 = { ...loads, tau: { ...loads.tau } };
     } else {
         this.hanhTrinhRequest1 = {
+          id:loads.id,
           gaDi:loads.gaDi,
           gaDen:loads.gaDen,
           ngayDi:loads.ngayDi,
@@ -105,6 +106,8 @@ themHanhTrinh:any
           tau : {
             id:loads.tau.id,
             tenTau:loads.tau.tenTau,
+            soLuongToa:loads.tau.soLuongToa,
+            toas:loads.tau.toas
           }
         }
     }
@@ -137,6 +140,7 @@ themHanhTrinh:any
     console.log(this.hanhTrinhRequest);
 
     let tau: any = {
+      "id":this.hanhTrinhRequest.id,
       "gaDi": this.hanhTrinhRequest.gaDi,
       "gaDen": this.hanhTrinhRequest.gaDen,
       "ngayDi": this.hanhTrinhRequest.ngayDi,
@@ -163,7 +167,32 @@ themHanhTrinh:any
     })
     
   }
-
+  onCapNhatClick(){
+      console.log(this.hanhTrinhRequest1);
+      let tau: any = {
+        "id":this.hanhTrinhRequest1.id,
+        "gaDi": this.hanhTrinhRequest1.gaDi,
+        "gaDen": this.hanhTrinhRequest1.gaDen,
+        "ngayDi": this.hanhTrinhRequest1.ngayDi,
+        "ngayDen": this.hanhTrinhRequest1.ngayDen,
+        "gioDi": this.hanhTrinhRequest1.gioDi,
+        "gioDen": this.hanhTrinhRequest1.gioDen,
+        "trangThai": this.hanhTrinhRequest1.trangThai,
+        "giaVe": this.hanhTrinhRequest1.giaVe,
+        "tau": {
+            "id": this.hanhTrinhRequest1.tau.id,
+            "tenTau": this.hanhTrinhRequest1.tau.tenTau
+        }
+    };
+      this.service.capNhatHanhTrinh(tau).subscribe(data =>{
+        console.log(data);
+        this.modalOpen1 = false;
+        this.ngZone.run(() => {
+          // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
+          this.loadData();
+        });
+      })
+  }
   loadData(){
     this.service.getDanhSachHanhTrinh().subscribe(data =>{
       console.log(data);

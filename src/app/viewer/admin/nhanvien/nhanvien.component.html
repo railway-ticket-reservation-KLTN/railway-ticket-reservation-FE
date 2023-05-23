@@ -82,12 +82,14 @@
           <thead class="et-table-header">
             <tr>
               <th style="width: 2%;">#</th>
-              <th style="width: 19%;" class="ng-binding">Tên tài Khoản<!--Họ tên--></th>
-              <th style="width: 19%;" class="ng-binding">Loại TK<!--Thông tin vé--></th>
+              <th style="width: 10%;" class="ng-binding">Tên tài Khoản<!--Họ tên--></th>
+              <th style="width: 10%;" class="ng-binding">Loại TK<!--Thông tin vé--></th>
               <th style="width: 8%;" class="ng-binding">Tên nhân viên<!--Thành tiền (VNĐ)--></th>
               <th style="width: 15%;" class="ng-binding">Số điện thoại<!--Loại lệ phí trả vé--></th>
               <th style="width: 15%;" class="ng-binding">Địa chỉ<!--Loại lệ phí trả vé--></th>
               <th style="width: 8%;" class="ng-binding">Vị trí<!--Lệ phí trả vé--></th>
+              <th style="width: 19%;" class="ng-binding">Trạng thái<!--Lệ phí trả vé--></th>
+
 
             </tr>
           </thead>
@@ -100,6 +102,9 @@
               <td>{{loads.nhanVien.sdt}}</td>
               <td>{{loads.nhanVien.diaChi}}</td>
               <td>{{loads.nhanVien.viTri}}</td>
+              <td [ngClass]="{'text-success': loads.trangThai === 1, 'text-danger': loads.trangThai === 0}">
+                {{ loads.trangThai === 1 ? 'Đang hoạt động' : 'Không hoạt động' }}
+              </td>
               <td>
                 <input type="checkbox" (change)="selectLoad($event, loads)">
               </td>
