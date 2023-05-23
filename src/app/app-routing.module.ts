@@ -25,6 +25,9 @@ import { AdminService } from './service/admin-service.service';
 import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
 import { AuthGuard } from './viewer/admin/auth.guard';
 import { SussecssReturnComponent } from './viewer/passenger/sidebar/return-tickets/sussecss-return/sussecss-return.component';
+import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/muavetructuyen/muavetructuyen.component';
+import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/quydinhvanchuyen/quydinhvanchuyen.component';
+import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -51,6 +54,10 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'momopayment', component:MomoComponent},
   {path:'return-susscess', component:SussecssReturnComponent},
+  {path:'dieukienmuave', component:MuavetructuyenComponent},
+  {path:'quydinhvanchuyen', component:QuydinhvanchuyenComponent},
+  {path:'chinhsachhoantrave', component:ChinhsachhoantraveComponent},
+
   {
     path: 'home',
     component: HomeComponent,

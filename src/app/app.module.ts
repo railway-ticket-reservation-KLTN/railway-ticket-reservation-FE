@@ -60,6 +60,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MomoComponent } from './viewer/passenger/sidebar/momo/momo.component';
 import { SussecssReturnComponent } from './viewer/passenger/sidebar/return-tickets/sussecss-return/sussecss-return.component';
 import { ChartComponent } from './viewer/admin/chart/chart.component';
+import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/quydinhvanchuyen/quydinhvanchuyen.component';
+import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/muavetructuyen/muavetructuyen.component';
+import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +99,10 @@ import { ChartComponent } from './viewer/admin/chart/chart.component';
     EmpAddEditComponent,
     MomoComponent,
     SussecssReturnComponent,
-    ChartComponent
+    ChartComponent,
+    QuydinhvanchuyenComponent,
+    MuavetructuyenComponent,
+    ChinhsachhoantraveComponent
   ],
   imports: [
     BrowserModule,
