@@ -10,8 +10,8 @@ import { DanhSachToaRequest } from '../domain/DanhSachToaRequest';
 import { DanhSachToaResponse } from '../domain/DanhSachToaResponse';
 import { DanhSachGheRequest } from '../domain/DanhSachGheRequest';
 import { DanhSachGheResponse } from '../domain/DanhSachGheResponse';
-import { map } from 'rxjs/operators';
-import { VeTauInfoKhuHoi } from '../domain/VeTauInfoKhuHoi';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';import { VeTauInfoKhuHoi } from '../domain/VeTauInfoKhuHoi';
 import { DatCho } from '../domain/DatCho';
 import { gheDaDat } from '../domain/GheDaDat';
 import { DatChoInfo } from '../domain/DatChoInfo';
@@ -90,11 +90,51 @@ export class MachineService {
     const url = `${this.REST_API_SERVER}/datcho`;
     return this.http.post<any>(url, datCho, this.httpOptions);
   }
-  public getPDFInve(data: any[]): Observable<any> {
+  public getPDFInve(data: any[]): Observable<Blob> {
     const url = `${this.REST_API_SERVER}/taopdf`;
-    return this.http.post<any>(url, data, this.httpOptions);
+    return this.http.post(url, data, {
+      responseType: 'blob',
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      map((response: Blob) => response),
+      catchError((error: any) => of(error))
+    );
   }
 
+  //  public getPDFInve(data: any[]): Observable<Blob> {
+  //   const url = `${this.REST_API_SERVER}/taopdf`;
+  //   this.http.post(url, {
+  //     responseType: ResponseContentType.Blob
+  //   }).subscribe(
+  //     (response) => {
+  //       var blob = new Blob([response.blob()], {type: 'application/pdf'});
+  //       const blobUrl = URL.createObjectURL(blob);
+  //         const iframe = document.createElement('iframe');
+  //         iframe.style.display = 'none';
+  //         iframe.src = blobUrl;
+  //         document.body.appendChild(iframe);
+  //         iframe.contentWindow.print();
+  //   });
+  // }
+
+  // public getPDFInve(data: any[]): void {
+  //   const url = `${this.REST_API_SERVER}/taopdf`;
+  //   this.http.post(url, {
+  //     responseType: 'blob'
+  //   }).subscribe(
+  //     response => {
+  //       // const blob = new Blob([response], {type: 'application/pdf'});
+  //       const blobUrl = URL.createObjectURL(response.data);
+  //       const iframe = document.createElement('iframe');
+  //       iframe.style.display = 'none';
+  //       iframe.src = blobUrl;
+  //       document.body.appendChild(iframe);
+  //       iframe.contentWindow.print();
+  //     }
+  //   );
+  // }
   public traVe(traVe: TraVe): Observable<TraVeInFo[]> {
     const url = `${this.REST_API_SERVER}/ves`;
     return this.http.post<TraVeInFo[]>(url, traVe, this.httpOptions);
