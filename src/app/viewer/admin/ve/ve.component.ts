@@ -61,9 +61,8 @@ export class VeComponent implements OnInit {
         this.service.xacNhanDatVe(this.selectedLoads).subscribe(data => {
           alert("Vé" + " " + this.selectedLoads[i].maVe + " " + "Đặt thành công");
           console.log(data);
-
+          this.selectedLoads =[];
           this.ngZone.run(() => {
-            // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
             this.loadData();
           });
           for (let i = 0; i < data.length; i++) {
@@ -83,20 +82,6 @@ export class VeComponent implements OnInit {
               gioDi: data[i].veTau.hanhTrinh.gioDi,
             }
           }
-
-              console.log(this.dataRequest);
-              // this.serviceKH.getPDFInve(this.dataRequest).subscribe(data =>{
-              //       console.log(data);
-              //       const pdf = new Blob([data], { type: 'application/pdf' });
-              //       const blobUrl = URL.createObjectURL(pdf);
-              //       const iframe = document.createElement('iframe');
-              //       // const iframe = document.getElementById('printf');
-              //       iframe.id='print'
-              //       iframe.style.display = 'none';
-              //       iframe.src = blobUrl;
-              //       document.body.appendChild(iframe);
-              //       iframe.getElementsByTagName('iframe').contentWindow;      
-              // })
               this.serviceKH.getPDFInve(this.dataRequest).subscribe(data => {
                 console.log(data);
                 const pdf = new Blob([data], { type: 'application/pdf' });
@@ -119,25 +104,6 @@ export class VeComponent implements OnInit {
       }
 
     }
-  }
-
-  generatePDF(data: any[]) {
-    this.serviceKH.getPDFInve(data).subscribe(
-      response => {
-        // Xử lý dữ liệu Blob tại đây
-        const blobData: Blob = response;
-        // Ví dụ: Tạo URL cho Blob và tải xuống
-        const blobUrl = window.URL.createObjectURL(blobData);
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = 'file.pdf';
-        link.click();
-      },
-      error => {
-        // Xử lý lỗi trong quá trình tạo PDF
-        console.error(error);
-      }
-    );
   }
   btnTraVe() {
     for (let i = 0; i < this.selectedLoads.length; i++) {
