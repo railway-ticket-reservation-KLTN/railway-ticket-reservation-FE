@@ -102,48 +102,11 @@ export class MachineService {
       catchError((error: any) => of(error))
     );
   }
-
-  //  public getPDFInve(data: any[]): Observable<Blob> {
-  //   const url = `${this.REST_API_SERVER}/taopdf`;
-  //   this.http.post(url, {
-  //     responseType: ResponseContentType.Blob
-  //   }).subscribe(
-  //     (response) => {
-  //       var blob = new Blob([response.blob()], {type: 'application/pdf'});
-  //       const blobUrl = URL.createObjectURL(blob);
-  //         const iframe = document.createElement('iframe');
-  //         iframe.style.display = 'none';
-  //         iframe.src = blobUrl;
-  //         document.body.appendChild(iframe);
-  //         iframe.contentWindow.print();
-  //   });
-  // }
-
-  // public getPDFInve(data: any[]): void {
-  //   const url = `${this.REST_API_SERVER}/taopdf`;
-  //   this.http.post(url, {
-  //     responseType: 'blob'
-  //   }).subscribe(
-  //     response => {
-  //       // const blob = new Blob([response], {type: 'application/pdf'});
-  //       const blobUrl = URL.createObjectURL(response.data);
-  //       const iframe = document.createElement('iframe');
-  //       iframe.style.display = 'none';
-  //       iframe.src = blobUrl;
-  //       document.body.appendChild(iframe);
-  //       iframe.contentWindow.print();
-  //     }
-  //   );
-  // }
   public traVe(traVe: TraVe): Observable<TraVeInFo[]> {
     const url = `${this.REST_API_SERVER}/ves`;
     return this.http.post<TraVeInFo[]>(url, traVe, this.httpOptions);
   }
 
-  // public getTraCho(traCho: TraCho): Observable<boolean> {
-  //   const url = `${this.REST_API_SERVER}/tracho`;
-  //   return this.http.post<any>(url, traCho, this.httpOptions);
-  // }
   public traCho(traCho: TraCho): Observable<boolean> {
     const url = `${this.REST_API_SERVER}/tracho`;
     return this.http.delete<boolean>(url, { body: traCho, headers: this.httpOptions.headers });
