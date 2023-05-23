@@ -22,6 +22,10 @@ export class FindTicketsComponent implements OnInit {
   machineSearch = new TimChuyenTauRequest();
   searchForm: FormGroup;
   isError!: boolean ;
+  isErrorGaDen!: boolean ;
+  isErrorNgayDi!: boolean ;
+  isErrorNgayDen!: boolean ;
+
 
   constructor(
     private machineService:MachineService,

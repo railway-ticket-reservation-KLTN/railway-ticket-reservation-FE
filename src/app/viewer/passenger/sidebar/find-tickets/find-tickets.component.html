@@ -3,11 +3,11 @@
   <div class="panel-search" style="height: 10px;">
   </div>
   <div class="panel panel-warning"
-    style="margin-bottom: 15px;margin-left:15px; margin-right:15px; border-radius: 15px;">
+    style="margin-bottom: 15px;margin-left:15px; margin-right:15px; border-radius: 15px; overflow:auto">
     <div class="panel-heading" style="border-top-right-radius:15px; border-top-left-radius: 15px;">
       <h3 class="panel-title" style="font-size: 25px;">Thông tin hành trình</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body" style="max-height: 270px;">
       <form #searchForm="ngForm">
         <div class="form-group">
 
@@ -71,11 +71,12 @@
             <option value="Sài Gòn"></option>
 
           </datalist>
+          </div>
+
           <div *ngIf="gaDiInput.invalid && (gaDiInput.dirty || gaDiInput.touched)">
             <span *ngIf="gaDiInput.errors?.['pattern']" class="error-message">
               Chỉ cho phép nhập chữ cái.
             </span>
-          </div>
           <!-- <span *ngIf="searchForm.controls['machineSearch.gaDi'].invalid && (searchForm.controls['machineSearch.gaDi'].dirty || searchForm.controls['machineSearch.gaDi'].touched)">
             Vui lòng chỉ nhập ký tự không phải số.
           </span> -->
@@ -91,7 +92,7 @@
             pattern="^[^0-9]+$"
             #gaDenInput="ngModel"
             [ngClass]="{ 'error': gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched) }"
-            (input)="isError = gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched) ? true : false" >
+            (input)="isErrorGaDen = gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched) ? true : false" >
           <datalist id="stations-arivel">
             <option value="Lào Cai"></option>
             <option value="Phố Lú"></option>
@@ -144,12 +145,12 @@
             <option value="Biên Hòa"></option>
             <option value="Bình Thuận"></option>
             <option value="Sài Gòn"></option>
-          </datalist>
+          </datalist> 
+          </div>
           <div *ngIf="gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched)">
             <span *ngIf="gaDenInput.errors?.['pattern']" class="error-message">
               Chỉ cho phép nhập chữ cái.
-            </span>
-          </div>
+          </span>
         </div>
         <div class="form-group">
           <label for="departure-date">Ngày đi:</label>
@@ -158,13 +159,13 @@
              pattern="^\d{4}-\d{2}-\d{2}$"
              #ngayDiInput="ngModel"
              [ngClass]="{ 'error': ngayDiInput.invalid && (ngayDiInput.dirty || ngayDiInput.touched) }"
-             (input)="isError = ngayDiInput.invalid && (ngayDiInput.dirty || ngayDiInput.touched) ? true : false"
-             >
-             <div *ngIf="ngayDiInput.invalid && (ngayDiInput.dirty || ngayDiInput.touched)">
-              <span *ngIf="ngayDiInput.errors?.['pattern']" class="error-message">
-                Nhập sai định dạng ngày
-              </span>
-            </div>
+             (input)="isErrorNgayDi = ngayDiInput.invalid && (ngayDiInput.dirty || ngayDiInput.touched) ? true : false"
+             >      
+        </div>
+        <div *ngIf="ngayDiInput.invalid && (ngayDiInput.dirty || ngayDiInput.touched)">
+          <span *ngIf="ngayDiInput.errors?.['pattern']" class="error-message">
+            Nhập sai định dạng dd/mm/yyyy
+          </span>
         </div>
         <div class="form-group">
           <label for="return-date">Ngày về:</label>
@@ -173,13 +174,14 @@
                pattern="^\d{4}-\d{2}-\d{2}$"
              #ngayVeInput="ngModel"
              [ngClass]="{ 'error': ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched) }"
-             (input)="isError = ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched) ? true : false"
+             (input)="isErrorNgayDen = ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched) ? true : false"
+             
              >
-             <div *ngIf="ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched)">
-              <span *ngIf="ngayVeInput.errors?.['pattern']" class="error-message">
-                Nhập sai định dạng ngày
-              </span>
-            </div>
+        </div>
+        <div *ngIf="ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched)">
+          <span *ngIf="ngayVeInput.errors?.['pattern']" class="error-message">
+            Nhập sai định dạng dd/mm/yyyy
+          </span>
         </div>
         <div class="form-check" style="text-align: center;">
           <label for="one-way" style="margin-top: 4; margin-right: 5px; font-family: Arial, Helvetica, sans-serif;">Một
@@ -192,7 +194,7 @@
             id="round-trip" name="trip-type" min="1" max="10">
         </div>
         <div style="display: flex; justify-content: center;">
-          <button (click)="onSearch()" type="submit" [disabled]="isError" class="search-button">Tìm kiếm</button>
+          <button (click)="onSearch()" type="submit" [disabled]="isError || isErrorGaDen || isErrorNgayDi || isErrorNgayDen" class="search-button">Tìm kiếm</button>
         </div>
       </form>
     </div>
