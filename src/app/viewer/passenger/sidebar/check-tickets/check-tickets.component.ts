@@ -21,6 +21,11 @@ export class CheckTicketsComponent implements OnInit {
   gaDenError=true;
   macTauError=true;
   Error=true;
+  isErrormaVe!:boolean;
+  isErrortenTau!:boolean;
+  isError!:boolean;
+  isErrorGaDen!:boolean;
+  isErrorsoGiayTo!:boolean;
   constructor(
     private machineService: MachineService
   ) { }

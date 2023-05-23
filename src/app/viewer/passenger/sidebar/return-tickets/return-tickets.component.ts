@@ -22,7 +22,11 @@ export class ReturnTicketsComponent implements OnInit {
   khachDatVe=new KhachDatVe;
   traVeInfo:any[];
   selectedLoads: any[] = [];
-
+  isErrormaVe!:boolean;
+  isErrorhoTen!:boolean;
+  isErroremail!:boolean;
+  isErrorsoGiayTo!:boolean;
+  isErrorsdt!:boolean;
   constructor(
     private service:MachineService,
     private router: Router,

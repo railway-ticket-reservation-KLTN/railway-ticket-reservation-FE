@@ -10,7 +10,14 @@
     box-shadow: 1px 2px #0082c0;
     border: 1px solid #fff;
   }
-
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .error-message{
+    color: #b94a48
+  
+  }
   /*!
  * Bootswatch v3.2.0
  * Homepage: http://bootswatch.com

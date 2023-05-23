@@ -182,10 +182,10 @@
                                 <div class="text-center ng-hide" ng-show="ve.seat.Status.Status != 6">
 
                                 </div>
-                                <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
+                                <!-- <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
                                     <span ng-bind-html="'PBuyTicket_thoiGianTamGiu'|translate:ve.seat.Status.Duration"
                                         class="ng-binding">Giữ trong <span class="text-danger">572</span> giây</span>
-                                </div>
+                                </div> -->
                                 <div>
                                     <div class="ng-binding">
                                         {{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}
@@ -393,62 +393,115 @@
                             class="kt-form-label ng-binding">Họ và tên<span
                             style="color: red">*</span></label></div>
                     <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
-                        <div _ngcontent-ybq-c94="" class="form-group"><span
-                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
-                                mã vé chính
-                                xác 8 hoặc 9 ký tự số</span>
-                                <input _ngcontent-ybq-c94="" type="text"
-                                placeholder="Họ và tên" [(ngModel)]="nguoiDatVe.tenHanhKhach"
-                                id="tenHanhKhach" required="" class="form-control ng-pristine ng-valid ng-untouched"
-                                ng-reflect-required=""></div>
+                        <div _ngcontent-ybq-c94="" class="form-group">
+                                <input _ngcontent-ybq-c94=""
+                                type="text"
+                                placeholder="Họ và tên" 
+                                [(ngModel)]="nguoiDatVe.tenHanhKhach"
+                                id="tenHanhKhach" 
+                                required 
+                                class="form-control ng-pristine ng-valid ng-untouched"
+                                pattern="^[a-zA-Z\s]+$"
+                                #hoTenInput="ngModel"
+                                [ngClass]="{ 'error': hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) }"
+                                (input)="isErrorhoTen = hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) ? true : false"
+                                >
+                        </div>
+
+                        <div *ngIf="hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched)">
+                            <span *ngIf="hoTenInput.errors?.['pattern']" class="error-message">
+                              Nhập đúng họ tên bằng chữ cái
+                            </span>
+                          </div>
                     </div>
                     <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
                             ng-class="{'has-error': macTauError}" class="kt-form-label ng-binding">Số CMND/Hộ chiếu
                             <span style="color: red">*</span></label></div>
                     <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
-                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': macTauError}" class="form-group"><span
-                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
-                                mác tàu chính
-                                xác</span><input _ngcontent-ybq-c94=""  [(ngModel)]="nguoiDatVe.soGiayTo" type="text" ng-change="macTauError = false"
-                                placeholder="Số CMND/Hộ chiếu" id="soGiayTo"
-                                class="form-control ng-pristine ng-valid ng-untouched" ng-reflect-model="SE8"></div>
+                        <div _ngcontent-ybq-c94="" class="form-group">
+                            <input _ngcontent-ybq-c94=""  
+                            [(ngModel)]="nguoiDatVe.soGiayTo" 
+                            type="text" 
+                            placeholder="Số CMND/Hộ chiếu" id="soGiayTo"
+                            class="form-control ng-pristine ng-valid ng-untouched"
+                            required 
+                            pattern="[A-Z0-9]{8,12}"
+                            #soGiayToInput="ngModel"
+                            [ngClass]="{ 'error': soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched) }"
+                            (input)="isErrorsoGiayTo = soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched) ? true : false"
+                            >
+                        </div>
+                        <div *ngIf="soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched)">
+                            <span *ngIf="soGiayToInput.errors?.['pattern']" class="error-message">
+                                Nhập đúng số CMND/Hộ chiếu
+                            </span>
+                          </div>
                     </div>
                 </div>
                 <div _ngcontent-ybq-c94="" class="row">
                     <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
                             ng-class="{'has-error': gaDiError}" class="kt-form-label ng-binding">Email <span style="color: red">*</span></label></div>
                     <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
-                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': gaDiError}" class="form-group"><span
-                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
-                                ga đi ghi
-                                trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.email" type="email" placeholder="Email"
-                                class="form-control ng-pristine ng-valid ng-untouched"></div>
+                        <div _ngcontent-ybq-c94=""  class="form-group">
+                            <input _ngcontent-ybq-c94="" 
+                            [(ngModel)]="nguoiDatVe.email" 
+                            type="email" 
+                            placeholder="Email"
+                            class="form-control ng-pristine ng-valid ng-untouched"
+                            required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                            #emailInput="ngModel"
+                            [ngClass]="{ 'error': emailInput.invalid && (emailInput.dirty || emailInput.touched) }"
+                            (input)="isErroremail = emailInput.invalid && (emailInput.dirty || emailInput.touched) ? true : false"
+                            >
+                        </div>
+
+                        <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+                            <span *ngIf="emailInput.errors?.['pattern']" class="error-message">
+                             Yêu cầu nhập đúng email
+                            </span>
+                          </div>
                     </div>
                     <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
-                            ng-class="{'has-error': gaDenError}"  class="kt-form-label ng-binding">Xác nhận email</label>
+                            class="kt-form-label ng-binding">Xác nhận email</label>
                     </div>
                     <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
-                        <div _ngcontent-ybq-c94="" ng-class="{'has-error': gaDenError}" class="form-group"><span
-                                _ngcontent-ybq-c94="" class="control-label ng-binding ng-hide" hidden="">Vui lòng nhập
-                                ga đến ghi
-                                trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.email" type="email" placeholder="Xác nhận email"
-                                class="form-control ng-pristine ng-valid ng-untouched"></div>
+                        <div _ngcontent-ybq-c94="" class="form-group">
+                            <input _ngcontent-ybq-c94="" 
+                            [(ngModel)]="nguoiDatVe.email" 
+                            type="email" 
+                            placeholder="Xác nhận email"
+                            class="form-control ng-pristine ng-valid ng-untouched"
+                            >
+                        </div>
                     </div>
                 </div>
                 <div _ngcontent-ybq-c94="" class="row">
                     <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label _ngcontent-ybq-c94=""
-                            ng-class="{'has-error': ngayDiError}" class="kt-form-label ng-binding">Số điện thoại <span
+                             class="kt-form-label ng-binding">Số điện thoại <span
                                 style="color: red">*</span></label></div>
                     <div _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
-                        <div _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}"
+                        <div _ngcontent-ybq-c94="" _ngcontent-ppu-c53=""
                             class="form-group">
-                            <span _ngcontent-ybq-c94="" _ngcontent-ppu-c53="" class="control-label ng-binding ng-hide"
-                                hidden="">Vui
-                                lòng nhập ga đi ghi trên vé</span><input _ngcontent-ybq-c94="" [(ngModel)]="nguoiDatVe.sdt" _ngcontent-ppu-c53=""
-                                type="text" placeholder="Nhập số điện thoại  tại đây" aria-autocomplete="list"
-                                aria-expanded="false" aria-owns="typeahead-04M-6001"
-                                class="form-control ng-pristine ng-valid ng-untouched">
+                            <input _ngcontent-ybq-c94="" 
+                            [(ngModel)]="nguoiDatVe.sdt" 
+                            _ngcontent-ppu-c53=""
+                            type="text" 
+                            placeholder="Nhập số điện thoại  tại đây" 
+                            class="form-control ng-pristine ng-valid ng-untouched"
+                            required
+                            pattern="0[0-9]{9}"
+                            #sdtInput="ngModel"
+                            [ngClass]="{ 'error': sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) }"
+                            (input)="isErrorsdt = sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) ? true : false"
+                            >
                         </div>
+
+                        <div *ngIf="sdtInput.invalid && (sdtInput.dirty || sdtInput.touched)">
+                            <span *ngIf="sdtInput.errors?.['pattern']" class="error-message">
+                             Yêu cầu nhập đúng số điện thoại
+                            </span>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -551,9 +604,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12"><a analytics-on="click" analytics-event="SaveBooking-Step1" id="btnSaveBookInfo"
+        <div class="col-md-12">
+            <a analytics-on="click" [class.disabled]="isErrorhoTen || isErroremail || isErrorsdt || isErrorsoGiayTo" analytics-event="SaveBooking-Step1" id="btnSaveBookInfo"
                class="pull-right et-btn-rec ng-binding" ng-disabled="requesting" (click)="btnNext()">Tiếp
-                theo&gt;&gt;</a> <a routerLink="/tim-ve" class="pull-left et-btn-rec ng-binding"
+                theo&gt;&gt;</a> 
+                <a routerLink="/tim-ve" class="pull-left et-btn-rec ng-binding"
                 ng-disabled="requesting">&lt;&lt; Quay lại</a></div>
     </div>
 

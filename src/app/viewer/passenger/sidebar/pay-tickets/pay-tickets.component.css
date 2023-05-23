@@ -7315,7 +7315,14 @@ h5 {
   margin-bottom: 5px;
   padding-left: 5px
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.error-message{
+  color: #b94a48
 
+}
 .et-register-block label {
   font-weight: bold;
   font-size: 14px;

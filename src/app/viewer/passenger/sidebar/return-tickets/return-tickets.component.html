@@ -51,8 +51,22 @@
                             ng-disabled="isRequesting" 
                             [(ngModel)]="traVe.maDatVe"
                             ng-change="maVeError = false"
-                            placeholder="Nhập mã đặt vé" id="maVe" required>
+                            placeholder="Nhập mã đặt vé" 
+                            id="maVe" 
+                            required
+                            pattern="[0-9]{8,9}"
+                            #maVeInput="ngModel"
+                            [ngClass]="{ 'error': maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) }"
+                            (input)="isErrormaVe = maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) ? true : false"
+                            
+                            >
                     </div>
+                    <div *ngIf="maVeInput.invalid && (maVeInput.dirty || maVeInput.touched)">
+                        <span *ngIf="maVeInput.errors?.['pattern']" class="error-message">
+                            Vui lòng nhập mã vé chính xác 8
+                            hoặc 9 ký tự số
+                        </span>
+                      </div>
                 </div>
                 <div class="col-xs-4 col-sm-2 col-md-2">
                     <label class="kt-form-label ng-binding" ng-class="{'has-error': macTauError}">Tên khách đặt
@@ -66,11 +80,23 @@
                             type="text" 
                             class="form-control ng-pristine ng-valid" 
                             [(ngModel)]="traVe.tenKhachDat"
-                            ng-change="macTauError = false" 
                             placeholder="Tên khách đặt" 
-                            id="gaDen">
+                            id="hoTen"
+                            required 
+                            class="form-control ng-pristine ng-valid ng-untouched"
+                            pattern="^[a-zA-Z\s]+$"
+                            #hoTenInput="ngModel"
+                            [ngClass]="{ 'error': hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) }"
+                            (input)="isErrorhoTen = hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) ? true : false"
+                            >
     
                     </div>
+                    
+                    <div *ngIf="hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched)">
+                        <span *ngIf="hoTenInput.errors?.['pattern']" class="error-message">
+                          Nhập đúng họ tên bằng chữ cái
+                        </span>
+                      </div>
                 </div>
             </div>
             <div class="row">
@@ -85,9 +111,20 @@
                             type="text" class="form-control ng-pristine ng-valid" 
                             placeholder="email" 
                             [(ngModel)]="traVe.email"
-                            id="gaDi" 
+                            id="email" 
+                            required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                            #emailInput="ngModel"
+                            [ngClass]="{ 'error': emailInput.invalid && (emailInput.dirty || emailInput.touched) }"
+                            (input)="isErroremail = emailInput.invalid && (emailInput.dirty || emailInput.touched) ? true : false"
                            >
                     </div>
+
+                    <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+                        <span *ngIf="emailInput.errors?.['pattern']" class="error-message">
+                         Yêu cầu nhập đúng email
+                        </span>
+                      </div>
                 </div>
                 <div class="col-xs-4 col-sm-2 col-md-2">
                     <label class="kt-form-label ng-binding" ng-class="{'has-error': gaDenError}">Số CMND/CCCD<!--Ga đến--></label>
@@ -101,9 +138,19 @@
                             class="form-control ng-pristine ng-valid" 
                             placeholder="Số giấy Tờ" 
                             [(ngModel)]="traVe.soGiayTo"
-                            id="gaDen" 
+                            id="soGiayTo" 
+                            required 
+                            pattern="[A-Z0-9]{8,12}"
+                            #soGiayToInput="ngModel"
+                            [ngClass]="{ 'error': soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched) }"
+                            (input)="isErrorsoGiayTo = soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched) ? true : false"
                             >
                     </div>
+                    <div *ngIf="soGiayToInput.invalid && (soGiayToInput.dirty || soGiayToInput.touched)">
+                        <span *ngIf="soGiayToInput.errors?.['pattern']" class="error-message">
+                            Nhập đúng số CMND/Hộ chiếu
+                        </span>
+                      </div>
                 </div>
             </div>
             <div class="row">
@@ -111,22 +158,32 @@
                     <label class="kt-form-label ng-binding" ng-class="{'has-error': ngayDiError}">Số điện thoại<!--Ngày đi--></label>
                 </div>
                 <div _ngcontent-ppu-c53="" class="col-xs-8 col-sm-4 col-md-4">
-                    <div _ngcontent-ppu-c53="" ng-class="{'has-error': gaDiError}" class="form-group"><span _ngcontent-ppu-c53=""
-                        [hidden]="gaDiError" class="control-label ng-binding ng-hide">Vui lòng nhập ga đi ghi trên vé</span>
+                    <div _ngcontent-ppu-c53="" class="form-group">
                             <input
                                 _ngcontent-ppu-c53="" 
                                 type="text" 
                                 placeholder="Số điện thoại"
                                 [(ngModel)]="traVe.sdt"
-                                id="gaDi" 
+                                id="sdt" 
                                 aria-expanded="false" 
                                 aria-owns="typeahead-04M-6001"
-                                class="form-control ng-pristine ng-valid"></div>
+                                class="form-control ng-pristine ng-valid"
+                                required
+                                pattern="0[0-9]{9}"
+                                #sdtInput="ngModel"
+                                [ngClass]="{ 'error': sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) }"
+                                (input)="isErrorsdt = sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) ? true : false"
+                                ></div>
+                                <div *ngIf="sdtInput.invalid && (sdtInput.dirty || sdtInput.touched)">
+                                    <span *ngIf="sdtInput.errors?.['pattern']" class="error-message">
+                                     Yêu cầu nhập đúng số điện thoại
+                                    </span>
+                                  </div>
                 </div>
             </div>
             <div class="col-md-12 text-right">
                 <p>
-                    <button (click)="btnSearch()" class="btn btn-primary ng-binding">Tìm kiếm</button></p>
+                    <button (click)="btnSearch()" [disabled]="isErrormaVe || isErrorhoTen || isErroremail ||isErrorsoGiayTo || isErrorsdt" class="btn btn-primary ng-binding">Tìm kiếm</button></p>
                 <hr >
             </div>
         </div>

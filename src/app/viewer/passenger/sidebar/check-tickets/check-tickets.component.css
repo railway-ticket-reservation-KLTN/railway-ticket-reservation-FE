@@ -6669,7 +6669,15 @@ body,html {
     background-color: #eee;
     font-size: 15px
 }
-
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .error-message{
+    color: #b94a48
+  
+  }
 .et-table-group-header {
     background-color: #dbedf7;
     color: #0082c0

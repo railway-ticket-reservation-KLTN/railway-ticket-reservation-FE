@@ -6,10 +6,10 @@ export class TraVe{
     sdt:string;
 
     constructor(){
-        this.maDatVe = "1100071693";
-        this.tenKhachDat = "loc 11111111111";
-        this.email = "nguyenlocba431@gmail.com";
-        this.soGiayTo = "432424";
-        this.sdt= "0374079637";
+        this.maDatVe = "";
+        this.tenKhachDat = "";
+        this.email = "";
+        this.soGiayTo = "";
+        this.sdt= "";
     }
 }
