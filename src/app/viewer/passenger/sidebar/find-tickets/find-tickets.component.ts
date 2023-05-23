@@ -7,6 +7,7 @@ import { ErrorService } from 'src/app/service/error-service.service';
 import { VeTauInfo } from 'src/app/domain/VeTauInfo';
 import { VeTauInfoKhuHoi } from 'src/app/domain/VeTauInfoKhuHoi';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-find-tickets',
@@ -19,20 +20,27 @@ export class FindTicketsComponent implements OnInit {
   isCheck=true;
   minDate: string;
   machineSearch = new TimChuyenTauRequest();
-  
+  searchForm: FormGroup;
+  isError!: boolean ;
+
   constructor(
     private machineService:MachineService,
     private router:Router,
     private errorService: ErrorService,
-    private snackBar: MatSnackBar
-
+    private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder
   ){
     const today = new Date();
     const year = today.getFullYear();
     const month = today.getMonth() + 1;
     const day = today.getDate();
     this.minDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-
+    this.searchForm = this.formBuilder.group({
+      ['gaDi']: ['', Validators.pattern('^[^0-9]+$')],
+      ['gaDen']: ['', Validators.pattern('^[^0-9]+$')],
+      ['ngayDi']: ['', Validators.pattern('^(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])-[0-9]{4}$')],
+      ['ngayVe']: ['', Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/[0-9]{4}$')]
+    });
   }
   ngOnInit(){
     this.machineSearch.loaiHanhTrinh ==="MOT_CHIEU"
@@ -47,6 +55,7 @@ export class FindTicketsComponent implements OnInit {
     this.machineSearch.loaiHanhTrinh = 'KHU_HOI';
    }
   onSearch(){ 
+console.log(this.machineSearch.ngayDi);
 
     if(this.checkDuplicatePassengers4()){
       this.machineService.getHanhTrinhTau(this.machineSearch).subscribe(data => {

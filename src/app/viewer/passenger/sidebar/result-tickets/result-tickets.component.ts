@@ -153,12 +153,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.tauInfoKhuHoi = tauInfoKhuHoi;
       console.log(this.toaXeListKhuHoi);
       this.loadToaGheKhuHoi(event, this.tauInfoKhuHoi.maToa, this.tauInfoKhuHoi.soToa, this.tauInfoKhuHoi.tenTau);
-
-      
-    });
-    
+    }); 
   }
-
   loadToaGhe(event: any, id: string, soToa: string, tenTau: string) {
     this.danhSachGheRequest.maToa = id;
     this.danhSachGheRequest.ngayDi = this.dataSearchLoadToa.ngayDi;
