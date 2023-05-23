@@ -8,7 +8,7 @@
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
-            <input type="button" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">
+            <button class="btn btn-danger" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">Xóa</button>
             <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
 
 <!-- Modal Popup -->
@@ -214,7 +214,7 @@
                             <input type="checkbox" (change)="selectLoad($event, loads)">
                         </td>
                         <td>
-                          <button (click)="openModal1(loads)" type="button" class="btn btn-success">Sửa</button>
+                          <button (click)="openModal1(loads)" type="button" class="btn btn-secondary">Sửa</button>
 
                         </td>
                     </tr>
