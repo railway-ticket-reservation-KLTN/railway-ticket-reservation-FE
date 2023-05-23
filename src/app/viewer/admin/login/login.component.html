@@ -1,18 +1,21 @@
+
+<div class="container">
+  <img src="assets/images/logo.svg" alt="">
+</div>
 <div class="center">
-    <h1>Login</h1>
+    <h1>Đăng nhập</h1>
     <form method="post">
       <div class="txt_field">
         <input type="text" name="userName" [(ngModel)]="dangNhap.userName" required>
         <span></span>
-        <label>Username</label>
+        <label>Tên tài khoản</label>
       </div>
       <div class="txt_field">
         <input type="password" name="password" [(ngModel)]="dangNhap.password" required>
         <span></span>
-        <label>Password</label>
+        <label>Mật khẩu</label>
       </div>
-      <div class="pass">Forgot Password?</div>
-      <input type="submit" (click)="btnSubmit()" value="Login">
+      <input type="submit" (click)="btnSubmit()" value="Đăng nhập">
       <div class="signup_link">
       </div>
     </form>
