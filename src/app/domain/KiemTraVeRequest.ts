@@ -7,12 +7,12 @@ export class KiemTraVeRequest{
         soGiayTo: string;
 
         constructor(){
-            this.maVe = "";
-            this.tenTau = "";
-            this.gaDi = "";
-            this.gaDen = "";
-            this.ngayDi = "";
-            this.soGiayTo = "";
+            this.maVe = "12345678";
+            this.tenTau = "SE22";
+            this.gaDi = "Sài Gòn";
+            this.gaDen = "Nha Trang";
+            this.ngayDi = "2023-05-24";
+            this.soGiayTo = "0123456789";
 
         }
 }
