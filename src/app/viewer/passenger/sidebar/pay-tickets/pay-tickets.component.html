@@ -24,17 +24,17 @@
                         <tr>
                             <th style="background-color: lavender;width: 25%; font-size: 14px;" class="ng-binding">Họ tên<!--Họ tên-->
                             </th>
-                            <th style="width: 150px;background-color: lavender; font-size: 14px;" class="ng-binding">Thông tin
+                            <th style="width: 220px;background-color: lavender; font-size: 14px;" class="ng-binding">Thông tin
                                 chỗ<!--Thông tin chỗ--></th>
-                            <th style="background-color: lavender; width: 100px;" class="ng-binding">Giá vé<!--Giá vé--></th>
+                            <th style="background-color: lavender; width: 140px;" class="ng-binding">Giá vé<!--Giá vé--></th>
                             <!-- <th style="background-color: lavender;" class="ng-binding">Giảm đối
                                 tượng</th> -->
-                            <th style="background-color: lavender;" class="ng-binding">Thành tiền (VNĐ)<!--Khuyến mại-->
+                            <th style="background-color: lavender; width: 220px;" class="ng-binding">Thành tiền (VNĐ)<!--Khuyến mại-->
                             </th>
-                            <th style="background-color: lavender;" class="ng-binding">Bảo hiểm<!--Bảo hiểm--></th>
-                            <th style="background-color: lavender;width: 120px;" class="ng-binding">Hủy
+                            <!-- <th style="background-color: lavender;" class="ng-binding">Bảo hiểm</th> -->
+                            <th style="background-color: lavender;width: 220px;" class="ng-binding">Hủy
                                 bỏ<!--Thành tiền (VNĐ)--></th>
-                            <th style="background-color: lavender;width: 25px;"></th>
+                            <!-- <th style="background-color: lavender;width: 125px;">Ghi chú</th> -->
                         </tr>
                     </thead>
                     <tbody ng-show="ves.khuHoi.length > 0" [hidden]="true">
@@ -43,51 +43,7 @@
                                 <label class="ng-binding">Khứ hồi<!--Khứ hồi--></label>
                                 <!--<div>Vui lòng nhập địa chỉ cư trú, lưu trú cho các vé chiều đi vào phần địa chỉ lưu trú kế bên</div>-->
                             </td>
-                            <!--<td colspan="7" style="text-align:left;vertical-align:middle;">
-                        <div class="input-group input-group-sm" style="margin-bottom:2px;">
-                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
-                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiDiDiaChiDi" id="luuTruKhuHoiDiDiaChiDi"
-                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
-                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
-                                   ng-class="{'et-error-block': luuTru.khuHoiDiDiaChiDiRequired}"
-                                   ng-change="changeLuuTruKhuHoiDiDiaChiDi()"
-                                   class="form-control input-sm" />
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
-                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiDiDiaChiDen" id="luuTruKhuHoiDiDiaChiDen"
-                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
-                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
-                                   ng-class="{'et-error-block': luuTru.khuHoiDiDiaChiDenRequired}"
-                                   ng-change="changeLuuTruKhuHoiDiDiaChiDen()"
-                                   class="form-control input-sm" />
-                        </div>
-                    </td>-->
                         </tr>
-                        <!-- ngRepeat: ve in ves.khuHoi -->
-                        <!--<tr>
-                    <td colspan="1" style="text-align:center;vertical-align:middle;">
-                        Vui lòng nhập địa chỉ cưu trú, lưu trú cho các vé chiều về vào phần địa chỉ lưu trú kế bên
-                    </td>
-                    <td colspan="7" style="text-align:left;vertical-align:middle;">
-                        <div class="input-group input-group-sm" style="margin-bottom:2px;">
-                            <span class="input-group-addon text-left" style="padding-right:22px;">Địa chỉ nơi đi<span style="color:red;">*</span></span>
-                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiVeDiaChiDi" id="luuTruKhuHoiVeDiaChiDi"
-                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
-                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
-                                   ng-class="{'et-error-block': luuTru.khuHoiVeDiaChiDiRequired}"
-                                   class="form-control input-sm" />
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon text-left">Địa chỉ nơi đến<span style="color:red;">*</span></span>
-                            <input type="text" placeholder="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố" ng-model="luuTru.khuHoiVeDiaChiDen" id="luuTruKhuHoiVeDiaChiDen"
-                                   style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
-                                   title="Ghi rõ số nhà, xã/phường, quận/huyện/thị xã, tỉnh/thành phố"
-                                   ng-class="{'et-error-block': luuTru.khuHoiVeDiaChiDenRequired}"
-                                   class="form-control input-sm" />
-                        </div>
-                    </td>
-                </tr>-->
                     </tbody>
                     <tbody ng-show="ves.chieuDi.length > 0" class="">
                         <tr class="et-table-group-header ng-hide"
@@ -228,9 +184,9 @@
                                 </div>
 
                             </td>
-                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                            <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0,000
-                            </td>
+                            </td> -->
                            
                             <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
                                 <a class="fa fa-trash-o"
@@ -375,9 +331,9 @@
                                 </div>
 
                             </td>
-                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                            <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0,000
-                            </td>
+                            </td> -->
                            
                             <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
                                 <a  class="fa fa-trash-o" (click)="removeTicketKhuHoi(loads1.maGhe)"
