@@ -46,10 +46,10 @@ export class ConfirmTicketsComponent implements OnInit {
     let total = 0;
     let totalKhuHoi = 0;
     for (let i = 0; i < this.xacnhanthongtin.gheDaDat.length; i++) {
-      total += this.xacnhanthongtin.gheDaDat[i].giaVe + 1000;
+      total += this.xacnhanthongtin.gheDaDat[i].giaVe;
     }
     for (let i = 0; i < this.xacnhanthongtinKhuHoi.gheDaDat.length; i++) {
-      totalKhuHoi += this.xacnhanthongtinKhuHoi.gheDaDat[i].giaVe + 1000;
+      totalKhuHoi += this.xacnhanthongtinKhuHoi.gheDaDat[i].giaVe;
     }
 
     return total + totalKhuHoi;
