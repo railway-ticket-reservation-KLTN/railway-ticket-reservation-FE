@@ -355,7 +355,9 @@ checkDuplicatePassengers5() {
   return true; // Không có lỗi
 }
 
-
+goBack() {
+  history.back();
+}
 
 }
 

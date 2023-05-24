@@ -642,7 +642,7 @@
             <a analytics-on="click" [class.disabled]="isErrorhoTen || isErroremail || isErrorsdt || isErrorsoGiayTo || isErrorhoTenMC || isErrorsoGiayToMC || isErrorhoTenKH || isErrorsoGiayToKH" analytics-event="SaveBooking-Step1" id="btnSaveBookInfo"
                class="pull-right et-btn-rec ng-binding" ng-disabled="requesting" (click)="btnNext()">Tiếp
                 theo&gt;&gt;</a> 
-                <a routerLink="/tim-ve" class="pull-left et-btn-rec ng-binding"
+                <a (click)="goBack()" class="pull-left et-btn-rec ng-binding"
                 ng-disabled="requesting">&lt;&lt; Quay lại</a></div>
     </div>
 

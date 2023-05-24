@@ -214,4 +214,7 @@ setPhuongThucThanhToan(xacNhanThongTinKH:any) {
   onReturnButtonClick(){
     this.router.navigate(['/thong-tin-giao-dich'], { queryParams: { data: JSON.stringify(this.xacnhanthongtinveInfo) } });
   }
+  goBack() {
+    history.back();
+  }
 }
