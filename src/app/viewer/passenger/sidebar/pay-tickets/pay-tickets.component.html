@@ -22,13 +22,13 @@
                 <table class="table table-bordered">
                     <thead class="et-table-header">
                         <tr>
-                            <th style="background-color: lavender;width: 25%;" class="ng-binding">Họ tên<!--Họ tên-->
+                            <th style="background-color: lavender;width: 25%; font-size: 14px;" class="ng-binding">Họ tên<!--Họ tên-->
                             </th>
-                            <th style="width: 150px;background-color: lavender; font-size: 14;" class="ng-binding">Thông tin
+                            <th style="width: 150px;background-color: lavender; font-size: 14px;" class="ng-binding">Thông tin
                                 chỗ<!--Thông tin chỗ--></th>
                             <th style="background-color: lavender; width: 100px;" class="ng-binding">Giá vé<!--Giá vé--></th>
-                            <th style="background-color: lavender;" class="ng-binding">Giảm đối
-                                tượng<!--Giảm đối tượng--></th>
+                            <!-- <th style="background-color: lavender;" class="ng-binding">Giảm đối
+                                tượng</th> -->
                             <th style="background-color: lavender;" class="ng-binding">Thành tiền (VNĐ)<!--Khuyến mại-->
                             </th>
                             <th style="background-color: lavender;" class="ng-binding">Bảo hiểm<!--Bảo hiểm--></th>
@@ -219,17 +219,17 @@
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 {{loads.giaVe}}
                             </td>
-                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                            <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0
-                            </td>
+                            </td> -->
                             <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
                                 <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
-                                    {{(loads.giaVe +1000)}}
+                                    {{(loads.giaVe)}}
                                 </div>
 
                             </td>
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
-                                1,000
+                                0,000
                             </td>
                            
                             <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
@@ -242,10 +242,7 @@
                         <tr class="et-table-group-header" ng-show="ves.khuHoi.length > 0 || ves.chieuDi.length > 0">
                             <td colspan="8" style="text-align:center;vertical-align:middle;">
                                 <label class="ng-binding">Chiều về<!--Chiều về--></label>&nbsp;
-                                <div ng-show="ves.khuHoi.length > 0 || ves.chieuDi.length > 0" class=""><a
-                                        class="et-btn ng-binding" id="btnCloneBookingInfo"
-                                        ng-show="ves.chieuDi.length > 0" ng-click="setBackInfo()">Lấy thông tin từ chiều
-                                        đi<!--Lấy thông tin từ chiều đi--></a></div>
+                               
                                 <!--<div>Vui lòng nhập địa chỉ cưu trú, lưu trú vào phần địa chỉ lưu trú kế bên</div>-->
                             </td>
                             <!--<td colspan="7" style="text-align:left;vertical-align:middle;">
@@ -369,17 +366,17 @@
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 {{loads1.giaVe}}
                             </td>
-                            <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
+                            <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0
-                            </td>
+                            </td> -->
                             <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
                                 <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
-                                    {{(loads1.giaVe + 1000)}}
+                                    {{(loads1.giaVe )}}
                                 </div>
 
                             </td>
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
-                                1,000
+                                0,000
                             </td>
                            
                             <td style="vertical-align: middle;border-bottom: solid 2px #ccc;">
@@ -628,8 +625,8 @@
                         với những quy định mua vé trực tuyến.</span></div>
                 <div><input type="checkbox" [(ngModel)]="agreement" class="ng-pristine ng-valid"> <span
                         ng-bind-html="'PBuyTicket_xacNhanDongYMuaVeOnline'|translate" class="ng-binding">Tôi đã đọc kỹ
-                        và đồng ý tuân thủ tất cả các <a href="/#/quydinhmuave" target="_blank">quy định mua vé trực
-                            tuyến</a>, <a href="/#/khuyenmai" target="_blank">các chương trình khuyến mại</a> của Tổng
+                        và đồng ý tuân thủ tất cả các <a routerLink="/dieukien" target="_blank">quy định mua vé trực
+                            tuyến</a>, <i>các chương trình khuyến mại</i> của Tổng
                         công ty đường sắt Việt Nam và chịu trách nhiệm về tính xác thực của các thông tin trên.</span>
                 </div>
             </div>

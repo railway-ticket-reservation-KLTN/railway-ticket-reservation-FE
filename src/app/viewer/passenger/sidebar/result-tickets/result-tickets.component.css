@@ -7561,6 +7561,15 @@ select {
     cursor: not-allowed;
 
 }
+.et-flip-img {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH"
+}
+
 
 .et-sit-blocked .popover h3 {
     color: #df5327

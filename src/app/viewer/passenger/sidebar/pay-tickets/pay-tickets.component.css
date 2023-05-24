@@ -10,7 +10,9 @@
     box-shadow: 1px 2px #0082c0;
     border: 1px solid #fff;
   }
-
+  *{
+    font-size: 15px !important;   
+}
   /*!
  * Bootswatch v3.2.0
  * Homepage: http://bootswatch.com

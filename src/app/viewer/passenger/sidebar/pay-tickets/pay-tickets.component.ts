@@ -112,19 +112,19 @@ getTotalPrice() {
   if(this.gheDaDatListKhuHoi.length > 0){
         if(this.gheDaDatList.length > 0){
           for (let i = 0; i < this.gheDaDatList.length; i++) {
-            total += this.gheDaDatList[i].giaVe + 1000;
+            total += this.gheDaDatList[i].giaVe;
           }
           for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
-            totalKhuHoi += this.gheDaDatListKhuHoi[i].giaVe + 1000;
+            totalKhuHoi += this.gheDaDatListKhuHoi[i].giaVe;
           }
         }else{
           for (let i = 0; i < this.gheDaDatListKhuHoi.length; i++) {
-            totalKhuHoi += this.gheDaDatListKhuHoi[i].giaVe + 1000;
+            totalKhuHoi += this.gheDaDatListKhuHoi[i].giaVe;
           }
         }
   }else{
     for (let i = 0; i < this.gheDaDatList.length; i++) {
-      total += this.gheDaDatList[i].giaVe + 1000;
+      total += this.gheDaDatList[i].giaVe;
     }
   }
  
