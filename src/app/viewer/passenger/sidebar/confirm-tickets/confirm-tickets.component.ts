@@ -40,8 +40,6 @@ export class ConfirmTicketsComponent implements OnInit {
     this.xacNhanThongTinLS = [...this.xacnhanthongtinKhuHoi.gheDaDat, ...this.xacnhanthongtin.gheDaDat];
     console.log(this.xacNhanThongTinLS);
     this.xacNhanThongTinKH = this.xacnhanthongtinKhuHoi.nguoiDatVe
-    console.log(this.xacNhanThongTinKH);
-    console.log(this.xacnhanthongtinve);
     this.setPhuongThucThanhToan(this.xacNhanThongTinKH)
   }
   getTotalPrice() {

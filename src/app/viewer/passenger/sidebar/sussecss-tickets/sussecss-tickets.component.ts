@@ -14,6 +14,7 @@ export class SussecssTicketsComponent implements OnInit {
   xacnhanthongtinveInfo: any;
   htmlMaContent = '';
   listVe: any[];
+  dataRequest:any[]=[];
   tongGia:any = 0;
   htmlTinhTongTien = '';
   htmlTinhTrangThanhToan = '';
@@ -67,5 +68,40 @@ export class SussecssTicketsComponent implements OnInit {
       this.tongGia += veTau.donGia;
     });
     this.htmlTinhTongTien = `${this.tongGia}`;
+  }
+  btnprint(){
+    for (let i = 0; i < this.xacnhanthongtinveInfo.veTaus.length; i++) {
+      this.dataRequest[i] = {
+        maVe: this.xacnhanthongtinveInfo.veTaus[i].maVe,
+        tenHanhKhach: this.xacnhanthongtinveInfo.veTaus[i].tenHanhKhach,
+        soGiayTo: this.xacnhanthongtinveInfo.veTaus[i].soGiayTo,
+        donGia: this.xacnhanthongtinveInfo.veTaus[i].donGia,
+        doiTuong: this.xacnhanthongtinveInfo.veTaus[i].doiTuong,
+        tenTau: this.xacnhanthongtinveInfo.veTaus[i].tenTau,
+        soGhe: this.xacnhanthongtinveInfo.veTaus[i].soGhe,
+        soToa: this.xacnhanthongtinveInfo.veTaus[i].soToa,
+        gaDi: this.xacnhanthongtinveInfo.veTaus[i].hanhTrinh.gaDi,
+        gaDen:this.xacnhanthongtinveInfo.veTaus[i].hanhTrinh.gaDen,
+        ngayDi: this.xacnhanthongtinveInfo.veTaus[i].hanhTrinh.ngayDi,
+        gioDi: this.xacnhanthongtinveInfo.veTaus[i].hanhTrinh.gioDi,
+      }
+    }
+    this.machineService.getPDFInve(this.dataRequest).subscribe(data => {
+      console.log(data);
+      const pdf = new Blob([data], { type: 'application/pdf' });
+      const blobUrl = URL.createObjectURL(pdf);
+      const iframe = document.createElement('iframe');
+      iframe.id = 'print';
+      iframe.style.display = 'none';
+      iframe.src = blobUrl;
+      document.body.appendChild(iframe);
+      iframe.onload = () => {
+        const contentWindow = iframe.contentWindow;
+        if (contentWindow) {
+          contentWindow.print();
+        }
+      };
+    });
+    
   }
 }

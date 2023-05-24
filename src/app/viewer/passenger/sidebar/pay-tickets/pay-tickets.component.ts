@@ -35,6 +35,10 @@ export class PayTicketsComponent implements OnInit {
   isErrorsoGiayTo!:boolean;
   isErroremail!:boolean;
   isErrorsdt!:boolean;
+  isErrorhoTenMC!:boolean;
+  isErrorsoGiayToMC!:boolean;
+  isErrorhoTenKH!:boolean;
+  isErrorsoGiayToKH!:boolean;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
