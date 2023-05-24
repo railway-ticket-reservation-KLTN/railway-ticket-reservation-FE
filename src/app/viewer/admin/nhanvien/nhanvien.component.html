@@ -26,12 +26,33 @@
                 <div class="form-group">
                   <label for="tenTaiKhoan">Tên tài khoản:</label>
                   <input type="text" id="tenTaiKhoan" [(ngModel)]="themNhanVien.tenTaiKhoan" class="form-control"
-                    placeholder="Tên tài khoản">
+                    placeholder="Tên tài khoản"
+                    pattern="^[a-zA-Z\s]+$"
+                    #hoTenInput="ngModel"
+                    [ngClass]="{ 'error': hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) }"
+                    (input)="isErrorhoTen = hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) ? true : false"
+                    >
+                </div>
+                <div *ngIf="hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched)">
+                  <span *ngIf="hoTenInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+                    Nhập đúng họ tên bằng chữ cái
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="matKhau">Mật khẩu:</label>
                   <input type="password" id="matKhau" [(ngModel)]="themNhanVien.matKhau" class="form-control"
-                    placeholder="Mật khẩu">
+                    placeholder="Mật khẩu"
+                    required
+                    pattern=".{4,}"
+                    #matKhauInput="ngModel"
+                    [ngClass]="{ 'error': matKhauInput.invalid && (matKhauInput.dirty || matKhauInput.touched) }"
+                    (input)="isErrorhoTenMatKhau = matKhauInput.invalid && (matKhauInput.dirty || matKhauInput.touched) ? true : false"
+                    >
+                </div>
+                <div *ngIf="matKhauInput.invalid && (matKhauInput.dirty || matKhauInput.touched)">
+                  <span *ngIf="matKhauInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+                    Nhập mật khẩu phải từ 4 kí tự trở lên
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="trangThai">Trạng thái:</label>
@@ -49,15 +70,51 @@
                 <div class="form-group">
                   <label for="tenNhanVien">Tên nhân viên:</label>
                   <input type="text" id="tenNhanVien" [(ngModel)]="tenNhanVien" class="form-control"
-                    placeholder="Tên nhân viên">
+                    placeholder="Tên nhân viên"
+                    required
+                    pattern="^[a-zA-Z\s]+$"
+                    #tenNhanVienInput="ngModel"
+                    [ngClass]="{ 'error': tenNhanVienInput.invalid && (tenNhanVienInput.dirty || tenNhanVienInput.touched) }"
+                    (input)="isErrortenNhanVien = tenNhanVienInput.invalid && (tenNhanVienInput.dirty || tenNhanVienInput.touched) ? true : false"
+                    >
+                </div>
+                <div *ngIf="tenNhanVienInput.invalid && (tenNhanVienInput.dirty || tenNhanVienInput.touched)">
+                  <span *ngIf="tenNhanVienInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+                    Nhập đúng họ tên bằng chữ cái
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="diaChi">Địa chỉ:</label>
-                  <input type="text" id="diaChi" [(ngModel)]="diaChi" class="form-control" placeholder="Địa chỉ">
+                  <input type="text" id="diaChi" [(ngModel)]="diaChi" 
+                  class="form-control" placeholder="Địa chỉ"
+                  required
+                  pattern=".{4,}"
+                  #diaChiInput="ngModel"
+                  [ngClass]="{ 'error': diaChiInput.invalid && (diaChiInput.dirty || diaChiInput.touched) }"
+                  (input)="isErrordiaChi = diaChiInput.invalid && (diaChiInput.dirty || diaChiInput.touched) ? true : false"
+                  >
+                </div>
+
+                <div *ngIf="diaChiInput.invalid && (diaChiInput.dirty || diaChiInput.touched)">
+                  <span *ngIf="diaChiInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+                    Nhập địa chỉ
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="sdt">Số điện thoại:</label>
-                  <input type="text" id="sdt" [(ngModel)]="sdt" class="form-control" placeholder="Số điện thoại">
+                  <input type="text" id="sdt" [(ngModel)]="sdt" class="form-control" 
+                  placeholder="Số điện thoại"
+                  pattern="0[0-9]{9}"
+                  #sdtInput="ngModel"
+                  [ngClass]="{ 'error': sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) }"
+                  (input)="isErrorsdt = sdtInput.invalid && (sdtInput.dirty || sdtInput.touched) ? true : false"
+                  >
+                </div>
+
+                <div *ngIf="sdtInput.invalid && (sdtInput.dirty || sdtInput.touched)">
+                  <span *ngIf="sdtInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+                   Yêu cầu nhập đúng số điện thoại
+                  </span>
                 </div>
                 <div class="form-group">
                   <label for="trangThai">Trạng thái:</label>
@@ -72,7 +129,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <button (click)="btnThem()" class="btn btn-primary">Thêm</button>
+                  <button (click)="btnThem()" [disabled]="isErrorhoTen || isErrorhoTenMatKhau || isErrortenNhanVien || isErrordiaChi || isErrorsdt" class="btn btn-primary">Thêm</button>
                 </div>
               </div>
             </div>

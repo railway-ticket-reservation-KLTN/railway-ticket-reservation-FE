@@ -9305,7 +9305,14 @@ table th {
   .navbar-default .navbar-nav>li>a {
       font-size: 11px!important
   }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.error-message{
+  color: red !important
 
+}
   .part-right {
       display: block!important
   }

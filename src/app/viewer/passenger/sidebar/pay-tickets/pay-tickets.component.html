@@ -132,7 +132,7 @@
                                         ng-change="syncRegister($index, false)" ng-disabled="ve.IsVeThang"
                                         style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
                                         required
-                                        pattern="^[a-zA-Z\s]+$"
+                                        pattern="^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$"
                                         required
                                         #hoTenInputMC="ngModel"
                                         [ngClass]="{ 'error': hoTenInputMC.invalid && (hoTenInputMC.dirty || hoTenInputMC.touched) }"
@@ -284,12 +284,12 @@
                                         style="border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;"
                                         required
                                         required
-                                        pattern="^[a-zA-Z\s]+$"
+                                        pattern="^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$"
                                         required
                                         #hoTenInputKH="ngModel"
                                         [ngClass]="{ 'error': hoTenInputKH.invalid && (hoTenInputKH.dirty || hoTenInputKH.touched) }"
                                         (input)="isErrorhoTenKH = hoTenInputKH.invalid && (hoTenInputKH.dirty || hoTenInputKH.touched) ? true : false">
-                                        >
+                                        
                                 </div>
                                 <div *ngIf="hoTenInputKH.invalid && (hoTenInputKH.dirty || hoTenInputKH.touched)">
                                     <span *ngIf="hoTenInputKH.errors?.['pattern']" class="error-message">
@@ -435,7 +435,7 @@
                                 id="tenHanhKhach" 
                                 required 
                                 class="form-control ng-pristine ng-valid ng-untouched"
-                                pattern="^[a-zA-Z\s]+$"
+                                pattern="^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$"
                                 #hoTenInput="ngModel"
                                 [ngClass]="{ 'error': hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) }"
                                 (input)="isErrorhoTen = hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) ? true : false"

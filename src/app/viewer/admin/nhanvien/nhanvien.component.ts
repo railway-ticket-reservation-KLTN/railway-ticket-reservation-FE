@@ -30,6 +30,11 @@ viTri1:string;
 trangThai1 = 1;
 selectedLoads: any[] = [];
 nhanVienDelete:any;
+isErrorhoTen!:boolean;
+isErrorhoTenMatKhau!:boolean;
+isErrortenNhanVien!:boolean;
+isErrordiaChi!:boolean;
+isErrorsdt!:boolean;
   constructor(
     private _dialog: MatDialog,
     private service:OtherAdminService,
@@ -97,24 +102,28 @@ nhanVienDelete:any;
   }
   btnThem(){
 
-    this.themNhanVien.nhanVien ={
-      tenNhanVien:this.tenNhanVien,
-      sdt:this.sdt,
-      diaChi:this.diaChi,
-      viTri:this.viTri,
-      trangThai:this.trangThai,
-      
+    if(this.checkDuplicatePassengers()){
+      this.themNhanVien.nhanVien ={
+        tenNhanVien:this.tenNhanVien,
+        sdt:this.sdt,
+        diaChi:this.diaChi,
+        viTri:this.viTri,
+        trangThai:this.trangThai,
+        
+      }
+      this.service.themTaiKhoan(this.themNhanVien).subscribe(data =>{
+        console.log(data);
+  
+        this.ngZone.run(() => {
+          // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
+          this.loadData();
+          this.modalOpen = false;
+        });       
+        
+      })   
+    }else{
+      alert("Không được bỏ trống")
     }
-    this.service.themTaiKhoan(this.themNhanVien).subscribe(data =>{
-      console.log(data);
-
-      this.ngZone.run(() => {
-        // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
-        this.loadData();
-        this.modalOpen = false;
-      });       
-      
-    })   
   }
 
   selectLoad(event: any, load: any) {
@@ -176,4 +185,13 @@ nhanVienDelete:any;
       }
     }
   }
+  checkDuplicatePassengers(){
+    if(!this.themNhanVien.matKhau || !this.themNhanVien.loaiTK || !this.themNhanVien.tenTaiKhoan ||
+      !this.themNhanVien.tenTaiKhoan || !this.themNhanVien.trangThai
+      ){
+        return false;
+      }
+      return true;
+  }
+  
 }

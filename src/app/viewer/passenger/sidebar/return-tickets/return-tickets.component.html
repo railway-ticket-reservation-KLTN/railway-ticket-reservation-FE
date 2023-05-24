@@ -84,7 +84,7 @@
                             id="hoTen"
                             required 
                             class="form-control ng-pristine ng-valid ng-untouched"
-                            pattern="^[a-zA-Z\s]+$"
+                            pattern="^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$"
                             #hoTenInput="ngModel"
                             [ngClass]="{ 'error': hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) }"
                             (input)="isErrorhoTen = hoTenInput.invalid && (hoTenInput.dirty || hoTenInput.touched) ? true : false"
