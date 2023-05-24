@@ -8,9 +8,6 @@
         </div>
         <div class="row list-ticket-deskhop">
             <div class="alert alert-info">
-                <p ng-bind-html="'PBuyTicket_dienGiaiGioVe'|translate" class="ng-binding">Các vé có biểu tượng là các vé
-                    bị hết thời gian tạm giữ. Xin vui lòng loại bỏ các vé này
-                    khỏi danh sách vé đặt mua trước khi thực hiện giao dịch thanh toán tiền.</p>
                 <p ng-bind-html="'PBuyTicket_dienGiaiNhapTT'|translate" class="ng-binding">Quý khách vui lòng điền đầy
                     đủ, chính xác tất cả các thông tin về hành khách đi tàu bao gồm: Họ tên đầy đủ, số giấy tờ tùy thân
                     (Số chứng minh nhân dân hoặc số hộ chiếu hoặc số giấy phép lái xe đường bộ được pháp luật Việt Nam
@@ -27,9 +24,9 @@
                         <tr>
                             <th style="background-color: lavender;width: 25%;" class="ng-binding">Họ tên<!--Họ tên-->
                             </th>
-                            <th style="width: 120px;background-color: lavender;" class="ng-binding">Thông tin
+                            <th style="width: 150px;background-color: lavender; font-size: 14;" class="ng-binding">Thông tin
                                 chỗ<!--Thông tin chỗ--></th>
-                            <th style="background-color: lavender;" class="ng-binding">Giá vé<!--Giá vé--></th>
+                            <th style="background-color: lavender; width: 100px;" class="ng-binding">Giá vé<!--Giá vé--></th>
                             <th style="background-color: lavender;" class="ng-binding">Giảm đối
                                 tượng<!--Giảm đối tượng--></th>
                             <th style="background-color: lavender;" class="ng-binding">Thành tiền (VNĐ)<!--Khuyến mại-->
@@ -204,7 +201,7 @@
                                         class="ng-binding">Giữ trong <span class="text-danger">572</span> giây</span>
                                 </div> -->
                                 <div>
-                                    <div class="ng-binding">
+                                    <div class="ng-binding" style="font-size: 15px;">
                                         {{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}
                                     </div>
                                     <div class="ng-binding">
@@ -351,11 +348,10 @@
 
                                 </div>
                                 <div class="text-center text-info" ng-show="ve.seat.Status.Status == 6">
-                                    <span ng-bind-html="'PBuyTicket_thoiGianTamGiu'|translate:ve.seat.Status.Duration"
-                                        class="ng-binding">Giữ trong <span class="text-danger">572</span> giây</span>
+                                   
                                 </div>
                                 <div>
-                                    <div class="ng-binding">
+                                    <div class="ng-binding" style="font-size: 15px;">
                                         {{loads1.tenTau}} {{loads1.gaDi}} - {{loads1.gaDen}}
                                     </div>
                                     <div class="ng-binding">
