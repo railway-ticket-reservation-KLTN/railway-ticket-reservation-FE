@@ -5676,6 +5676,34 @@ button.close {
     filter: FlipH;
     -ms-filter: "FlipH"
 }
+.et-sit-no[data-bs-toggle="tooltip"] {
+    position: relative;
+}
+
+.et-sit-no[data-bs-toggle="tooltip"]:hover::before {
+    content: attr(title);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    background-color: #000;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.et-sit-no[data-bs-toggle="tooltip"]:hover::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #000 transparent;
+}
 .fa{
     font-size: 27px;
 }
