@@ -35,6 +35,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   //   soToa :  '',
   //   soGhe : '',
   // };
+  modalOpen = false;
   showResult = true;
   tauList: any[];
   tauListSearch: any[];
@@ -82,13 +83,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       this.dataSearch = JSON.parse(params['data']);
       if (Array.isArray(this.dataSearch) == true && this.dataSearch.length > 0) {
         this.hanhTrinhInfo = this.dataSearch[0];
-       
         this.showResult = true;
         const tauInfo = this.dataSearch.find(item => item.id == 1);
         this.tauInfo = tauInfo;
         console.log(this.tauInfo);
-        
-        
         this.loadToaTau(event, this.hanhTrinhInfo.id, this.hanhTrinhInfo.tau.id);
         // this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, this.hanhTrinhInfo.tau.toas[0].tenTau);
         this.loadToaGhe(event, this.hanhTrinhInfo.tau.toas[0].maToa, this.hanhTrinhInfo.tau.toas[0].soToa, 
@@ -124,7 +122,12 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     });
    this.setTimeoutLoad();
   }
-
+  openModal() {
+    this.modalOpen = true;
+  }
+  closeModal() {
+    this.modalOpen = false;
+  }
   loadToaTau(event: any, id: string, soToa: string) {
     this.danhSachToaRequest.hanhTrinhID = id;
     const tauInfo1 = this.dataSearch.find(item => item.id == id);
@@ -188,17 +191,10 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     })
   }
   loadThongTinGioVe(event:any, id:string, soGhe:string, maToa:string){
-     //Một chiều  
-    // this.machineService.getDatCho(this.datCho).subscribe(data =>{
-      console.log(maToa);
-      console.log(this.danhSachGheResponse);           
-    // })   
     const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === id);
     const existingGheDaDat1 = this.danhSachGheResponse.find(ghe => ghe.trangThai === '0');
-
     console.log(existingGheDaDat);
-    
-    if (!existingGheDaDat) {
+    if (!existingGheDaDat && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length < 5) {
     this.show=false;
     this.datCho.gaDi = this.dataSearch[0].gaDi;
     this.datCho.gaDen =this.dataSearch[0].gaDen;
@@ -211,12 +207,8 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.datCho.trangThai ="DAT_CHO";
       this.machineService.getDatCho(this.datCho).subscribe(data => {
         // Xử lý dữ liệu trả về từ API (nếu cần)
-
-        console.log(data);
-        
-      });
-      console.log(this.datCho);
-      
+        console.log(data);        
+      });  
     } else {
       // Phần tử đã tồn tại trong mảng
       // Thực hiện xử lý khi phần tử bị trùng
@@ -244,18 +236,20 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     };    
     const index = this.selectedSeats.indexOf(id);
     const index1 = this.selectedSeats.indexOf(soGhe);
-
-    // if (index !== -1 && index1 !==-1 ) {
-    //   this.selectedSeats.splice(index, 1);
-    // } else {
-    //   this.selectedSeats.push(id);
-    // }
-    if (index !== -1 && index1 !== -1) {
+    if (index !== -1 && index1 !== -1 && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length >= 5) {
       this.selectedSeats.splice(index, 1);
+      console.log(this.selectedSeats);
+      
     } else if (!this.selectedSeats.includes(id)) {
-      this.selectedSeats.push(id);
+      if(this.gheDaDatList.length + this.gheDaDatListKhuHoi.length < 5){
+        this.selectedSeats.push(id);
+      }
+      
     }
-    if (Array.isArray(this.gheDaDatList) && this.gheDaDatList) {
+    if(this.gheDaDatList && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length >= 5){
+      alert("Mỗi khách chỉ được đặt 5 vé")
+    }
+    else if (Array.isArray(this.gheDaDatList)) {
       const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === newGheDaDat.maGhe);
       if (!existingGheDaDat) {
         this.gheDaDatList = [...this.gheDaDatList, newGheDaDat];
@@ -264,25 +258,30 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     } else {
       this.gheDaDatList = [newGheDaDat];
       this.gheDaDatList1 = this.gheDaDatList;
+      alert("Khách hàng chỉ được đặt tối đa 5 vé")
     }
     this.selectedCarId = id;
   }
   loadThongTinGioVeKhuHoi(event:any, id:string, soGhe:string){
-    
-    //Một chiều
-  this.showKhuHoi=false
-   this.datCho.gaDi = this.dataSearchVe[0].gaDi;
-   this.datCho.gaDen =this.dataSearchVe[0].gaDen;
-   this.datCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
-   this.datCho.maGhe = id;
-   this.datCho.tenTau = this.tauInfoKhuHoi.tenTau;
-   this.datCho.ngayDi = this.dataSearchVe[0].ngayDi;
-   this.datCho.gioDi = this.dataSearchVe[0].gioDi;
-   this.datCho.gioDen = this.dataSearchVe[0].gioDen;
-   this.datCho.trangThai ="DAT_CHO";
-   this.machineService.getDatCho(this.datCho).subscribe(data =>{
-     
-   })
+    const existingGheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === id);
+    if (!existingGheDaDat && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length < 5){
+      this.showKhuHoi=false
+      this.datCho.gaDi = this.dataSearchVe[0].gaDi;
+      this.datCho.gaDen =this.dataSearchVe[0].gaDen;
+      this.datCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
+      this.datCho.maGhe = id;
+      this.datCho.tenTau = this.tauInfoKhuHoi.tenTau;
+      this.datCho.ngayDi = this.dataSearchVe[0].ngayDi;
+      this.datCho.gioDi = this.dataSearchVe[0].gioDi;
+      this.datCho.gioDen = this.dataSearchVe[0].gioDen;
+      this.datCho.trangThai ="DAT_CHO";
+      this.machineService.getDatCho(this.datCho).subscribe(data =>{
+        
+      })
+    }else {
+      console.log('Phần tử đã tồn tại trong mảng');
+    }    
+ 
    const newGheDaDatKhuHoi = {
      tenTau: this.tauInfoKhuHoi.tenTau,
      gaDi: this.dataSearchVe[0].gaDi,
@@ -305,28 +304,25 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
    };
    const index = this.selectedSeatId.indexOf(id);
    const index1 = this.selectedSeatId.indexOf(soGhe);
-   if (index !== -1 && index1 !==-1 ) {
+   if (index !== -1 && index1 !==-1 && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length >= 5) {
      this.selectedSeatId.splice(index, 1);
    } else if(!this.selectedSeats.includes(id)) {
-     this.selectedSeatId.push(id);
+    if(this.gheDaDatListKhuHoi.length + this.gheDaDatList.length < 5){
+      this.selectedSeatId.push(id);
+    }
+     
    }
-  //  if(Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi){
-  //    this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi]; 
-  //    console.log(this.gheDaDatListKhuHoi);
-  //    // sử dụng spread operator để sao chép mảng và thêm phần tử mới
-  //  } else { 
-  //    this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
-  //  }
-
-  if (Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi) {
+  if(this.gheDaDatListKhuHoi && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length >= 5){
+    alert("Mỗi khách chỉ được đặt 5 vé")
+  }
+  else if (Array.isArray(this.gheDaDatListKhuHoi) && this.gheDaDatListKhuHoi) {
     const existingGheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === newGheDaDatKhuHoi.maGhe);
     if (!existingGheDaDat) {
       this.gheDaDatListKhuHoi = [...this.gheDaDatListKhuHoi, newGheDaDatKhuHoi];
-      this.gheDaDatList1 = this.gheDaDatListKhuHoi;
     }
   } else {
     this.gheDaDatListKhuHoi = [newGheDaDatKhuHoi];
-    this.gheDaDatList1 = this.gheDaDatListKhuHoi;
+    alert("Khách hàng chỉ được đặt tối đa 5 vé")
   }
  }
   btnDelete(maGhe:string, soGhe:string, ){
@@ -394,14 +390,17 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       }
     }, 1000);
   }
+  getTotalItemCount(): number {
+    return this.gheDaDatList.length + this.gheDaDatListKhuHoi.length;
+}
 
   onSubmit(){
-
     if(this.gheDaDatList.length <=0 && this.gheDaDatListKhuHoi.length <=0 ){
       alert("Không có vé để mua")
     }
-    // const arrayC = [...this.gheDaDatList, ...this.gheDaDatListKhuHoi]
-    // console.log(arrayC);
+    else if(this.gheDaDatList.length + this.gheDaDatListKhuHoi.length > 5){
+      alert("Mỗi khách chỉ đặt được tối đa 5 vé")
+    }
     else{
       this.router.navigate(['/thanhtoan'], { queryParams: { data: JSON.stringify(this.gheDaDatList),
         gheDaDatListKhuHoi: JSON.stringify(this.gheDaDatListKhuHoi)

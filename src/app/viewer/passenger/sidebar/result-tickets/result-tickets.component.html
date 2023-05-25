@@ -4,7 +4,72 @@
         <strong class="ng-binding">Chiều đi:</strong> ngày {{ hanhTrinhInfo.ngayDi }} từ {{hanhTrinhInfo.gaDi}} đến
         {{hanhTrinhInfo.gaDen}}
     </span>
-
+    <div class="social-media order-lg-last" style="float: right;">
+        <p class="mb-0 d-flex">
+            <a (click)="openModal()" class="d-flex align-items-center justify-content-center shopping-cart-icon">
+                <span class="fa fa-shopping-bag">
+                    <span class="badge badge-count">{{ getTotalItemCount() }}</span>
+                    <i class="sr-only">Shopping Cart</i>
+                </span>
+            </a>
+        </p>
+    </div>
+      <div class="modal" [(ngModel)]="modalOpen" (ngModelChange)="closeModal()" [class.show]="modalOpen">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Giỏ vé</h2>
+                    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 450px; overflow: auto; padding-top: 5px;">
+                    <!-- Add your desired content here -->
+                    <h3>Thông tin vé</h3>
+                    <form>
+                      <div class="form-group">
+                          <h5 [hidden]="show">Chiều đi</h5>
+                          <div *ngFor="let loads of gheDaDatList">
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}}
+                                  {{loads.gaDi}} - {{loads.gaDen}}</label><br>
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}}
+                                  {{loads.gioDi}}</label><br>
+                              <span (click)="btnDelete( loads.maGhe, loads.soGhe)" class="fa fa-trash-o"
+                                  style="font-weight: 900; float: right; padding-right: 20px;">
+                              </span>
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số
+                                  Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
+                              <p>=====================================================</p>
+                          </div>
+                          <h5 [hidden]="showKhuHoi">Chiều về</h5>
+                          <div *ngFor="let loads of gheDaDatListKhuHoi">
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}}
+                                  {{loads.gaDi}} - {{loads.gaDen}}</label><br>
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}}
+                                  {{loads.gioDi}}</label><br>
+                              <span (click)="btnDeleteKhuHoi( loads.maGhe, loads.soGhe)" class="fa fa-trash-o"
+                                  style="font-weight: 900; float: right; padding-right: 20px;">
+                              </span>
+                              <label for="departure-station"
+                                  style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số
+                                  Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
+                              <p>====================================</p>
+                          </div>
+                          <div style="display: flex; justify-content: center;">
+                              <button type="submit" (click)="onSubmit()">Mua vé</button>
+                          </div>
+                      </div>
+                  </form>
+                  </div>
+            </div>
+        </div>
+    </div>
+   
     <div class="row et-train-list" style="margin-top: 20px; margin-left: 20px;">
         <div class="previous-train et-col-md-1 text-center">
             <div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}"
@@ -90,44 +155,9 @@
                     <div class="et-arrow-right"></div>
                 </div>
             </div>
-
-            <div class="panel panel-warning" style=" margin-bottom: 15px; float: right ;margin-right:15px;border-radius: 15px; width: 30%;">
-                <div class="panel-heading" style="background-color:  rgba(73, 123, 254, 1) !important; border-top-right-radius:15px; border-top-left-radius: 15px;">
-                  <h3 class="panel-title" style="font-size: 25px;">Giỏ Vé</h3>
-                </div>
-                <div class="panel-body" style="max-height: 85px; overflow: auto; margin-right: 5px;">
-                  <form >
-                    <div class="form-group">
-                        <h5 [hidden]="show">Chiều đi</h5>
-                        <div *ngFor="let loads of gheDaDatList">
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}</label><br>
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}} {{loads.gioDi}}</label><br>
-                            <span (click)="btnDelete( loads.maGhe, loads.soGhe)" class="fa fa-trash-o" style="font-weight: 900; float: right; padding-right: 20px;">
-                                <!-- <span *ngIf="timeRemaining > 0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{ timeRemaining }}</span> -->
-                            </span>
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
-                            <p>====================================</p>
-                        </div>
-                        <h5 [hidden]="showKhuHoi">Chiều về</h5>
-                        <div *ngFor="let loads of gheDaDatListKhuHoi">
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.tenTau}} {{loads.gaDi}} - {{loads.gaDen}}</label><br>
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{loads.ngayDi}} {{loads.gioDi}}</label><br>
-                            <span (click)="btnDeleteKhuHoi( loads.maGhe, loads.soGhe)" class="fa fa-trash-o" style="font-weight: 900; float: right; padding-right: 20px;">
-                                <!-- <span *ngIf="timeRemaining > 0" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">{{ timeRemaining }}</span> -->
-                            </span>
-                            <label for="departure-station" style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Tên toa: {{loads.tenToa}} Số Toa: {{loads.soToa}} Số ghế: {{loads.soGhe}}</label>
-                            <p>====================================</p>
-                        </div>
-                    </div>
-                  </form>
-                  <div style="display: flex; justify-content: center;">
-                    <button type="submit" (click)="onSubmit()">Mua vé</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        
-    </div>
+            </div>
+            
+            </div>
 
     <!-- <li *ngFor="let tau of tauList"> -->
     <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
