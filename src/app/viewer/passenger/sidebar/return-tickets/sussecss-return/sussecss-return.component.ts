@@ -42,7 +42,7 @@ export class SussecssReturnComponent implements OnInit {
   getTotalPrice() {
     let total = 0;
     for (let i = 0; i < this.dataConfirmTraVe.length; i++) {
-      total += this.dataConfirmTraVe[i].donGia + 1000;
+      total += this.dataConfirmTraVe[i].donGia;
     }
     return total;
   }

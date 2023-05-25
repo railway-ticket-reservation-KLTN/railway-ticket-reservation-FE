@@ -161,7 +161,7 @@
 
     <!-- <li *ngFor="let tau of tauList"> -->
     <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
-        <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeList"
+        <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeList.slice().reverse() let i = index;"
             (click)="loadToaGhe($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                 ng-click="doiToaMoi(toa, false)"
@@ -463,6 +463,10 @@
 
     <!-- <li *ngFor="let tau of tauList"> -->
     <div class="col-md-12 et-no-margin"><!-- ngRepeat: toa in searchData.tauDi.ToaXes -->
+        <div class="et-car-block">
+            <div class="et-car-icon et-flip-img"><img src="https://dsvn.vn/images/train2.png"></div>
+            <div class="text-center text-info et-car-label ng-binding">{{tauInfoKhuHoi?.tenTau}}</div>
+        </div>
         <div class="et-car-block ng-scope" *ngFor="let toaXe of toaXeListKhuHoi"
             (click)="loadToaGheKhuHoi($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
@@ -473,10 +477,6 @@
             <div class="text-center text-info et-car-label ng-binding">{{toaXe.soToa}}</div>
         </div><!-- end ngRepeat: toa in searchData.tauDi.ToaXes -->
 
-        <div class="et-car-block">
-            <div class="et-car-icon"><img src="https://dsvn.vn/images/train2.png"></div>
-            <div class="text-center text-info et-car-label ng-binding">{{tauInfoKhuHoi?.tenTau}}</div>
-        </div>
         <div ng-show="searchData.tauDi.HasCheapTicket" class="text-center ng-binding ng-hide"
             style="color:#bf8c01;cursor:pointer" ng-click="openTauGiaRe(searchData.tauDi, 0)"></div>
     </div>
