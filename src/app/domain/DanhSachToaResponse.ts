@@ -4,5 +4,5 @@ export class DanhSachToaResponse{
     moTaToa:string;
     soLuongGhe:string;
     ten_toa:string;
-    tênTau:string;
+    tenTau:string;
 }

@@ -7768,8 +7768,8 @@ select {
 
 .et-col-90 {
     width: 90%;
-    float: left;
-    min-height: 1px
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .et-col-100 {

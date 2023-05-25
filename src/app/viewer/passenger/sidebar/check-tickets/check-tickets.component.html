@@ -23,17 +23,16 @@
                     <input type="text" 
                         class="form-control ng-pristine ng-valid" 
                         [(ngModel)]="kiemTraVeRequest.maVe"
-                        placeholder="Nhập mã vé gồm 8 hoặc 9 ký tự số" id="maVe" 
+                        placeholder="Nhập mã vé gồm 8 hoặc 10 ký tự số" id="maVe" 
                         required
-                        pattern="[0-9]{8,9}"
+                        pattern="[0-9]{8,10}"
                         #maVeInput="ngModel"
                         [ngClass]="{ 'error': maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) }"
                         (input)="isErrormaVe = maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) ? true : false">
                 </div>
                 <div *ngIf="maVeInput.invalid && (maVeInput.dirty || maVeInput.touched)">
                     <span *ngIf="maVeInput.errors?.['pattern']" class="error-message">
-                        Vui lòng nhập mã vé chính xác 8
-                        hoặc 9 ký tự số
+                        Vui lòng nhập mã vé chính xác 10 ký tự số
                     </span>
                   </div>
             </div>
@@ -339,6 +338,9 @@
                     
                 </tbody>
             </table>
+            <div ng-show="isValidTicket" class="ng-hide mt-1" [hidden]="showResult">
+                <a (click)="btnprint()" class="btn btn-primary ng-binding">In</a>
+            </div>
             <!--Giao dien cho mobile-->
             <!-- ngRepeat: item in items -->
         </div>

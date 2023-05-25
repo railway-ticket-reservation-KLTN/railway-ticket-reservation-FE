@@ -18,7 +18,7 @@
             <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" analytics-on="click"
                 analytics-event="SelectTrain" *ngFor="let search of dataSearch"
                 (click)="loadToaTau($event, search.id, search.soToa)" >
-                <div class="et-train-head et-train-head-selected" >
+                <div class="et-train-head" [ngClass]="{'et-train-head-selected': search.tau.tenTau === danhsachToaResponse.tenTau}" >
                     <div class="row center-block" style="width: 40%; margin-bottom: 3px">
                         <div class="et-train-lamp text-center ng-binding"
                             ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85);">
@@ -135,7 +135,7 @@
             (click)="loadToaGhe($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                 ng-click="doiToaMoi(toa, false)"
-                ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
+                [ngClass]="{'et-car-icon-selected': toaXe.soToa == danhsachToaResponse.soToa}">
                 <img src="https://dsvn.vn/images/trainCar2.png">
             </div>
             <div class="text-center text-info et-car-label ng-binding">{{toaXe.soToa}}</div>
@@ -153,18 +153,8 @@
         <h4 class="ng-binding" style="font-weight: bold;">Toa số {{danhsachToaResponse.soToa}} :
             {{danhsachToaResponse.moTaToa}} </h4>
     </div>
-    <div class="et-col-5">
-        <div class="et-car-previous-floor text-center" ng-click="previousCar()">&lt;</div>
-    </div>
-
-    <div class="et-col-90">
-        <div class="et-full-width et-car-loading ng-hide" ng-show="!seatMap[0].Status">
-            <div class="row text-capitalize text-center">
-            </div>
-            <!-- <div class="row text-center"><span class="ng-binding">Đang tải thông tin toa</span></div> -->
-        </div>
-        <div class="row et-car-floor">
-            <div class="et-car-door"></div>
+    <div class="et-col-90" style="margin-top: 110px;">
+        <div class="et-car-floor" style="margin: 0 auto;">
             <div class="et-car-nm-64-half-block">
                 <div class="et-full-width">
                     <div class="et-car-nm-64-sit ng-isolate-scope"
@@ -172,7 +162,7 @@
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 && selectedSeats.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai != '1'}"                                >
+                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 && selectedSeats.indexOf(ghes.trangThai) ==-1 || ghes.trangThai == '2' , 'et-sit-blocked': ghes.trangThai != '1'}"                                >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -195,7 +185,7 @@
                         *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe, ghes.toa.id)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1, 'et-sit-blocked': ghes.trangThai != '1'}" 
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 || ghes.trangThai == '2', 'et-sit-blocked': ghes.trangThai != '1'}" 
                                 >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
@@ -211,10 +201,6 @@
            
             <div class="et-car-door"></div>
         </div>
-    </div>
-
-    <div class="et-col-5">
-        <div class="et-car-next-floor text-center" ng-click="nextCar()">&gt;</div>
     </div>
     <div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px">
         <div class="et-col-md-12">
@@ -367,7 +353,7 @@
             <div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" analytics-on="click"
                 analytics-event="SelectTrain" *ngFor="let search of dataSearchVe"
                 (click)="loadToaTauKhuHoi($event, search.id, search.soToa)" >
-                <div class="et-train-head et-train-head-selected">
+                <div class="et-train-head" [ngClass]="{'et-train-head-selected': search.tau.tenTau === danhsachToaResponseKhuHoi.tenTau}">
                     <div class="row center-block" style="width: 40%; margin-bottom: 3px">
                         <div class="et-train-lamp text-center ng-binding"
                             ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85);">
@@ -451,7 +437,7 @@
             (click)="loadToaGheKhuHoi($event, toaXe.maToa, toaXe.soToa, toaXe.tenTau)">
             <div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable"
                 ng-click="doiToaMoi(toa, false)"
-                ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
+                [ngClass]="{'et-car-icon-selected': toaXe.soToa == danhsachToaResponseKhuHoi.soToa}">
                 <img src="https://dsvn.vn/images/trainCar2.png">
             </div>
             <div class="text-center text-info et-car-label ng-binding">{{toaXe.soToa}}</div>
@@ -469,17 +455,7 @@
         <h4 class="ng-binding" style="font-weight: bold;">Toa số {{danhsachToaResponseKhuHoi.soToa}} :
             {{danhsachToaResponseKhuHoi.moTaToa}} </h4>
     </div>
-
-    <div class="et-col-5">
-        <div class="et-car-previous-floor text-center" ng-click="previousCar()">&lt;</div>
-    </div>
-
-    <div class="et-col-90">
-        <div class="et-full-width et-car-loading ng-hide" ng-show="!seatMap[0].Status">
-            <div class="row text-capitalize text-center">
-            </div>
-            <!-- <div class="row text-center"><span class="ng-binding">Đang tải thông tin toa</span></div> -->
-        </div>
+    <div class="et-col-90" style="margin-top: 110px;">
         <div class="row et-car-floor">
             <div class="et-car-door"></div>
             <div class="et-car-nm-64-half-block">
@@ -527,10 +503,6 @@
             </div>
             <div class="et-car-door"></div>
         </div>
-    </div>
-
-    <div class="et-col-5">
-        <div class="et-car-next-floor text-center" ng-click="nextCar()">&gt;</div>
     </div>
     <div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px">
         <div class="et-col-md-12">

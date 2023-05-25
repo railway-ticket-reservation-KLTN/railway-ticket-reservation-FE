@@ -44,8 +44,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-4 col-md-4">
                     <div class="form-group" ng-class="{'has-error': maVeError}">
-                        <span class="control-label ng-binding ng-hide" [hidden]="Error">Vui lòng nhập mã vé chính xác 8
-                            hoặc 9 ký tự số<!--Vui lòng nhập mã vé chính xác 8 hoặc 9 ký tự số--></span>
+                        <span class="control-label ng-binding ng-hide" [hidden]="Error">Vui lòng nhập mã vé chính xác 10 ký tự số<!--Vui lòng nhập mã vé chính xác 8 hoặc 9 ký tự số--></span>
                         <input type="text" 
                             class="form-control ng-pristine ng-valid" 
                             ng-disabled="isRequesting" 
@@ -54,7 +53,7 @@
                             placeholder="Nhập mã đặt vé" 
                             id="maVe" 
                             required
-                            pattern="[0-9]{8,9}"
+                            pattern="[0-9]{8,10}"
                             #maVeInput="ngModel"
                             [ngClass]="{ 'error': maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) }"
                             (input)="isErrormaVe = maVeInput.invalid && (maVeInput.dirty || maVeInput.touched) ? true : false"
@@ -63,8 +62,7 @@
                     </div>
                     <div *ngIf="maVeInput.invalid && (maVeInput.dirty || maVeInput.touched)">
                         <span *ngIf="maVeInput.errors?.['pattern']" class="error-message">
-                            Vui lòng nhập mã vé chính xác 8
-                            hoặc 9 ký tự số
+                            Vui lòng nhập mã vé chính xác 10 ký tự số
                         </span>
                       </div>
                 </div>

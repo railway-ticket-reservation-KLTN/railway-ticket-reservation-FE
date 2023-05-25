@@ -26,6 +26,8 @@ export class CheckTicketsComponent implements OnInit {
   isError!:boolean;
   isErrorGaDen!:boolean;
   isErrorsoGiayTo!:boolean;
+  dataRequest:any;
+  dataArray:any[] = [];
   constructor(
     private machineService: MachineService
   ) { }
@@ -57,5 +59,40 @@ export class CheckTicketsComponent implements OnInit {
       })
 
   }
+
+  btnprint(){
+    this.dataRequest = {
+      maVe: this.kiemTraVeInfo.maVe,
+      tenHanhKhach: this.kiemTraVeInfo.tenHanhKhach,
+      soGiayTo: this.kiemTraVeInfo.soGiayTo,
+      donGia: this.kiemTraVeInfo.donGia,
+      doiTuong: this.kiemTraVeInfo.doiTuong,
+      tenTau: this.kiemTraVeInfo.tenTau,
+      soGhe: this.kiemTraVeInfo.soGhe,
+      soToa: this.kiemTraVeInfo.soToa,
+      gaDi: this.kiemTraVeInfo.hanhTrinh.gaDi,
+      gaDen:this.kiemTraVeInfo.hanhTrinh.gaDen,
+      ngayDi: this.kiemTraVeInfo.hanhTrinh.ngayDi,
+      gioDi: this.kiemTraVeInfo.hanhTrinh.gioDi,
+    }
+    this.dataArray.push(this.dataRequest);
+  this.machineService.getPDFInve(this.dataArray).subscribe(data => {
+    console.log(data);
+    const pdf = new Blob([data], { type: 'application/pdf' });
+    const blobUrl = URL.createObjectURL(pdf);
+    const iframe = document.createElement('iframe');
+    iframe.id = 'print';
+    iframe.style.display = 'none';
+    iframe.src = blobUrl;
+    document.body.appendChild(iframe);
+    iframe.onload = () => {
+      const contentWindow = iframe.contentWindow;
+      if (contentWindow) {
+        contentWindow.print();
+      }
+    };
+  });
+  
+}
  
 }
