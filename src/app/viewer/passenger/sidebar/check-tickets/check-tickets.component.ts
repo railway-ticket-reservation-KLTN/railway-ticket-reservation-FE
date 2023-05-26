@@ -13,6 +13,7 @@ export class CheckTicketsComponent implements OnInit {
   kiemTraVeInfo = new KiemTraVeInfo();
   hanhTrinhInfo = new HanhTrinh();
   htmlHienThiLabel = "";
+  htmlTrangThaiVe ="";
   kiemTraVeRequest = new KiemTraVeRequest();
   hidenSuccess = true;
   hidenError = true;
@@ -51,6 +52,23 @@ export class CheckTicketsComponent implements OnInit {
       console.log(this.kiemTraVeInfo);
       if(data != null) {
         this.htmlHienThiLabel = `Thông tin vé`;
+      }
+      switch (data.tinhTrang) {
+        case "DA_MUA":
+          this.htmlTrangThaiVe = "Đã thanh toán";
+          break;
+        case "HET_HAN_THANH_TOAN":
+          this.htmlTrangThaiVe = "Hết hạn thanh toán vé";
+          break;
+        case "CHUA_THANH_TOAN":
+          this.htmlTrangThaiVe = "Chưa thanh toán";
+          break;
+        case "DA_TRA_VE":
+          this.htmlTrangThaiVe = "Đã trả";
+          break;
+        default:
+          this.htmlTrangThaiVe = "";
+          break;
       }
     },
       (error) => {

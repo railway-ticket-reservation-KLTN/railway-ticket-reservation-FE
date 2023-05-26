@@ -48,13 +48,6 @@ export class MachineService {
     return this.http.post<KiemTraVeInfo>(url, kiemTraVeRequest, this.httpOptions).pipe(
       map((response: KiemTraVeInfo) => {
         // Thay đổi giá trị thuộc tính DA_THANH_TOAN trên đối tượng kết quả trả về
-        if( response.tinhTrang == 'CHUA_THANH_TOAN'){
-          response.tinhTrang = 'Chưa thanh toán';
-        }
-        else{
-          response.tinhTrang = 'Đã mua';
-        }
-       
         return response;
       })
     );

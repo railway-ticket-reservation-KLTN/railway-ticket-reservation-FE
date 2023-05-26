@@ -154,7 +154,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let loads of nhanVien | filter: searchText; let i = index">
+            <tr *ngFor="let loads of nhanVien | filter: searchText | paginate: {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+              }; let i = index">
               <td>{{i+1}}</td>
               <td>{{loads.tenTaiKhoan}}</td>
               <td>{{loads.loaiTK}}</td>
@@ -240,6 +244,14 @@
           <!-- ngRepeat: group in successGroup -->
         </table>
       </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
     </div>
   </div>
 </div>

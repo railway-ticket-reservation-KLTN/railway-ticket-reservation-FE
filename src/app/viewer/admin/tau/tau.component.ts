@@ -11,6 +11,12 @@ import { NgZone } from '@angular/core';
   styleUrls: ['./tau.component.css']
 })
 export class TauComponent implements OnInit {
+  page: number = 1;
+  filteredHanhTrinh: any[];
+
+  count: number = 0;
+  tableSize: number = 10;
+  tableSizes: any = [3, 6, 9, 12];
   HanhTrinh:any[];
   isError!:boolean;
   isErrorGioDi!:boolean;
@@ -63,7 +69,21 @@ themHanhTrinh:any
       
     })
   }
-
+  
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.loadData();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.loadData();
+  }
+  filterData(filteredGaDi: string) {
+    this.filteredHanhTrinh = this.HanhTrinh.filter(loads =>
+      (loads.gaDi.includes(filteredGaDi))
+    );
+  }
   btnDelete(){
 
     console.log(this.selectedLoads);

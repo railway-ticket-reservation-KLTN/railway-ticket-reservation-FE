@@ -179,10 +179,8 @@
                                   </div>
                 </div>
             </div>
-            <div class="col-md-12 text-right">
-                <p>
-                    <button (click)="btnSearch()" [disabled]="isErrormaVe || isErrorhoTen || isErroremail ||isErrorsoGiayTo || isErrorsdt" class="btn btn-primary ng-binding">Tìm kiếm</button></p>
-                <hr >
+            <div class="col-md-12 text-right" style="text-align: right;">
+                <button (click)="btnSearch()" [disabled]="isErrormaVe || isErrorhoTen || isErroremail ||isErrorsoGiayTo || isErrorsdt" class="btn btn-primary ng-binding">Tìm kiếm</button>
             </div>
         </div>
     </div>
@@ -244,14 +242,10 @@
                     </tr>
                     
                 </tbody>
-                <!-- ngRepeat: group in successGroup -->
             </table>
         </div>
     </div>
-    <!-- <div class="col-md-12 text-info" ng-show="successGroup.length > 0 || pendingGroup.length > 0">
-        <div ng-bind-html="'PReturnTicket_huongDanHoTro'|translate:bookingCode">
-        </div>
-    </div> -->
+
 
     <div _ngcontent-ybq-c94="" class="col-md-12" [hidden]="Susscess">
         <div _ngcontent-ybq-c94="" class="row">
@@ -295,10 +289,8 @@
                         class="form-control ng-pristine ng-valid ng-untouched"></div>
             </div>
         </div>
-        <div class="col-md-12 text-right">
-            <p><button class="btn btn-primary ng-binding" (click)="btnNext()" >Tiếp tục</button>
-            </p>
-            <hr>
+        <div class="col-md-12 text-right" style="text-align: right;">
+            <button class="btn btn-primary ng-binding" (click)="btnNext()" >Tiếp tục</button>
         </div>
     </div>
 </div>

@@ -10,8 +10,10 @@
             <button class="btn btn-danger" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">Xóa</button>
             <button (click)="openModal()" type="button" class="btn btn-success" style="margin-right: 50px; margin-bottom: 5px;">Thêm</button>
             <input type="text" class="searchInput" name="btnSearch" [(ngModel)]="searchText" id="searchInput" placeholder="Tìm kiếm hành trình..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
-            <input type="text" class="searchInput" name="gaDiFilter" [(ngModel)]="filteredGaDi" placeholder="Lọc theo ga đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
-            <input type="text" class="searchInput" name="gaDenFilter" [(ngModel)]="filteredGaDen" placeholder="Lọc theo ga đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+            <!-- <input type="text" class="searchInput" name="gaDiFilter" [(ngModel)]="filteredGaDi" placeholder="Lọc theo ga đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;"> -->
+            <!-- <input type="text" class="searchInput" name="gaDenFilter" [(ngModel)]="filteredGaDen" placeholder="Lọc theo ga đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;"> -->
+            <input type="text" (input)="filterData(filteredGaDi)"  [(ngModel)]="filteredGaDi" placeholder="Tìm kiếm">
+
             <input type="date" class="searchInput" name="ngayDiFilter" [(ngModel)]="filteredNgayDi" placeholder="Lọc theo ngày đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
             <input type="date" class="searchInput" name="ngayDenFilter" [(ngModel)]="filteredNgayDen" placeholder="Lọc theo ngày đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
@@ -263,9 +265,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let loads of HanhTrinh | filter: searchText; let i = index">
-                      <ng-container *ngIf="(loads.gaDi.includes(filteredGaDi) || filteredGaDi === '') && (loads.gaDen.includes(filteredGaDen) || filteredGaDen === '') && (loads.ngayDi.includes(filteredNgayDi) || filteredNgayDi === '') && (loads.ngayDen.includes(filteredNgayDen) || filteredNgayDen === '')">
-
+                  <tr *ngFor="let loads of HanhTrinh | filter: searchText | paginate: {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  }; let i = index">
                         <td>{{i+1}}</td>
                         <td>{{loads.tau.tenTau}}</td>
                         <td>{{loads.tau.soLuongToa}}</td>
@@ -283,8 +287,6 @@
                           <button (click)="openModal1(loads)" type="button" class="btn btn-secondary">Sửa</button>
 
                         </td>
-                      </ng-container>
-
                     </tr>
                     <div class="modal" [class.show]="modalOpen1">
                       <div class="modal-dialog">
@@ -458,6 +460,14 @@
                 </tbody>
                 <!-- ngRepeat: group in successGroup -->
             </table>
+        </div>
+        <div class="d-flex justify-content-center">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+          </pagination-controls>
         </div>
     </div>
   </div>

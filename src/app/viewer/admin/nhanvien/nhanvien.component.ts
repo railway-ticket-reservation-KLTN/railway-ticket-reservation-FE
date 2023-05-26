@@ -11,6 +11,10 @@ import { NgZone } from '@angular/core';
   styleUrls: ['./nhanvien.component.css']
 })
 export class NhanvienComponent implements OnInit {
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 3;
+  tableSizes: any = [3, 6, 9, 12];
 nhanVien:any[];
 editedData:any
 searchText:string;
@@ -65,6 +69,15 @@ isErrorsdt!:boolean;
   }
   openModal() {
     this.modalOpen = true;
+  }
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.loadData();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.loadData();
   }
   openModal1(loads:any) {
     this.modalOpen1 = true;    

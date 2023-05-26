@@ -7,7 +7,17 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "src",  
+    "public": "dist/sell-train-tickets",
+    "rewrites": [
+      {
+        "source": "/login",
+        "destination": "/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",

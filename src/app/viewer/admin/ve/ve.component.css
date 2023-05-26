@@ -23,14 +23,14 @@
     }
   }
 
-  :host>>>.container-fluid.page{
+  :host >>> .container-fluid.page{
     height: 100% !important;
   }
-  :host>>>.page__content.shadow.p-3.position-relative{
+  :host >>> .page__content.shadow.p-3.position-relative{
     height: 100% !important;
   }
-  :host>>>.d-flex.page__box.p-3.mt-2{
-    background-color:rgba(73, 123, 254, 1) !important;
+  :host >>> .d-flex.page__box.p-3.mt-2 {
+    background-color: rgba(73, 123, 254, 1) !important;
   }
   .image-section {
     /* background-image: url("images/railway-banner-set-vector-edited-1.png"); */
