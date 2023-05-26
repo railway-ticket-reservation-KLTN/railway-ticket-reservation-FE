@@ -6762,7 +6762,13 @@ body,html {
   color: #fff;
   font-size: 14px;
 }
-
+.searchInput{
+  border: 1px solid #ccc;
+  outline: none;
+  height: 40px;
+  background-color: #fff;
+  font-weight: 700;
+}
 .et-table-group-header {
   background-color: #dbedf7;
   color: #0082c0

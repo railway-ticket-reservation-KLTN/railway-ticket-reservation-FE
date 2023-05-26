@@ -9,7 +9,9 @@
       <div ng-show="successGroup.length > 0" class="ng-hide">
         <button class="btn btn-danger" (click)="btnDelete()" value="Xóa"
           style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">Xóa</button>
-        <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
+        <button (click)="openModal()" type="button" class="btn btn-success" style="margin-right: 305px">Thêm</button>
+        <input type="text" class="searchInput" name="btnSearch" [(ngModel)]="searchText" id="searchInput" placeholder="Tìm kiếm nhân viên..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+
         <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách tài khoản</h5>
 
         <div class="modal" [(ngModel)]="modalOpen" (ngModelChange)="closeModal()" [class.show]="modalOpen">
@@ -152,7 +154,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let loads of nhanVien; let i = index">
+            <tr *ngFor="let loads of nhanVien | filter: searchText; let i = index">
               <td>{{i+1}}</td>
               <td>{{loads.tenTaiKhoan}}</td>
               <td>{{loads.loaiTK}}</td>

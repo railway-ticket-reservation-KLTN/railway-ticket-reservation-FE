@@ -12,7 +12,17 @@ import { NgZone } from '@angular/core';
 })
 export class TauComponent implements OnInit {
   HanhTrinh:any[];
+  isError!:boolean;
+  isErrorGioDi!:boolean;
+  isErrorGiaVe!:boolean;
+  isErrorGioDen!:boolean;
+  isErrorGaDen!:boolean;
+  filteredGaDi: string = '';
+  filteredGaDen: string = '';
+  filteredNgayDi: string = '';
+  filteredNgayDen: string = '';
   Tau:any[]=[];
+  searchText:string;
   isShow= true;
   modalOpen = false;
   modalOpen1 = false;
@@ -135,37 +145,42 @@ themHanhTrinh:any
   }
 
   onThemClick(){
-    let danhSachTau: any[] = [];
+   
+    if(this.checkDuplicatePassengers()){
+      let danhSachTau: any[] = [];
     
-    console.log(this.hanhTrinhRequest);
-
-    let tau: any = {
-      "id":this.hanhTrinhRequest.id,
-      "gaDi": this.hanhTrinhRequest.gaDi,
-      "gaDen": this.hanhTrinhRequest.gaDen,
-      "ngayDi": this.hanhTrinhRequest.ngayDi,
-      "ngayDen": this.hanhTrinhRequest.ngayDen,
-      "gioDi": this.hanhTrinhRequest.gioDi,
-      "gioDen": this.hanhTrinhRequest.gioDen,
-      "trangThai": this.hanhTrinhRequest.trangThai,
-      "giaVe": this.hanhTrinhRequest.giaVe,
-      "tau": {
-          "id": this.hanhTrinhRequest.tau.id,
-          "tenTau": this.hanhTrinhRequest.tau.tenTau
-      }
-  };
-    danhSachTau.push(tau);
-    console.log(danhSachTau);
-
-    this.service.themHanhTrinh(danhSachTau).subscribe(data =>{
-      this.modalOpen = false;
-      this.ngZone.run(() => {
-        // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
-        this.loadData();
-      });
+      console.log(this.hanhTrinhRequest);
+  
+      let tau: any = {
+        "id":this.hanhTrinhRequest.id,
+        "gaDi": this.hanhTrinhRequest.gaDi,
+        "gaDen": this.hanhTrinhRequest.gaDen,
+        "ngayDi": this.hanhTrinhRequest.ngayDi,
+        "ngayDen": this.hanhTrinhRequest.ngayDen,
+        "gioDi": this.hanhTrinhRequest.gioDi,
+        "gioDen": this.hanhTrinhRequest.gioDen,
+        "trangThai": this.hanhTrinhRequest.trangThai,
+        "giaVe": this.hanhTrinhRequest.giaVe,
+        "tau": {
+            "id": this.hanhTrinhRequest.tau.id,
+            "tenTau": this.hanhTrinhRequest.tau.tenTau
+        }
+    };
+      danhSachTau.push(tau);
+      console.log(danhSachTau);
+  
+      this.service.themHanhTrinh(danhSachTau).subscribe(data =>{
+        this.modalOpen = false;
+        this.ngZone.run(() => {
+          // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
+          this.loadData();
+        });
+        
+      })
       
-    })
-    
+    }else{
+      alert("Yêu cầu nhập đầy đủ thông tin")
+    }
   }
   onCapNhatClick(){
       console.log(this.hanhTrinhRequest1);
@@ -200,4 +215,14 @@ themHanhTrinh:any
       
     });
   }
+
+  checkDuplicatePassengers(){
+    if(!this.hanhTrinhRequest.gaDi || !this.hanhTrinhRequest.gaDen || !this.hanhTrinhRequest.ngayDi ||
+      !this.hanhTrinhRequest.ngayDen || !this.hanhTrinhRequest.gioDi || !this.hanhTrinhRequest.gioDen || !this.hanhTrinhRequest.giaVe || !this.hanhTrinhRequest.tau
+      ){
+        return false;
+      }
+      return true;
+  }
+  
 }

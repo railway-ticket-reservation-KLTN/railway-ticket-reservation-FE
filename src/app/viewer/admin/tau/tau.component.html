@@ -8,7 +8,12 @@
       <div class="col-md-12 table-responsive list-ticket-desktop" style="padding-top: 70px;">
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <button class="btn btn-danger" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">Xóa</button>
-            <button (click)="openModal()" type="button" class="btn btn-success">Thêm</button>
+            <button (click)="openModal()" type="button" class="btn btn-success" style="margin-right: 50px; margin-bottom: 5px;">Thêm</button>
+            <input type="text" class="searchInput" name="btnSearch" [(ngModel)]="searchText" id="searchInput" placeholder="Tìm kiếm hành trình..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+            <input type="text" class="searchInput" name="gaDiFilter" [(ngModel)]="filteredGaDi" placeholder="Lọc theo ga đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+            <input type="text" class="searchInput" name="gaDenFilter" [(ngModel)]="filteredGaDen" placeholder="Lọc theo ga đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+            <input type="date" class="searchInput" name="ngayDiFilter" [(ngModel)]="filteredNgayDi" placeholder="Lọc theo ngày đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+            <input type="date" class="searchInput" name="ngayDenFilter" [(ngModel)]="filteredNgayDen" placeholder="Lọc theo ngày đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
 
 <!-- Modal Popup -->
@@ -27,7 +32,11 @@
         <div class="form-group">
             <label for="gaDi">Ga đi:</label>
             <input placeholder="Ga đi" list="stations"
-            required #cus_class="ngModel" type="text" id="gaDi" [(ngModel)]="hanhTrinhRequest.gaDi" class="form-control">
+            required type="text" id="gaDi" [(ngModel)]="hanhTrinhRequest.gaDi" class="form-control"
+            pattern="^[^0-9]+$"
+            #gaDiInput="ngModel"
+            [ngClass]="{ 'error': gaDiInput.invalid && (gaDiInput.dirty || gaDiInput.touched) }"
+            (input)="isError = gaDiInput.invalid && (gaDiInput.dirty || gaDiInput.touched) ? true : false">
             <datalist id="stations">
               <option value="Lào Cai"></option>
               <option value="Phố Lú"></option>
@@ -83,11 +92,23 @@
   
             </datalist>
           </div>
-          
+          <div *ngIf="gaDiInput.invalid && (gaDiInput.dirty || gaDiInput.touched)">
+            <span *ngIf="gaDiInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+              Chỉ cho phép nhập chữ cái.
+            </span>
+          <!-- <span *ngIf="searchForm.controls['machineSearch.gaDi'].invalid && (searchForm.controls['machineSearch.gaDi'].dirty || searchForm.controls['machineSearch.gaDi'].touched)">
+            Vui lòng chỉ nhập ký tự không phải số.
+          </span> -->
+        </div>
           <div class="form-group">
             <label for="gaDen">Ga đến:</label>
             <input placeholder="Ga đến" list="stations-arivel"
-            required #depStation="ngModel" type="text" id="gaDen" [(ngModel)]="hanhTrinhRequest.gaDen" class="form-control">
+             type="text" id="gaDen" [(ngModel)]="hanhTrinhRequest.gaDen" class="form-control"
+             pattern="^[^0-9]+$"
+             required
+             #gaDenInput="ngModel"
+             [ngClass]="{ 'error': gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched) }"
+             (input)="isErrorGaDen = gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched) ? true : false" >
             <datalist id="stations-arivel">
               <option value="Lào Cai"></option>
               <option value="Phố Lú"></option>
@@ -142,14 +163,44 @@
               <option value="Sài Gòn"></option>
             </datalist>
           </div>
+
+          <div *ngIf="gaDenInput.invalid && (gaDenInput.dirty || gaDenInput.touched)">
+            <span *ngIf="gaDenInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+              Chỉ cho phép nhập chữ cái.
+          </span>
+        </div>
           <div class="form-group">
             <label for="gioDi">Giờ đi:</label>
-            <input placeholder="00:00:00" type="text" id="gioDi" [(ngModel)]="hanhTrinhRequest.gioDi" class="form-control">
+            <input placeholder="00:00:00" type="text" id="gioDi" [(ngModel)]="hanhTrinhRequest.gioDi" class="form-control"
+            required
+            pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            #gioDiInput="ngModel"
+            [ngClass]="{ 'error': gioDiInput.invalid && (gioDiInput.dirty || gioDiInput.touched) }"
+            (input)="isErrorGioDi = gioDiInput.invalid && (gioDiInput.dirty || gioDiInput.touched) ? true : false" >
+            
           </div>
+
+          <div *ngIf="gioDiInput.invalid && (gioDiInput.dirty || gioDiInput.touched)">
+            <span *ngIf="gioDiInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+              Nhập giờ theo đúng định dạng giờ:phút:giây
+          </span>
+        </div>
           <div class="form-group">
             <label for="gioDen">Giờ đến:</label>
-            <input placeholder="00:00:00" type="text" id="gioDen" [(ngModel)]="hanhTrinhRequest.gioDen" class="form-control">
+            <input placeholder="00:00:00" type="text" id="gioDen" [(ngModel)]="hanhTrinhRequest.gioDen" class="form-control"
+            required
+            pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+            #gioDenInput="ngModel"
+            [ngClass]="{ 'error': gioDenInput.invalid && (gioDenInput.dirty || gioDenInput.touched) }"
+            (input)="isErrorGioDen = gioDenInput.invalid && (gioDenInput.dirty || gioDenInput.touched) ? true : false" >
+            
           </div>
+
+          <div *ngIf="gioDenInput.invalid && (gioDenInput.dirty || gioDenInput.touched)">
+            <span *ngIf="gioDenInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+              Nhập giờ theo đúng định dạng giờ:phút:giây
+          </span>
+        </div>
           <div class="form-group">
             <label for="ngayDi">Ngày đi:</label>
             <input  type="date" id="ngayDi" [(ngModel)]="hanhTrinhRequest.ngayDi" class="form-control" min="{{ minDate }}">
@@ -160,12 +211,25 @@
           </div>
           <div class="form-group">
             <label for="tinhTrang">Trạng thái:</label>
-            <input type="number" id="trangThai" [(ngModel)]="hanhTrinhRequest.trangThai" class="form-control">
+            <input type="number" id="trangThai" [(ngModel)]="hanhTrinhRequest.trangThai" class="form-control" disabled>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="giaVe">Giá vé</label>
             <input placeholder="Giá vé" type="number" id="giaVe" [(ngModel)]="hanhTrinhRequest.giaVe" class="form-control">
-          </div>
+          </div> -->
+          <div class="form-group">
+            <label for="giaVe">Giá vé</label>
+            <input placeholder="Giá vé" type="text" id="giaVe" [(ngModel)]="hanhTrinhRequest.giaVe" class="form-control"
+                   required pattern="^\d+(\.\d{1,2})?$" 
+                   #giaVeInput="ngModel"
+                   [ngClass]="{ 'error': giaVeInput.invalid && (giaVeInput.dirty || giaVeInput.touched) }"
+                   (input)="isErrorGiaVe = giaVeInput.invalid && (giaVeInput.dirty || giaVeInput.touched) ? true : false">
+        </div>
+        <div *ngIf="giaVeInput.invalid && (giaVeInput.dirty || giaVeInput.touched)">
+          <span *ngIf="giaVeInput.errors?.['pattern']" class="error-message" style="color: #F33A00;">
+            Nhập giá vé là số không âm
+        </span>
+      </div>
           <div class="form-group">
             <label for="tenTau">Tàu</label>
             <select id="tenTau"  class="form-control" [(ngModel)]="hanhTrinhRequest.tau">
@@ -175,7 +239,7 @@
             </select>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" (click)="onThemClick()">Thêm</button>
+            <button class="btn btn-primary" [disabled]="isError || isErrorGioDi || isErrorGiaVe || isErrorGioDen || isErrorGaDen" (click)="onThemClick()">Thêm</button>
           </div>
       </div>
     </div>
@@ -199,7 +263,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let loads of HanhTrinh; let i = index">
+                    <tr *ngFor="let loads of HanhTrinh | filter: searchText; let i = index">
+                      <ng-container *ngIf="(loads.gaDi.includes(filteredGaDi) || filteredGaDi === '') && (loads.gaDen.includes(filteredGaDen) || filteredGaDen === '') && (loads.ngayDi.includes(filteredNgayDi) || filteredNgayDi === '') && (loads.ngayDen.includes(filteredNgayDen) || filteredNgayDen === '')">
+
                         <td>{{i+1}}</td>
                         <td>{{loads.tau.tenTau}}</td>
                         <td>{{loads.tau.soLuongToa}}</td>
@@ -217,6 +283,8 @@
                           <button (click)="openModal1(loads)" type="button" class="btn btn-secondary">Sửa</button>
 
                         </td>
+                      </ng-container>
+
                     </tr>
                     <div class="modal" [class.show]="modalOpen1">
                       <div class="modal-dialog">

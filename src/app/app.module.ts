@@ -63,6 +63,8 @@ import { ChartComponent } from './viewer/admin/chart/chart.component';
 import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/quydinhvanchuyen/quydinhvanchuyen.component';
 import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/muavetructuyen/muavetructuyen.component';
 import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -107,6 +109,7 @@ import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulati
   imports: [
     BrowserModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
     FormsModule,
     NgbModule,
     HttpClientModule,

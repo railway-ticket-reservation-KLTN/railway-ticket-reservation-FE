@@ -13,6 +13,7 @@ import { NgZone } from '@angular/core';
 export class NhanvienComponent implements OnInit {
 nhanVien:any[];
 editedData:any
+searchText:string;
 isShow=true;
 modalOpen = false;
 modalOpen1 = false;

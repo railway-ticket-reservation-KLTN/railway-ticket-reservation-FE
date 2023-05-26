@@ -6684,6 +6684,13 @@ button.close {
   filter: none;
   border-bottom: 1px solid #59822c
 }
+.searchInput{
+  border: 1px solid #ccc;
+  outline: none;
+  height: 40px;
+  background-color: #fff;
+  font-weight: 700;
+}
 
 .btn-info {
   background-image: -webkit-linear-gradient(#04519b,#033c73 60%,#02325f);
@@ -6804,7 +6811,6 @@ body,html {
 .et-table-cell {
   vertical-align: middle!important
 }
-
 .et-table-header {
   background-color: #497BFE; 
   font-size: 14px; 
