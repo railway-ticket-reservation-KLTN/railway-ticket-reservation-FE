@@ -167,9 +167,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gaDen = this.dataSearchLoadToa.gaDen;
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
-      this.danhSachGheResponse = data;
-      console.log(this.danhSachGheResponse);
-      
+      this.danhSachGheResponse = data;      
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);
       this.danhsachToaResponse = gheInFo;      
     })
@@ -193,7 +191,6 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   loadThongTinGioVe(event:any, id:string, soGhe:string, maToa:string){
     const existingGheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === id);
     const existingGheDaDat1 = this.danhSachGheResponse.find(ghe => ghe.trangThai === '0');
-    console.log(existingGheDaDat);
     if (!existingGheDaDat && this.gheDaDatList.length + this.gheDaDatListKhuHoi.length < 5) {
     this.show=false;
     this.datCho.gaDi = this.dataSearch[0].gaDi;
@@ -207,7 +204,6 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.datCho.trangThai ="DAT_CHO";
       this.machineService.getDatCho(this.datCho).subscribe(data => {
         // Xử lý dữ liệu trả về từ API (nếu cần)
-        console.log(data);        
       });  
     } else {
       // Phần tử đã tồn tại trong mảng
@@ -337,7 +333,6 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.traCho.gioDen = this.dataSearch[0].gioDen;
     this.traCho.trangThai ="DAT_CHO";
     this.machineService.traCho(this.traCho).subscribe(data =>{
-      console.log(data);
       
     });
     const index = this.selectedSeats.indexOf(soGhe);

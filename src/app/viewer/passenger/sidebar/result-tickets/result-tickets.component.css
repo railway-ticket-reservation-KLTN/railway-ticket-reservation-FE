@@ -2100,7 +2100,15 @@ button {
         width: 90%!important
     }
 }
-
+.et-main-label {
+    /* background: url(/images/label_bg.png) right bottom no-repeat #0082c4; */
+    padding: 5px 40px 5px 10px;
+    margin-left: 5px;
+    background-color: #0082c0;
+    color: #fff;
+    font-family: Verdana
+  }
+  
 @media (min-width: 1200px) {
     .et-col-5 {
         width:5%!important

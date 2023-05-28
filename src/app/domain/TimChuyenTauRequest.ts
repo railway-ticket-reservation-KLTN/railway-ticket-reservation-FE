@@ -9,6 +9,6 @@ export class TimChuyenTauRequest{
         this.gaDen="";
         this.ngayDi="";
         this.ngayVe="";
-        this.loaiHanhTrinh=""
+        this.loaiHanhTrinh="MOT_CHIEU"
     }
 }

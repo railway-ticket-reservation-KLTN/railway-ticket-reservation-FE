@@ -171,11 +171,11 @@
           <label for="return-date">Ngày về:</label>
           <input type="date" [disabled]="isCheck" [(ngModel)]="machineSearch.ngayVe" id="return-date" name="return-date"
             min="{{ machineSearch.ngayDi }}" required
+
                pattern="^\d{4}-\d{2}-\d{2}$"
              #ngayVeInput="ngModel"
              [ngClass]="{ 'error': ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched) }"
              (input)="isErrorNgayDen = ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched) ? true : false"
-             
              >
         </div>
         <div *ngIf="ngayVeInput.invalid && (ngayVeInput.dirty || ngayVeInput.touched)">
