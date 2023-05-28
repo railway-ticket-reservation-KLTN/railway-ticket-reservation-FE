@@ -64,10 +64,13 @@ import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulation
 import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/muavetructuyen/muavetructuyen.component';
 import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { CustomFilterPipe } from './service/custom-filter';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    CustomFilterPipe ,
     HomeComponent,
     FindTicketsComponent,
     PayTicketsComponent,

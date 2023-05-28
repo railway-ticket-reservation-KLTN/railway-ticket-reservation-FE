@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemHanhTrinhRequest } from 'src/app/domain/admin/ThemHanhTrinhRequest';
 import { MachineService } from 'src/app/service/machine-service.service';
 import { OtherAdminService } from 'src/app/service/other-admin-service';
 import { NgZone } from '@angular/core';
+import { CustomFilterPipe } from 'src/app/service/custom-filter';
 
 @Component({
   selector: 'app-tau',
   templateUrl: './tau.component.html',
-  styleUrls: ['./tau.component.css']
+  styleUrls: ['./tau.component.css'],
+  providers: [CustomFilterPipe] // Thêm CustomFilterPipe vào providers
+
 })
-export class TauComponent implements OnInit {
+export class TauComponent implements OnInit  {
   page: number = 1;
   filteredHanhTrinh: any[];
-
   count: number = 0;
-  tableSize: number = 10;
+  tableSize: number = 50;
   tableSizes: any = [3, 6, 9, 12];
   HanhTrinh:any[];
   isError!:boolean;
@@ -44,7 +46,8 @@ themHanhTrinh:any
     private _dialog: MatDialog,
     private service:OtherAdminService,
     private serviceKH:MachineService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private customFilter:CustomFilterPipe,
   ) {
     const today = new Date();
     const year = today.getFullYear();
@@ -52,6 +55,7 @@ themHanhTrinh:any
     const day = today.getDate();
     this.minDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
   }
+
   ngOnInit() {
     this.service.getDanhSachHanhTrinh().subscribe(data =>{
       console.log(data);
@@ -106,6 +110,7 @@ themHanhTrinh:any
   btnAdd(){
 
   }
+
   btnEdit(){
 
   }
@@ -116,7 +121,6 @@ themHanhTrinh:any
   closeModal() {
     this.modalOpen = false;
   }
-
   openModal1(loads:any) {
     this.modalOpen1 = true;
     console.log(loads);
@@ -244,5 +248,21 @@ themHanhTrinh:any
       }
       return true;
   }
+  // Trong thành phần TypeScript
+applyFilter() {
+  this.filteredHanhTrinh = this.HanhTrinh.filter((load: any) => {
+    const search = this.searchText.toLowerCase();
+    const matchTenTau = load.tau.tenTau.toLowerCase().includes(search);
+    const matchGaDi = load.gaDi.toLowerCase().includes(search);
+    const matchGaDen = load.gaDen.toLowerCase().includes(search);
+    return matchTenTau || matchGaDi || matchGaDen;
+  });
+}
+isLoadMatched(load: any): boolean {
+  return this.filteredGaDi === '' || load.gaDi.toLowerCase().includes(this.filteredGaDi.toLowerCase());
+}
+
   
 }
+
+

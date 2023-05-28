@@ -9,13 +9,14 @@
         <div ng-show="successGroup.length > 0" class="ng-hide">
             <button class="btn btn-danger" (click)="btnDelete()" value="Xóa" style="float: right; background-color: #F33A00; outline: none;border: 1px solid #ccc; padding: 5px; border-radius: 5px; ">Xóa</button>
             <button (click)="openModal()" type="button" class="btn btn-success" style="margin-right: 50px; margin-bottom: 5px;">Thêm</button>
-            <input type="text" class="searchInput" name="btnSearch" [(ngModel)]="searchText" id="searchInput" placeholder="Tìm kiếm hành trình..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
-            <!-- <input type="text" class="searchInput" name="gaDiFilter" [(ngModel)]="filteredGaDi" placeholder="Lọc theo ga đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;"> -->
-            <!-- <input type="text" class="searchInput" name="gaDenFilter" [(ngModel)]="filteredGaDen" placeholder="Lọc theo ga đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;"> -->
-            <input type="text" (input)="filterData(filteredGaDi)"  [(ngModel)]="filteredGaDi" placeholder="Tìm kiếm">
+            <!-- <input type="text" class="searchInput" name="btnSearch" [(ngModel)]="searchText" id="searchInput" placeholder="Tìm kiếm hành trình..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;"> -->
+            <input type="text" class="searchInput" name="gaDiFilter" [(ngModel)]="filteredGaDi" placeholder="Lọc theo ga đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
 
+           
+            <input type="text" class="searchInput" name="gaDenFilter" [(ngModel)]="filteredGaDen" placeholder="Lọc theo ga đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
             <input type="date" class="searchInput" name="ngayDiFilter" [(ngModel)]="filteredNgayDi" placeholder="Lọc theo ngày đi..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
             <input type="date" class="searchInput" name="ngayDenFilter" [(ngModel)]="filteredNgayDen" placeholder="Lọc theo ngày đến..." style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px;">
+
             <h5 class="et-register-block ng-binding"><!--Các giao dịch thành công-->Danh sách hành trình</h5>
 
 <!-- Modal Popup -->
@@ -265,28 +266,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let loads of HanhTrinh | filter: searchText | paginate: {
-                    itemsPerPage: tableSize,
-                    currentPage: page,
-                    totalItems: count
-                  }; let i = index">
+                    <tr *ngFor="let load of HanhTrinh |customFilter:searchText:filteredGaDi: filteredGaDen: filteredNgayDi: filteredNgayDen | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
+                      <ng-container *ngIf="filteredGaDi === '' || isLoadMatched(load)">
                         <td>{{i+1}}</td>
-                        <td>{{loads.tau.tenTau}}</td>
-                        <td>{{loads.tau.soLuongToa}}</td>
-                        <td>{{loads.gaDi}}</td>
-                        <td>{{loads.gaDen}}</td>
-                        <td>{{loads.ngayDi}}</td>
-                        <td>{{loads.ngayDen}}</td>
-                        <td>{{loads.gioDi}}</td>
-                        <td>{{loads.gioDen}}</td>
-                        <td>{{loads.giaVe}}</td>
+                        <td>{{load.tau.tenTau}}</td>
+                        <td>{{load.tau.soLuongToa}}</td>
+                        <td>{{load.gaDi}}</td>
+                        <td>{{load.gaDen}}</td>
+                        <td>{{load.ngayDi}}</td>
+                        <td>{{load.ngayDen}}</td>
+                        <td>{{load.gioDi}}</td>
+                        <td>{{load.gioDen}}</td>
+                        <td>{{load.giaVe}}</td>
                         <td>   
-                            <input type="checkbox" (change)="selectLoad($event, loads)">
+                          <input type="checkbox" (change)="selectLoad($event, load)">
                         </td>
                         <td>
-                          <button (click)="openModal1(loads)" type="button" class="btn btn-secondary">Sửa</button>
-
+                          <button (click)="openModal1(load)" type="button" class="btn btn-secondary">Sửa</button>
                         </td>
+                      </ng-container>
                     </tr>
                     <div class="modal" [class.show]="modalOpen1">
                       <div class="modal-dialog">
