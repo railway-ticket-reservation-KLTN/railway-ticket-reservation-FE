@@ -2061,7 +2061,7 @@ button {
     }
 
     .et-main-label {
-        background-image: none!important;
+        background-image: #0082c4!important; 
         padding-right: 10px!important;
         margin-right: 5px!important
     }

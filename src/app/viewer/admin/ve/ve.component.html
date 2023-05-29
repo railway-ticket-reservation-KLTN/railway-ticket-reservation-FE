@@ -33,7 +33,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let loads of Ve; let i = index">
+                    <tr *ngFor="let loads of Ve | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
                       <td>   
                         <input type="checkbox" (change)="selectLoad($event, loads)">
                     </td>
@@ -94,7 +94,15 @@
                     
                 </tbody>
                 <!-- ngRepeat: group in successGroup -->
-            </table>        
+            </table>  
+            <div class="d-flex justify-content-center">
+              <pagination-controls
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="onTableDataChange($event)"
+              >
+              </pagination-controls>
+            </div>      
         </div>
     </div>
     </div>

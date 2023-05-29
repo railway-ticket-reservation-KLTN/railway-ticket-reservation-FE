@@ -14,6 +14,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VeComponent implements OnInit {
   Ve: any[];
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [3, 6, 9, 12];
   maDatCho: string;
   dataRequest: any[] = [];
   selectedLoads: any[] = [];
@@ -40,6 +44,15 @@ export class VeComponent implements OnInit {
       alert("Không có quyền truy cập")
 
     });
+  }
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.loadData();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.loadData();
   }
   selectLoad(event: any, load: any) {
     load.isSelected = event.target.checked;
@@ -138,15 +151,19 @@ export class VeComponent implements OnInit {
     console.log(this.maDatCho);
     this.service.getDSMaDatCho(this.maDatCho).subscribe(data => {
       console.log(data);
-
-    });
-    this.ngZone.run(() => {
-      // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
-      this.service.getDSMaDatCho(this.maDatCho).subscribe(data => {
-        this.Ve = data;
-
+      this.ngZone.run(() => {
+        // Gọi loadData() hoặc bất kỳ phương thức nào để load lại dữ liệu
+        this.service.getDSMaDatCho(this.maDatCho).subscribe(data => {
+          this.Ve = data;
+  
+        });
       });
+
+    }, (error) => {
+      alert("Không có có dữ liệu")
+
     });
+   
   }
 
 }

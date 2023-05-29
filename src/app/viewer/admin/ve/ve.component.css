@@ -6722,10 +6722,11 @@ body,html {
 }
 
 .et-table-header {
-  font-weight: 700;
-  color: #000;
-  background-color: #eee;
-  font-size: 12px
+  font-weight: bold;
+  color: #fff;
+  background-color: #497BFE;
+  font-size: 14px
+
 }
 
 .et-table-group-header {

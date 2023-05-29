@@ -180,4 +180,39 @@ import { ThemNhanVien } from "../domain/admin/ThemNhanVien";
         // Xử lý logic khi không có token
         return of(null);
       }
+      public getDanhSachVeTrongThang(): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.http.get<any>('http://localhost:8080/v1/admin/sovethang', { headers });
+        }
+        // Xử lý logic khi không có token
+        return of(null); 
+      }
+      public getDoanhThuTrongThang(): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.http.get<any>('http://localhost:8080/v1/admin/doanthuthang', { headers });
+        }
+        // Xử lý logic khi không có token
+        return of(null); 
+      }
+      public getDoanhThuTrongNam(): Observable<any[]> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          return this.http.get<any[]>('http://localhost:8080/v1/admin/doanthuthangtrongnam', { headers });
+        }
+        // Xử lý logic khi không có token
+        return of([]); 
+      }
+      
+
   }

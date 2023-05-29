@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart, ChartOptions, LinearScale } from 'chart.js';
 import 'chart.js/auto';
+import { OtherAdminService } from 'src/app/service/other-admin-service';
 @Component({
   selector: 'app-home-two',
   templateUrl: './home.component.html',
@@ -9,9 +10,41 @@ import 'chart.js/auto';
 
 export class HomeComponent {
   chart: Chart;
-
+  veTrongThang:any;
+  doanhThuTrongThang:any;
+  doanhThuThangTheoNam:any[];
+  formattedDoanhThu:any;
+  thang:any[];
+  doanhThu:any[];
   ngOnInit() {
     this.renderChart();
+    this.service.getDanhSachVeTrongThang().subscribe(data =>{
+      this.veTrongThang= data;
+      console.log(this.veTrongThang);
+      
+    });
+    this.service.getDoanhThuTrongThang().subscribe(data =>{
+      this.doanhThuTrongThang=data;
+      this.formattedDoanhThu = this.doanhThuTrongThang.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+
+      
+    });
+    this.service.getDoanhThuTrongNam().subscribe(data =>{
+      this.doanhThuThangTheoNam=data;
+      console.log(this.doanhThuThangTheoNam);
+      this.thang = this.doanhThuThangTheoNam.map(item => item.thang); // Tạo mảng tháng
+      this.doanhThu = this.doanhThuThangTheoNam.map(item => item.doanh_thu); // Tạo mảng doanh thu
+    console.log(this.thang)
+    console.log(this.doanhThu);
+  ;
+  
+      // Thêm mảng tháng vào mảng doanh thu
+    })
+  }
+  constructor(
+    private service:OtherAdminService
+  ){
+
   }
 
   renderChart() {
@@ -23,11 +56,11 @@ export class HomeComponent {
     }
   
     const data = {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5','Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'], // Ngày trong tháng
+      labels: this.thang, // Ngày trong tháng
       datasets: [
         {
           label: 'Tổng doanh thu', // Doanh thu
-          data: [100, 200, 150, 300, 250, 100, 200, 150, 300, 250], // Dữ liệu doanh thu
+          data: this.doanhThu, // Dữ liệu doanh thu
           backgroundColor: 'rgba(75, 192, 192, 0.5)', // Màu nền cột
           borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
           borderWidth: 1

@@ -3235,8 +3235,10 @@ select[multiple].input-lg,textarea.input-lg {
 
 .btn-success {
   color: #fff;
-  background-color: #73a839;
-  border-color: #73a839
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #27D724;
+  border-color: #27D724
 }
 
 .btn-success.active,.btn-success:active,.btn-success:focus,.btn-success:hover,.open>.dropdown-toggle.btn-success {
@@ -3313,8 +3315,10 @@ select[multiple].input-lg,textarea.input-lg {
 
 .btn-danger {
   color: #fff;
-  background-color: #c71c22;
-  border-color: #c71c22
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #F30F00;
+  border-color: #F30F00
 }
 
 .btn-danger.active,.btn-danger:active,.btn-danger:focus,.btn-danger:hover,.open>.dropdown-toggle.btn-danger {
@@ -6675,15 +6679,7 @@ button.close {
   border-bottom: 1px solid #178acc
 }
 
-.btn-success {
-  background-image: -webkit-linear-gradient(#88c149,#73a839 60%,#699934);
-  background-image: -o-linear-gradient(#88c149,#73a839 60%,#699934);
-  background-image: linear-gradient(#88c149,#73a839 60%,#699934);
-  background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff88c149', endColorstr='#ff699934', GradientType=0);
-  filter: none;
-  border-bottom: 1px solid #59822c
-}
+
 .searchInput{
   border: 1px solid #ccc;
   outline: none;
@@ -6712,15 +6708,7 @@ button.close {
   border-bottom: 1px solid #aa4200
 }
 
-.btn-danger {
-  background-image: -webkit-linear-gradient(#e12b31,#c71c22 60%,#b5191f);
-  background-image: -o-linear-gradient(#e12b31,#c71c22 60%,#b5191f);
-  background-image: linear-gradient(#e12b31,#c71c22 60%,#b5191f);
-  background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe12b31', endColorstr='#ffb5191f', GradientType=0);
-  filter: none;
-  border-bottom: 1px solid #9a161a
-}
+
 
 .panel-danger .panel-heading,.panel-danger .panel-title,.panel-info .panel-heading,.panel-info .panel-title,.panel-primary .panel-heading,.panel-primary .panel-title,.panel-success .panel-heading,.panel-success .panel-title,.panel-warning .panel-heading,.panel-warning .panel-title {
   color: #fff
