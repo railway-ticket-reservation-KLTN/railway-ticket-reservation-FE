@@ -25,7 +25,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   show=true;
   showKhuHoi=true;
   selectedCarId: string;
-
+  seat:any;
   // ticket = {
   //   tenToa : '',
   //   gaDi : '',
@@ -35,6 +35,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   //   soToa :  '',
   //   soGhe : '',
   // };
+  index:any;
   modalOpen = false;
   showResult = true;
   tauList: any[];
@@ -323,60 +324,85 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     alert("Khách hàng chỉ được đặt tối đa 5 vé")
   }
  }
+
   btnDelete(maGhe:string, soGhe:string, ){
+   console.log(this.gheDaDatList);
    
-    this.traCho.gaDi = this.dataSearch[0].gaDi;
-    this.traCho.gaDen =this.dataSearch[0].gaDen;
-    this.traCho.soToa = this.danhsachToaResponse.soToa;
-    this.traCho.maGhe = maGhe;
-    this.traCho.tenTau = this.tauInfo.tenTau;
-    this.traCho.ngayDi = this.dataSearch[0].ngayDi;
-    this.traCho.gioDi = this.dataSearch[0].gioDi;
-    this.traCho.gioDen = this.dataSearch[0].gioDen;
-    this.traCho.trangThai ="DAT_CHO";
-    this.machineService.traCho(this.traCho).subscribe(data =>{
-      
+    this.gheDaDatList.forEach((data) => {
+      if (data.maGhe == maGhe) {
+          this.traCho.gaDi = data.gaDi;
+          this.traCho.gaDen = data.gaDen;
+          this.traCho.soToa = data.soToa;
+          this.traCho.maGhe = data.maGhe;
+          this.traCho.tenTau = data.tenTau;
+          this.traCho.ngayDi = data.ngayDi;
+          this.traCho.gioDi = data.gioDi;
+          this.traCho.gioDen = data.gioDen;
+          this.traCho.trangThai = data.trangThai;
+          console.log(this.traCho);
+          this.index = this.selectedSeats.indexOf(maGhe);
+          this.gheDaDatList.splice(this.index, 1);
+          console.log(this.index);
+          this.selectedSeats.splice(this.index, 1);
+          this.machineService.traCho(this.traCho).subscribe(data =>{
     });
-    const index = this.selectedSeats.indexOf(soGhe);
     
-    this.gheDaDatList.splice(index, 1);
-    console.log(index);
-    this.selectedSeats.splice(index, 1);
-  
-    // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
-    const gheDaDat = this.gheDaDatList.find(ghe => ghe.maGhe === soGhe);
-  
-    if (gheDaDat) {
-      gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
-    }
+      }
+  });
+    
   }
   btnDeleteKhuHoi(maGhe:string, soGhe:string, ){
-    this.traCho.gaDi = this.dataSearchVe[0].gaDi;
-    this.traCho.gaDen =this.dataSearchVe[0].gaDen;
-    this.traCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
-    this.traCho.maGhe = maGhe;
-    this.traCho.tenTau = this.tauInfoKhuHoi.tenTau;
-    this.traCho.ngayDi = this.dataSearchVe[0].ngayDi;
-    this.traCho.gioDi = this.dataSearchVe[0].gioDi;
-    this.traCho.gioDen = this.dataSearchVe[0].gioDen;
-    this.traCho.trangThai ="DAT_CHO";
-    this.machineService.traCho(this.traCho).subscribe(data =>{
-      console.log(data);
-      
-    });
-    const index = this.selectedSeatId.indexOf(soGhe);
     
-    this.gheDaDatListKhuHoi.splice(index, 1);
-    console.log(index);
-    this.selectedSeatId.splice(index, 1);
+     this.gheDaDatListKhuHoi.forEach((data) => {
+       if (data.maGhe == maGhe) {
+           this.traCho.gaDi = data.gaDi;
+           this.traCho.gaDen = data.gaDen;
+           this.traCho.soToa = data.soToa;
+           this.traCho.maGhe = data.maGhe;
+           this.traCho.tenTau = data.tenTau;
+           this.traCho.ngayDi = data.ngayDi;
+           this.traCho.gioDi = data.gioDi;
+           this.traCho.gioDen = data.gioDen;
+           this.traCho.trangThai = data.trangThai;
+           console.log(this.traCho);
+           this.index = this.selectedSeatId.indexOf(maGhe);
+           this.gheDaDatListKhuHoi.splice(this.index, 1);
+           console.log(this.index);
+           this.selectedSeatId.splice(this.index, 1);
+           this.machineService.traCho(this.traCho).subscribe(data =>{
+     });
+     
+       }
+   });
+     
+   }
+  // btnDeleteKhuHoi(maGhe:string, soGhe:string, ){
+  //   this.traCho.gaDi = this.dataSearchVe[0].gaDi;
+  //   this.traCho.gaDen =this.dataSearchVe[0].gaDen;
+  //   this.traCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
+  //   this.traCho.maGhe = maGhe;
+  //   this.traCho.tenTau = this.tauInfoKhuHoi.tenTau;
+  //   this.traCho.ngayDi = this.dataSearchVe[0].ngayDi;
+  //   this.traCho.gioDi = this.dataSearchVe[0].gioDi;
+  //   this.traCho.gioDen = this.dataSearchVe[0].gioDen;
+  //   this.traCho.trangThai ="DAT_CHO";
+  //   this.machineService.traCho(this.traCho).subscribe(data =>{
+  //     console.log(data);
+      
+  //   });
+  //   const index = this.selectedSeatId.indexOf(soGhe);
+    
+  //   this.gheDaDatListKhuHoi.splice(index, 1);
+  //   console.log(index);
+  //   this.selectedSeatId.splice(index, 1);
   
-    // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
-    const gheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === maGhe);
+  //   // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
+  //   const gheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === maGhe);
   
-    if (gheDaDat) {
-      gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
-    }
-  }
+  //   if (gheDaDat) {
+  //     gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
+  //   }
+  // }
   
   setTimeoutLoad(){
     const countdown = setInterval(() => {
