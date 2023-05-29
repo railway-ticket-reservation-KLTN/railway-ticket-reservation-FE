@@ -34,14 +34,11 @@ export class HomeComponent {
       this.doanhThuThangTheoNam=data;
       console.log(this.doanhThuThangTheoNam); 
       if (this.doanhThuThangTheoNam) {
-        this.doanhThuThangTheoNam.forEach(doanhThuThang => {
-          this.thang.forEach(month =>{
-            if(month == doanhThuThang.thang) {
-              this.dataSetChart.push(doanhThuThang.doanh_thu);
-            }
+        this.thang.forEach(month => {
+          if(!this.pushDoanhThu(month)) {
             this.dataSetChart.push(0);
-          })
-      });
+          }
+        })
       } else {
         console.error("No data received from the service.");
       }
@@ -50,13 +47,24 @@ export class HomeComponent {
 
   ;
       })
+
+      console.log(this.dataSetChart);
+      
   }
   constructor(
     private service:OtherAdminService
   ){
 
   }
-
+  pushDoanhThu(month:any):Boolean {
+    for (let i = 0; i < this.doanhThuThangTheoNam.length; i++) {
+      if(month == this.doanhThuThangTheoNam[i].thang) {
+        this.dataSetChart.push(this.doanhThuThangTheoNam[i].doanh_thu);
+        return true;
+      }
+    }
+    return false;
+  }
   renderChart() {
 
     const canvas = <HTMLCanvasElement>document.getElementById('columnChart');
@@ -78,10 +86,7 @@ export class HomeComponent {
           borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
           borderWidth: 1
         }
-      ],
-     
-      
-      
+      ], 
     };
 
 // Thêm giá trị doanh thu vào mảng data.datasets[0].data
