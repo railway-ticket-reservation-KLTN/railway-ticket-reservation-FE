@@ -14,8 +14,11 @@ export class HomeComponent {
   doanhThuTrongThang:any;
   doanhThuThangTheoNam:any[]=[];
   formattedDoanhThu:any;
-  thang:any[]=[];
-  doanhThu:any[]=[];
+  thang:any[]=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  // doanhThu:any[]=[];
+  dataSetChart:any[]=[];
+  dataObject:any;
+
   ngOnInit() {
     this.renderChart();
     this.service.getDanhSachVeTrongThang().subscribe(data =>{
@@ -33,22 +36,31 @@ export class HomeComponent {
       this.doanhThuThangTheoNam=data;
       console.log(this.doanhThuThangTheoNam); 
       if (this.doanhThuThangTheoNam) {
-        for (let i = 0; i < this.doanhThuThangTheoNam.length; i++) {
-          this.thang.push(this.doanhThuThangTheoNam[i].thang);
-          this.thang = this.thang.slice(0, 1);
+        // for (let i = 0; i < this.doanhThuThangTheoNam.length; i++) {
+        //   this.thang.push(this.doanhThuThangTheoNam[i].thang);
+        //   this.thang = this.thang.slice(0, 1);
 
-          this.doanhThu.push(this.doanhThuThangTheoNam[i].doanh_thu);
-          this.thang = this.doanhThu.slice(0, 1);
+        //   this.doanhThu.push(this.doanhThuThangTheoNam[i].doanh_thu);
+        //   this.thang = this.doanhThu.slice(0, 1);
 
-        }
-        console.log(this.thang);
-        console.log(this.doanhThu);
+        // }
+        // console.log(this.thang);
+        // console.log(this.doanhThu);
+        this.doanhThuThangTheoNam.forEach(doanhThuThang => {
+          this.thang.forEach(month =>{
+            if(month == doanhThuThang.thang) {
+              this.dataSetChart.push(doanhThuThang.doanh_thu);
+            }
+            this.dataSetChart.push(0);
+          })
+      });
       } else {
         console.error("No data received from the service.");
       }
       this.chart.destroy();
       this.renderChart() 
       
+console.log(this.dataSetChart);
 
 
   ;
@@ -78,14 +90,18 @@ export class HomeComponent {
       datasets: [
         {
           label: 'Tổng doanh thu', // Doanh thu
-          data: this.doanhThu, // Dữ liệu doanh thu
+          data: this.dataSetChart, // Dữ liệu doanh thu
           backgroundColor: 'rgba(75, 192, 192, 0.5)', // Màu nền cột
           borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
           borderWidth: 1
         }
       ],
+      // datasets:this.dataSetChart
+     
+      
       
     };
+    console.log(this.dataSetChart);
 
 // Thêm giá trị doanh thu vào mảng data.datasets[0].data
 
