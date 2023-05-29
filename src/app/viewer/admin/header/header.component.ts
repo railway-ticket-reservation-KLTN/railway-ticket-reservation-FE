@@ -13,7 +13,7 @@ export class HeaderComponentAdmin implements OnInit {
     private route: ActivatedRoute) {}
 
   ngOnInit(){
-    const allowedUrls = ['home', 'dashboard','ves', 'taus', 'nhan-vien'];
+    const allowedUrls = ['home', 'dashboard','ves', 'taus', 'nhan-vien', 'thongke'];
     // const url = this.route.snapshot.url[0].path;
     // this.isShow = allowedUrls.includes(url);
 

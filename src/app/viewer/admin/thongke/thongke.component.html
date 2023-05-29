@@ -1,0 +1,66 @@
+<div class="container-fluid page">
+    <div class="page__content shadow p-3 position-relative">
+      <div class="main">
+        <div class="cards">
+          <div class="card">
+            <div class="card-content">
+              <div class="number">1111</div>
+              <div class="card-name">Vé trong tháng</div>
+            </div>
+            <div class="icon-box">
+              <i class="fa fa-users"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">222</div>
+              <div class="card-name">Doanh thu trong tháng</div>
+            </div>
+            <div class="icon-box">
+              <i class="fa fa-shopping-bag"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="number">68</div>
+              <div class="card-name">Vé đã hủy</div>
+            </div>
+            <div class="icon-box">
+                <i class="fa fa-trash"></i>
+            </div>
+          </div>
+
+         
+        </div>
+        
+        <select class="searchInput" name="namFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;" >
+            <option value="">-- Chọn năm --</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>        
+          <select class="searchInput" name="thangFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;">
+            <option value="0">Tất cả tháng</option>
+            <option value="1">Tháng 1</option>
+            <option value="2">Tháng 2</option>
+            <option value="3">Tháng 3</option>
+            <option value="4">Tháng 4</option>
+            <option value="5">Tháng 5</option>
+            <option value="6">Tháng 6</option>
+            <option value="7">Tháng 7</option>
+            <option value="8">Tháng 8</option>
+            <option value="9">Tháng 9</option>
+            <option value="10">Tháng 10</option>
+            <option value="11">Tháng 11</option>
+            <option value="12">Tháng 12</option>
+            <option value="13">Tháng 13</option>
+          </select>        
+          <div class="charts">
+          <div class="chart">
+            <canvas id="columnChart" width="900" height="900"></canvas>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  

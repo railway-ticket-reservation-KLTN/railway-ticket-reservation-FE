@@ -28,6 +28,7 @@ import { SussecssReturnComponent } from './viewer/passenger/sidebar/return-ticke
 import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/muavetructuyen/muavetructuyen.component';
 import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/quydinhvanchuyen/quydinhvanchuyen.component';
 import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
+import { ThongkeComponent } from './viewer/admin/thongke/thongke.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -57,6 +58,9 @@ const routes: Routes = [
   {path:'dieukienmuave', component:MuavetructuyenComponent},
   {path:'quydinhvanchuyen', component:QuydinhvanchuyenComponent},
   {path:'chinhsachhoantrave', component:ChinhsachhoantraveComponent},
+  {path:'thongke', component:ThongkeComponent},
+
+
 
   {
     path: 'home',

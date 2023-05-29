@@ -65,6 +65,7 @@ import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/
 import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CustomFilterPipe } from './service/custom-filter';
+import { ThongkeComponent } from './viewer/admin/thongke/thongke.component';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { CustomFilterPipe } from './service/custom-filter';
     ChartComponent,
     QuydinhvanchuyenComponent,
     MuavetructuyenComponent,
-    ChinhsachhoantraveComponent
+    ChinhsachhoantraveComponent,
+    ThongkeComponent
   ],
   imports: [
     BrowserModule,
