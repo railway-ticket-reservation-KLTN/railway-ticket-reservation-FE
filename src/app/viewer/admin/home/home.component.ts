@@ -15,9 +15,7 @@ export class HomeComponent {
   doanhThuThangTheoNam:any[]=[];
   formattedDoanhThu:any;
   thang:any[]=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  // doanhThu:any[]=[];
   dataSetChart:any[]=[];
-  dataObject:any;
 
   ngOnInit() {
     this.renderChart();
@@ -36,16 +34,6 @@ export class HomeComponent {
       this.doanhThuThangTheoNam=data;
       console.log(this.doanhThuThangTheoNam); 
       if (this.doanhThuThangTheoNam) {
-        // for (let i = 0; i < this.doanhThuThangTheoNam.length; i++) {
-        //   this.thang.push(this.doanhThuThangTheoNam[i].thang);
-        //   this.thang = this.thang.slice(0, 1);
-
-        //   this.doanhThu.push(this.doanhThuThangTheoNam[i].doanh_thu);
-        //   this.thang = this.doanhThu.slice(0, 1);
-
-        // }
-        // console.log(this.thang);
-        // console.log(this.doanhThu);
         this.doanhThuThangTheoNam.forEach(doanhThuThang => {
           this.thang.forEach(month =>{
             if(month == doanhThuThang.thang) {
@@ -59,14 +47,9 @@ export class HomeComponent {
       }
       this.chart.destroy();
       this.renderChart() 
-      
-console.log(this.dataSetChart);
-
 
   ;
-  
-      // Thêm mảng tháng vào mảng doanh thu
-    })
+      })
   }
   constructor(
     private service:OtherAdminService
@@ -96,19 +79,12 @@ console.log(this.dataSetChart);
           borderWidth: 1
         }
       ],
-      // datasets:this.dataSetChart
      
       
       
     };
-    console.log(this.dataSetChart);
 
 // Thêm giá trị doanh thu vào mảng data.datasets[0].data
-
-
-    
-
-
     const options: ChartOptions = {
       scales: {
         y: {
