@@ -167,7 +167,9 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gaDen = this.dataSearchLoadToa.gaDen;
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
-      this.danhSachGheResponse = data;      
+      this.danhSachGheResponse = data;     
+      console.log(this.danhSachGheResponse);
+       
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);
       this.danhsachToaResponse = gheInFo;      
     })

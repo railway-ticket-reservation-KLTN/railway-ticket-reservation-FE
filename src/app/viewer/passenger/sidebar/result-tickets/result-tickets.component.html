@@ -192,7 +192,7 @@
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 && selectedSeats.indexOf(ghes.trangThai) ==-1 || ghes.trangThai == '2' , 'et-sit-blocked': ghes.trangThai != '1'}"                                >
+                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 && selectedSeats.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai == '0', 'et-sit-buying1':ghes.trangThai == '2'}"                                >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán" title="Giá vé : 50000" data-bs-toggle="tooltip"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -215,7 +215,7 @@
                         *ngFor="let ghes of danhSachGheResponse | slice:27:64 " (click)="loadThongTinGioVe($event, ghes.id, ghes.soGhe, ghes.toa.id)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 || ghes.trangThai == '2', 'et-sit-blocked': ghes.trangThai != '1'}" 
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeats.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeats.indexOf(ghes.id) !== -1 || ghes.trangThai == '2', 'et-sit-blocked': ghes.trangThai == '0', 'et-sit-buying1':ghes.trangThai == '2'}" 
                                 >
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán" title="Giá vé : 50000" data-bs-toggle="tooltip"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
@@ -495,7 +495,7 @@
                         <div class="et-car-seat-left et-seat-h-35" analytics-on="click" analytics-event="SelectTicket">
                             <div class="et-col-16 et-sit-side"></div>
                             <div class="et-col-84 et-sit-sur-outer">
-                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeatId.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeatId.indexOf(ghes.id) !== -1 && selectedSeatId.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai != '1'}">
+                                <div class="et-sit-sur text-center et-sit-avaiable" [ngClass]="{'et-sit-avaiable': selectedSeatId.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeatId.indexOf(ghes.id) !== -1 && selectedSeatId.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai == '0', 'et-sit-buying1':ghes.trangThai == '2'}">
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán" title="Giá vé : 50000" data-bs-toggle="tooltip"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
@@ -519,7 +519,7 @@
                         *ngFor="let ghes of danhSachGheResponseKhuHoi | slice:27:64 " (click)="loadThongTinGioVeKhuHoi($event, ghes.id, ghes.soGhe)">
                         <div class="et-car-seat-right et-seat-h-35" analytics-on="click">
                             <div class="et-col-84 et-sit-sur-outer-invert">
-                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeatId.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeatId.indexOf(ghes.id) !== -1 && selectedSeatId.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai != '1'}">
+                                <div class="et-sit-sur-invert text-center et-sit-avaiable"  [ngClass]="{'et-sit-avaiable': selectedSeatId.indexOf(ghes.id) === -1, 'et-sit-buying': selectedSeatId.indexOf(ghes.id) !== -1 && selectedSeatId.indexOf(ghes.trangThai) ==-1 , 'et-sit-blocked': ghes.trangThai == '0', 'et-sit-buying1':ghes.trangThai == '2'}">
                                     <div data-popover="Chỗ đã bán" data-popover-title="Chỗ đã bán" title="Giá vé : 50000" data-bs-toggle="tooltip"
                                         data-popover-trigger="mouseenter" data-popover-placement="top"
                                         class="et-sit-no ng-scope"><span ng-show="!seat.waiting"
