@@ -53,7 +53,8 @@
                         <div class="ng-binding">Toa: {{ves.soToa}} chỗ số: {{ves.soGhe}}</div>
                     </td>
                     <td class="et-table-cell et-text-md ng-binding" [innerHTML] ="htmlTinhTrangThanhToan"></td>
-                    <td class="et-table-cell text-right ng-binding">{{ves.donGia}}</td>
+                    <td class="et-table-cell text-right ng-binding">{{(ves.donGia).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                    </td>
                 </tr><!-- end ngRepeat: book in group -->
             </tbody><!-- end ngRepeat: group in bookingGroup -->
             <tfoot>

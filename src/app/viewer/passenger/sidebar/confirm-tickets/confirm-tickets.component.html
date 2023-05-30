@@ -97,7 +97,7 @@
                                     </div>
                                 </td> -->
                                 <td rowspan="" class="et-table-cell text-right ng-binding">
-                                    {{loads.giaVe}}
+                                    {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </td>
                                 <!-- <td class="et-table-cell text-center" style="border-bottom: solid 2px #ccc;">
                                     
@@ -118,7 +118,7 @@
                         </button>
                     </td>-->
                                 <td rowspan="" class="et-table-cell text-right ng-binding">
-                                    {{loads.giaVe}}
+                                    {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </td>
                             </tr>
                             <!-- ngRepeat: dichVu in listDichVuByTicket[ve.seat.Status.TicketId] --><!-- end ngRepeat: ve in ves.chieuDi -->
@@ -158,7 +158,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="" class="et-table-cell text-right ng-binding">
-                                    {{loads.giaVe}}
+                                    {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </td>
                                 <!-- <td class="et-table-cell text-center" style="border-bottom: solid 2px #ccc;">
                                    
@@ -179,7 +179,7 @@
                         </button>
                     </td>-->
                                 <td rowspan="" class="et-table-cell text-right ng-binding">
-                                    {{loads.giaVe}}
+                                    {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </td>
                             </tr>
                             <!-- ngRepeat: ve in ves.chieuVe -->
@@ -191,7 +191,8 @@
                                             tiền<!--Tổng tiền--></strong></span>
                                 </td>
                                 <td colspan="5" class="text-right">
-                                    <strong class="ng-binding">{{getTotalPrice()}} VNĐ</strong>
+                                    <strong class="ng-binding">{{(getTotalPrice()).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                                    </strong>
                                 </td>
                             </tr>
                         </tfoot>

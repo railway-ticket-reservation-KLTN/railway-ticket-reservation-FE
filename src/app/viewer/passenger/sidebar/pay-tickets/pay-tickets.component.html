@@ -173,14 +173,14 @@
                                 </div>
                             </td>
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
-                                {{loads.giaVe}}
+                                {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                             </td>
                             <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0
                             </td> -->
                             <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
                                 <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
-                                    {{(loads.giaVe)}}
+                                    {{(loads.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </div>
 
                             </td>
@@ -320,14 +320,14 @@
                                 </div>
                             </td>
                             <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
-                                {{loads1.giaVe}}
+                                {{(loads1.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                             </td>
                             <!-- <td class="et-table-cell text-right ng-binding" style="border-bottom: solid 2px #ccc;">
                                 0
                             </td> -->
                             <td class="et-table-cell text-left" style="border-bottom: solid 2px #ccc;">
                                 <div ng-show="!ve.isloadedKhuyenMai" class="ng-binding ng-hide">
-                                    {{(loads1.giaVe )}}
+                                    {{(loads1.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
                                 </div>
 
                             </td>
@@ -354,7 +354,8 @@
                                 </div>
                             </td>
                             <td class="text-right">
-                                <strong class="ng-binding"> {{ getTotalPrice() }}</strong>
+                                <strong class="ng-binding">{{(getTotalPrice()).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                                </strong>
                             </td>
                             <td>&nbsp;</td>
                         </tr>

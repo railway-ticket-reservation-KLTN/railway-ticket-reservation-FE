@@ -67,7 +67,7 @@ export class SussecssTicketsComponent implements OnInit {
     xacnhanthongtinveInfo.veTaus.forEach(veTau => {
       this.tongGia += veTau.donGia;
     });
-    this.htmlTinhTongTien = `${this.tongGia}`;
+    this.htmlTinhTongTien = `${this.tongGia.toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}`;
   }
   btnprint(){
     for (let i = 0; i < this.xacnhanthongtinveInfo.veTaus.length; i++) {
