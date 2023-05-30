@@ -13,7 +13,7 @@
           </div>
           <div class="card">
             <div class="card-content">
-              <div class="number">{{doanhThu}}</div>
+              <div class="number">{{doanhThuFilter}}</div>
               <div class="card-name">Doanh thu </div>
             </div>
             <div class="icon-box">
@@ -52,9 +52,12 @@
             <option value="11">Tháng 11</option>
             <option value="12">Tháng 12</option>
           </select>        
-          <div class="charts">
-          <div class="chart">
+          <div class="charts" >
+          <div class="chart" [hidden]="showResult">
             <canvas id="columnChart" width="900" height="900"></canvas>
+          </div>
+          <div class="chart" [hidden]="showResult1">
+            <canvas id="columnChart1" width="900" height="900"></canvas>
           </div>
           
         </div>
