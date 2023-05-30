@@ -73,8 +73,6 @@ export class HomeComponent {
       console.error("Không tìm thấy ngữ cảnh vẽ hợp lệ.");
       return;
     }
-  
-
     const data = {
 
       labels: this.thang, // Ngày trong tháng

@@ -20,7 +20,7 @@ export class ThongkeComponent implements OnInit {
   soVe:number;
   doanhThu:any;
   doanhThuFilter:any;
-  namResponse:number;
+  namResponse:any;
   thangResponse:number;
   doanhThuNam : any;
   doanhThuThangNam : any;
@@ -78,6 +78,7 @@ export class ThongkeComponent implements OnInit {
           this.doanhThuFilter = '';
           this.soVe =0;
           this.doanhThuResponse=[];
+          this.namResponse = this.nam
           this.chart.destroy();
           this.renderChart()
 
@@ -105,7 +106,8 @@ export class ThongkeComponent implements OnInit {
             this.doanhThuResponse.push(this.doanhThu);
           }    
           this.chart.destroy();
-          this.renderChart1()
+          this.renderChart1();
+          this.namResponse = this.nam;
           this.thangchart =[];
           this.doanhThuResponse =[];
         },
