@@ -9,7 +9,7 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
   styleUrls: ['./thongke.component.css']
 })
 export class ThongkeComponent implements OnInit {
-  nam:string ='';
+  nam:string ='2023';
   thang:number = 0;
   years: number[] = [];
   selectedYear: number;
@@ -33,7 +33,7 @@ export class ThongkeComponent implements OnInit {
   }
   ngOnInit() {
     this.renderChart();
-    this.onThangNamChange();
+    this.onNamChange();
   }
   onNamChange() {
     if (this.nam) {
