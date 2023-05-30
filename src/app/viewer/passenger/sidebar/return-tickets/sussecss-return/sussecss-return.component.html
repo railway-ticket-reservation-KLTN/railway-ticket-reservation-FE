@@ -56,13 +56,15 @@
                         <div class="ng-binding">Toa: {{ves.soToa}} chỗ số: {{ves.soGhe}}</div>
                     </td>
                     <td class="et-table-cell et-text-md ng-binding"></td>
-                    <td class="et-table-cell text-right ng-binding">{{ves.donGia}}</td>
+                    <td class="et-table-cell text-right ng-binding">{{(ves.donGia).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                    </td>
                 </tr><!-- end ngRepeat: book in group -->
             </tbody><!-- end ngRepeat: group in bookingGroup -->
             <tfoot>
                 <tr class="info">
                     <td colspan="6"><span class="pull-right"><strong class="ng-binding">Tổng tiền</strong></span></td>
-                    <td class="text-right"><strong class="ng-binding">{{getTotalPrice()}}</strong></td>
+                    <td class="text-right"><strong class="ng-binding">{{(getTotalPrice()).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                    </strong></td>
                 </tr>
             </tfoot>
         </table>

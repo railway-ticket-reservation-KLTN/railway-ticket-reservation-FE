@@ -72,11 +72,12 @@
                                 </div>
                             </td>
                             <td rowspan="" class="et-table-cell text-right ng-binding">
-                               {{loads.donGia}}
+                                {{(loads.donGia).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+
                             </td>
                             <td class="et-table-cell text-right" style="border-bottom: solid 2px #ccc;">
                                 <!-- ngIf: listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID -->
-                                20000
+                                20.000 VNĐ
                             </td>
                             <td class="et-table-cell text-right" style="border-bottom: solid 2px #ccc;">
                                 <!-- ngIf: listDichVuByTicket[ve.seat.Status.TicketId][0].DichVuDetailID -->
@@ -89,8 +90,12 @@
                             <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                         </button>
                     </td>-->
-                            <td rowspan="" class="et-table-cell text-right ng-binding">
+                            <!-- <td rowspan="" class="et-table-cell text-right ng-binding">
                                 {{loads.donGia - 20000}}
+                            </td> -->
+                            <td rowspan="" class="et-table-cell text-right ng-binding">
+                            {{(loads.donGia - 20000).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+
                             </td>
                         </tr>
                         <!-- ngRepeat: dichVu in listDichVuByTicket[ve.seat.Status.TicketId] --><!-- end ngRepeat: ve in ves.chieuDi -->
@@ -102,7 +107,8 @@
                                         tiền<!--Tổng tiền--></strong></span>
                             </td>
                             <td colspan="5" class="text-right">
-                                <strong class="ng-binding">{{getTotalPrice()}} VNĐ</strong>
+                                <strong class="ng-binding">{{(getTotalPrice()).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                                </strong>
                             </td>
                         </tr>
                     </tfoot>
