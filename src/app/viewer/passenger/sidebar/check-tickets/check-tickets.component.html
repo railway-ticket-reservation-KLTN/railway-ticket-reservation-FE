@@ -4,6 +4,9 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="ng-binding" style="text-align: center;">Kiểm tra vé<!--Kiểm tra vé--></h3>
+            <div class="alert alert-info">
+                <div class="ng-binding">Theo quy định của Tổng công ty Đường sắt Việt Nam, hành khách có thông tin giấy tờ tùy thân trùng với thông tin trên vé điện tử mới đủ điều kiện vào ga lên tàu.<br>Để đảm bảo quyền lợi cho hành khách, tránh mua phải vé giả, hoặc vé không đúng với quy định, quý khách có thể kiểm tra lại vé điện tử của mình bằng cách điền đầy đủ các thông tin dưới đây.</div>
+            </div>
             <div [hidden]="hidenSuccess" class="alert alert-success ng-hide" ng-show="isValidTicket">
                 <div ng-bind-html="'PKTraVe_ResultValid'|translate" class="ng-binding"><strong>Vé điện tử của bạn hoàn
                         toàn hợp lệ.</strong></div>
@@ -328,7 +331,9 @@
                         <td>{{ hanhTrinhInfo.ngayDi }}</td>
                         <td>{{ hanhTrinhInfo.gaDi }}</td>
                         <td>{{ hanhTrinhInfo.gaDen }}</td>
-                        <td>{{ hanhTrinhInfo.giaVe }}</td>
+                        <!-- <td>{{ hanhTrinhInfo.giaVe }}</td> -->
+                        <td>{{(hanhTrinhInfo.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
+                        </td>
                         <td>{{ kiemTraVeInfo.doiTuong }}</td>
                         <td>{{ kiemTraVeInfo.soGhe }}</td>
                         <td>{{ kiemTraVeInfo.soToa }}</td>
