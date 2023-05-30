@@ -9,31 +9,31 @@ import { OtherAdminService } from 'src/app/service/other-admin-service';
   styleUrls: ['./thongke.component.css']
 })
 export class ThongkeComponent implements OnInit {
-  nam:string ='2023';
-  thang:number = 0;
+  nam: string = '2023';
+  thang: number = 0;
   years: any[] = [];
-  namThongKe :any[]=[];
-  doanhThuResponse:any[] =[];
-  doanhThuThangResponse:any[] =[];
+  namThongKe: any[] = [];
+  doanhThuResponse: any[] = [];
+  doanhThuThangResponse: any[] = [];
   selectedYear: number;
   chart: Chart;
-  soVe:number;
-  doanhThu:any;
-  doanhThuFilter:any;
-  namResponse:any;
-  thangResponse:number;
-  doanhThuNam : any;
-  doanhThuThangNam : any;
-  showResult:boolean;
-  showResult1:boolean;
+  soVe: number;
+  doanhThu: any;
+  doanhThuFilter: any;
+  namResponse: any;
+  thangResponse: number;
+  doanhThuNam: any;
+  doanhThuThangNam: any;
+  showResult: boolean;
+  showResult1: boolean;
 
-  thangchart:any[]=[];
-  doanhThuThang:any[] =[];
+  thangchart: any[] = [];
+  doanhThuThang: any[] = [];
 
   constructor(
 
-    private service:OtherAdminService
-  ){
+    private service: OtherAdminService
+  ) {
     const currentYear = new Date().getFullYear();
     const startYear = 2012;
 
@@ -54,7 +54,7 @@ export class ThongkeComponent implements OnInit {
       this.showResult1 = true;
       this.service.getThongKeTrongNam(this.nam).subscribe(
         (data) => {
-         this.doanhThuNam=data;
+          this.doanhThuNam = data;
           console.log(this.doanhThuNam);
           this.doanhThu = this.doanhThuNam.doanhThu
           this.doanhThuFilter = this.doanhThu.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
@@ -62,12 +62,12 @@ export class ThongkeComponent implements OnInit {
           this.namResponse = this.doanhThuNam.nam;
           if (!this.namThongKe.includes(this.namResponse)) {
             this.namThongKe.push(this.namResponse);
-          }          
+          }
           this.doanhThuResponse.push(this.doanhThu);
           console.log(this.years);
           console.log(this.doanhThuResponse);
-          
-          
+
+
           this.chart.destroy();
           this.renderChart()
           // Xử lý dữ liệu trả về từ AP
@@ -76,8 +76,8 @@ export class ThongkeComponent implements OnInit {
           // Xử lý lỗi khi gọi API
           alert("Không có dữ liệu")
           this.doanhThuFilter = '';
-          this.soVe =0;
-          this.doanhThuResponse=[];
+          this.soVe = 0;
+          this.doanhThuResponse = [];
           this.namResponse = this.nam
           this.chart.destroy();
           this.renderChart()
@@ -93,7 +93,7 @@ export class ThongkeComponent implements OnInit {
       this.showResult1 = false;
       this.service.getThongKeThangTrongNam(this.nam, this.thang).subscribe(
         (data) => {
-          this.doanhThuThangNam=data;
+          this.doanhThuThangNam = data;
           this.doanhThu = this.doanhThuThangNam.doanhThu;
           this.doanhThuFilter = this.doanhThu.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
           this.soVe = this.doanhThuThangNam.soVe;
@@ -101,22 +101,22 @@ export class ThongkeComponent implements OnInit {
           this.thangResponse = this.doanhThuThangNam.thang;
           if (!this.thangchart.includes(this.thangResponse)) {
             this.thangchart.push(this.thangResponse);
-          }  
-          if(this.doanhThuThangNam.thang == this.thang){
+          }
+          if (this.doanhThuThangNam.thang == this.thang) {
             this.doanhThuResponse.push(this.doanhThu);
-          }    
+          }
           this.chart.destroy();
           this.renderChart1();
           this.namResponse = this.nam;
-          this.thangchart =[];
-          this.doanhThuResponse =[];
+          this.thangchart = [];
+          this.doanhThuResponse = [];
         },
         (error) => {
           // Xử lý lỗi khi gọi API
           alert("Không có dữ liệu")
           this.doanhThuFilter = '';
-          this.soVe =0;
-          this.doanhThuResponse=[];
+          this.soVe = 0;
+          this.doanhThuResponse = [];
           this.chart.destroy();
           this.renderChart1()
         }
@@ -141,10 +141,10 @@ export class ThongkeComponent implements OnInit {
           borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
           borderWidth: 1
         }
-      ], 
+      ],
     };
 
-// Thêm giá trị doanh thu vào mảng data.datasets[0].data
+    // Thêm giá trị doanh thu vào mảng data.datasets[0].data
     const options: ChartOptions = {
       scales: {
         y: {
@@ -177,10 +177,10 @@ export class ThongkeComponent implements OnInit {
           borderColor: 'rgba(75, 192, 192, 1)', // Màu viền cột
           borderWidth: 1
         }
-      ], 
+      ],
     };
 
-// Thêm giá trị doanh thu vào mảng data.datasets[0].data
+    // Thêm giá trị doanh thu vào mảng data.datasets[0].data
     const options: ChartOptions = {
       scales: {
         y: {
