@@ -213,6 +213,34 @@ import { ThemNhanVien } from "../domain/admin/ThemNhanVien";
         // Xử lý logic khi không có token
         return of([]); 
       }
+
+
+      public getThongKeTrongNam(nam:string): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
       
+          // Sử dụng mảng data trong yêu cầu HTTP
+          return this.http.get<any>('http://localhost:8080/v1/admin/thongketheonam?nam=' + nam, { headers });
+        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
+      public getThongKeThangTrongNam(nam:string, thang:number): Observable<any> {
+        const token = this.adminService.getToken();
+        if (token) {
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+          });
+          // Sử dụng mảng data trong yêu cầu HTTP
+          const url = 'http://localhost:8080/v1/admin/thongketheonamthang?nam=' + nam +'&thang=' + thang;
+          return this.http.get<any>(url, { headers });        }
+      
+        // Xử lý logic khi không có token
+        return of(null);
+      }
 
   }

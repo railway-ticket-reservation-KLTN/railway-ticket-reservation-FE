@@ -4,7 +4,7 @@
         <div class="cards">
           <div class="card">
             <div class="card-content">
-              <div class="number">1111</div>
+              <div class="number">{{soVe}}</div>
               <div class="card-name">Vé trong tháng</div>
             </div>
             <div class="icon-box">
@@ -13,7 +13,7 @@
           </div>
           <div class="card">
             <div class="card-content">
-              <div class="number">222</div>
+              <div class="number">{{doanhThu}}</div>
               <div class="card-name">Doanh thu trong tháng</div>
             </div>
             <div class="icon-box">
@@ -22,8 +22,8 @@
           </div>
           <div class="card">
             <div class="card-content">
-              <div class="number">68</div>
-              <div class="card-name">Vé đã hủy</div>
+              <div class="number">{{namResponse}}</div>
+              <div class="card-name">Năm</div>
             </div>
             <div class="icon-box">
                 <i class="fa fa-trash"></i>
@@ -33,11 +33,11 @@
          
         </div>
         
-        <select class="searchInput" name="namFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;" >
+        <select class="searchInput" name="namFilter" (keyup)="onNamChange()" (change)="onNamChange()" [(ngModel)]="nam" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;" >
             <option value="">-- Chọn năm --</option>
             <option *ngFor="let year of years" [value]="year">{{ year }}</option>
           </select>        
-          <select class="searchInput" name="thangFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;">
+          <select class="searchInput" [(ngModel)]="thang" (keyup)="onThangNamChange()" (change)="onThangNamChange()" name="thangFilter" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px; margin-right: 5px; margin-bottom: 5px; width: fit-content;" [disabled]="!nam">
             <option value="0">Tất cả tháng</option>
             <option value="1">Tháng 1</option>
             <option value="2">Tháng 2</option>
@@ -51,7 +51,6 @@
             <option value="10">Tháng 10</option>
             <option value="11">Tháng 11</option>
             <option value="12">Tháng 12</option>
-            <option value="13">Tháng 13</option>
           </select>        
           <div class="charts">
           <div class="chart">

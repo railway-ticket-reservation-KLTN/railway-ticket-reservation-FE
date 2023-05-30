@@ -9472,6 +9472,9 @@ table th {
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }
+select[disabled]{
+  background-color: #ccc;
+}
 .searchInput {
     padding: 5px;
     border: 1px solid #ccc;

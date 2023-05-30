@@ -1,17 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartOptions, LinearScale } from 'chart.js';
 import 'chart.js/auto';
+import { DoanhThuNam } from 'src/app/domain/admin/DoanhThuNam';
+import { OtherAdminService } from 'src/app/service/other-admin-service';
 @Component({
   selector: 'app-thongke',
   templateUrl: './thongke.component.html',
   styleUrls: ['./thongke.component.css']
 })
 export class ThongkeComponent implements OnInit {
-
+  nam:string ='';
+  thang:number = 0;
   years: number[] = [];
   selectedYear: number;
+  chart: Chart;
+  soVe:number;
+  doanhThu:any ;
+  namResponse:number;
+  doanhThuNam : any;
+  doanhThuThangNam : any;
 
-  constructor(){
+  constructor(
+
+    private service:OtherAdminService
+  ){
     const currentYear = new Date().getFullYear();
     const startYear = 2012;
 
@@ -21,9 +33,45 @@ export class ThongkeComponent implements OnInit {
   }
   ngOnInit() {
     this.renderChart();
+    this.onThangNamChange();
   }
-  chart: Chart;
+  onNamChange() {
+    if (this.nam) {
+      this.service.getThongKeTrongNam(this.nam).subscribe(
+        (data) => {
+         this.doanhThuNam=data;
+          console.log(this.doanhThuNam);
+          this.doanhThu = this.doanhThuNam.doanhThu.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;
+          this.soVe = this.doanhThuNam.soVe;
+          this.namResponse = this.doanhThuNam.nam;
+          console.log(this.doanhThu);
+          // Xử lý dữ liệu trả về từ AP
+        },
+        (error) => {
+          // Xử lý lỗi khi gọi API
+          alert("Không có dữ liệu")
+        }
+      );
+    }
+  }
 
+  onThangNamChange() {
+    if (this.nam && this.thang) {
+      this.service.getThongKeThangTrongNam(this.nam, this.thang).subscribe(
+        (data) => {
+         this.doanhThuThangNam=data;
+          this.doanhThu = this.doanhThuThangNam.doanhThu.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });;;
+          this.soVe = this.doanhThuThangNam.soVe;
+          this.namResponse = this.doanhThuThangNam.nam;
+          // Xử lý dữ liệu trả về từ AP
+        },
+        (error) => {
+          // Xử lý lỗi khi gọi API
+          alert("Không có dữ liệu")
+        }
+      );
+    }
+  }
   renderChart() {
 
     const canvas = <HTMLCanvasElement>document.getElementById('columnChart');
