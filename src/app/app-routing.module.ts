@@ -29,6 +29,7 @@ import { MuavetructuyenComponent } from './viewer/passenger/sidebar/regulations/
 import { QuydinhvanchuyenComponent } from './viewer/passenger/sidebar/regulations/dieukien/quydinhvanchuyen/quydinhvanchuyen.component';
 import { ChinhsachhoantraveComponent } from './viewer/passenger/sidebar/regulations/chinhsachhoantrave/chinhsachhoantrave.component';
 import { ThongkeComponent } from './viewer/admin/thongke/thongke.component';
+import { SidebarComponent } from '@coreui/angular';
 
 const routes: Routes = [
   { path: '', redirectTo: '/trangchu', pathMatch: 'full' },
@@ -65,6 +66,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    
   },
 ];
 @NgModule({

@@ -23,7 +23,10 @@ export class HomeComponent {
       this.veTrongThang= data;
       console.log(this.veTrongThang);
       
-    });
+    },(error) => {
+      alert("Không có quyền truy cập")
+      
+  });
     this.service.getDoanhThuTrongThang().subscribe(data =>{
       this.doanhThuTrongThang=data;
       this.formattedDoanhThu = this.doanhThuTrongThang.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
