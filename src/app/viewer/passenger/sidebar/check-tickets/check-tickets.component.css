@@ -740,7 +740,10 @@ body,html {
 }
 
 
-
+.error-message{
+    color: red;
+    font-weight: bold;
+}
 .et-table-header {
     background-color: #497BFE; 
     font-size: 14px; 

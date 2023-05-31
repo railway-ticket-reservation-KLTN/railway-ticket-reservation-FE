@@ -34,8 +34,9 @@ export class CheckTicketsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-  }
+    console.log(this.kiemTraVeInfo.maVe);
+    this.kiemTraVeInfo.maVe = '';
+    }
 
 
   async onSearch() {
