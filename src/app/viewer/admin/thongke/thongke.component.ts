@@ -51,7 +51,7 @@ export class ThongkeComponent implements OnInit {
   onNamChange() {
     // this.chart.destroy();
 
-    if (this.nam) {
+    if (this.nam && this.thang == 0) {
       this.showResult = false;
       this.showResult1 = true;
       this.service.getThongKeTrongNam(this.nam).subscribe(
@@ -92,7 +92,7 @@ export class ThongkeComponent implements OnInit {
   }
  
   onThangNamChange() {
-    if (this.nam && this.thang) {
+    if (this.nam && this.thang !=0) {
       this.showResult = true;
       this.showResult1 = false;
       this.service.getThongKeThangTrongNam(this.nam, this.thang).subscribe(
@@ -130,6 +130,8 @@ export class ThongkeComponent implements OnInit {
           this.renderChart1()
         }
       );
+    } else if( this.nam && this.thang == 0){
+      this.onNamChange();
     }
   }
   renderChart() {
