@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Chart, ChartOptions, LinearScale } from 'chart.js';
 import 'chart.js/auto';
 import { DoanhThuNam } from 'src/app/domain/admin/DoanhThuNam';
@@ -44,11 +44,13 @@ export class ThongkeComponent implements OnInit {
   ngOnInit() {
     this.showResult = false;
     this.showResult1 = true;
-    this.renderChart();
     this.onNamChange();
     this.renderChart();
   }
+
   onNamChange() {
+    // this.chart.destroy();
+
     if (this.nam) {
       this.showResult = false;
       this.showResult1 = true;
@@ -66,10 +68,12 @@ export class ThongkeComponent implements OnInit {
           this.doanhThuResponse.push(this.doanhThu);
           console.log(this.years);
           console.log(this.doanhThuResponse);
-
-
           this.chart.destroy();
-          this.renderChart()
+          this.renderChart();
+          this.namResponse = this.nam;
+          this.thangchart = [];
+          this.doanhThuResponse = [];
+
           // Xử lý dữ liệu trả về từ AP
         },
         (error) => {
@@ -86,7 +90,7 @@ export class ThongkeComponent implements OnInit {
       );
     }
   }
-
+ 
   onThangNamChange() {
     if (this.nam && this.thang) {
       this.showResult = true;
@@ -101,12 +105,17 @@ export class ThongkeComponent implements OnInit {
           this.thangResponse = this.doanhThuThangNam.thang;
           if (!this.thangchart.includes(this.thangResponse)) {
             this.thangchart.push(this.thangResponse);
+            console.log(this.thangchart);
+            
           }
           if (this.doanhThuThangNam.thang == this.thang) {
             this.doanhThuResponse.push(this.doanhThu);
+            console.log(this.doanhThuResponse);
+            
           }
           this.chart.destroy();
           this.renderChart1();
+          // this.chart.update();
           this.namResponse = this.nam;
           this.thangchart = [];
           this.doanhThuResponse = [];
@@ -124,7 +133,7 @@ export class ThongkeComponent implements OnInit {
     }
   }
   renderChart() {
-    const canvas = <HTMLCanvasElement>document.getElementById('columnChart');
+    const canvas = <HTMLCanvasElement>document.getElementById('columnChart1');
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       console.error("Không tìm thấy ngữ cảnh vẽ hợp lệ.");
@@ -160,9 +169,9 @@ export class ThongkeComponent implements OnInit {
     });
   }
   renderChart1() {
-    const canvas = <HTMLCanvasElement>document.getElementById('columnChart1');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
+    const canvas = <HTMLCanvasElement>document.getElementById('columnChart2');
+    const ctx1 = canvas.getContext('2d');
+    if (!ctx1) {
       console.error("Không tìm thấy ngữ cảnh vẽ hợp lệ.");
       return;
     }
@@ -179,7 +188,7 @@ export class ThongkeComponent implements OnInit {
         }
       ],
     };
-
+    
     // Thêm giá trị doanh thu vào mảng data.datasets[0].data
     const options: ChartOptions = {
       scales: {
@@ -189,7 +198,7 @@ export class ThongkeComponent implements OnInit {
       }
     };
 
-    this.chart = new Chart(ctx, {
+    this.chart = new Chart(ctx1, {
       type: 'bar',
       data: data,
       options: options

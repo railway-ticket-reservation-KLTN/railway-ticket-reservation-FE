@@ -89,7 +89,8 @@
                                         required
                                         #hoTenInputMC="ngModel"
                                         [ngClass]="{ 'error': hoTenInputMC.invalid && (hoTenInputMC.dirty || hoTenInputMC.touched) }"
-                                        (input)="isErrorhoTenMC = hoTenInputMC.invalid && (hoTenInputMC.dirty || hoTenInputMC.touched) ? true : false">
+                                        (input)="isErrorhoTenMC = hoTenInputMC.invalid && (hoTenInputMC.dirty || hoTenInputMC.touched) ? true : false"
+                                        >
                                 </div>
                                 <div *ngIf="hoTenInputMC.invalid && (hoTenInputMC.dirty || hoTenInputMC.touched)">
                                     <span *ngIf="hoTenInputMC.errors?.['pattern']" class="error-message">

@@ -331,9 +331,8 @@
                         <td>{{ hanhTrinhInfo.ngayDi }}</td>
                         <td>{{ hanhTrinhInfo.gaDi }}</td>
                         <td>{{ hanhTrinhInfo.gaDen }}</td>
-                        <!-- <td>{{ hanhTrinhInfo.giaVe }}</td> -->
-                        <td>{{(hanhTrinhInfo.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}
-                        </td>
+                        <td>{{ hanhTrinhInfo.giaVe }}</td>
+                        <!-- <td>{{(hanhTrinhInfo.giaVe).toLocaleString('vi-VN').split(',').join('.') + ' VNĐ'}}</td> -->
                         <td>{{ kiemTraVeInfo.doiTuong }}</td>
                         <td>{{ kiemTraVeInfo.soGhe }}</td>
                         <td>{{ kiemTraVeInfo.soToa }}</td>
@@ -343,7 +342,7 @@
                     
                 </tbody>
             </table>
-            <div ng-show="isValidTicket" class="ng-hide mt-1" [hidden]="showResult">
+            <div  class="mt-1" *ngIf="kiemTraVeInfo.maVe != ''">
                 <a (click)="btnprint()" class="btn btn-primary ng-binding">In</a>
             </div>
             <!--Giao dien cho mobile-->

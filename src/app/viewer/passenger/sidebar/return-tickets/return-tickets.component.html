@@ -212,15 +212,15 @@
             <table class="table table-bordered">
                 <thead class="et-table-header">
                 <tr>
-                    <th style="width: 2%;">#</th>
-                    <th style="width: 19%;" class="ng-binding">Họ tên<!--Họ tên--></th>
-                    <th style="width: 19%;" class="ng-binding">Thông tin vé<!--Thông tin vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
-                    <th style="width: 15%;" class="ng-binding">Loại trả vé<!--Loại lệ phí trả vé--></th>
-                    <th style="width: 15%;" class="ng-binding">Tình trạng vé<!--Tình trạng vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Lệ phí trả vé<!--Lệ phí trả vé--></th>
-                    <th style="width: 8%;" class="ng-binding">Tiền trả lại<!--Tiền trả lại--></th>
-                    <th style="width: 6%;" class="ng-binding">Chọn vé trả<!--Chọn vé trả--></th>
+                    <th style="width: 2%; text-align: center;">#</th>
+                    <th style="width: 19%; text-align: center;" class="ng-binding">Họ tên<!--Họ tên--></th>
+                    <th style="width: 19%; text-align: center;" class="ng-binding">Thông tin vé<!--Thông tin vé--></th>
+                    <th style="width: 8%; text-align: center;" class="ng-binding">Thành tiền (VNĐ)<!--Thành tiền (VNĐ)--></th>
+                    <th style="width: 15%; text-align: center;" class="ng-binding">Loại trả vé<!--Loại lệ phí trả vé--></th>
+                    <th style="width: 15%; text-align: center;" class="ng-binding">Tình trạng vé<!--Tình trạng vé--></th>
+                    <th style="width: 8%; text-align: center;" class="ng-binding">Lệ phí trả vé<!--Lệ phí trả vé--></th>
+                    <th style="width: 8%; text-align: center;" class="ng-binding">Tiền trả lại<!--Tiền trả lại--></th>
+                    <th style="width: 6%; text-align: center;" class="ng-binding">Chọn vé trả<!--Chọn vé trả--></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -228,8 +228,8 @@
                         <td>{{i+1}}</td>
                         <td>{{loads.tenHanhKhach}}</td>
                         <td>{{loads.tenTau}} {{loads.hanhTrinh.ngayDi}}
-                             {{loads.soGhe}} {{loads.soToa}}
-                            {{loads.donGia}} {{loads.maVe}}</td>
+                            Số ghế: {{loads.soGhe}} Số toa: {{loads.soToa}}
+                            Mã vé: {{loads.maVe}}</td>
                         <td>{{loads.donGia}}</td>
                         <td>Trả vé</td>
                         <td *ngIf="loads.tinhTrang === 'DA_MUA'">Đã thanh toán</td>
@@ -264,7 +264,7 @@
                        ></div>
             </div>
             <div _ngcontent-ybq-c94="" class="col-xs-4 col-sm-2 col-md-2"><label
-                   class="kt-form-label ng-binding">Số CMND/Hộ chiếu
+                   class="kt-form-label ng-binding">Số giấy tờ
                   </label></div>
             <div _ngcontent-ybq-c94="" class="col-xs-8 col-sm-4 col-md-4">
                 <div _ngcontent-ybq-c94="" class="form-group"><input  type="text" 

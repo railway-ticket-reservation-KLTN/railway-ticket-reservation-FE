@@ -102,6 +102,17 @@
     font-weight: bold;
     margin-bottom: 10px;
   }
+  .chart1 {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 10px;
+  }
+  .chart1 h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
   canvas {
     width: 100%;

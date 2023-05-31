@@ -40,7 +40,7 @@ export class CheckTicketsComponent implements OnInit {
 
   async onSearch() {
 
- 
+    this.kiemTraVeInfo.maVe = '';
     this.hidenError = true;
     this.hidenSuccess = true;
     this.showResult=true;
@@ -72,6 +72,7 @@ export class CheckTicketsComponent implements OnInit {
       }
     },
       (error) => {
+        this.htmlHienThiLabel = '';
         this.hidenError = false;
         this.showResult=true;
       })

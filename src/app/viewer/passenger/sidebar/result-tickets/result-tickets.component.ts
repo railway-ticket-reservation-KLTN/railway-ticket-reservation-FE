@@ -23,18 +23,12 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
   public selectedSeatId: string[] = [];
   public selectedSeats: string[] = [];
   show=true;
+  giaVeTau:any;
+  giaVeTauKhuHoi:any;
   showKhuHoi=true;
   selectedCarId: string;
   seat:any;
-  // ticket = {
-  //   tenToa : '',
-  //   gaDi : '',
-  //   gaDen : '',
-  //   ngayDi :'',
-  //   gioDi : '',
-  //   soToa :  '',
-  //   soGhe : '',
-  // };
+ 
   index:any;
   modalOpen = false;
   showResult = true;
@@ -123,6 +117,39 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     });
    this.setTimeoutLoad();
   }
+  xuLiGiaVe(maToa:any, giaHanhTrinh:any) {
+    switch (maToa) {
+      case 1:
+        this.giaVeTau = giaHanhTrinh;
+        break;
+      case 2:
+        this.giaVeTau = giaHanhTrinh + 50000;
+        break;
+      case 3:
+        this.giaVeTau = giaHanhTrinh + 100000;
+        break;
+      default:
+        this.giaVeTau = 0;
+        break;
+    }
+}
+
+xuLyGiaVeKhuHoi(maToa:any, giaHanhTrinhKhuHoi:any) {
+  switch (maToa) {
+    case 1:
+      this.giaVeTauKhuHoi = giaHanhTrinhKhuHoi;
+      break;
+    case 2:
+      this.giaVeTauKhuHoi = giaHanhTrinhKhuHoi + 50000;
+      break;
+    case 3:
+      this.giaVeTauKhuHoi = giaHanhTrinhKhuHoi + 100000;
+      break;
+    default:
+      this.giaVeTauKhuHoi = 0;
+      break;
+  }
+}
   openModal() {
     this.modalOpen = true;
   }
@@ -169,8 +196,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToa.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponse = data;     
-      console.log(this.danhSachGheResponse);
-       
+      this.xuLiGiaVe(this.danhSachGheRequest.maToa, this.hanhTrinhInfo.giaVe);       
       const gheInFo = this.toaXeList.find(item => item.soToa == soToa);
       this.danhsachToaResponse = gheInFo;      
     })
@@ -186,6 +212,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
     this.danhSachGheRequest.gioDi = this.dataSearchLoadToaKhuHoi.gioDi
     this.machineService.getDanhSachGhe(this.danhSachGheRequest).subscribe(data => {
       this.danhSachGheResponseKhuHoi = data;
+      this.xuLyGiaVeKhuHoi(this.danhSachGheRequest.maToa, this.hanhTrinhInfoKhuHoi.giaVe);
       const gheInFo = this.toaXeListKhuHoi.find(item => item.soToa == soToa);
       this.danhsachToaResponseKhuHoi = gheInFo;
       console.log(this.danhSachGheResponseKhuHoi); 
@@ -222,7 +249,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
       gioDi: this.dataSearch[0].gioDi,
       soToa: this.danhsachToaResponse.soToa,
       soGhe: soGhe,
-      giaVe:this.dataSearch[0].giaVe,
+      giaVe:this.giaVeTau,
       selected: true,
       tenToa: this.tauInfo.tenToa,
       trangThai:'DAT_CHO',
@@ -290,7 +317,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
      gioDi: this.dataSearchVe[0].gioDi,
      soToa: this.danhsachToaResponseKhuHoi.soToa,
      soGhe: soGhe,
-     giaVe:this.dataSearchVe[0].giaVe,
+     giaVe:this.giaVeTauKhuHoi,
      selected: true,
      tenToa: this.tauInfoKhuHoi.tenToa,
      trangThai:'DAT_CHO',
@@ -376,34 +403,7 @@ export class ResultTicketsComponent implements OnInit, OnChanges {
    });
      
    }
-  // btnDeleteKhuHoi(maGhe:string, soGhe:string, ){
-  //   this.traCho.gaDi = this.dataSearchVe[0].gaDi;
-  //   this.traCho.gaDen =this.dataSearchVe[0].gaDen;
-  //   this.traCho.soToa = this.danhsachToaResponseKhuHoi.soToa;
-  //   this.traCho.maGhe = maGhe;
-  //   this.traCho.tenTau = this.tauInfoKhuHoi.tenTau;
-  //   this.traCho.ngayDi = this.dataSearchVe[0].ngayDi;
-  //   this.traCho.gioDi = this.dataSearchVe[0].gioDi;
-  //   this.traCho.gioDen = this.dataSearchVe[0].gioDen;
-  //   this.traCho.trangThai ="DAT_CHO";
-  //   this.machineService.traCho(this.traCho).subscribe(data =>{
-  //     console.log(data);
-      
-  //   });
-  //   const index = this.selectedSeatId.indexOf(soGhe);
-    
-  //   this.gheDaDatListKhuHoi.splice(index, 1);
-  //   console.log(index);
-  //   this.selectedSeatId.splice(index, 1);
-  
-  //   // Tìm phần tử có thuộc tính soGhe bằng với giá trị soGhe truyền vào
-  //   const gheDaDat = this.gheDaDatListKhuHoi.find(ghe => ghe.maGhe === maGhe);
-  
-  //   if (gheDaDat) {
-  //     gheDaDat.selected = false; // Set thuộc tính selected của phần tử này thành false
-  //   }
-  // }
-  
+ 
   setTimeoutLoad(){
     const countdown = setInterval(() => {
       this.timeRemaining -= 1; // decrease the time remaining by 1 second
