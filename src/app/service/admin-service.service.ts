@@ -38,6 +38,10 @@ import { tap } from 'rxjs/operators';
       getToken(): string | null {
         return this.token || localStorage.getItem(this.tokenKey);
       }
+      xoaToken() {
+        this.token = '';
+        localStorage.removeItem(this.tokenKey);
+      }
 
 
   }
